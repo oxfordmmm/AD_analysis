@@ -1,0 +1,7 @@
+name: virmet
+channels:
+  - conda-forge
+  - defaults
+  - bioconda
+dependencies:
+  - virmet

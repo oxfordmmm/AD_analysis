@@ -1,0 +1,12 @@
+name: map
+channels:
+  - conda-forge
+  - defaults
+  - bioconda
+dependencies:
+  - minimap2
+  - samtools
+  - bcftools
+  - pysam
+  - biopython
+  - pandas

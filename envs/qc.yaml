@@ -1,0 +1,9 @@
+name: qc
+channels:
+  - conda-forge
+  - defaults
+  - bioconda
+dependencies:
+  - nanostat
+  - nanoplot
+  - pycoqc

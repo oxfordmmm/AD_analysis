@@ -1,0 +1,17 @@
+name: r
+channels:
+  - conda-forge
+  - defaults
+  - bioconda
+dependencies:
+  - r-base=4.2.1
+  - r-essentials
+  - r-tidyverse
+  - r-gtools
+  - r-vroom
+  - r-doparallel
+  - r-rmarkdown=2.9
+  - r-tinytex
+  - pdflatex
+  - texlive-core
+

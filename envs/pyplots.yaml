@@ -1,0 +1,8 @@
+name: pyplots.yml
+channels:
+  - conda-forge
+  - defaults
+  - bioconda
+dependencies:
+  - matplotlib
+  - pandas

@@ -1,0 +1,11 @@
+name: r2
+channels:
+  - conda-forge
+  - defaults
+  - bioconda
+dependencies:
+  - r-base=4.2.3
+  - r-rmarkdown
+  - r-xfun
+
+

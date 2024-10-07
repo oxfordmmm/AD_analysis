@@ -1,0 +1,8 @@
+name: nanosim
+channels:
+  - conda-forge
+  - defaults
+  - bioconda
+dependencies:
+  - nanosim-h
+  - badread
