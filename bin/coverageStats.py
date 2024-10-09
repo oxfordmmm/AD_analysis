@@ -26,6 +26,9 @@ def coverageStats(df):
     df2['Sample name']=sys.argv[2]
     df2['bases']=df2.chrom.map(bases)
     df2=df2[['Sample name','chrom','length','bases','avDepth','position cov1','position cov10','covBreadth1x','covBreadth10x']]
+
+    df3=pd.read_csv('alignment_counts.csv')
+    df2=df2.merge(df3,left_on='chrom', right_on='ref', how='left')
     df2.to_csv('coverage_stats.csv',index=False)
     print(df2)
     

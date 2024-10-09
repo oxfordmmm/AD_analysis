@@ -91,7 +91,7 @@ process FILTER_SISPA {
     errorStrategy 'ignore'
     
     publishDir "$params.output/bams", pattern: "*.bam"
-    publishDir "$params.output/alignment_info", pattern: "*.csv", mode: 'copy'
+    publishDir "$params.output/alignment_info", pattern: "_alignments.csv", mode: 'copy'
     publishDir "$params.output/reports", pattern: "*.txt", mode: 'copy'
 
     input:
@@ -104,6 +104,7 @@ process FILTER_SISPA {
     tuple val(barcode), path("${barcode}*.csv"), emit: stats
     tuple val(barcode), path("${barcode}_alignments.csv"), emit: alignments
     tuple val(barcode), path("*_report.txt"), emit: report
+    tuple val(barcode), path("${barcode}_alignment_counts.csv"), emit: alignment_counts
 
     script:
     """
@@ -251,19 +252,37 @@ process GENOME_DEPTH {
     publishDir "$params.output/depths", overwrite: true, mode: 'copy'  
                                                                                 
     input:                                                                      
-    tuple val(barcode), path('ref.fasta'), path("${barcode}.sorted.bam"), path("${barcode}.sorted.bam.bai")
+    tuple val(barcode), path('ref.fasta'), path("${barcode}.sorted.bam"), path("${barcode}.sorted.bam.bai"), path("alignment_counts.csv")
 
     output:                                                                     
     tuple val(barcode), path("${barcode}_depth.csv"), emit: genomeDepths
-    tuple val(barcode), path("${barcode}_depth.tsv"), emit: tsv         
+    tuple val(barcode), path("${barcode}_depth.tsv"), emit: tsv 
+    path("${barcode}_depth.csv"), emit: csv        
                                                                                 
     script:                                                                     
     """                                                                         
     samtools depth -aa ${barcode}.sorted.bam > ${barcode}_depth.tsv                
-    python3 $params.bin/coverageStats.py ${barcode}_depth.tsv  ${barcode}                               
+    coverageStats.py ${barcode}_depth.tsv  ${barcode} alignment_counts.csv                              
                                                                                 
     mv coverage_stats.csv ${barcode}_depth.csv                                 
     """                                                  
+}
+
+process DEPTH_SUMMARY {
+    conda "$params.envs/map"
+    publishDir "$params.output/depth_summary", mode: 'copy'
+
+    input:
+    path("depths???.csv")
+
+    output:
+    path("depth_summary.csv"), emit: summary
+    path("depth_summary_pass.csv"), emit: pass_summary
+
+    script:
+    """
+    depth_summary.py -i *.csv -o depth_summary.csv
+    """
 }
 
 process BCFTOOLS_CONSENSUS {

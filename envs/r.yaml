@@ -10,7 +10,7 @@ dependencies:
   - r-gtools
   - r-vroom
   - r-doparallel
-  - r-rmarkdown=2.9
+  - r-rmarkdown
   - r-tinytex
   - pdflatex
   - texlive-core

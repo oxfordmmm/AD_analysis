@@ -20,6 +20,7 @@ include {FILTER_SISPA} from './processes/map.nf'
 include {INDEX_REF} from './processes/map.nf'
 include {CLAIR3} from './processes/map.nf'
 include {GENOME_DEPTH} from './processes/map.nf' 
+include {DEPTH_SUMMARY} from './processes/map.nf'
 include {BCFTOOLS_CSQ} from './processes/map.nf' 
 include {BCFTOOLS_CONSENSUS} from './processes/map.nf' 
 include {GRAPH_COVERAGE} from './processes/map.nf' 
@@ -204,7 +205,7 @@ workflow sispa {
     GRAPH_SISPA_ALIGNMENTS(sispa_summary_ch, "$params.output/alignment_summary")
 
     // pass to consensus workflow to produce consensus fasta and coverage graphs
-    consensus(references, FILTER_SISPA.out.bam, FILTER_SISPA.out.bam_no_ref)
+    consensus(references, FILTER_SISPA.out.bam, FILTER_SISPA.out.bam_no_ref, FILTER_SISPA.out.alignment_counts)
 }
 
 /*
@@ -277,6 +278,7 @@ workflow consensus {
         references
         bam
         bam_no_ref 
+        alignment_counts
 
     main:
 
@@ -288,7 +290,13 @@ workflow consensus {
     CLAIR3(bam_no_ref.combine(INDEX_REF.out.index))
 
     // get depth of reads along ref
-    GENOME_DEPTH(bam)
+    GENOME_DEPTH(bam.combine(alignment_counts, by:0))
+
+    // sumarise the depth for all samples
+    depths=GENOME_DEPTH.out.csv
+        .collect()
+
+    DEPTH_SUMMARY(depths)
 
     // create consensus file by applying vcf to ref. Depth is used to mask low depth regions
     BCFTOOLS_CONSENSUS(CLAIR3.out.vcf.combine(INDEX_REF.out.index).combine(GENOME_DEPTH.out.tsv, by:0))

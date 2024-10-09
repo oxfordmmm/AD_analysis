@@ -87,3 +87,7 @@ if __name__ == '__main__':
         file.write(f"{secondary_count} reads were secondary. \n")
         file.write(f"{supplementary_count} reads were supplementary. \n")
         file.write(f"{alignments.shape[0]} good alignments.\n")
+
+    # count alignments per chrom
+    alignment_counts = alignments.groupby('ref').size().reset_index(name='counts')
+    alignment_counts.to_csv(f"{prefix}_alignment_counts.csv", index=False)
