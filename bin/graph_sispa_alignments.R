@@ -5,6 +5,7 @@ library(tidyverse)
 args <- commandArgs(trailingOnly = TRUE)
 read_stats_file <- args[1]
 alignments_file <- args[2]
+barcode <- args[3]
 
 read_stats <- read_csv(read_stats_file) %>% 
   rename(query = id) %>% 
@@ -33,6 +34,7 @@ df <- read_stats %>%
   replace(is.na(.), 0) %>% 
   arrange(desc(align_len))
 df
+df$barcode <- barcode
 df %>% write_csv('read_align_stats.csv')
 
 
@@ -89,14 +91,16 @@ read_length_quartiles_mapped <- df %>%
   print()
 
 
+barcodes <- tibble(barcode = barcode) %>% print()
 all_summary_stats <- bind_cols(
+  barcodes,
   reads_summary,
   qc_summary,
   bases_summary,
   read_length_quartiles,
   read_length_quartiles_mapped,
 ) %>% 
-  write_csv('summary_stats.csv') %>% 
-  pivot_longer(names_to = 'stat', cols=everything()) %>% 
-  print(n=40)
+  write_csv('summary_stats.csv')# %>% 
+  #pivot_longer(names_to = 'stat', cols=everything()) %>% 
+  #print(n=40)
 

@@ -170,6 +170,7 @@ process GRAPH_PHI_ALIGNMENTS {
 process GRAPH_SISPA_ALIGNMENTS {
     conda "$params.envs/r"
     publishDir "$outdir", mode: 'copy'
+    errorStrategy 'ignore'
 
     input:
     tuple val(barcode), path("read_stats.csv"), path("alignment_info.csv")
@@ -182,7 +183,7 @@ process GRAPH_SISPA_ALIGNMENTS {
 
     script:
     """
-    Rscript $params.bin/graph_sispa_alignments.R read_stats.csv alignment_info.csv
+    Rscript $params.bin/graph_sispa_alignments.R read_stats.csv alignment_info.csv $barcode
     mv read_align_stats.csv ${barcode}_read_align_stats.csv
     mv summary_stats.csv ${barcode}_summary_stats.csv
 
@@ -276,12 +277,13 @@ process DEPTH_SUMMARY {
     path("depths???.csv")
 
     output:
-    path("depth_summary.csv"), emit: summary
-    path("depth_summary_pass.csv"), emit: pass_summary
+    path("*depth_summary.csv"), emit: summary
+    path("*depth_summary_pass.csv"), emit: pass_summary
 
     script:
+    batch = params.batch
     """
-    depth_summary.py -i *.csv -o depth_summary.csv
+    depth_summary.py -i *.csv -o ${params.batch}_depth_summary.csv -b $batch
     """
 }
 
@@ -354,17 +356,19 @@ process GRAPH_COVERAGE_SEPARATE {
     publishDir "$params.output/coverage_graphs", mode: 'copy'
 
     input:
-    tuple val(sampleName), path(depth_file), val(outfile)
+    tuple val(sampleName), path(depth_file)
     val(group_size)
     val(low_depth_cutoff)
     val(high_cutoff)
 
     output:
-    tuple val(sampleName), path("*.png")
+    tuple val(sampleName), path("*.png"), emit: 'png'
+    tuple val(sampleName), path("*.pdf"), emit: 'pdf'
+
 
     script:
     """
-    Rscript $params.bin/graph_coverage_separate.R $depth_file $group_size $low_depth_cutoff $high_cutoff $outfile $sampleName
+    Rscript $params.bin/graph_coverage_separate.R $depth_file $group_size $low_depth_cutoff $high_cutoff $sampleName
     """
 }
 

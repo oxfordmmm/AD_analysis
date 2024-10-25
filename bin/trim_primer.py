@@ -13,6 +13,8 @@ def trim(reads, blast_df, margin_pc, min_read_length):
     read_stats = []
 
     all_hits = blast_df.copy()
+    # filter hits shorter than 21
+    all_hits = all_hits.query('length > 21')
     all_hits['low'] = all_hits[['sstart', 'send']].min(axis=1)
     all_hits['high'] = all_hits[['sstart', 'send']].max(axis=1)
     # Want to remove random nonomers as well
@@ -22,6 +24,7 @@ def trim(reads, blast_df, margin_pc, min_read_length):
     print(all_hits)
 
     for seq_record in sequences:
+        primer_middle = False
         if seq_record.id not in primer_read_ids:
             trimmed_seqs.append(seq_record)
             stats = {
@@ -66,8 +69,9 @@ def trim(reads, blast_df, margin_pc, min_read_length):
                 new_end = min(new_end, row['low'])
             else:
                 # Primer must have been in the middle so remove
-                removed_seqs.append(seq_record)
-                trim_fail = True
+                #removed_seqs.append(seq_record)
+                trimmed_seqs.append(seq_record)
+                trim_fail = False
                 stats = {
                     'id' : seq_record.id,
                     'read_length' : seq_length,
@@ -77,6 +81,7 @@ def trim(reads, blast_df, margin_pc, min_read_length):
                     'fail_reason' : 'primer_in_middle',
                 }
                 read_stats.append(stats)
+                primer_middle = True
                 break
         
         if new_end - new_start < min_read_length:
@@ -92,7 +97,7 @@ def trim(reads, blast_df, margin_pc, min_read_length):
             }
             read_stats.append(stats)
 
-        if not trim_fail:
+        if not trim_fail and not primer_middle:
             new_record = seq_record[new_start:new_end]
             trimmed_seqs.append(new_record)
             stats = {

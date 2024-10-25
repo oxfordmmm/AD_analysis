@@ -37,4 +37,6 @@ p <- compact_df %>%
   facet_wrap(vars(id), scales='free') +
   theme(strip.text = element_text(size = 5))
 
-ggsave(outfile, plot=p, width=25, height=15, dpi=300, limitsize = F)
+ggsave(outfile, plot=p, width=25, height=15, dpi=300, limitsize = F, format='png')
+#ggsave(outfile, plot=p, width=25, height=15, dpi=300, limitsize = F, format='pdf')
+

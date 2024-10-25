@@ -34,8 +34,11 @@ def run(args):
     df.rename(columns={'counts':'sample num reads'},inplace=True)
 
     df=applyThresholds(df)
+    df.sort_values(by=['Sample name','chrom'], ascending=[True,True], inplace=True)
+    df['batch']=args.batch
     df.to_csv(args.output,index=False)
     df2=df[df['pass']==True]
+    df2.sort_values(by=['Sample name','chrom'], ascending=[True,True], inplace=True)
     df2.to_csv(args.output.replace('.csv','_pass.csv'),index=False)
 
 if __name__ == '__main__':
@@ -43,6 +46,8 @@ if __name__ == '__main__':
 
     argparser.add_argument('-i', '--input', help='Input files', required=True, nargs='+')
     argparser.add_argument('-o', '--output', help='Output file', required=True)
+    argparser.add_argument('-b', '--batch', required=False, default=1,
+                        help='Batch name or run name')
     argparser.add_argument('-p', '--percentage_type_reads', required=False, default=1.0,
                         help='Percentage of total segment reads required to pass, default=1%')
     argparser.add_argument('-r', '--percentage_run_reads', required=False, default=0.5,

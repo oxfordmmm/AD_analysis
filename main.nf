@@ -47,97 +47,22 @@ Then run clean reads through kaiju/bracken
 map clean reads to refs
 make coverage graphs and report errors per 1000 bases
 
-For PHI:
-split by primers. Divide into no primers, 1/2 primer, 3-10 primers and many primers
-run through kaiju/bracken but report number of reads with/without multiplicity
-map split reads to refs
-Check for reads which map to same spot multiple times (so probs missed primer)
-Check to see if split reads map to the same spot as confirmation.
-
 Could try for a read with 3+ primers. Blast/minimap2 gaps onto themselves to check for similarity
 */
 
 // params.meta_ref=["${params.refs}/spikes.fasta"]
 
-
-// This workflow simply runs NanoPlot. It requires internet so cannot be run on rescomp slurm cluster (needs -profile local)
-workflow nanoplot {
-    reads = Channel.fromPath("$params.input/*.fq.gz")
-                .map {it ->
-                    tuple(it.simpleName, it)
-                }
-    
-    NANOPLOT(reads, "$params.output/nanoplots")
-}
-
-
 // New more generalised entries
-workflow phi_workflow {
-    references = Channel.fromList(params.meta_ref)
-
-    phi_reads = Channel.fromPath("$params.input/*.fq.gz")
-                .map {it ->
-                    tuple(it.simpleName, it)
-                }
-    phi(phi_reads, references)
-}
-
 workflow sispa_workflow {
     references = Channel.fromList(params.meta_ref)
 
-    sispa_reads = Channel.fromPath("$params.input/*.fq.gz")
+    sispa_reads = Channel.fromPath("$params.input/*")
                 .map {it ->
                     tuple(it.simpleName, it)
                 }
     sispa(sispa_reads, references)
 }
 
-workflow RV_workflow {
-    references = Channel.fromList(params.RV_ref)
-
-    RV_reads = Channel.fromPath("$params.RV_input/*.fq.gz")
-                .map {it ->
-                    tuple(it.simpleName, it)
-                }
-
-    //RV_reads.view()
-    //references.view()
-
-    RV(RV_reads, references)
-}
-  
-workflow RV {
-    take:
-        reads
-        references
-
-    main:
-
-    MINIMAP2( reads.combine(references) )  // map reads to reference
-    
-    FILTER_SISPA(MINIMAP2.out.bam, 20) //
-
-    // pass to consensus workflow to produce consensus fasta and coverage graphs
-    consensus(references, FILTER_SISPA.out.bam, FILTER_SISPA.out.bam_no_ref)
-}
-
-workflow corona_workflow {
-    references = Channel.fromList(params.corona_ref)
-
-    reads = Channel.fromPath("$params.corona_input/*.fq.gz")
-                .map {it ->
-                    tuple(it.simpleName, it)
-                }
-
-    // Map reads to reference
-    MINIMAP2( reads.combine(references) )  
-    
-    // Filter the bam file
-    FILTER_SISPA(MINIMAP2.out.bam, 20)
-
-    // Pass to consensus workflow to produce consensus fasta and coverage graphs
-    consensus(references, FILTER_SISPA.out.bam, FILTER_SISPA.out.bam_no_ref)
-}
 
 /*
 This is the central workflow for dealing with SISPA reads.
@@ -154,9 +79,6 @@ workflow sispa {
         references
 
     main:
-    read_fastas = FASTQ_TO_FASTA(reads)
-
-    BLASTN(read_fastas, "$params.refs/primers.fasta")
 
     // Split reads into batches of n=2500 as SISPA_TRIM_PRIMER is slow when n is large
     reads.splitFastq(by: 2500, file: true, elem: [1])
@@ -166,7 +88,12 @@ workflow sispa {
     //SPLIT_READS_BY_PRIMER(batch_fq.combine(BLASTN.out, by: 0))
     //SISPA_TRIM_PRIMER(reads.join(BLASTN.out))
 
-    SISPA_TRIM_PRIMER(batch_fq.combine(BLASTN.out, by: 0))
+    // blast the reads to find the primers
+    read_fastas = FASTQ_TO_FASTA(batch_fq)
+
+    BLASTN(read_fastas, "$params.refs/primers.fasta")
+
+    SISPA_TRIM_PRIMER(batch_fq.combine(BLASTN.out, by: [0,1]))
 
     //SISPA_TRIM_PRIMER.out.fastq.view()
 
@@ -209,66 +136,6 @@ workflow sispa {
 }
 
 /*
-This is the central workflow for dealing with PHI reads.
-1. Will convert reads to fastas in order to use blast to find primer in them.
-2. Then it splits the reads by primer to produce "pseudoreads"
-3. Then uses minimap2 to align reads to reference producing a bam file
-4. This bam file needs to be filtered. With Phi we expect to sometimes get
-    multiple alignments for a single read, we just need to make sure these are 
-    not overlapping. 
-5. We pass the filtered bam file to the consensus workflow
-*/
-
-workflow phi {
-    take:
-        reads
-        references
-    
-    main:
-        read_fastas = FASTQ_TO_FASTA(reads)
-        BLASTN(read_fastas, "$params.refs/primers.fasta")
-
-        //reads.view(
-        reads.splitFastq(by: 2500, file: true, elem: [1])
-            .map{ fileTuple -> tuple(fileTuple[0], file(fileTuple[1]).baseName, fileTuple[1])}
-            .set { batch_fq }
-            
-        //batch_fq.view()
-        // [4, /gpfs3/well/bag/users/vbr851/projects/agnostic_diagnostic_v2/work/db/986cca81e162a07ae2854cda543fd6/4.1.fq]
-
-        PHI_SPLIT_READS_BY_PRIMER(batch_fq.combine(BLASTN.out, by: 0))
-
-        PHI_SPLIT_READS_BY_PRIMER.out.fastq  // This is non-primer reads and pseudoreads together
-            .groupTuple()
-            .set { grouped_splitting_fastq }
-
-        PHI_SPLIT_READS_BY_PRIMER.out.read_stats
-            .groupTuple()
-            .set { grouped_splitting_read_stats }
-
-        PHI_MERGE_SPLITTING_OUTPUTS( grouped_splitting_fastq, grouped_splitting_read_stats )
-
-        //MERGE_SPLITTING_OUTPUTS.out.fastq.view()
-        //MERGE_SPLITTING_OUTPUTS.out.read_stats.view()
-
-        PHI_SPLITTING_REPORT(PHI_MERGE_SPLITTING_OUTPUTS.out.read_stats,"$params.output/reports")
-
-        MINIMAP2( PHI_MERGE_SPLITTING_OUTPUTS.out.fastq.combine(references) )
-        
-        FILTER_PHI(MINIMAP2.out.bam, 20, 30)
-
-        phi_summary_ch = PHI_MERGE_SPLITTING_OUTPUTS.out.read_stats
-                .join(FILTER_PHI.out.non_overlapping)
-
-        GRAPH_PHI_ALIGNMENTS(phi_summary_ch, "$params.output/alignment_summary")
-
-        // // pass to consensus workflow to produce consensus fasta and coverage graphs
-        consensus(references, FILTER_PHI.out.bam, FILTER_PHI.out.bam_no_ref)
-}
-
-
-
-/*
 This section is modified from Nick's flu pipeline.
 Uses the bam alignment file to do some basecalling with clair3, 
 then goes on to produce a consensus fasta and depth coverage graph.
@@ -307,7 +174,7 @@ workflow consensus {
 
     // Produce coverage graphs for the spiked references
     to_graph = GENOME_DEPTH.out.tsv.map {it -> 
-        tuple(it[0], it[1], "${it[0]}_depth.png")
+        tuple(it[0], it[1])
     }
     //GRAPH_COVERAGE(to_graph, 50, 5, 100)
 

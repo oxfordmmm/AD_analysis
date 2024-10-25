@@ -2,10 +2,10 @@ process FASTQ_TO_FASTA {
     conda "$params.envs/biopython"
 
     input:
-    tuple val(barcode), path(fastq)
+    tuple val(barcode), val(split), path(fastq)
 
     output:
-    tuple val(barcode), path("${barcode}.fasta")
+    tuple val(barcode), val(split), path("${barcode}.fasta")
 
     script:
     """
@@ -18,17 +18,18 @@ Uses blast to find all locations of the 22bp primer within the reads.
 Returns a tsv where each row is a primer hit
 */
 process BLASTN {
-    cpus 4
+    tag {barcode  + ' ' + split}
+    //cpus 4
 
     conda "$params.envs/blast"
-    publishDir "$params.output/primer_blast", mode: 'copy'
+    publishDir "$params.output/primer_blast", mode: 'copy', saveAs: { filename -> "${barcode}_${split}_primer_blast.tsv" }
 
     input:
-    tuple val(barcode), path(reads)
+    tuple val(barcode), val(split), path(reads)
     path(query) // This is the sequence you want to search for
 
     output:
-    tuple val(barcode), path("${barcode}_blast.tsv") 
+    tuple val(barcode), val(split), path("${barcode}_blast.tsv") 
 
     script:
     """
@@ -71,6 +72,8 @@ The script split_by_primer.py, will produce several outputs:
     - report.txt: a short summary of the splitting
 */
 process PHI_SPLIT_READS_BY_PRIMER {
+    tag {barcode  + ' ' + split}
+
     conda "$params.envs/biopython"
     cpus = 4
 
@@ -101,6 +104,7 @@ If a read has a primer in the middle then something is wrong and the read is fai
 Output all fastq files so that we can view them
 */
 process SISPA_TRIM_PRIMER {
+    tag {barcode  + ' ' + split}
     conda "$params.envs/biopython"
 
     input:
@@ -114,9 +118,7 @@ process SISPA_TRIM_PRIMER {
     script:
     """
     echo barcode $barcode
-    #gzip -dc $reads > reads.fastq
-    #python3 $params.bin/trim_primer.py -r reads.fastq -b $primer_blast -o ${barcode} -m 20
-    python3 $params.bin/trim_primer.py -r $reads -b $primer_blast -o ${split} -m 20
+    trim_primer.py -r $reads -b $primer_blast -o ${split} -m 20
     """
 }
 
@@ -147,6 +149,7 @@ process PHI_MERGE_SPLITTING_OUTPUTS{
 }
 
 process SISPA_MERGE_TRIMMING_OUTPUTS {
+    tag {barcode}
     label 'online'
 
     publishDir "$params.output/trimmed_reads", mode: 'copy', pattern: "*.fastq.gz"
@@ -194,6 +197,7 @@ process PHI_SPLITTING_REPORT {
 // This script needs writing
 process SISPA_TRIMMING_REPORT {
     conda "$params.envs/biopython"
+    tag {barcode}
 
     publishDir "$outdir", mode: 'copy'
 

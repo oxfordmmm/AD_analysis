@@ -9,7 +9,7 @@ group_size <- strtoi(args[2]) # e.g. 50
 low_depth <- strtoi(args[3]) # e.g. 5
 cutoff <- strtoi(args[4]) # e.g. 100
 outfile <- args[5]
-sample <- args[6]
+sample <- args[5]
 
 df <- read_tsv(file, col_names = c('id', 'locus', 'depth'))
 head(df)
@@ -55,7 +55,9 @@ p <- compact_df %>%
   theme(strip.text = element_text(size = 3))
 #p
 
-ggsave(outfile, plot=p, width=25, height=15, dpi=300, limitsize = F)
+ggsave(paste0(outfile,".png"), plot=p, width=25, height=15, dpi=300, limitsize = F)
+ggsave(paste0(outfile,".pdf"), plot=p, width=25, height=15, dpi=300, limitsize = F, device='pdf')
+
 
 print("Plotted for all")
 
@@ -87,8 +89,8 @@ p_controls <- controls_df %>%
   theme(strip.text = element_text(size = 10))
 
 #p_controls
-ggsave(paste0("controls_",outfile), plot=p_controls, width=25, height=15, dpi=300, limitsize = F)
-
+ggsave(paste0("controls_",outfile, '.png'), plot=p_controls, width=25, height=15, dpi=300, limitsize = F)
+ggsave(paste0("controls_",outfile, '.pdf'), plot=p_controls, width=25, height=15, dpi=300, limitsize = F, device='pdf')
 print("P controls saved")
 
 #### Filter and plot of positive samples ####
@@ -124,7 +126,8 @@ if (nrow(positive_df) > 0) {
     theme(strip.text = element_text(size = 10))
   
   # Save the plot
-  ggsave(paste0("positives_",outfile), plot=p_positive, width=25, height=15, dpi=300, limitsize = F)
+  ggsave(paste0("positives_",outfile,".png"), plot=p_positive, width=25, height=15, dpi=300, limitsize = F)
+  ggsave(paste0("positives_",outfile,".pdf"), plot=p_positive, width=25, height=15, dpi=300, limitsize = F, device='pdf')
   
   print("P positive saved")
 } else {
@@ -154,7 +157,9 @@ p_all_positives <- all_positives_df %>%
 
 p_all_positives
 
-ggsave(paste0("all_positives_",outfile), plot=p_all_positives, width=25, height=15, dpi=300, limitsize = F)
+ggsave(paste0("all_positives_",outfile,".png"), plot=p_all_positives, width=25, height=15, dpi=300, limitsize = F)
+ggsave(paste0("all_positives_",outfile,".pdf"), plot=p_all_positives, width=25, height=15, limitsize = F, dpi=300, device='pdf')
+
 
 p <- compact_df %>%  
   ggplot(aes(x=locus, y=depth)) +
@@ -164,4 +169,5 @@ p <- compact_df %>%
   facet_wrap(vars(id), scales='free') +
   theme(strip.text = element_text(size = 10))
 
-ggsave(outfile, plot=p, width=25, height=15, dpi=300, limitsize = F)
+ggsave(paste0(outfile,".png"), plot=p, width=25, height=15, dpi=300, limitsize = F)
+ggsave(paste0(outfile,".pdf"), plot=p, width=25, height=15, dpi=300, limitsize = F, device='pdf')
