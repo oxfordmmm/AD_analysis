@@ -13,5 +13,10 @@ python3 ~/soft/AD_analysis/thresholds/analysis.py -i \
     /mnt/data/analysis/nick/agnostic_diagnostic/fractionated_SISPA_run2 \
     -m meta.csv \
     -p pathogens.csv \
+    -pr pathogen_reduced.csv \
     -o results.csv
 
+
+
+
+cp roc_curve.png /mnt/data/analysis/nick/agnostic_diagnostic/thresholds/

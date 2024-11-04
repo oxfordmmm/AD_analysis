@@ -42,8 +42,10 @@ HRE,Human_enterovirus_A
 HRE,Human_enterovirus_B
 Enterovirus,Human_enterovirus_A
 Enterovirus,Human_enterovirus_B
+Enterovirus,Human_enterovirus_68_strain_Fermon
 Human Rhinovirus,Human_rhinovirus_89
 Human Rhinovirus,Human_rhinovirus_C
+Human Rhinovirus,Human_rhinovirus_3
 Influenza A,Influenza_A_virus_A_California_07_2009H1N1_segment_1_polymerase_PB2_PB2_gene
 Influenza A,Influenza_A_virus_A_California_07_2009H1N1_segment_2_polymerase_PB1_PB1_gene
 Influenza A,Influenza_A_virus_A_California_07_2009H1N1_segment_3_polymerase_PA_PA_gene
@@ -81,3 +83,17 @@ RSV,RSVA_Human_respiratory_syncytial_virus_S2
 SARS-CoV-2,SARS-CoV-2
 SARS-Cov-2,SARS-CoV-2
 SARSCoV2,SARS-CoV-2
+SARS_coronavirus_Tor2,SARS_coronavirus_Tor2
+murine_respirovirus,murine_respirovirus
+zika,zika
+MS2,MS2
+orthoreovirus_1,orthoreovirus_1
+orthoreovirus_2,orthoreovirus_2
+orthoreovirus_3,orthoreovirus_3
+orthoreovirus_4,orthoreovirus_4
+orthoreovirus_5,orthoreovirus_5
+orthoreovirus_6,orthoreovirus_6
+orthoreovirus_7,orthoreovirus_7
+orthoreovirus_8,orthoreovirus_8
+orthoreovirus_9,orthoreovirus_9
+orthoreovirus_10,orthoreovirus_10
