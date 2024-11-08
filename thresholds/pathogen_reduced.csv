@@ -8,6 +8,9 @@ Coronavirus NL63,Coronavirus NL63
 Coronavirus OC43,Coronavirus OC43
 Enterovirus,Rhinovirus/enterovirus
 Flu A,Influenza A
+Flu A/H1-2009,Influenza A/H1-2009
+Flu A/H1,Influenza A/H1
+Flu A/H3,Influenza A/H3
 FluB,Influenza B
 HRE,Rhinovirus/enterovirus
 Human Rhinovirus,Rhinovirus/enterovirus
@@ -25,7 +28,6 @@ RSV,RSV
 SARS-CoV-2,SARS-CoV-2
 SARS-Cov-2,SARS-CoV-2
 SARSCoV2,SARS-CoV-2
-SARS_coronavirus_Tor2,SARS_coronavirus_Tor2
 murine_respirovirus,murine_respirovirus
 orthoreovirus_1,orthoreovirus
 orthoreovirus_10,orthoreovirus
@@ -38,3 +40,7 @@ orthoreovirus_7,orthoreovirus
 orthoreovirus_8,orthoreovirus
 orthoreovirus_9,orthoreovirus
 zika,zika
+Bordetella_parapertussis,Bordetella_parapertussis
+Bordetella_pertussis,Bordetella_pertussis
+Chlamydia_pneumoniae,Chlamydia_pneumoniae
+Mycoplasmoides_pneumoniae,Mycoplasma_pneumoniae

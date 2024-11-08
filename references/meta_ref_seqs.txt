@@ -1,0 +1,72 @@
+>Human_coxsackievirus_A2_strain_Fleetwood complete_genome
+>Coxsackievirus_B3_mRNA complete_genome
+>Human_enterovirus_A complete_genome
+>Human_enterovirus_B complete_genome
+>Poliovirus complete_genome
+>Human_enterovirus_D complete_genome
+>Enterovirus_sp._isolate_CPML_8109_08 complete_genome
+>Human_coronavirus_229E complete_genome
+>Human_Coronavirus_NL63 complete_genome
+>Human_coronavirus_OC43_strain_ATCC_VR-759 complete_genome
+>Human_metapneumovirus_isolate_00-1 complete_genome
+>Human_rubulavirus_2 complete_genome
+>Human_parainfluenza_virus_4a_viral_cRNA complete_genome strain:_M-25
+>Human_parainfluenza_virus_1 complete_genome
+>Human_parainfluenza_virus_3 complete_genome
+>Influenza_A_virus_A_California_07_2009H1N1_segment_1_polymerase_PB2_PB2_gene complete_cds
+>Influenza_A_virus_A_California_07_2009H1N1_segment_2_polymerase_PB1_PB1_gene complete_cds;_and_nonfunctional_PB1-F2_protein_PB1-F2_gene complete_sequence
+>Influenza_A_virus_A_California_07_2009H1N1_segment_3_polymerase_PA_PA_gene complete_cds
+>Influenza_A_virus_A_California_07_2009H1N1_segment_4_hemagglutinin_HA_gene complete_cds
+>Influenza_A_virus_A_California_07_2009H1N1_segment_5_nucleocapsid_protein_NP_gene complete_cds
+>Influenza_A_virus_A_California_07_2009H1N1_segment_6_neuraminidase_NA_gene complete_cds
+>Influenza_A_virus_A_California_07_2009H1N1_segment_7_matrix_protein_2_M2_and_matrix_protein_1_M1_genes complete_cds
+>Influenza_A_virus_A_California_07_2009H1N1_segment_8_nuclear_export_protein_NEP_and_nonstructural_protein_1_NS1_genes complete_cds
+>Influenza_A_virus_A_New_York_392_2004H3N2_segment_1 complete_sequence
+>Influenza_A_virus_A_New_York_392_2004H3N2_segment_2 complete_sequence
+>Influenza_A_virus_A_New_York_392_2004H3N2_segment_3 complete_sequence
+>Influenza_A_virus_A_New_York_392_2004H3N2_segment_4 complete_sequence
+>Influenza_A_virus_A_New_York_392_2004H3N2_segment_5 complete_sequence
+>Influenza_A_virus_A_New_York_392_2004H3N2_segment_6 complete_sequence
+>Influenza_A_virus_A_New_York_392_2004H3N2_segment_7 complete_sequence
+>Influenza_A_virus_A_New_York_392_2004H3N2_segment_8 complete_sequence
+>Influenza_A_virus_A_Puerto_Rico_8_1934H1N1_segment_1 complete_sequence
+>Influenza_A_virus_A_Puerto_Rico_8_1934H1N1_segment_2 complete_sequence
+>Influenza_A_virus_A_Puerto_Rico_8_1934H1N1_segment_3 complete_sequence
+>Influenza_A_virus_A_Puerto_Rico_8_1934H1N1_segment_4 complete_sequence
+>Influenza_A_virus_A_Puerto_Rico_8_1934H1N1_segment_5 complete_sequence
+>Influenza_A_virus_A_Puerto_Rico_8_1934H1N1_segment_6 complete_sequence
+>Influenza_A_virus_A_Puerto_Rico_8_1934H1N1_segment_7 complete_sequence
+>Influenza_A_virus_A_Puerto_Rico_8_1934H1N1_segment_8 complete_sequence
+>Influenza_B_virus_B_Lee_1940_segment_2 complete_sequence
+>Influenza_B_virus_B_Lee_1940_segment_3 complete_sequence
+>Influenza_B_virus_B_Lee_1940_segment_4 complete_sequence
+>Influenza_B_virus_B_Lee_1940_segment_5 complete_sequence
+>Influenza_B_virus_B_Lee_1940_segment_6 complete_sequence
+>Influenza_B_virus_B_Lee_1940_segment_7 complete_sequence
+>Influenza_B_virus_B_Lee_1940_segment_8 complete_sequence
+>Influenza_B_virus_RNA_1 complete_sequence
+>Human_parechovirus genome
+>Human_rhinovirus_89 complete_genome
+>Human_rhinovirus_C complete_genome
+>SARS_coronavirus_Tor2 complete_genome
+>Enterovirus_A114_strain_V13-0285 partial_genome
+>Human_enterovirus_68_strain_Fermon complete_genome
+>polyprotein_[echovirus_22_EV22 Harris Genomic_RNA_Complete 7339_nt]
+>Human_rhinovirus_3 complete_genome
+>MS2 NC_001417.2 phage 
+>armored_rna
+>murine_respirovirus id="c8dd320c60974309_1" assembly_id="c8dd320c60974309" genome_id="7faf9d6fedd048db" atcc_catalog_number="ATCC VR-907" species="Murine respirovirus" contig_number="1" topology="linear"
+>orthoreovirus_1 assembly_id="b743b6d8043e41fd" genome_id="96c234ec82e64d9a" atcc_catalog_number="ATCC VR-824" species="Mammalian orthoreovirus 3" contig_number="1" topology="linear"
+>orthoreovirus_2 assembly_id="b743b6d8043e41fd" genome_id="96c234ec82e64d9a" atcc_catalog_number="ATCC VR-824" species="Mammalian orthoreovirus 3" contig_number="2" topology="linear"
+>orthoreovirus_3 assembly_id="b743b6d8043e41fd" genome_id="96c234ec82e64d9a" atcc_catalog_number="ATCC VR-824" species="Mammalian orthoreovirus 3" contig_number="3" topology="linear"
+>orthoreovirus_4 assembly_id="b743b6d8043e41fd" genome_id="96c234ec82e64d9a" atcc_catalog_number="ATCC VR-824" species="Mammalian orthoreovirus 3" contig_number="4" topology="linear"
+>orthoreovirus_5 assembly_id="b743b6d8043e41fd" genome_id="96c234ec82e64d9a" atcc_catalog_number="ATCC VR-824" species="Mammalian orthoreovirus 3" contig_number="5" topology="linear"
+>orthoreovirus_6 assembly_id="b743b6d8043e41fd" genome_id="96c234ec82e64d9a" atcc_catalog_number="ATCC VR-824" species="Mammalian orthoreovirus 3" contig_number="6" topology="linear"
+>orthoreovirus_7 assembly_id="b743b6d8043e41fd" genome_id="96c234ec82e64d9a" atcc_catalog_number="ATCC VR-824" species="Mammalian orthoreovirus 3" contig_number="7" topology="linear"
+>orthoreovirus_8 assembly_id="b743b6d8043e41fd" genome_id="96c234ec82e64d9a" atcc_catalog_number="ATCC VR-824" species="Mammalian orthoreovirus 3" contig_number="8" topology="linear"
+>orthoreovirus_9 assembly_id="b743b6d8043e41fd" genome_id="96c234ec82e64d9a" atcc_catalog_number="ATCC VR-824" species="Mammalian orthoreovirus 3" contig_number="9" topology="linear"
+>orthoreovirus_10 assembly_id="b743b6d8043e41fd" genome_id="96c234ec82e64d9a" atcc_catalog_number="ATCC VR-824" species="Mammalian orthoreovirus 3" contig_number="10" topology="linear"
+>zika id="9c65c86b09fd4b2b_1" assembly_id="9c65c86b09fd4b2b" genome_id="fd56ec9cdeae468b" atcc_catalog_number="ATCC VR-1838" species="Zika virus" contig_number="1" topology="linear"
+>RSVB_Human_Respiratory_syncytial_virus_9320 complete genome AY353550.1
+>RSVA_Human_respiratory_syncytial_virus_S2 complete genome U39662.1
+>Human_adenovirus_21_isolate_OHT_006_complete_genome

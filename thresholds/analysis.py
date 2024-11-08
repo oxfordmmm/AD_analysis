@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import roc_curve, auc
 from sklearn import metrics
 
 import seaborn as sns
@@ -21,6 +22,7 @@ positive_controls=['MS2',
 'orthoreovirus_8',
 'orthoreovirus_9',
 'orthoreovirus_10',
+'orthoreovirus',
 'zika']
 
 def getDataFrame(input):
@@ -38,22 +40,27 @@ def getDataFrame(input):
     df['barcode']=df['Sample name'].map(int)
     # remove sup from batch
     df['run']=df['batch'].str.replace('_sup','')
+    # remove SARS_coronavirus_Tor2
+    df=df[df['chrom']!='SARS_coronavirus_Tor2']
     return df
 
 def checkThresholds(df, percentage_type_reads, percentage_run_reads ):
     '''Calculate the thresholds for the run and filter'''
-    cols=['run', 'barcode', 'chrom','sample num reads','batch']
+    cols=['run', 'barcode', 'chrom','sample num reads','batch','length','bases', 'position cov1', 'position cov10','avDepth', 'covBreadth1x']
     df=df[cols]
     total_reads=df['sample num reads'].sum()
         
     g=df.groupby(['chrom'])[['sample num reads']].sum()
     g['type numreads threshold']=(g['sample num reads']/100)*float(percentage_type_reads)
     g['run numreads threshold']=(total_reads/100)*float(percentage_run_reads)
-    g.rename(columns={'sample num reads':'run num reads'},inplace=True)
+    g.rename(columns={'sample num reads':'type num reads'},inplace=True)
+    g['run num reads']=total_reads
 
     df=pd.merge(df,g, on='chrom',how='left')
 
     ## Apply thresholds
+    df['sample reads percent of type']=(df['sample num reads']/df['type num reads'])*100
+    df['sample reads percent of run']=(df['sample num reads']/df['run num reads'])*100
     df['type pass']=np.where(df['sample num reads']>=df['type numreads threshold'],True,False)
     df['run pass']=np.where(df['sample num reads']>=df['run numreads threshold'],True,False)
     df['pass']=np.where(df['type pass'] & df['run pass'],True,False)
@@ -93,6 +100,49 @@ def getMeta(meta, pathogens, pathogens_reduced):
 
     ## count number of pathogens in the test to caluculate TN
     num_pathogens=len(df3['pathogen_reduced'].unique())
+
+    ## Create meta data biofire output
+    metaDF=df.copy()
+    # add Negavtive control where pathogen 1 is empty
+    metaDF['pathogen 1']=np.where(metaDF['pathogen 1'].isnull(),'Negative control',metaDF['pathogen 1'])
+    metaDF=metaDF.melt(id_vars=['Run','barcode','sample_name'],
+                       value_vars=['pathogen 1','pathogen 2','pathogen 3'],
+                       var_name='pathogen number',value_name='pathogen')
+    metaDF['pathogen reduced']=metaDF['pathogen'].map(path_dict_reduced)
+    metaDF.dropna(subset=['pathogen'],inplace=True)
+    metaDF['Biofire positive']=np.where(metaDF['pathogen']=='Negative control',0,1)
+  
+    # add all species not found as biofire negative
+    biofire_pathogens=df3['pathogen_reduced'].unique()
+    biofire_pathogens=list(set(biofire_pathogens)-set(positive_controls))
+    runs=metaDF['Run'].unique()
+    additonal_rows=[]
+    for run in runs:
+        barcodes=metaDF[metaDF['Run']==run]['barcode'].unique()
+        for barcode in barcodes:
+            pathogens=metaDF[(metaDF['Run']==run) & (metaDF['barcode']==barcode)]['pathogen reduced'].unique()
+            missed_pathogens=list(set(biofire_pathogens) - set(pathogens))
+            for p in missed_pathogens:
+                d={'Run':run,'barcode':barcode,'sample_name':None,'pathogen number':None,'pathogen':p,'pathogen reduced':p,'Biofire positive':0}
+                additonal_rows.append(d)
+    if len(additonal_rows)>0:
+        ar_df=pd.DataFrame(additonal_rows)
+        metaDF=pd.concat([metaDF,ar_df])
+
+    metaDF.sort_values(by=['Run','barcode','pathogen'],inplace=True)
+
+    metaDF=metaDF[metaDF['pathogen']!='Negative control']
+    metaDF=metaDF[metaDF['pathogen']!='SARS_coronavirus_Tor2']
+    metaDF=metaDF[metaDF['pathogen']!='orthoreovirus']
+    keep_runs=['expt10_03072024', 'expt11_150824','expt10A_17072024']
+    metaDF=metaDF[metaDF['Run'].isin(keep_runs)]
+    
+    cols=['Run','barcode','pathogen reduced','Biofire positive']
+    metaDF=metaDF[cols]
+    metaDF.rename(columns={'pathogen reduced':'pathogen'},inplace=True)
+
+    print(metaDF)
+    metaDF.to_csv('metaDF.csv', index=False)
     
     return metaDict, df, path_dict_rev, path_dict_reduced, num_pathogens
 
@@ -152,7 +202,7 @@ def checkSensitivity(df, metaDict, path_dict, path_dict_reduced):
                    'runBar':runBar,
                    'chrom':pc,
                    'sample num reads':0, 
-                   'pcTP':1, 'TP':0, 'FP':0, 'FN':0}
+                   'pcTP':0, 'TP':0, 'FP':0, 'FN':1}
                 pc_missed.append(d)
         if len(pc_missed)>0:
             dfPCmissed=pd.DataFrame(pc_missed)
@@ -180,6 +230,9 @@ def checkSensSpec(data, metaDict, metaDF, path_dict, path_dict_reduced, num_path
     
     if len(dfs)>0:
         data=pd.concat(dfs)
+        data['pathogen']=data['chrom'].map(path_dict)
+        data['pathogen_reduced']=data['pathogen'].map(path_dict_reduced)
+        data['pathogen_reduced']=np.where(data['pathogen_reduced'].isnull(),data['chrom'],data['pathogen_reduced'])
 
         # Create a second dataframe of one sample per row with TP, FP, FN, TN
         #print(data)
@@ -193,7 +246,6 @@ def checkSensSpec(data, metaDict, metaDF, path_dict, path_dict_reduced, num_path
         df=pd.merge(TP,pcTP, on=['run','barcode'],how='left')
         df=pd.merge(df,FP, on=['run','barcode'],how='left')
         df=pd.merge(df,FN, on=['run','barcode'],how='left')
-        
         
 
         # calculate the TPR and FPR rates
@@ -218,35 +270,58 @@ def checkSensSpec(data, metaDict, metaDF, path_dict, path_dict_reduced, num_path
     else:
         return None, None, None
 
-def plotROC(df2):
+def getAdditionalMetrics(fpr, tpr, thresholds, pathogen, metric):
+    df=pd.DataFrame({'fpr':fpr, 'tpr':tpr, 'thresholds':thresholds})
+    df['sensitivity']=df['tpr']
+    df['specificity']=1-df['fpr']
+    df['1-specificity']=df['fpr']
+    df['pathogen']=pathogen
+    df['metric']=metric
+    #df['accuracy']=(df['tpr']+df['specificity'])/2
+    df['Youden J statistic']=df['sensitivity']+df['specificity']-1
+    df['F1 score']=(2*df['sensitivity']*df['specificity'])/(df['sensitivity']+df['specificity'])
+    df.to_csv(f'additional_stats/{pathogen}_{metric}_thresholds.csv')
+
+
+def plotROC(df, pathogen, metric):
     '''Plot the ROC curve'''
-    #print(df)
-    #chrom='MS2'
-    #df2=df[df['chrom']==chrom]
-    X=df2[['sample num reads']]
+    print(pathogen, metric)
+    if pathogen!='All_pathogens':
+        df2=df[df['pathogen_reduced']==pathogen]
+    else:
+        df2=df
+    df2.fillna(0,inplace=True)
+    #X=df2[['sample num reads','sample reads percent of type', 'sample reads percent of run']]
+    X=df2[metric]
     y=df2['pcTP']
-    #split the dataset into training (70%) and testing (30%) sets
-    X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.3,random_state=0) 
 
-    #print(X_train)
-    #print(y_train)
-    #instantiate the model
-    log_regression = LogisticRegression()
+    # check if y contail only one class
+    if len(y.unique())==1 or len(X)<2:
+        print(y)
+        return
+    
+    # show distribution of the data
+    g=df.groupby(['pathogen_reduced','pcTP'])[metric].count()
+    g.to_csv(f'sample_counts/{pathogen}_{metric}_counts.csv')
+    print(g)
 
-    #fit the model using the training data
-    log_regression.fit(X_train,y_train)
-
-    #define metrics
-    y_pred_proba = log_regression.predict_proba(X)[::,1]
-    fpr, tpr, _ = metrics.roc_curve(y,  y_pred_proba)
-    auc = metrics.roc_auc_score(y, y_pred_proba)
+    # ROC curve from sklearn
+    fpr, tpr, thresholds = roc_curve(y, X)
+    getAdditionalMetrics(fpr, tpr, thresholds, pathogen, metric)
+    # Compute the AUC (area under the curve)
+    roc_auc = auc(fpr, tpr)
+    #print(thresholds)
 
     #create ROC curve
-    plt.plot(fpr,tpr, label="AUC="+str(auc))
+    plt.plot(fpr,tpr, label="AUC="+str(roc_auc))
     plt.ylabel('True Positive Rate')
     plt.xlabel('False Positive Rate')
     plt.legend(loc=4)
-    plt.savefig('roc_curve.png')
+    # add diagonal line
+    plt.plot([0, 1], [0, 1], color='navy', linestyle='--')
+    metric_=metric.replace(' ','_')
+    plt.savefig(f'rocs/{pathogen}_roc_{metric_}.pdf')
+    plt.clf()
     
 def main(args):
     df=getDataFrame(args.input)
@@ -264,7 +339,16 @@ def main(args):
                 dfs.append(sensSpec)
     sensSpec=pd.concat(dfs)
     sensSpec.to_csv(f'{args.output}_sensSpec.csv')
-    plotROC(data)
+    
+    # plot ROC curves
+    metrics=['sample num reads','sample reads percent of type', 'sample reads percent of run', 'bases', 'position cov1', 'position cov10','avDepth', 'covBreadth1x']
+    #plotROC(data, 'All_pathogens', 'sample num reads')
+    #for metric in metrics:
+    #    plotROC(data, 'All_pathogens', metric)
+
+    #pathogens=data['pathogen_reduced'].unique()
+    #for pathogen in pathogens:
+    #    plotROC(data, pathogen, metric)
 
 
 if __name__ == '__main__':
