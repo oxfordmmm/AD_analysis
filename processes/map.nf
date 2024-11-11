@@ -3,6 +3,22 @@ Process maps reads to reference to produce a sam file of alignments,
 Samtools is used to sort and filter,
 Tries to keep as many alignments as possible
 */
+process MASK_REF {
+    conda "$params.envs/map"
+    cpus 3
+
+    input:
+    tuple path('ref.fasta'), path('mask.csv')
+
+    output:
+    path('masked.fasta') , emit: fasta
+
+    script:
+    """
+    mask_ref.py -r ref.fasta -m mask.csv -o masked.fasta
+    """
+}
+
 process MINIMAP2 {
     conda "$params.envs/map"
     cpus 3

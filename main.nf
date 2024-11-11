@@ -13,6 +13,7 @@ include {SISPA_TRIMMING_REPORT} from './processes/primer.nf'  // may need to cha
 // include {COMBINE_CSVS} from './processes/general.nf'
 
 // mapping
+include {MASK_REF} from './processes/map.nf'
 include {MINIMAP2} from './processes/map.nf'
 include {FILTER_BAM} from './processes/map.nf'
 include {FILTER_PHI} from './processes/map.nf'
@@ -56,11 +57,13 @@ Could try for a read with 3+ primers. Blast/minimap2 gaps onto themselves to che
 workflow sispa_workflow {
     references = Channel.fromList(params.meta_ref)
 
+    masks = Channel.fromPath(params.masks)
+
     sispa_reads = Channel.fromPath("$params.input/*")
                 .map {it ->
                     tuple(it.simpleName, it)
                 }
-    sispa(sispa_reads, references)
+    sispa(sispa_reads, references, masks)
 }
 
 
@@ -77,6 +80,7 @@ workflow sispa {
     take:
         reads
         references
+        masks
 
     main:
 
@@ -122,7 +126,9 @@ workflow sispa {
 
 
     //MINIMAP2(SISPA_TRIM_PRIMER.out.trimmed.combine(references))
-    MINIMAP2( SISPA_MERGE_TRIMMING_OUTPUTS.out.fastq.combine(references) )
+    MASK_REF(references.combine(masks))
+
+    MINIMAP2( SISPA_MERGE_TRIMMING_OUTPUTS.out.fastq.combine(MASK_REF.out.fasta) )
     
     FILTER_SISPA(MINIMAP2.out.bam, 20)
 
@@ -178,7 +184,7 @@ workflow consensus {
     }
     //GRAPH_COVERAGE(to_graph, 50, 5, 100)
 
-    GRAPH_COVERAGE_SEPARATE(to_graph, 50, 5, 100)
+    //GRAPH_COVERAGE_SEPARATE(to_graph, 50, 5, 100)
 
     // all_depth_files = GENOME_DEPTH.out.tsv
     //                     .map{it -> it[1]}
@@ -189,7 +195,7 @@ workflow consensus {
     Channel.fromPath("${params.test_rmd}")
         .set{ ch_rmd }
 
-    GRAPH_COVERAGE_REPORT(ch_rmd)
+    //GRAPH_COVERAGE_REPORT(ch_rmd)
 
     //GRAPH_COVERAGE_ALL_SAMPLES_OPTIMISED(all_depth_files, 50, 5, 100)
 }

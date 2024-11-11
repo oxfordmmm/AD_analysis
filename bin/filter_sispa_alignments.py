@@ -78,6 +78,7 @@ if __name__ == '__main__':
         alignments, unmapped_count, secondary_count, supplementary_count = get_good_alignments(input_bam, output, min_length)
         alignments = alignments.sort_values(by=['query', 'query_start'])
         alignments.to_csv(f"{prefix}_all_alignments.csv", index=False)
+        alignments_all  = alignments.copy()
 
         alignments = alignments.query('supp == False and secondary == False')
     
@@ -89,5 +90,11 @@ if __name__ == '__main__':
         file.write(f"{alignments.shape[0]} good alignments.\n")
 
     # count alignments per chrom
-    alignment_counts = alignments.groupby('ref').size().reset_index(name='counts')
-    alignment_counts.to_csv(f"{prefix}_alignment_counts.csv", index=False)
+    #alignment_counts = alignments.groupby(['ref','query']).size().reset_index(name='counts')
+    alignment_counts = alignments_all.groupby(['ref'])[['query']].count()#.reset_index(name='counts')
+    alignment_counts.rename(columns={'query':'non-unique counts'}, inplace=True)
+    alignment_counts_unique = alignments_all.groupby(['ref'])[['query']].nunique()#.reset_index(name='unique counts')
+    alignment_counts_unique.rename(columns={'query':'counts'}, inplace=True)
+    alignment_counts = alignment_counts.merge(alignment_counts_unique, on='ref', how='left')
+
+    alignment_counts.to_csv(f"{prefix}_alignment_counts.csv")

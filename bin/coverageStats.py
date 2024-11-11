@@ -13,7 +13,7 @@ def coverageStats(df):
 
     bases=df.groupby(['chrom'])['depth'].sum()
     chromLens=df.groupby(['chrom'])['position'].count()
-    avDepth=bases/cov1['depth']
+    meanDepth=bases/cov1['depth']
 
     cov1.reset_index(inplace=True)
     cov10.reset_index(inplace=True)
@@ -22,10 +22,10 @@ def coverageStats(df):
     df2['length']=df2.chrom.map(chromLens)
     df2['covBreadth1x']=df2['depth cov1']/df2['length']
     df2['covBreadth10x']=df2['depth cov10']/df2['length']
-    df2['avDepth']=df2.chrom.map(avDepth)
+    df2['meanDepth']=df2.chrom.map(meanDepth)
     df2['Sample name']=sys.argv[2]
     df2['bases']=df2.chrom.map(bases)
-    df2=df2[['Sample name','chrom','length','bases','avDepth','position cov1','position cov10','covBreadth1x','covBreadth10x']]
+    df2=df2[['Sample name','chrom','length','bases','meanDepth','position cov1','position cov10','covBreadth1x','covBreadth10x']]
 
     df3=pd.read_csv('alignment_counts.csv')
     df2=df2.merge(df3,left_on='chrom', right_on='ref', how='left')
