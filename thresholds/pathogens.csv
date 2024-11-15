@@ -6,6 +6,7 @@ Coronavirus 229E,Human_coronavirus_229E
 Coronavirus HKU,Human_coronavirus_HKU1
 Coronavirus NL63,Human_Coronavirus_NL63
 Coronavirus OC43,Human_coronavirus_OC43_strain_ATCC_VR-759
+Flu A,Influenza_A_virus_place_holder
 Flu A/H1-2009,Influenza_A_virus_A_California_07_2009H1N1_segment_1_polymerase_PB2_PB2_gene
 Flu A/H1-2009,Influenza_A_virus_A_California_07_2009H1N1_segment_2_polymerase_PB1_PB1_gene
 Flu A/H1-2009,Influenza_A_virus_A_California_07_2009H1N1_segment_3_polymerase_PA_PA_gene
@@ -41,8 +42,11 @@ FluB,Influenza_B_virus_RNA_1
 HRE,Human_enterovirus_A
 HRE,Human_enterovirus_B
 Enterovirus,Human_enterovirus_A
+Enterovirus,Enterovirus_A114_strain_V13-0285
 Enterovirus,Human_enterovirus_B
 Enterovirus,Human_enterovirus_68_strain_Fermon
+Enterovirus,Enterovirus_sp._isolate_CPML_8109_08
+Enterovirus,Human_enterovirus_D
 Human Rhinovirus,Human_rhinovirus_89
 Human Rhinovirus,Human_rhinovirus_C
 Human Rhinovirus,Human_rhinovirus_3
@@ -96,7 +100,10 @@ orthoreovirus_7,orthoreovirus_7
 orthoreovirus_8,orthoreovirus_8
 orthoreovirus_9,orthoreovirus_9
 orthoreovirus_10,orthoreovirus_10
-CP085971.1,Bordetella_parapertussis
-NZ_CP025371.1,Bordetella_pertussis
-NC_005043.1,Chlamydia_pneumoniae
-NZ_LR214945.1,Mycoplasmoides_pneumoniae
+Coxsackievirus_B3_mRNA,Coxsackievirus_B3_mRNA
+Human_coxsackievirus_A2_strain_Fleetwood,Human_coxsackievirus_A2_strain_Fleetwood
+Poliovirus,Poliovirus
+Bordetella_parapertussis,CP085971.1
+Bordetella_pertussis,NZ_CP025371.1
+Chlamydia_pneumoniae,NC_005043.1
+Mycoplasmoides_pneumoniae,NZ_LR214945.1

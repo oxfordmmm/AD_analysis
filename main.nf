@@ -59,11 +59,15 @@ workflow sispa_workflow {
 
     masks = Channel.fromPath(params.masks)
 
+    meta_pathogens = Channel.fromPath(params.meta_pathogens)
+
+    pathogens_reduced = Channel.fromPath(params.pathogens_reduced)
+
     sispa_reads = Channel.fromPath("$params.input/*")
                 .map {it ->
                     tuple(it.simpleName, it)
                 }
-    sispa(sispa_reads, references, masks)
+    sispa(sispa_reads, references, masks, meta_pathogens, pathogens_reduced)
 }
 
 
@@ -81,6 +85,8 @@ workflow sispa {
         reads
         references
         masks
+        meta_pathogens
+        pathogens_reduced
 
     main:
 
@@ -135,10 +141,11 @@ workflow sispa {
     sispa_summary_ch = SISPA_MERGE_TRIMMING_OUTPUTS.out.read_stats
             .join(FILTER_SISPA.out.alignments)
 
-    GRAPH_SISPA_ALIGNMENTS(sispa_summary_ch, "$params.output/alignment_summary")
+    //GRAPH_SISPA_ALIGNMENTS(sispa_summary_ch, "$params.output/alignment_summary")
 
     // pass to consensus workflow to produce consensus fasta and coverage graphs
-    consensus(references, FILTER_SISPA.out.bam, FILTER_SISPA.out.bam_no_ref, FILTER_SISPA.out.alignment_counts)
+    consensus(references, FILTER_SISPA.out.bam, FILTER_SISPA.out.bam_no_ref, FILTER_SISPA.out.alignment_counts, 
+                meta_pathogens, pathogens_reduced)  
 }
 
 /*
@@ -152,6 +159,8 @@ workflow consensus {
         bam
         bam_no_ref 
         alignment_counts
+        meta_pathogens
+        pathogens_reduced
 
     main:
 
@@ -160,7 +169,7 @@ workflow consensus {
 
     // produces vcf file giving points of variance against reference. 
     // clair3 needed because ont output has more complex error profile
-    CLAIR3(bam_no_ref.combine(INDEX_REF.out.index))
+    //CLAIR3(bam_no_ref.combine(INDEX_REF.out.index))
 
     // get depth of reads along ref
     GENOME_DEPTH(bam.combine(alignment_counts, by:0))
@@ -169,19 +178,19 @@ workflow consensus {
     depths=GENOME_DEPTH.out.csv
         .collect()
 
-    DEPTH_SUMMARY(depths)
+    DEPTH_SUMMARY(depths, meta_pathogens, pathogens_reduced)
 
     // create consensus file by applying vcf to ref. Depth is used to mask low depth regions
-    BCFTOOLS_CONSENSUS(CLAIR3.out.vcf.combine(INDEX_REF.out.index).combine(GENOME_DEPTH.out.tsv, by:0))
+    //BCFTOOLS_CONSENSUS(CLAIR3.out.vcf.combine(INDEX_REF.out.index).combine(GENOME_DEPTH.out.tsv, by:0))
     
     // Calculate some basic stats about the resulting consensus fasta (count snps and N's etc)
-    to_count_ns = BCFTOOLS_CONSENSUS.out.fasta.join(CLAIR3.out.vcf)
-    COUNT_NS(to_count_ns)
+    //to_count_ns = BCFTOOLS_CONSENSUS.out.fasta.join(CLAIR3.out.vcf)
+    //COUNT_NS(to_count_ns)
 
     // Produce coverage graphs for the spiked references
-    to_graph = GENOME_DEPTH.out.tsv.map {it -> 
-        tuple(it[0], it[1])
-    }
+    //to_graph = GENOME_DEPTH.out.tsv.map {it -> 
+    //    tuple(it[0], it[1])
+    //}
     //GRAPH_COVERAGE(to_graph, 50, 5, 100)
 
     //GRAPH_COVERAGE_SEPARATE(to_graph, 50, 5, 100)
@@ -192,8 +201,8 @@ workflow consensus {
 
     //GRAPH_COVERAGE_ALL_SAMPLES(all_depth_files, 50, 5, 100)
 
-    Channel.fromPath("${params.test_rmd}")
-        .set{ ch_rmd }
+    //Channel.fromPath("${params.test_rmd}")
+    //    .set{ ch_rmd }
 
     //GRAPH_COVERAGE_REPORT(ch_rmd)
 

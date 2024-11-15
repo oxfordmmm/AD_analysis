@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import pandas as pd
+import numpy as np
 import sys
 
 def getData(f):
@@ -9,26 +10,57 @@ def getData(f):
 
 def coverageStats(df):
     cov1=df[df.depth > 1].groupby(['chrom']).count()
+    cov3=df[df.depth > 3].groupby(['chrom']).count()
+    cov5=df[df.depth > 5].groupby(['chrom']).count()
     cov10=df[df.depth > 10].groupby(['chrom']).count()
 
     bases=df.groupby(['chrom'])['depth'].sum()
     chromLens=df.groupby(['chrom'])['position'].count()
     meanDepth=bases/cov1['depth']
 
+    # Additional columns
+    df['trunc5']=np.where(df['depth']>5,5,df['depth'])
+    df['trunc10']=np.where(df['depth']>10,10,df['depth'])
+    AuG_trunc5=df.groupby(['chrom'])['trunc5'].sum()
+    AuG_trunc10=df.groupby(['chrom'])['trunc10'].sum()
+    meanDepth_trunc5=AuG_trunc5/cov1['depth']
+    meanDepth_trunc10=AuG_trunc10/cov1['depth']
+
     cov1.reset_index(inplace=True)
+    cov3.reset_index(inplace=True)
+    cov3.rename(columns={'depth':'depth cov3','position':'position cov3'},inplace=True)
+    cov5.reset_index(inplace=True)
+    cov5.rename(columns={'depth':'depth cov5','position': 'position cov5' },inplace=True)
     cov10.reset_index(inplace=True)
+    print(cov3)
 
     df2=cov1.merge(cov10,on='chrom',suffixes=[' cov1',' cov10'],how='outer')
+    df2=df2.merge(cov3,on='chrom',how='outer')
+    df2=df2.merge(cov5,on='chrom',how='outer')
+    print(df2.columns)
     df2['length']=df2.chrom.map(chromLens)
     df2['covBreadth1x']=df2['depth cov1']/df2['length']
+    df2['covBreadth3x']=df2['depth cov3']/df2['length']
+    df2['covBreadth5x']=df2['depth cov5']/df2['length']
     df2['covBreadth10x']=df2['depth cov10']/df2['length']
     df2['meanDepth']=df2.chrom.map(meanDepth)
+    df2['AuG_trunc5']=df2.chrom.map(AuG_trunc5)
+    df2['AuG_trunc10']=df2.chrom.map(AuG_trunc10)
+    df2['meanDepth_trunc5']=df2.chrom.map(meanDepth_trunc5)
+    df2['meanDepth_trunc10']=df2.chrom.map(meanDepth_trunc10)
     df2['Sample name']=sys.argv[2]
     df2['bases']=df2.chrom.map(bases)
-    df2=df2[['Sample name','chrom','length','bases','meanDepth','position cov1','position cov10','covBreadth1x','covBreadth10x']]
+    df2['AuG']=df2['bases']/df2['length']
+    df2['Bases_perc']=df2['AuG']*100
+
+    
+    df2=df2[['Sample name','chrom','length','bases','meanDepth',
+             'position cov1', 'position cov3','position cov5', 'position cov10',
+             'covBreadth1x', 'covBreadth3x','covBreadth5x','covBreadth10x',
+             'meanDepth_trunc5','meanDepth_trunc10','AuG','AuG_trunc5','AuG_trunc10']]
 
     df3=pd.read_csv('alignment_counts.csv')
-    df2=df2.merge(df3,left_on='chrom', right_on='ref', how='left')
+    df2=df2.merge(df3,on=['Sample name', 'chrom'], how='outer')
     df2.to_csv('coverage_stats.csv',index=False)
     print(df2)
     

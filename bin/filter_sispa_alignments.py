@@ -20,7 +20,7 @@ def get_good_alignments(in_file, out_file, min_length):
     secondary_count = 0
     supplementary_count = 0
 
-    for read in input_bam.fetch():        
+    for read in input_bam.fetch(until_eof=True):  
         if read.is_unmapped:
             unmapped_count += 1
             continue
@@ -66,6 +66,8 @@ if __name__ == '__main__':
                         help='output prefix for other files')
     parser.add_argument('-m', '--min_length', required=True,
                         help='min alignment length required to pass filtering')    
+    parser.add_argument('-s', '--sample_name', required=True,
+                        help='sample name')
     args = parser.parse_args()
     input_bam = args.inBam
     output = args.outBam
@@ -76,11 +78,12 @@ if __name__ == '__main__':
 
     with open(f"{prefix}_filter_report.txt", "w") as file:
         alignments, unmapped_count, secondary_count, supplementary_count = get_good_alignments(input_bam, output, min_length)
-        alignments = alignments.sort_values(by=['query', 'query_start'])
-        alignments.to_csv(f"{prefix}_all_alignments.csv", index=False)
-        alignments_all  = alignments.copy()
+        if len(alignments) > 0:
+            alignments = alignments.sort_values(by=['query', 'query_start'])
+            alignments.to_csv(f"{prefix}_all_alignments.csv", index=False)
+            alignments_all  = alignments.copy()
 
-        alignments = alignments.query('supp == False and secondary == False')
+            alignments = alignments.query('supp == False and secondary == False')
     
         # Get good alignments
         alignments.to_csv(f"{prefix}_alignments.csv", index=False)
@@ -91,10 +94,19 @@ if __name__ == '__main__':
 
     # count alignments per chrom
     #alignment_counts = alignments.groupby(['ref','query']).size().reset_index(name='counts')
-    alignment_counts = alignments_all.groupby(['ref'])[['query']].count()#.reset_index(name='counts')
-    alignment_counts.rename(columns={'query':'non-unique counts'}, inplace=True)
-    alignment_counts_unique = alignments_all.groupby(['ref'])[['query']].nunique()#.reset_index(name='unique counts')
-    alignment_counts_unique.rename(columns={'query':'counts'}, inplace=True)
-    alignment_counts = alignment_counts.merge(alignment_counts_unique, on='ref', how='left')
-
-    alignment_counts.to_csv(f"{prefix}_alignment_counts.csv")
+    if len(alignments) > 0:
+        alignment_counts = alignments_all.groupby(['ref'])[['query']].count()#.reset_index(name='counts')
+        alignment_counts.rename(columns={'query':'non-unique counts'}, inplace=True)
+        alignment_counts_unique = alignments_all.groupby(['ref'])[['query']].nunique()#.reset_index(name='unique counts')
+        alignment_counts_unique.rename(columns={'query':'counts'}, inplace=True)
+        alignment_counts = alignment_counts.merge(alignment_counts_unique, on='ref', how='left')
+    else:
+        # create empty dataframe with ref as index
+        alignment_counts = pd.DataFrame(columns=['ref','non-unique counts','counts'])
+        alignment_counts.set_index('ref', inplace=True)
+    # add unmapped counts
+    alignment_counts.loc['unmapped'] = [unmapped_count, unmapped_count]
+    alignment_counts['Sample name'] = args.sample_name
+    alignment_counts.reset_index(inplace=True)
+    alignment_counts.rename(columns={'ref':'chrom'}, inplace=True)
+    alignment_counts.to_csv(f"{prefix}_alignment_counts.csv", index=False)

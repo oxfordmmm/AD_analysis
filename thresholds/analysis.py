@@ -34,9 +34,11 @@ def getDataFrame(input):
     df=pd.concat(dfs)
     # remove SQK-RBK114-96_barcode from Sample name
     df['Sample name']=df['Sample name'].str.replace('SQK-RBK114-96_barcode','')
-    # remove unclassified samples
+    # remove unclassified samples and nan
     df=df[df['Sample name']!='unclassified']
+    df=df[~df['Sample name'].isnull()]
     # convert Sample name to int
+    print(df['Sample name'].unique())
     df['barcode']=df['Sample name'].map(int)
     # remove sup from batch
     df['run']=df['batch'].str.replace('_sup','')
@@ -46,8 +48,8 @@ def getDataFrame(input):
 
 def checkThresholds(df, percentage_type_reads, percentage_run_reads ):
     '''Calculate the thresholds for the run and filter'''
-    cols=['run', 'barcode', 'chrom','sample num reads','batch','length','bases', 'position cov1', 'position cov10','avDepth', 'covBreadth1x']
-    df=df[cols]
+    #cols=['run', 'barcode', 'chrom','sample num reads','batch','length','bases', 'position cov1', 'position cov10','avDepth', 'covBreadth1x']
+    #df=df[cols]
     total_reads=df['sample num reads'].sum()
         
     g=df.groupby(['chrom'])[['sample num reads']].sum()
@@ -69,10 +71,12 @@ def checkThresholds(df, percentage_type_reads, percentage_run_reads ):
     df['percentage_run_reads']=percentage_run_reads
     return df
 
-def getMeta(meta, pathogens, pathogens_reduced):
+def getMeta(meta, pathogens, pathogens_reduced,biofire):
     df=pd.read_csv(meta)
     # strip whitespace from values
     df['pathogen 1'] = df['pathogen 1'].str.strip()
+
+    biofire_pathogens=open(biofire).read().splitlines()
 
     df2=pd.read_csv(pathogens)
     
@@ -113,8 +117,8 @@ def getMeta(meta, pathogens, pathogens_reduced):
     metaDF['Biofire positive']=np.where(metaDF['pathogen']=='Negative control',0,1)
   
     # add all species not found as biofire negative
-    biofire_pathogens=df3['pathogen_reduced'].unique()
-    biofire_pathogens=list(set(biofire_pathogens)-set(positive_controls))
+    #biofire_pathogens=df3['pathogen_reduced'].unique()
+    #biofire_pathogens=list(set(biofire_pathogens)-set(positive_controls))
     runs=metaDF['Run'].unique()
     additonal_rows=[]
     for run in runs:
@@ -143,6 +147,9 @@ def getMeta(meta, pathogens, pathogens_reduced):
 
     print(metaDF)
     metaDF.to_csv('metaDF.csv', index=False)
+
+    metaDFbiofire_only=metaDF[metaDF['pathogen'].isin(biofire_pathogens)]
+    metaDFbiofire_only.to_csv('metaDF_biofire_only.csv', index=False)
     
     return metaDict, df, path_dict_rev, path_dict_reduced, num_pathogens
 
@@ -167,6 +174,9 @@ def checkSensitivity(df, metaDict, path_dict, path_dict_reduced):
     dfs=[]
     for barcode in barcodes:
         dfB=df[df['barcode']==barcode].copy()
+        dfB=dfB[dfB['chrom']!='unmapped']
+        if len(dfB)==0:
+            continue
         dfB['runBar']=dfB['run']+'_'+dfB['barcode'].astype(str)
         runBar=dfB['runBar'].unique()[0]
         
@@ -325,23 +335,23 @@ def plotROC(df, pathogen, metric):
     
 def main(args):
     df=getDataFrame(args.input)
-    metaDict, metaDF, path_dict, pathogens_reduced, num_pathogens=getMeta(args.meta, args.pathogens, args.pathogens_reduced)
+    metaDict, metaDF, path_dict, pathogens_reduced, num_pathogens=getMeta(args.meta, args.pathogens, args.pathogens_reduced, args.biofire)
     #print(metaDict)
-    dfs=[]
-    thresholds=[0.0, 0.1, 0.3, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 2.4, 3.3, 4.2, 5.1, 6.0, 7.0, 8.0, 9.0, 10.0, 20, 30, 40, 50, 60, 70, 80, 90, 99]
-    thresholds=[0.0]
-    for p in thresholds:
-        for r in thresholds:
-            print(p,r)
-            data, df2, sensSpec=checkSensSpec(df, metaDict, metaDF, path_dict, pathogens_reduced, num_pathogens, percentage_type_reads=p, percentage_run_reads=r)
-            data.to_csv(f'{args.output}_{p}_{r}.csv')
-            if sensSpec is not None:
-                dfs.append(sensSpec)
-    sensSpec=pd.concat(dfs)
-    sensSpec.to_csv(f'{args.output}_sensSpec.csv')
+    #dfs=[]
+    #thresholds=[0.0, 0.1, 0.3, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 2.4, 3.3, 4.2, 5.1, 6.0, 7.0, 8.0, 9.0, 10.0, 20, 30, 40, 50, 60, 70, 80, 90, 99]
+    #thresholds=[0.0]
+    #for p in thresholds:
+    #    for r in thresholds:
+    #        print(p,r)
+    #        data, df2, sensSpec=checkSensSpec(df, metaDict, metaDF, path_dict, pathogens_reduced, num_pathogens, percentage_type_reads=p, percentage_run_reads=r)
+    #        data.to_csv(f'{args.output}_{p}_{r}.csv')
+    #        if sensSpec is not None:
+    #            dfs.append(sensSpec)
+    #sensSpec=pd.concat(dfs)
+    #sensSpec.to_csv(f'{args.output}_sensSpec.csv')
     
     # plot ROC curves
-    metrics=['sample num reads','sample reads percent of type', 'sample reads percent of run', 'bases', 'position cov1', 'position cov10','avDepth', 'covBreadth1x']
+    #metrics=['sample num reads','sample reads percent of type', 'sample reads percent of run', 'bases', 'position cov1', 'position cov10','avDepth', 'covBreadth1x']
     #plotROC(data, 'All_pathogens', 'sample num reads')
     #for metric in metrics:
     #    plotROC(data, 'All_pathogens', metric)
@@ -361,6 +371,8 @@ if __name__ == '__main__':
                         help='Pathogens file')
     parser.add_argument('-pr', '--pathogens_reduced', required=True,
                         help='Pathogens reduced file')
+    parser.add_argument('-bf', '--biofire', required=True,
+                        help='list of biofire pathogens')
     parser.add_argument('-o', '--output', required=True,
                          help='Output file')
     args = parser.parse_args()

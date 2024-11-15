@@ -115,18 +115,18 @@ process FILTER_SISPA {
     val(min_align_length)
 
     output:
-    tuple val(barcode), path('ref.fasta'), path("${barcode}.filt.bam"), path("${barcode}.filt.bam.bai"), emit: bam
-    tuple val(barcode), path("${barcode}.filt.bam"), path("${barcode}.filt.bam.bai"), emit: bam_no_ref
-    tuple val(barcode), path("${barcode}*.csv"), emit: stats
-    tuple val(barcode), path("${barcode}_alignments.csv"), emit: alignments
-    tuple val(barcode), path("*_report.txt"), emit: report
+    tuple val(barcode), path('ref.fasta'), path("${barcode}.filt.bam"), path("${barcode}.filt.bam.bai"), emit: bam, optional: true
+    tuple val(barcode), path("${barcode}.filt.bam"), path("${barcode}.filt.bam.bai"), emit: bam_no_ref, optional: true
+    tuple val(barcode), path("${barcode}*.csv"), emit: stats, optional: true
+    tuple val(barcode), path("${barcode}_alignments.csv"), emit: alignments, optional: true
+    tuple val(barcode), path("*_report.txt"), emit: report, optional: true
     tuple val(barcode), path("${barcode}_alignment_counts.csv"), emit: alignment_counts
 
     script:
     """
     echo barcode $barcode
-    python3 ${params.bin}/filter_sispa_alignments.py -i ${barcode}.bam -o ${barcode}.filt.bam \
-        -p ${barcode} -m $min_align_length
+    filter_sispa_alignments.py -i ${barcode}.bam -o ${barcode}.filt.bam \
+        -p ${barcode} -m $min_align_length -s $barcode
     samtools index ${barcode}.filt.bam
     """
 }
@@ -291,15 +291,17 @@ process DEPTH_SUMMARY {
 
     input:
     path("depths???.csv")
+    path("meta_pathogens.csv")
+    path("pathogens_reduced.csv")
 
     output:
     path("*depth_summary.csv"), emit: summary
-    path("*depth_summary_pass.csv"), emit: pass_summary
+    //path("*depth_summary_pass.csv"), emit: pass_summary
 
     script:
     batch = params.batch
     """
-    depth_summary.py -i *.csv -o ${params.batch}_depth_summary.csv -b $batch
+    depth_summary.py -i *.csv -o ${params.batch}_depth_summary.csv -b $batch -mp meta_pathogens.csv -pr pathogens_reduced.csv
     """
 }
 
