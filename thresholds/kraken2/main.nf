@@ -4,8 +4,8 @@ params.fastqs = ''
 
 
 process KRAKEN2SERVER {
-    tag {barcode + ' ' + run}
-    publishDir "classifications/${barcode}/", mode: 'copy'
+    tag {run + ' ' + barcode}
+    publishDir "classifications/${run}/${barcode}/", mode: 'copy'
     maxForks 15
 
     label 'kraken2server'
@@ -40,10 +40,11 @@ process KRAKEN2SERVER {
 
 
 workflow {
-    fastqs=Channel.fromPath("$params.fastqs/*")
-        .map {it ->
-            tuple(it.getParent().getName() , it.simpleName, it)
+    fastqs=Channel.fromPath("$params.fastqs/**/*.fastq.gz")
+            .map {it ->
+                tuple(it.getParent().getName() , it.simpleName, it)
             }
+
 
     KRAKEN2SERVER(fastqs)
 

@@ -63,11 +63,13 @@ workflow sispa_workflow {
 
     pathogens_reduced = Channel.fromPath(params.pathogens_reduced)
 
+    multi_segment_pathogens = Channel.fromPath(params.multi_segment_pathogens)
+
     sispa_reads = Channel.fromPath("$params.input/*")
                 .map {it ->
                     tuple(it.simpleName, it)
                 }
-    sispa(sispa_reads, references, masks, meta_pathogens, pathogens_reduced)
+    sispa(sispa_reads, references, masks, meta_pathogens, pathogens_reduced, multi_segment_pathogens)
 }
 
 
@@ -87,6 +89,7 @@ workflow sispa {
         masks
         meta_pathogens
         pathogens_reduced
+        multi_segment_pathogens
 
     main:
 
@@ -145,7 +148,7 @@ workflow sispa {
 
     // pass to consensus workflow to produce consensus fasta and coverage graphs
     consensus(references, FILTER_SISPA.out.bam, FILTER_SISPA.out.bam_no_ref, FILTER_SISPA.out.alignment_counts, 
-                meta_pathogens, pathogens_reduced)  
+                meta_pathogens, pathogens_reduced, multi_segment_pathogens)  
 }
 
 /*
@@ -161,6 +164,7 @@ workflow consensus {
         alignment_counts
         meta_pathogens
         pathogens_reduced
+        multi_segment_pathogens
 
     main:
 
@@ -172,7 +176,7 @@ workflow consensus {
     //CLAIR3(bam_no_ref.combine(INDEX_REF.out.index))
 
     // get depth of reads along ref
-    GENOME_DEPTH(bam.combine(alignment_counts, by:0))
+    GENOME_DEPTH(bam.combine(alignment_counts, by:0), multi_segment_pathogens)
 
     // sumarise the depth for all samples
     depths=GENOME_DEPTH.out.csv

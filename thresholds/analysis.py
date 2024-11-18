@@ -151,7 +151,7 @@ def getMeta(meta, pathogens, pathogens_reduced,biofire):
     metaDFbiofire_only=metaDF[metaDF['pathogen'].isin(biofire_pathogens)]
     metaDFbiofire_only.to_csv('metaDF_biofire_only.csv', index=False)
     
-    return metaDict, df, path_dict_rev, path_dict_reduced, num_pathogens
+    return metaDFbiofire_only
 
 def checkFN(chroms, species, path_dict, path_dict_reduced):
     '''Check for false negatives. Convert chroms and species to same species and check for differences'''
@@ -335,7 +335,23 @@ def plotROC(df, pathogen, metric):
     
 def main(args):
     df=getDataFrame(args.input)
-    metaDict, metaDF, path_dict, pathogens_reduced, num_pathogens=getMeta(args.meta, args.pathogens, args.pathogens_reduced, args.biofire)
+    metaDFbiofire_only=getMeta(args.meta, args.pathogens, args.pathogens_reduced, args.biofire)
+    df.to_csv('all_results.csv')
+    # remove duplicates for pathogen_reduced and keep row with highest sample num reads
+    df=df.sort_values(by=['batch','Sample name','pathogen_reduced','sample num reads'],ascending=False)
+    df.drop_duplicates(subset=['batch','Sample name','pathogen_reduced'],inplace=True,keep='first')
+    df.to_csv('all_results_no_duplicates.csv')
+
+    # remove _sup from batch
+    df['Run']=df['batch'].str.replace('_sup','')
+
+    # merge with metaDFbiofire_only
+    df2=metaDFbiofire_only.merge(df,left_on=['Run','barcode','pathogen'],
+                                right_on=['Run','barcode','pathogen_reduced'],
+                                how='left')
+    
+    df2.to_csv('all_results_merged.csv', index=False)
+
     #print(metaDict)
     #dfs=[]
     #thresholds=[0.0, 0.1, 0.3, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 2.4, 3.3, 4.2, 5.1, 6.0, 7.0, 8.0, 9.0, 10.0, 20, 30, 40, 50, 60, 70, 80, 90, 99]

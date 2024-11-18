@@ -270,6 +270,7 @@ process GENOME_DEPTH {
                                                                                 
     input:                                                                      
     tuple val(barcode), path('ref.fasta'), path("${barcode}.sorted.bam"), path("${barcode}.sorted.bam.bai"), path("alignment_counts.csv")
+    each path("multi_segment_pathogens.csv")
 
     output:                                                                     
     tuple val(barcode), path("${barcode}_depth.csv"), emit: genomeDepths
@@ -279,7 +280,7 @@ process GENOME_DEPTH {
     script:                                                                     
     """                                                                         
     samtools depth -aa ${barcode}.sorted.bam > ${barcode}_depth.tsv                
-    coverageStats.py ${barcode}_depth.tsv  ${barcode} alignment_counts.csv                              
+    coverageStats.py ${barcode}_depth.tsv  ${barcode} alignment_counts.csv  multi_segment_pathogens.csv                     
                                                                                 
     mv coverage_stats.csv ${barcode}_depth.csv                                 
     """                                                  

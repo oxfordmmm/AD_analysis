@@ -3,12 +3,29 @@ import pandas as pd
 import numpy as np
 import sys
 
-def getData(f):
-    names=['chrom','position','depth']
+def getData(f,f2, multiSegmentDict):
+    names=['original_chrom','position','depth']
     df=pd.read_csv(f,sep='\t',names=names)
-    return df
+    
+    df['chrom']=df['original_chrom'].map(multiSegmentDict)
+    df['chrom']=df['chrom'].fillna(df['original_chrom'])
 
-def coverageStats(df):
+    df3=pd.read_csv(f2) 
+    
+    df3['chrom2']=df3['chrom'].map(multiSegmentDict)
+    df3['chrom2']=df3['chrom2'].fillna(df3['chrom'])
+    df3['chrom']=df3['chrom2']
+    df3.drop(columns=['chrom2'],inplace=True)
+
+    df3['non-unique counts']=df3.groupby(['Sample name','chrom'])['non-unique counts'].transform('sum')
+    df3['counts']=df3.groupby(['Sample name','chrom'])['counts'].transform('sum')
+    df3.drop_duplicates(subset=['Sample name','chrom'],keep='first', inplace=True)
+    df3.drop(columns=['Sample name'],inplace=True)
+    #df=df.merge(df3,on=['chrom'], how='outer')
+    
+    return df, df3
+
+def coverageStats(df, df3):
     cov1=df[df.depth > 1].groupby(['chrom']).count()
     cov3=df[df.depth > 3].groupby(['chrom']).count()
     cov5=df[df.depth > 5].groupby(['chrom']).count()
@@ -39,10 +56,10 @@ def coverageStats(df):
     df2=df2.merge(cov5,on='chrom',how='outer')
     print(df2.columns)
     df2['length']=df2.chrom.map(chromLens)
-    df2['covBreadth1x']=df2['depth cov1']/df2['length']
-    df2['covBreadth3x']=df2['depth cov3']/df2['length']
-    df2['covBreadth5x']=df2['depth cov5']/df2['length']
-    df2['covBreadth10x']=df2['depth cov10']/df2['length']
+    df2['covBreadth1x']=(df2['depth cov1']/df2['length'])*100
+    df2['covBreadth3x']=(df2['depth cov3']/df2['length'])*100
+    df2['covBreadth5x']=(df2['depth cov5']/df2['length'])*100
+    df2['covBreadth10x']=(df2['depth cov10']/df2['length'])*100
     df2['meanDepth']=df2.chrom.map(meanDepth)
     df2['AuG_trunc5']=df2.chrom.map(AuG_trunc5)
     df2['AuG_trunc10']=df2.chrom.map(AuG_trunc10)
@@ -53,17 +70,26 @@ def coverageStats(df):
     df2['AuG']=df2['bases']/df2['length']
     df2['Bases_perc']=df2['AuG']*100
 
-    
-    df2=df2[['Sample name','chrom','length','bases','meanDepth',
+    df2=df2.merge(df3,on='chrom',how='outer')
+
+    df2=df2[['Sample name','chrom','length',
+             'counts', 'non-unique counts', 'bases','meanDepth',
              'position cov1', 'position cov3','position cov5', 'position cov10',
              'covBreadth1x', 'covBreadth3x','covBreadth5x','covBreadth10x',
              'meanDepth_trunc5','meanDepth_trunc10','AuG','AuG_trunc5','AuG_trunc10']]
 
-    df3=pd.read_csv('alignment_counts.csv')
-    df2=df2.merge(df3,on=['Sample name', 'chrom'], how='outer')
+    
     df2.to_csv('coverage_stats.csv',index=False)
     print(df2)
     
 
-df=getData(sys.argv[1])
-coverageStats(df)
+
+multiSegment=pd.read_csv(sys.argv[4])
+path_dict={}
+for i,r in multiSegment.iterrows():
+    path_dict.setdefault(r['pathogen'],[]).append(r['reference'])
+# reverse path_dict
+
+multiSegmentDict={v:k for k,values in path_dict.items() for v in values}
+df, df3=getData(sys.argv[1], sys.argv[3], multiSegmentDict)
+coverageStats(df, df3)
