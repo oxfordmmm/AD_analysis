@@ -369,6 +369,24 @@ process GRAPH_COVERAGE {
     """
 }
 
+process PLOT_BACTERIAL {
+    conda "$params.envs/pyplots"
+
+    publishDir "$params.output/coverage_graphs/bacteria", mode: 'copy'
+
+    input:
+    tuple val(sampleName), path(depth_file) 
+    
+    output:
+    tuple val(sampleName), path("${sampleName}.pdf"), emit: 'pdf'
+    tuple val(sampleName), path("${sampleName}.csv"), emit: 'csv'
+
+    script:
+    """
+    plot_bacteria.py $depth_file ${sampleName}
+    """
+}
+
 process GRAPH_COVERAGE_SEPARATE {
     conda "$params.envs/r"
 

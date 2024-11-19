@@ -10,6 +10,11 @@ outfile <- args[5]
 sample <- args[6]
 
 df <- read_tsv(file, col_names = c('id', 'locus', 'depth'))
+bacterial_chroms=c('CP085971.1','NZ_CP025371.1','NC_005043.1','NZ_LR214945.1')
+
+# filter bacterial chromosomes
+df <- df %>% 
+  filter(locus %in% bacterial_chroms)
 df
 
 ids <- df %>% 

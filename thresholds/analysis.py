@@ -332,7 +332,32 @@ def plotROC(df, pathogen, metric):
     metric_=metric.replace(' ','_')
     plt.savefig(f'rocs/{pathogen}_roc_{metric_}.pdf')
     plt.clf()
+
+def box_plots(df):
+    '''Melt wide to long for metrics'''
+    metrics=['meanDepth', 'meanDepth_trunc5', 'meanDepth_trunc10','AuG','AuG_trunc5','AuG_trunc10',
+          'bases', 'bases_perc', 
+          'Cov1', 'Cov3', 'Cov5', 'Cov10', 
+          'Cov1_perc','Cov3_perc','Cov5_perc','Cov10_perc',
+          'sample num reads','total run reads mapped', 'total run reads inc unmapped', 
+          'Sample_reads_percent_of_run', 'Sample_reads_percent_of_refs', 'Sample_reads_percent_of_type']
     
+    df2=df.melt(id_vars=['run','barcode','chrom','pathogen','Biofire positive'],
+                value_vars=metrics,
+                var_name='metric',value_name='value')
+    
+    df2=df2[~df2['metric'].isin(['total run reads mapped', 'total run reads inc unmapped'])]
+    # facetted box plot with each metric per facet and biofire positive or negative on x axis
+    g=sns.FacetGrid(df2, col='metric', col_wrap=4, sharey=False)
+    g.map(sns.boxplot, 'Biofire positive', 'value', order=[0,1])
+    g.set_titles("{col_name}")
+    #g.set_xticklabels(rotation=90)
+    df2.to_csv('box_plots.csv')
+    plt.tight_layout()
+    plt.savefig('box_plots.pdf')
+
+
+
 def main(args):
     df=getDataFrame(args.input)
     metaDFbiofire_only=getMeta(args.meta, args.pathogens, args.pathogens_reduced, args.biofire)
@@ -346,11 +371,16 @@ def main(args):
     df['Run']=df['batch'].str.replace('_sup','')
 
     # merge with metaDFbiofire_only
+    df.drop(columns=['pathogen'],inplace=True)
     df2=metaDFbiofire_only.merge(df,left_on=['Run','barcode','pathogen'],
                                 right_on=['Run','barcode','pathogen_reduced'],
                                 how='left')
-    
-    df2.to_csv('all_results_merged.csv', index=False)
+    df2.drop(columns=['pathogen_reduced'],inplace=True)
+
+    df2.to_csv('biofire_results_merged.csv', index=False)
+
+    # make box plots
+    box_plots(df2)
 
     #print(metaDict)
     #dfs=[]

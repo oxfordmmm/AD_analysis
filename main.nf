@@ -24,6 +24,7 @@ include {GENOME_DEPTH} from './processes/map.nf'
 include {DEPTH_SUMMARY} from './processes/map.nf'
 include {BCFTOOLS_CSQ} from './processes/map.nf' 
 include {BCFTOOLS_CONSENSUS} from './processes/map.nf' 
+include {PLOT_BACTERIAL} from './processes/map.nf'
 include {GRAPH_COVERAGE} from './processes/map.nf' 
 include {GRAPH_COVERAGE_ALL_SAMPLES} from './processes/map.nf' 
 include {GRAPH_COVERAGE_SEPARATE} from './processes/map.nf'
@@ -183,6 +184,8 @@ workflow consensus {
         .collect()
 
     DEPTH_SUMMARY(depths, meta_pathogens, pathogens_reduced)
+
+    PLOT_BACTERIAL(GENOME_DEPTH.out.tsv)
 
     // create consensus file by applying vcf to ref. Depth is used to mask low depth regions
     //BCFTOOLS_CONSENSUS(CLAIR3.out.vcf.combine(INDEX_REF.out.index).combine(GENOME_DEPTH.out.tsv, by:0))
