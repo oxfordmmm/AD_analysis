@@ -109,7 +109,7 @@ def getMeta(meta, pathogens, pathogens_reduced,biofire):
     metaDF=df.copy()
     # add Negavtive control where pathogen 1 is empty
     metaDF['pathogen 1']=np.where(metaDF['pathogen 1'].isnull(),'Negative control',metaDF['pathogen 1'])
-    metaDF=metaDF.melt(id_vars=['Run','barcode','sample_name'],
+    metaDF=metaDF.melt(id_vars=['Run','barcode','sample_name','seq_name'],
                        value_vars=['pathogen 1','pathogen 2','pathogen 3'],
                        var_name='pathogen number',value_name='pathogen')
     metaDF['pathogen reduced']=metaDF['pathogen'].map(path_dict_reduced)
@@ -124,10 +124,11 @@ def getMeta(meta, pathogens, pathogens_reduced,biofire):
     for run in runs:
         barcodes=metaDF[metaDF['Run']==run]['barcode'].unique()
         for barcode in barcodes:
+            seq_name=metaDF[(metaDF['Run']==run) & (metaDF['barcode']==barcode)]['seq_name'].unique()[0]
             pathogens=metaDF[(metaDF['Run']==run) & (metaDF['barcode']==barcode)]['pathogen reduced'].unique()
             missed_pathogens=list(set(biofire_pathogens) - set(pathogens))
             for p in missed_pathogens:
-                d={'Run':run,'barcode':barcode,'sample_name':None,'pathogen number':None,'pathogen':p,'pathogen reduced':p,'Biofire positive':0}
+                d={'Run':run,'barcode':barcode,'seq_name':seq_name,'pathogen number':None,'pathogen':p,'pathogen reduced':p,'Biofire positive':0}
                 additonal_rows.append(d)
     if len(additonal_rows)>0:
         ar_df=pd.DataFrame(additonal_rows)
@@ -141,7 +142,7 @@ def getMeta(meta, pathogens, pathogens_reduced,biofire):
     keep_runs=['expt10_03072024', 'expt11_150824','expt10A_17072024']
     metaDF=metaDF[metaDF['Run'].isin(keep_runs)]
     
-    cols=['Run','barcode','pathogen reduced','Biofire positive']
+    cols=['Run','barcode','seq_name','pathogen reduced','Biofire positive']
     metaDF=metaDF[cols]
     metaDF.rename(columns={'pathogen reduced':'pathogen'},inplace=True)
 
@@ -342,7 +343,7 @@ def box_plots(df):
           'sample num reads','total run reads mapped', 'total run reads inc unmapped', 
           'Sample_reads_percent_of_run', 'Sample_reads_percent_of_refs', 'Sample_reads_percent_of_type']
     
-    df2=df.melt(id_vars=['run','barcode','chrom','pathogen','Biofire positive'],
+    df2=df.melt(id_vars=['Run','seq_name','barcode','pathogen','Biofire positive'],
                 value_vars=metrics,
                 var_name='metric',value_name='value')
     
@@ -375,12 +376,13 @@ def main(args):
     df2=metaDFbiofire_only.merge(df,left_on=['Run','barcode','pathogen'],
                                 right_on=['Run','barcode','pathogen_reduced'],
                                 how='left')
-    df2.drop(columns=['pathogen_reduced'],inplace=True)
-
-    df2.to_csv('biofire_results_merged.csv', index=False)
+    df2.drop(columns=['pathogen_reduced','run','Sample name','batch','chrom'],inplace=True)
 
     # make box plots
     box_plots(df2)
+
+    df2.fillna(0,inplace=True)
+    df2.to_csv('biofire_results_merged.csv', index=False)
 
     #print(metaDict)
     #dfs=[]

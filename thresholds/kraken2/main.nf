@@ -38,6 +38,49 @@ process KRAKEN2SERVER {
 
 }
 
+process EXTRACT_RESULTS {
+    tag {run + ' ' + barcode}
+    publishDir "results/${run}/${barcode}/", mode: 'copy'
+
+    label 'python'
+
+    input:
+    tuple val(run), val(barcode), path("${run}_${barcode}_report.txt")
+
+    output:
+    path("${run}_${barcode}_report.tsv"), emit: tsv
+
+    script:
+    """
+    extract_results.py -i ${run}_${barcode}_report.txt \
+        -o ${run}_${barcode}_report.tsv \
+        -t 463676 147711 44130 518987 641809 211044 335341 47681 2760809 138948 42789 138949 \
+            138951 138950 33757 11224 12730 11216 2560525 162145 11137 277944 186938 2697049 12814 31631 \
+            290028 11520 \
+            11320 12059 11118 10509 \
+            519 520 83558 2104 \
+            351073 64320 3052731 12022\
+        -r $run -b $barcode
+    """
+}
+
+process COMPILE_RESULTS {
+    publishDir "compiled_results/", mode: 'copy'
+
+    label 'python'
+
+    input:
+    path "*.tsv"
+
+    output:
+    path "compiled_results.csv"
+
+    script:
+    """
+    compile_results.py -i *.tsv -o compiled_results.csv
+    """
+}
+
 
 workflow {
     fastqs=Channel.fromPath("$params.fastqs/**/*.fastq.gz")
@@ -47,5 +90,12 @@ workflow {
 
 
     KRAKEN2SERVER(fastqs)
+
+    EXTRACT_RESULTS(KRAKEN2SERVER.out.reports)
+
+    results=EXTRACT_RESULTS.out.tsv
+        .collect()
+
+    COMPILE_RESULTS(results)
 
 }
