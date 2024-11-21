@@ -1,6 +1,7 @@
 
 
 params.fastqs = ''
+params.meta_pathogens="$projectDir/../meta.csv"
 
 
 process KRAKEN2SERVER {
@@ -71,13 +72,14 @@ process COMPILE_RESULTS {
 
     input:
     path "*.tsv"
+    path('meta.csv')
 
     output:
     path "compiled_results.csv"
 
     script:
     """
-    compile_results.py -i *.tsv -o compiled_results.csv
+    compile_results.py -i *.tsv -o compiled_results.csv -m meta.csv
     """
 }
 
@@ -88,6 +90,8 @@ workflow {
                 tuple(it.getParent().getName() , it.simpleName, it)
             }
 
+    meta_pathogens = Channel.fromPath(params.meta_pathogens)
+
 
     KRAKEN2SERVER(fastqs)
 
@@ -96,6 +100,6 @@ workflow {
     results=EXTRACT_RESULTS.out.tsv
         .collect()
 
-    COMPILE_RESULTS(results)
+    COMPILE_RESULTS(results, meta_pathogens)
 
 }

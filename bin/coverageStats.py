@@ -26,10 +26,10 @@ def getData(f,f2, multiSegmentDict):
     return df, df3
 
 def coverageStats(df, df3):
-    cov1=df[df.depth > 1].groupby(['chrom']).count()
-    cov3=df[df.depth > 3].groupby(['chrom']).count()
-    cov5=df[df.depth > 5].groupby(['chrom']).count()
-    cov10=df[df.depth > 10].groupby(['chrom']).count()
+    cov1=df[df.depth >= 1].groupby(['chrom']).count()
+    cov3=df[df.depth >= 3].groupby(['chrom']).count()
+    cov5=df[df.depth >= 5].groupby(['chrom']).count()
+    cov10=df[df.depth >= 10].groupby(['chrom']).count()
 
     bases=df.groupby(['chrom'])['depth'].sum()
     chromLens=df.groupby(['chrom'])['position'].count()

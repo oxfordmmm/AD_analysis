@@ -264,7 +264,8 @@ process CLAIR3 {
 /*
 Finds depth of read coverage across reference
 */
-process GENOME_DEPTH {                                                           
+process GENOME_DEPTH {     
+    tag {barcode}                                                      
     conda "$params.envs/map"
     publishDir "$params.output/depths", overwrite: true, mode: 'copy'  
                                                                                 
