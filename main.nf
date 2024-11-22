@@ -185,7 +185,7 @@ workflow consensus {
 
     DEPTH_SUMMARY(depths, meta_pathogens, pathogens_reduced)
 
-    PLOT_BACTERIAL(GENOME_DEPTH.out.tsv)
+    //PLOT_BACTERIAL(GENOME_DEPTH.out.tsv)
 
     // create consensus file by applying vcf to ref. Depth is used to mask low depth regions
     //BCFTOOLS_CONSENSUS(CLAIR3.out.vcf.combine(INDEX_REF.out.index).combine(GENOME_DEPTH.out.tsv, by:0))

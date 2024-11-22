@@ -139,8 +139,8 @@ def getMeta(meta, pathogens, pathogens_reduced,biofire):
     metaDF=metaDF[metaDF['pathogen']!='Negative control']
     metaDF=metaDF[metaDF['pathogen']!='SARS_coronavirus_Tor2']
     metaDF=metaDF[metaDF['pathogen']!='orthoreovirus']
-    keep_runs=['expt10_03072024', 'expt11_150824','expt10A_17072024']
-    metaDF=metaDF[metaDF['Run'].isin(keep_runs)]
+    #keep_runs=['expt10_03072024', 'expt11_150824','expt10A_17072024']
+    #metaDF=metaDF[metaDF['Run'].isin(keep_runs)]
     
     cols=['Run','barcode','seq_name','pathogen reduced','Biofire positive']
     metaDF=metaDF[cols]
@@ -298,13 +298,13 @@ def plotROC(df, pathogen, metric):
     '''Plot the ROC curve'''
     print(pathogen, metric)
     if pathogen!='All_pathogens':
-        df2=df[df['pathogen_reduced']==pathogen]
+        df2=df[df['pathogen']==pathogen]
     else:
         df2=df
     df2.fillna(0,inplace=True)
     #X=df2[['sample num reads','sample reads percent of type', 'sample reads percent of run']]
     X=df2[metric]
-    y=df2['pcTP']
+    y=df2['Biofire positive']
 
     # check if y contail only one class
     if len(y.unique())==1 or len(X)<2:
@@ -312,9 +312,9 @@ def plotROC(df, pathogen, metric):
         return
     
     # show distribution of the data
-    g=df.groupby(['pathogen_reduced','pcTP'])[metric].count()
-    g.to_csv(f'sample_counts/{pathogen}_{metric}_counts.csv')
-    print(g)
+    #g=df.groupby(['pathogen','Biofire positive'])[metric].count()
+    #g.to_csv(f'sample_counts/{pathogen}_{metric}_counts.csv')
+    #print(g)
 
     # ROC curve from sklearn
     fpr, tpr, thresholds = roc_curve(y, X)
@@ -341,7 +341,7 @@ def box_plots(df):
           'Cov1', 'Cov3', 'Cov5', 'Cov10', 
           'Cov1_perc','Cov3_perc','Cov5_perc','Cov10_perc',
           'sample num reads','total run reads mapped', 'total run reads inc unmapped', 
-          'Sample_reads_percent_of_run', 'Sample_reads_percent_of_refs', 'Sample_reads_percent_of_type']
+          'Sample_reads_percent_of_run', 'Sample_reads_percent_of_refs', 'Sample_reads_percent_of_type_run', 'Sample_reads_percent_of_type_sample']
     
     df2=df.melt(id_vars=['Run','seq_name','barcode','pathogen','Biofire positive'],
                 value_vars=metrics,
@@ -352,10 +352,26 @@ def box_plots(df):
     g=sns.FacetGrid(df2, col='metric', col_wrap=4, sharey=False)
     g.map(sns.boxplot, 'Biofire positive', 'value', order=[0,1])
     g.set_titles("{col_name}")
+    # set all y-axis to start at 0 
+    for ax in g.axes.flat:
+        ax.set_ylim(0)
+        #ax.set_yscale('log')
+
     #g.set_xticklabels(rotation=90)
     df2.to_csv('box_plots.csv')
     plt.tight_layout()
     plt.savefig('box_plots.pdf')
+
+    # scatter plots
+    plot_metrics=['sample num reads','meanDepth', 'AuG','AuG_trunc5','AuG_trunc10',
+          'bases', 'bases_perc',  
+          'Cov1_perc','Cov3_perc','Cov5_perc','Cov10_perc']
+    df3=df[plot_metrics]
+    g2 = sns.PairGrid(df3)
+    g2.map(sns.scatterplot)
+    plt.tight_layout()
+    plt.savefig('scatter_plots.pdf')
+    plt.clf()
 
 
 
@@ -384,6 +400,13 @@ def main(args):
     df2.fillna(0,inplace=True)
     df2.to_csv('biofire_results_merged.csv', index=False)
 
+    # plot ROC curves
+    metrics=['sample num reads','meanDepth', 'AuG','AuG_trunc5','AuG_trunc10',
+          'bases', 'bases_perc',  
+          'Cov1_perc','Cov3_perc','Cov5_perc','Cov10_perc']
+    for metric in metrics:
+        plotROC(df2, 'All_pathogens', metric)
+
     #print(metaDict)
     #dfs=[]
     #thresholds=[0.0, 0.1, 0.3, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 2.4, 3.3, 4.2, 5.1, 6.0, 7.0, 8.0, 9.0, 10.0, 20, 30, 40, 50, 60, 70, 80, 90, 99]
@@ -398,11 +421,7 @@ def main(args):
     #sensSpec=pd.concat(dfs)
     #sensSpec.to_csv(f'{args.output}_sensSpec.csv')
     
-    # plot ROC curves
-    #metrics=['sample num reads','sample reads percent of type', 'sample reads percent of run', 'bases', 'position cov1', 'position cov10','avDepth', 'covBreadth1x']
-    #plotROC(data, 'All_pathogens', 'sample num reads')
-    #for metric in metrics:
-    #    plotROC(data, 'All_pathogens', metric)
+    
 
     #pathogens=data['pathogen_reduced'].unique()
     #for pathogen in pathogens:

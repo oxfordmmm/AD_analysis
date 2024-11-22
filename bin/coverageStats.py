@@ -20,7 +20,7 @@ def getData(f,f2, multiSegmentDict):
     df3['non-unique counts']=df3.groupby(['Sample name','chrom'])['non-unique counts'].transform('sum')
     df3['counts']=df3.groupby(['Sample name','chrom'])['counts'].transform('sum')
     df3.drop_duplicates(subset=['Sample name','chrom'],keep='first', inplace=True)
-    df3.drop(columns=['Sample name'],inplace=True)
+    #df3.drop(columns=['Sample name'],inplace=True)
     #df=df.merge(df3,on=['chrom'], how='outer')
     
     return df, df3
@@ -61,8 +61,10 @@ def coverageStats(df, df3):
     df2['covBreadth5x']=(df2['depth cov5']/df2['length'])*100
     df2['covBreadth10x']=(df2['depth cov10']/df2['length'])*100
     df2['meanDepth']=df2.chrom.map(meanDepth)
-    df2['AuG_trunc5']=df2.chrom.map(AuG_trunc5)
-    df2['AuG_trunc10']=df2.chrom.map(AuG_trunc10)
+    df2['AuG_trunc5_sum']=df2.chrom.map(AuG_trunc5)
+    df2['AuG_trunc10_sum']=df2.chrom.map(AuG_trunc10)
+    df2['AuG_trunc5']=df2['AuG_trunc5_sum']/df2['length']
+    df2['AuG_trunc10']=df2['AuG_trunc10_sum']/df2['length']
     df2['meanDepth_trunc5']=df2.chrom.map(meanDepth_trunc5)
     df2['meanDepth_trunc10']=df2.chrom.map(meanDepth_trunc10)
     df2['Sample name']=sys.argv[2]
@@ -70,7 +72,7 @@ def coverageStats(df, df3):
     df2['AuG']=df2['bases']/df2['length']
     df2['Bases_perc']=df2['AuG']*100
 
-    df2=df2.merge(df3,on='chrom',how='outer')
+    df2=df2.merge(df3,on=['Sample name', 'chrom'],how='outer')
 
     df2=df2[['Sample name','chrom','length',
              'counts', 'non-unique counts', 'bases','meanDepth',

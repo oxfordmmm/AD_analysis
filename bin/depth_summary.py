@@ -45,8 +45,10 @@ def getMeta(args):
 def applyThresholds(df):
     df['Sample_reads_percent_of_run']=(df['sample num reads']/df['total run reads inc unmapped'])*100
     df['Sample_reads_percent_of_refs']=(df['sample num reads']/df['total run reads mapped'])*100
-    df['pathogen reads']=df.groupby(['pathogen_reduced'])['sample num reads'].transform('sum')
-    df['Sample_reads_percent_of_type']=(df['sample num reads']/df['pathogen reads'])*100
+    df['pathogen reads sample']=df.groupby(['Sample name','pathogen_reduced'])['sample num reads'].transform('sum')
+    df['pathogen reads run']=df.groupby(['pathogen_reduced'])['sample num reads'].transform('sum')
+    df['Sample_reads_percent_of_type_sample']=(df['sample num reads']/df['pathogen reads sample'])*100
+    df['Sample_reads_percent_of_type_run']=(df['sample num reads']/df['pathogen reads run'])*100
     df['type pass']=np.where(df['sample num reads']>=df['type numreads threshold'],True,False)
     df['run pass']=np.where(df['sample num reads']>=df['run numreads threshold'],True,False)
     df['pass']=np.where(df['type pass'] & df['run pass'],True,False)
@@ -75,8 +77,8 @@ def run(args):
           'Cov1', 'Cov3', 'Cov5', 'Cov10', 
           'Cov1_perc','Cov3_perc','Cov5_perc','Cov10_perc',
           'sample num reads','total run reads mapped', 'total run reads inc unmapped', 
-          'Sample_reads_percent_of_run', 'Sample_reads_percent_of_refs', 'Sample_reads_percent_of_type']
-    df.to_csv('test.csv')
+          'Sample_reads_percent_of_run', 'Sample_reads_percent_of_refs', 'Sample_reads_percent_of_type_run', 'Sample_reads_percent_of_type_sample']
+    #df.to_csv('test.csv')
     df=df[cols]
     df.to_csv(args.output,index=False)
     #df2=df[df['pass']==True]
