@@ -25,6 +25,18 @@ positive_controls=['MS2',
 'orthoreovirus',
 'zika']
 
+def reduce_fluA(df):
+    df2=df.copy()
+    df2=df[df['pathogen_reduced'].isin(['Influenza A/H1-2009','Influenza A/H3','Influenza A/H1'])]
+    df2.sort_values(by=['sample num reads','Cov1_perc'],ascending=False, inplace=True)
+    df2.drop_duplicates(subset=['run','barcode'],inplace=True, keep='first')
+    df2['pathogen']='Influenza A'
+    df2['pathogen_reduced']='Influenza A'
+    #df=df[df['pathogen_reduced']!='Influenza A']
+    # assign df2 to df by 'Run','barcode'
+    df=pd.concat([df,df2])
+    return df
+
 def getDataFrame(input):
     dfs=[]
     for folder in input:
@@ -44,6 +56,9 @@ def getDataFrame(input):
     df['run']=df['batch'].str.replace('_sup','')
     # remove SARS_coronavirus_Tor2
     df=df[df['chrom']!='SARS_coronavirus_Tor2']
+
+    # reduce fluA to one species 
+    df=reduce_fluA(df)
     return df
 
 def checkThresholds(df, percentage_type_reads, percentage_run_reads ):
