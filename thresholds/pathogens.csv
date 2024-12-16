@@ -31,6 +31,14 @@ Flu A/H1,Influenza_A_virus_A_Puerto_Rico_8_1934H1N1_segment_5
 Flu A/H1,Influenza_A_virus_A_Puerto_Rico_8_1934H1N1_segment_6
 Flu A/H1,Influenza_A_virus_A_Puerto_Rico_8_1934H1N1_segment_7
 Flu A/H1,Influenza_A_virus_A_Puerto_Rico_8_1934H1N1_segment_8
+Flu A/H5,NC_007357.1
+Flu A/H5,NC_007358.1
+Flu A/H5,NC_007359.1
+Flu A/H5,NC_007362.1
+Flu A/H5,NC_007360.1
+Flu A/H5,NC_007361.1
+Flu A/H5,NC_007363.1
+Flu A/H5,NC_007364.1
 FluB,Influenza_B_virus_B_Lee_1940_segment_2
 FluB,Influenza_B_virus_B_Lee_1940_segment_3
 FluB,Influenza_B_virus_B_Lee_1940_segment_4
@@ -56,6 +64,7 @@ Human Rhinovirus,Human_rhinovirus_C
 Human Rhinovirus,Human_rhinovirus_3
 Metapneumo,Human_metapneumovirus_isolate_00-1
 Metapneumovirus,Human_metapneumovirus_isolate_00-1
+MERS,NC_019843.3
 Paraflu 1,Human_parainfluenza_virus_1
 Paraflu 2,Human_rubulavirus_2
 Paraflu 3,Human_parainfluenza_virus_3

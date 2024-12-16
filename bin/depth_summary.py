@@ -77,7 +77,9 @@ def run(args):
           'Cov1', 'Cov3', 'Cov5', 'Cov10', 
           'Cov1_perc','Cov3_perc','Cov5_perc','Cov10_perc',
           'sample num reads','total run reads mapped', 'total run reads inc unmapped', 
-          'Sample_reads_percent_of_run', 'Sample_reads_percent_of_refs', 'Sample_reads_percent_of_type_run', 'Sample_reads_percent_of_type_sample']
+          'Sample_reads_percent_of_run', 'Sample_reads_percent_of_refs', 'Sample_reads_percent_of_type_run', 'Sample_reads_percent_of_type_sample',
+          'median_read_length', 'median_aligned_length', 'mean_read_length', 'mean_aligned_length',
+          'Sample_num_reads_200', 'Sample_num_reads_300', 'Sample_num_reads_400']
     #df.to_csv('test.csv')
     df=df[cols]
     df.to_csv(args.output,index=False)

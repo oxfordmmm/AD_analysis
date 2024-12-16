@@ -15,6 +15,7 @@ include {SISPA_TRIMMING_REPORT} from './processes/primer.nf'  // may need to cha
 // mapping
 include {MASK_REF} from './processes/map.nf'
 include {MINIMAP2} from './processes/map.nf'
+include {CALC_OVERLAPS} from './processes/map.nf'
 include {FILTER_BAM} from './processes/map.nf'
 include {FILTER_PHI} from './processes/map.nf'
 include {FILTER_SISPA} from './processes/map.nf'
@@ -142,6 +143,8 @@ workflow sispa {
     
     FILTER_SISPA(MINIMAP2.out.bam, 20)
 
+    //CALC_OVERLAPS(FILTER_SISPA.out.bam)
+
     sispa_summary_ch = SISPA_MERGE_TRIMMING_OUTPUTS.out.read_stats
             .join(FILTER_SISPA.out.alignments)
 
@@ -149,7 +152,7 @@ workflow sispa {
 
     // pass to consensus workflow to produce consensus fasta and coverage graphs
     consensus(references, FILTER_SISPA.out.bam, FILTER_SISPA.out.bam_no_ref, FILTER_SISPA.out.alignment_counts, 
-                meta_pathogens, pathogens_reduced, multi_segment_pathogens)  
+                meta_pathogens, pathogens_reduced, multi_segment_pathogens, FILTER_SISPA.out.alignments)  
 }
 
 /*
@@ -166,6 +169,7 @@ workflow consensus {
         meta_pathogens
         pathogens_reduced
         multi_segment_pathogens
+        alignments_info
 
     main:
 
@@ -177,7 +181,7 @@ workflow consensus {
     //CLAIR3(bam_no_ref.combine(INDEX_REF.out.index))
 
     // get depth of reads along ref
-    GENOME_DEPTH(bam.combine(alignment_counts, by:0), multi_segment_pathogens)
+    GENOME_DEPTH(bam.combine(alignment_counts, by:0).combine(alignments_info, by:0), multi_segment_pathogens)
 
     // sumarise the depth for all samples
     depths=GENOME_DEPTH.out.csv
@@ -195,16 +199,16 @@ workflow consensus {
     //COUNT_NS(to_count_ns)
 
     // Produce coverage graphs for the spiked references
-    //to_graph = GENOME_DEPTH.out.tsv.map {it -> 
-    //    tuple(it[0], it[1])
-    //}
+    to_graph = GENOME_DEPTH.out.tsv.map {it -> 
+        tuple(it[0], it[1])
+    }
     //GRAPH_COVERAGE(to_graph, 50, 5, 100)
 
-    //GRAPH_COVERAGE_SEPARATE(to_graph, 50, 5, 100)
+    GRAPH_COVERAGE_SEPARATE(to_graph, 50, 5, 100)
 
-    // all_depth_files = GENOME_DEPTH.out.tsv
-    //                     .map{it -> it[1]}
-    //                     .collect()
+    all_depth_files = GENOME_DEPTH.out.tsv
+                        .map{it -> it[1]}
+                        .collect()
 
     //GRAPH_COVERAGE_ALL_SAMPLES(all_depth_files, 50, 5, 100)
 

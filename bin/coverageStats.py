@@ -2,6 +2,10 @@
 import pandas as pd
 import numpy as np
 import sys
+import os
+
+def is_non_zero_file(fpath):  
+    return os.path.isfile(fpath) and os.path.getsize(fpath) > 0
 
 def getData(f,f2, multiSegmentDict):
     names=['original_chrom','position','depth']
@@ -25,7 +29,7 @@ def getData(f,f2, multiSegmentDict):
     
     return df, df3
 
-def coverageStats(df, df3):
+def coverageStats(df, df3, df4):
     cov1=df[df.depth >= 1].groupby(['chrom']).count()
     cov3=df[df.depth >= 3].groupby(['chrom']).count()
     cov5=df[df.depth >= 5].groupby(['chrom']).count()
@@ -79,10 +83,38 @@ def coverageStats(df, df3):
              'position cov1', 'position cov3','position cov5', 'position cov10',
              'covBreadth1x', 'covBreadth3x','covBreadth5x','covBreadth10x',
              'meanDepth_trunc5','meanDepth_trunc10','AuG','AuG_trunc5','AuG_trunc10']]
-
     
+
+    if len(df4)==0:
+        print('no alignment info')
+        df2['median_read_length']=None
+        df2['median_aligned_length']=None
+        df2['mean_read_length']=None
+        df2['mean_aligned_length']=None
+        for c in [200, 300, 400]:
+            df2[f'Sample_num_reads_{c}']=None
+        df2.to_csv('coverage_stats.csv',index=False)
+        return
+
+    median_read_length=df4.groupby('ref')['read_len'].median()
+    mean_read_length=df4.groupby('ref')['read_len'].mean()
+    median_aligned_length=df4.groupby('ref')['align_len'].median()
+    mean_aligned_length=df4.groupby('ref')['align_len'].mean()
+    print(mean_aligned_length)
+    df2['median_read_length']=df2['chrom'].map(median_read_length)
+    df2['median_aligned_length']=df2['chrom'].map(median_aligned_length)
+    df2['mean_read_length']=df2['chrom'].map(mean_read_length)
+    df2['mean_aligned_length']=df2['chrom'].map(mean_aligned_length)
+
+    for c in [200, 300, 400]:
+        df5=df4[df4['align_len']>c]
+        sample_num_reads=df5.groupby('ref')['query'].count()
+        df2[f'Sample_num_reads_{c}']=df2['chrom'].map(sample_num_reads)
+
+
     df2.to_csv('coverage_stats.csv',index=False)
-    print(df2)
+    #print(df2)
+    return
     
 
 
@@ -94,4 +126,15 @@ for i,r in multiSegment.iterrows():
 
 multiSegmentDict={v:k for k,values in path_dict.items() for v in values}
 df, df3=getData(sys.argv[1], sys.argv[3], multiSegmentDict)
-coverageStats(df, df3)
+
+try:
+    print('reading aligntment info')
+    df4=pd.read_csv(sys.argv[5])
+    df4['chrom2']=df4['ref'].map(multiSegmentDict)
+    df4['chrom2']=df4['chrom2'].fillna(df4['ref'])
+    df4['ref']=df4['chrom2']
+except:
+    print('no alignment info')
+    df4=pd.DataFrame()
+
+coverageStats(df, df3, df4)

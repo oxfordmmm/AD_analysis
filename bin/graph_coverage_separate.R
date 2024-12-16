@@ -12,7 +12,13 @@ outfile <- args[5]
 sample <- args[5]
 
 df <- read_tsv(file, col_names = c('id', 'locus', 'depth'))
-head(df)
+#head(df)
+bacterial_chroms=c('CP085971.1','NZ_CP025371.1','NC_005043.1','NZ_LR214945.1')
+
+# filter out bacterial chromosomes
+df <- df %>% 
+  filter(!locus %in% bacterial_chroms)
+df
 
 # Reorder the levels of id to be alphabetical and numerical (uses gtools)
 # Do this to the original df so all downstream subsets are ordered the same

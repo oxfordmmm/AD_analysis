@@ -4,8 +4,13 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import roc_curve, auc
+from sklearn.metrics import roc_curve, auc, roc_auc_score
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
 from sklearn import metrics
+from scipy.stats import spearmanr
+import os
+import joblib
 
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -86,7 +91,7 @@ def checkThresholds(df, percentage_type_reads, percentage_run_reads ):
     df['percentage_run_reads']=percentage_run_reads
     return df
 
-def getMeta(meta, pathogens, pathogens_reduced,biofire):
+def getMeta(meta, pathogens, pathogens_reduced,biofire,keep_runs):
     df=pd.read_csv(meta)
     # strip whitespace from values
     df['pathogen 1'] = df['pathogen 1'].str.strip()
@@ -155,7 +160,7 @@ def getMeta(meta, pathogens, pathogens_reduced,biofire):
     metaDF=metaDF[metaDF['pathogen']!='SARS_coronavirus_Tor2']
     metaDF=metaDF[metaDF['pathogen']!='orthoreovirus']
     #keep_runs=['expt10_03072024', 'expt11_150824','expt10A_17072024']
-    #metaDF=metaDF[metaDF['Run'].isin(keep_runs)]
+    metaDF=metaDF[metaDF['Run'].isin(keep_runs)]
     
     cols=['Run','barcode','seq_name','pathogen reduced','Biofire positive']
     metaDF=metaDF[cols]
@@ -307,11 +312,55 @@ def getAdditionalMetrics(fpr, tpr, thresholds, pathogen, metric):
     df['Youden J statistic']=df['sensitivity']+df['specificity']-1
     df['F1 score']=(2*df['sensitivity']*df['specificity'])/(df['sensitivity']+df['specificity'])
     df.to_csv(f'additional_stats/{pathogen}_{metric}_thresholds.csv')
+    df.sort_values(by='Youden J statistic',ascending=False,inplace=True)
+    top_threshold=df.head(1)
+    return top_threshold
 
+def getPPV_NPV_MLR(thresh_df, df, pathogen, metric):
+    '''Calculate the positive predictive value and negative predictive value'''
+    df['TP']=np.where((df['gold_standard']==1) & (df['logit_pred']==1),1,0)
+    df['FP']=np.where((df['gold_standard']==0) & (df['logit_pred']==1),1,0)
+    df['TN']=np.where((df['gold_standard']==0) & (df['logit_pred']==0),1,0)
+    df['FN']=np.where((df['gold_standard']==1) & (df['logit_pred']==0),1,0)
+    TP=df['TP'].sum()
+    FP=df['FP'].sum()
+    TN=df['TN'].sum()
+    FN=df['FN'].sum()
+    PPV=TP/(TP+FP)
+    NPV=TN/(TN+FN)
+    thresh_df['PPV']=PPV
+    thresh_df['NPV']=NPV
+    print(f'PPV: {PPV}, NPV: {NPV}')
+    thresh_df.to_csv(f'additional_stats/{pathogen}_{metric}_predictions.csv')
+    return thresh_df
 
-def plotROC(df, pathogen, metric):
+def getPPV_NPV(thresh_df, df, pathogen, metric):
+    '''Calculate the positive predictive value and negative predictive value'''
+    print(thresh_df)
+    threshold=thresh_df['thresholds'].values[0]
+    df['prediction']=np.where(df[metric]>threshold,1,0)
+    df['TP']=np.where((df['gold_standard']==1) & (df['prediction']==1),1,0)
+    df['FP']=np.where((df['gold_standard']==0) & (df['prediction']==1),1,0)
+    df['TN']=np.where((df['gold_standard']==0) & (df['prediction']==0),1,0)
+    df['FN']=np.where((df['gold_standard']==1) & (df['prediction']==0),1,0)
+    TP=df['TP'].sum()
+    FP=df['FP'].sum()
+    TN=df['TN'].sum()
+    FN=df['FN'].sum()
+    PPV=TP/(TP+FP)
+    NPV=TN/(TN+FN)
+    thresh_df['PPV']=PPV
+    thresh_df['NPV']=NPV
+    print(f'PPV: {PPV}, NPV: {NPV}')
+    thresh_df.to_csv(f'additional_stats/{pathogen}_{metric}_predictions.csv')
+    return thresh_df
+
+def plotROC(df, pathogen, metric, remove_no_data=True):
     '''Plot the ROC curve'''
     print(pathogen, metric)
+    # remove rows where sample num reads is 0 and biofire is positive for that sample
+    if remove_no_data:
+        df=df[~((df['sample num reads']==0) & (df['Biofire positive']==1))]
     if pathogen!='All_pathogens':
         df2=df[df['pathogen']==pathogen]
     else:
@@ -319,35 +368,119 @@ def plotROC(df, pathogen, metric):
     df2.fillna(0,inplace=True)
     #X=df2[['sample num reads','sample reads percent of type', 'sample reads percent of run']]
     X=df2[metric]
-    y=df2['Biofire positive']
+    y=df2['gold_standard']
 
     # check if y contail only one class
     if len(y.unique())==1 or len(X)<2:
         print(y)
         return
     
-    # show distribution of the data
-    #g=df.groupby(['pathogen','Biofire positive'])[metric].count()
-    #g.to_csv(f'sample_counts/{pathogen}_{metric}_counts.csv')
-    #print(g)
-
     # ROC curve from sklearn
     fpr, tpr, thresholds = roc_curve(y, X)
-    getAdditionalMetrics(fpr, tpr, thresholds, pathogen, metric)
+    threshold=getAdditionalMetrics(fpr, tpr, thresholds, pathogen, metric)
+    thresh_df=getPPV_NPV(threshold, df2, pathogen, metric)
+    thresh_df['remove_no_data']=remove_no_data
     # Compute the AUC (area under the curve)
     roc_auc = auc(fpr, tpr)
     #print(thresholds)
+    thresh_df['AUC']=roc_auc
 
     #create ROC curve
     plt.plot(fpr,tpr, label="AUC="+str(roc_auc))
-    plt.ylabel('True Positive Rate')
+    plt.plot([0, 1], [0, 1],'r--')
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.05])
     plt.xlabel('False Positive Rate')
-    plt.legend(loc=4)
-    # add diagonal line
-    plt.plot([0, 1], [0, 1], color='navy', linestyle='--')
+    plt.ylabel('True Positive Rate')
+    plt.title('Receiver operating characteristic')
+    plt.legend(loc="lower right")
     metric_=metric.replace(' ','_')
-    plt.savefig(f'rocs/{pathogen}_roc_{metric_}.pdf')
+
+    if remove_no_data:
+        plt.savefig(f'rocs/{pathogen}_roc_{metric_}_no_zero.pdf')
+    else:
+        plt.savefig(f'rocs/{pathogen}_roc_{metric_}.pdf')
     plt.clf()
+    plt.close()
+    return thresh_df
+
+def plotROCs(df2):
+    metrics=['sample num reads','meanDepth', 'AuG','AuG_trunc5','AuG_trunc10',
+          'bases', 'bases_perc',  
+          'Cov1_perc','Cov3_perc','Cov5_perc','Cov10_perc',
+          'Sample_reads_percent_of_run', 'Sample_reads_percent_of_refs', 'Sample_reads_percent_of_type_run', 'Sample_reads_percent_of_type_sample',
+          'median_read_length', 'median_aligned_length', 'mean_read_length', 'mean_aligned_length',
+          'Sample_num_reads_200', 'Sample_num_reads_300', 'Sample_num_reads_400']
+    thresh_dfs=[]
+    for metric in metrics:
+        thresh_df=plotROC(df2, 'All_pathogens', metric, remove_no_data=False)
+        if thresh_df is not None:
+            thresh_dfs.append(thresh_df)
+
+        # again but remove samples with 0 reads and biofire positive
+        thresh_df=plotROC(df2, 'All_pathogens', metric, remove_no_data=True)
+        if thresh_df is not None:
+            thresh_dfs.append(thresh_df)
+    thresh_df=pd.concat(thresh_dfs)
+    thresh_df.to_csv('all_pathogens_thresholds.csv')
+
+def reg_coef(x,y,label=None,color=None,hue=None,**kwargs):
+    ax = plt.gca()
+    # remove nan values
+    x2=[]
+    y2=[]
+    #print('X:  ',x.name)
+    #print('Y:  ',y.name)
+    #import sys
+    #sys.exit()
+    for ix, iy in zip(x, y):
+        if np.isnan(ix) or np.isnan(iy):
+            continue
+        else:
+            x2.append(ix)
+            y2.append(iy)
+    p = spearmanr(x2,y2)
+    #print(list(x2),list(y2), p.correlation, p.pvalue)
+    ax.annotate('x: {}\ny: {}\n \u03C1={:.2f}'.format(x.name, y.name,p.correlation ), xy=(0.5,0.5), xycoords='axes fraction', ha='center')
+    #ax.set_axis_off()
+
+    # cirlce plots
+    
+    #print(c_size)
+    x_max = max(x2)
+    y_max = max(y2)
+    c_size = (len(x2)/len(x))*x_max
+    if p.correlation>0:
+        c_colour='blue'
+    elif p.correlation==0:
+        c_colour='black'
+    else:
+        c_colour='red'
+    #Drawing_uncolored_circle = plt.Circle((x_max/2, y_max/2), radius=c_size, fill=False, color=c_colour, lw=2, alpha=0.5)
+    #c_size2 = len(x2)/len(x)
+    #Drawing_uncolored_circle = plt.Circle((0.5, 0.5), radius=c_size2, fill=False, color='black', lw=2, alpha=0.5)
+    #ax.add_patch(Drawing_uncolored_circle)
+    #ax.set(xlim=(0,1),ylim=(0, 1))
+    
+def reg_coef_inside(x,y,label=None,color=None,hue=None,**kwargs):
+    ax = plt.gca()
+    # remove nan values
+    x2=[]
+    y2=[]
+    #print('X:  ',x.name)
+    #print('Y:  ',y.name)
+    #import sys
+    #sys.exit()
+    for ix, iy in zip(x, y):
+        if np.isnan(ix) or np.isnan(iy):
+            continue
+        else:
+            x2.append(ix)
+            y2.append(iy)
+    p = spearmanr(x2,y2)
+    #print(list(x2),list(y2), p.correlation, p.pvalue)
+    ax.annotate('P={:.2f}'.format(p.correlation ), xy=(0.7,0.1), xycoords='axes fraction', ha='center')
+    ax.set_axis_off()
 
 def box_plots(df):
     '''Melt wide to long for metrics'''
@@ -356,16 +489,18 @@ def box_plots(df):
           'Cov1', 'Cov3', 'Cov5', 'Cov10', 
           'Cov1_perc','Cov3_perc','Cov5_perc','Cov10_perc',
           'sample num reads','total run reads mapped', 'total run reads inc unmapped', 
-          'Sample_reads_percent_of_run', 'Sample_reads_percent_of_refs', 'Sample_reads_percent_of_type_run', 'Sample_reads_percent_of_type_sample']
+          'Sample_reads_percent_of_run', 'Sample_reads_percent_of_refs', 'Sample_reads_percent_of_type_run', 'Sample_reads_percent_of_type_sample',
+          'median_read_length', 'median_aligned_length', 'mean_read_length', 'mean_aligned_length',
+          'Sample_num_reads_300', 'Sample_num_reads_500', 'Sample_num_reads_1000']
     
-    df2=df.melt(id_vars=['Run','seq_name','barcode','pathogen','Biofire positive'],
+    df2=df.melt(id_vars=['Run','seq_name','barcode','pathogen','Biofire positive','gold_standard'],
                 value_vars=metrics,
                 var_name='metric',value_name='value')
     
     df2=df2[~df2['metric'].isin(['total run reads mapped', 'total run reads inc unmapped'])]
     # facetted box plot with each metric per facet and biofire positive or negative on x axis
-    g=sns.FacetGrid(df2, col='metric', col_wrap=4, sharey=False)
-    g.map(sns.boxplot, 'Biofire positive', 'value', order=[0,1])
+    g=sns.FacetGrid(df2, col='metric', col_wrap=6, sharey=False)
+    g.map(sns.boxplot, 'gold_standard', 'value', order=[0,1])
     g.set_titles("{col_name}")
     # set all y-axis to start at 0 
     for ax in g.axes.flat:
@@ -380,19 +515,270 @@ def box_plots(df):
     # scatter plots
     plot_metrics=['sample num reads','meanDepth', 'AuG','AuG_trunc5','AuG_trunc10',
           'bases', 'bases_perc',  
-          'Cov1_perc','Cov3_perc','Cov5_perc','Cov10_perc']
+          'Cov1_perc','Cov3_perc','Cov5_perc','Cov10_perc',
+          'Sample_reads_percent_of_run', 'Sample_reads_percent_of_refs', 'Sample_reads_percent_of_type_run', 'Sample_reads_percent_of_type_sample',
+          'median_read_length', 'median_aligned_length', 'mean_read_length', 'mean_aligned_length',
+          'Sample_num_reads_200', 'Sample_num_reads_300', 'Sample_num_reads_400']
     df3=df[plot_metrics]
     g2 = sns.PairGrid(df3)
-    g2.map(sns.scatterplot)
+    g2.map_upper(reg_coef, hue=None)
+    #g2.map_diag(sns.kdeplot)
+    g2.map_lower(sns.scatterplot)
+    #g2.map_lower(sns.regplot,  scatter_kws = {"color": "black", "alpha": 0.5},
+    #        line_kws = {"color": "red"})
+    #g2.map_lower(reg_coef_inside, hue=None)
+    
+    # make both axis log scale
+    #for ax in g2.axes.flat:
+    #if ax.get_xlabel() in log_columns:
+    #    ax.set(xscale="log")
+
     plt.tight_layout()
     plt.savefig('scatter_plots.pdf')
     plt.clf()
 
+    ## create matrix
+    df4=df3.corr(method='spearman')
+    df4.to_csv('spearman_correlation_matrix.csv')
 
+    # melt matrix
+    df5=df4.reset_index().melt(id_vars='index')
+    df5.to_csv('spearman_correlation_matrix_melted.csv')
 
+def adjust_gold_standard(df):
+    '''Create a new column with the gold standard
+    change the Influnza subtypes gold standard to 1 if Influnza A positive and sequencing maps to Influenza A'''
+    df['gold_standard']=df['Biofire positive']
+    
+    # FLU_A_POS is 1 if biofire positive for Influenza A for the run and barcode
+    df['condition'] = (df['Biofire positive'] == 1) & (df['pathogen'] == 'Influenza A')
+    df['FLU_A_POS'] = df.groupby(['Run', 'barcode'])['condition'].transform('any')
+
+    flu_A_options=['Influnza A','Influenza A/H1-2009','Influenza A/H3','Influenza A/H1']
+
+    filtered_df = df[df['pathogen'].isin(flu_A_options)]
+
+    # Step 2: Group by 'Run' and 'barcode' and find the index of the row with the highest 'num_reads'
+    filtered_df['TOP_FLU_A'] = filtered_df.groupby(['Run', 'barcode'])['sample num reads'].transform('idxmax')
+
+    # Step 3: Set the 'top_flu' column to 1 for the row with the highest 'num_reads', and 0 for others
+    df['TOP_FLU_A'] = df.index.isin(filtered_df['TOP_FLU_A'])
+    
+    df['gold_standard']=np.where( ( df['pathogen_reduced'].isin(flu_A_options) ) & ( df['FLU_A_POS']==1) & (df['TOP_FLU_A']==1), 1, df['gold_standard'] )
+    return df
+
+def plot_read_length_hist(input, pathogens, pathogens_reduced):
+    dfs=[]
+    for folder in input:
+        run=folder.split('/')[-1]
+        barcodes=os.listdir(f'{folder}/alignment_info/')
+        barcodes=[b for b in barcodes if b.endswith('_all_alignments.csv')]
+        for barcode in barcodes:
+            df=pd.read_csv(f'{folder}/alignment_info/{barcode}')
+            df['Run']=run
+            dfs.append(df)
+            b=barcode.split('_')[0]
+            df['barcode']=b
+            dfs.append(df)
+
+    df=pd.concat(dfs)
+
+    # reduce ref to pathogens
+    df2=pd.read_csv(pathogens)
+    
+    path_dict={}
+    for i,r in df2.iterrows():
+        path_dict.setdefault(r['pathogen'],[]).append(r['reference'])
+
+    # reverse path_dict
+    path_dict_rev={v:k for k,values in path_dict.items() for v in values}
+    df['Pathogen']=df['ref'].map(path_dict_rev)
+
+    df3=pd.read_csv(pathogens_reduced)
+    df3.set_index('pathogen',inplace=True)
+    path_dict_reduced=df3.to_dict()['pathogen_reduced']
+
+    df['Pathogen_reduced']=df['Pathogen'].map(path_dict_reduced)
+
+    # plot histogram of read length by species
+    g=sns.FacetGrid(df, col='Run', row='Pathogen_reduced', sharey=False)
+    g.map(sns.histplot, 'read_len')
+    plt.savefig('plots/read_length_hist.pdf')
+    plt.clf()
+
+    # plot histogram of align_len length by species
+    g=sns.FacetGrid(df, col='Run', row='Pathogen_reduced', sharey=False)
+    g.map(sns.histplot, 'align_len')
+    g.set_titles("{row_name}|{col_name}")
+    plt.savefig('plots/align_length_hist.pdf')
+    plt.clf()
+
+    # box plot of read length by species
+    fig, ax = plt.subplots(figsize=(16, 9))
+    sns.boxplot(data=df, x='Pathogen_reduced', y='read_len')
+    plt.xticks(rotation=90)
+    # set y axis range from 0 to 1000
+    plt.ylim(0,1000)
+    plt.tight_layout()
+
+    # set dimensions of plot
+    plt.savefig('plots/read_length_boxplot.pdf')
+    plt.clf()
+
+    # box plot of align length by species
+    fig, ax = plt.subplots(figsize=(16, 9))
+    sns.boxplot(data=df, x='Pathogen_reduced', y='align_len')
+    plt.xticks(rotation=90)
+    plt.ylim(0,1000)
+    plt.tight_layout()
+    
+    plt.savefig('plots/align_length_boxplot.pdf')
+    plt.clf()
+
+def multivariate_logistic_regression(df):
+    metrics=['AuG_trunc10', 'bases', 'sample num reads',
+          'Sample_reads_percent_of_run', 'Sample_reads_percent_of_refs', 
+          'Sample_reads_percent_of_type_run', 'Sample_reads_percent_of_type_sample',
+          'mean_read_length','mean_aligned_length']
+    
+    X=df[metrics]
+    y=df['gold_standard']
+    #X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
+    logreg = LogisticRegression(max_iter=1000)
+    logreg.fit(X, y)
+    y_pred = logreg.predict(X)
+    y_probs = logreg.predict_proba(X)[:,1]
+    df['logit_probs']=y_probs
+    df['logit_pred']=y_pred
+
+    # save model
+    joblib.dump(logreg, 'logit_model.pkl')
+
+    #print('Accuracy of logistic regression classifier on test set: {:.2f}'.format(logreg.score(X_test, y_test)))
+
+    # confusion matrix
+    #confusion_matrix = confusion_matrix(y, y_pred)
+    #print(confusion_matrix)
+
+    # classification report
+    print(classification_report(y, y_pred))
+
+    # ROC curve
+    logit_roc_auc = roc_auc_score(y, logreg.predict(X))
+    fpr, tpr, thresholds = roc_curve(y, logreg.predict_proba(X)[:,1])
+    plt.figure()
+    plt.plot(fpr, tpr, label='Logistic Regression (area = %0.2f)' % logit_roc_auc)
+    plt.plot([0, 1], [0, 1],'r--')
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.05])
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('Receiver operating characteristic')
+    plt.legend(loc="lower right")
+    plt.savefig('rocs/Log_ROC.pdf')
+    plt.clf()
+    plt.close()
+
+    # make data frame for fpr, tpr, thresholds
+    df2=pd.DataFrame({'fpr':fpr, 'tpr':tpr})
+    #for i, threshold in enumerate(thresholds):
+    df2[f'thresholds'] = thresholds
+    df2['sensitivity']=df2['tpr']
+    df2['specificity']=1-df2['fpr']
+    df2['1-specificity']=df2['fpr']
+    df2['Youden J statistic']=df2['sensitivity']+df2['specificity']-1
+    df2['F1 score']=(2*df2['sensitivity']*df2['specificity'])/(df2['sensitivity']+df2['specificity'])
+    df2.to_csv('logit_thresholds.csv')
+    #print(thresholds)
+
+    # print feature importance
+    # Get feature importance
+    feature_importance = np.abs(logreg.coef_[0])
+    feature_names = X.columns #if hasattr(X, 'columns') else [f"Feature {i}" for i in range(X.shape[1])]
+    # Display sorted feature importance
+    sorted_indices = np.argsort(feature_importance)[::-1]
+    fi_list=[]
+    for idx in sorted_indices:
+        fi_list.append({'feature': feature_names[idx], 'importance':feature_importance[idx]})
+        print(f"{feature_names[idx]}: {feature_importance[idx]}")
+    fi_df=pd.DataFrame(fi_list)
+    fi_df.to_csv('logit_feature_importance.csv')
+    # bar plot of feature importance
+    plt.figure(figsize=(10, 6))
+    sns.barplot(x=fi_df['importance'], y=fi_df['feature'])
+    plt.title('Feature Importance')
+    plt.xlabel('Importance')
+    plt.ylabel('Feature')
+    #plt.xscale('log')
+    plt.grid(True)
+    plt.tight_layout()
+    plt.savefig('features/logit_feature_importance.pdf')    
+    plt.clf()
+    plt.close()
+
+    X=X.to_numpy()
+    for feature_index in range(X.shape[1]):
+        #feature_index = 0  # Feature of interest (index of the feature)
+        feature_values = X[:, feature_index]
+
+        name=metrics[feature_index]
+        # Create a scatter plot to show the relationship
+        plt.figure(figsize=(8, 6))
+        plt.scatter(feature_values, y_probs, alpha=0.5, s=10, c=y, cmap='coolwarm')
+        plt.title(f"Effect of Feature {name} on Predicted Probability")
+        plt.xlabel(f"Feature {name} Value")
+        plt.ylabel("Predicted Probability (P(y=1))")
+        plt.colorbar(label='True Labels')  # Color represents true labels (y_test)
+        plt.grid(True)
+        plt.savefig(f'features/logit_feature_{name}.pdf')
+        plt.clf()
+        plt.close()
+
+        # Sort feature values and predicted probabilities
+        sorted_indices = np.argsort(feature_values)
+        sorted_feature_values = feature_values[sorted_indices]
+        sorted_probs = y_probs[sorted_indices]
+
+        # Plot a smoother curve
+        plt.figure(figsize=(8, 6))
+        plt.plot(sorted_feature_values, sorted_probs, color='blue', linewidth=2)
+        plt.title(f"Effect of Feature {name} on Predicted Probability (Smoothed)")
+        plt.xlabel(f"Feature {name} Value")
+        plt.ylabel("Predicted Probability (P(y=1))")
+        plt.grid(True)
+        plt.savefig(f'features/logit_feature_{name}_smoothed.pdf')
+        plt.clf()
+        plt.close()
+
+    ## PPV and NPV
+    pathogen='All_pathogens'
+    metric='logit_probs'
+    threshold=getAdditionalMetrics(fpr, tpr, thresholds, pathogen, metric)
+    df.to_csv('logit_predictions.csv')
+    thresh_df=getPPV_NPV_MLR(threshold, df, pathogen, metric)
+    #df.to_csv('logit_predictions.csv')
+    thresh_df['remove_no_data']='remove_no_data'  
+    thresh_df['AUC']=logit_roc_auc
+    thresh_df.to_csv('logit_thresholds_PPV_NPV.csv')
+
+    # plot preds and probs by TP, FP, TN, FN
+    cols=['logit_probs','logit_pred','gold_standard', 'pathogen', 'TP', 'FP', 'TN', 'FN']
+    df3=df[cols]
+    # melt to long
+    df3=df3.melt(id_vars=['logit_probs','logit_pred','gold_standard', 'pathogen'],
+                               value_vars=['TP','FP','TN','FN'],
+                               var_name='Test result type',value_name='test result')
+    df3=df3[df3['test result']==1]
+    g2=sns.boxplot(data=df3, x='Test result type', y='logit_probs')
+    # add dots to boxplot
+    sns.stripplot(data=df3, x='Test result type', y='logit_probs')
+    plt.savefig('plots/logit_predictions_boxplot.pdf')
+
+     
 def main(args):
     df=getDataFrame(args.input)
-    metaDFbiofire_only=getMeta(args.meta, args.pathogens, args.pathogens_reduced, args.biofire)
+    keep_runs=[run.split('/')[-1] for run in args.input]
+    metaDFbiofire_only=getMeta(args.meta, args.pathogens, args.pathogens_reduced, args.biofire, keep_runs)
     df.to_csv('all_results.csv')
     # remove duplicates for pathogen_reduced and keep row with highest sample num reads
     df=df.sort_values(by=['batch','Sample name','pathogen_reduced','sample num reads'],ascending=False)
@@ -407,6 +793,7 @@ def main(args):
     df2=metaDFbiofire_only.merge(df,left_on=['Run','barcode','pathogen'],
                                 right_on=['Run','barcode','pathogen_reduced'],
                                 how='left')
+    df2=adjust_gold_standard(df2)
     df2.drop(columns=['pathogen_reduced','run','Sample name','batch','chrom'],inplace=True)
 
     # make box plots
@@ -416,32 +803,10 @@ def main(args):
     df2.to_csv('biofire_results_merged.csv', index=False)
 
     # plot ROC curves
-    metrics=['sample num reads','meanDepth', 'AuG','AuG_trunc5','AuG_trunc10',
-          'bases', 'bases_perc',  
-          'Cov1_perc','Cov3_perc','Cov5_perc','Cov10_perc']
-    for metric in metrics:
-        plotROC(df2, 'All_pathogens', metric)
+    plotROCs(df2)
 
-    #print(metaDict)
-    #dfs=[]
-    #thresholds=[0.0, 0.1, 0.3, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 2.4, 3.3, 4.2, 5.1, 6.0, 7.0, 8.0, 9.0, 10.0, 20, 30, 40, 50, 60, 70, 80, 90, 99]
-    #thresholds=[0.0]
-    #for p in thresholds:
-    #    for r in thresholds:
-    #        print(p,r)
-    #        data, df2, sensSpec=checkSensSpec(df, metaDict, metaDF, path_dict, pathogens_reduced, num_pathogens, percentage_type_reads=p, percentage_run_reads=r)
-    #        data.to_csv(f'{args.output}_{p}_{r}.csv')
-    #        if sensSpec is not None:
-    #            dfs.append(sensSpec)
-    #sensSpec=pd.concat(dfs)
-    #sensSpec.to_csv(f'{args.output}_sensSpec.csv')
-    
-    
-
-    #pathogens=data['pathogen_reduced'].unique()
-    #for pathogen in pathogens:
-    #    plotROC(data, pathogen, metric)
-
+    # Multivariate logistic regression
+    multivariate_logistic_regression(df2)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -460,6 +825,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     main(args)
+    plot_read_length_hist(args.input, args.pathogens, args.pathogens_reduced)
     #df=pd.read_csv(args.output)
     #plotROC(df)
 

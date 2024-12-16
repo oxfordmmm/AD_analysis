@@ -11,6 +11,7 @@ Flu A,Influenza A
 Flu A/H1-2009,Influenza A/H1-2009
 Flu A/H1,Influenza A/H1
 Flu A/H3,Influenza A/H3
+Flu A/H5,Influenza A/H5
 FluB,Influenza B
 HRE,Rhinovirus/enterovirus
 Human Rhinovirus,Rhinovirus/enterovirus
@@ -18,6 +19,7 @@ Influenza A,Influenza A
 MS2,MS2
 Metapneumo,Metapneumovirus
 Metapneumovirus,Metapneumovirus
+MERS,MERS
 Paraflu 1,Parainfluenza 1
 Paraflu 2,Parainfluenza 2
 Paraflu 3,Parainfluenza 3

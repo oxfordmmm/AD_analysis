@@ -22,7 +22,7 @@ process MASK_REF {
 process MINIMAP2 {
     conda "$params.envs/map"
     cpus 3
-    publishDir "$params.output/bams", pattern: "*.bam*"
+    //publishDir "$params.output/bams", pattern: "*.bam*"
 
     input:
     tuple val(barcode), path('sequences.fastq'), path('ref.fasta')
@@ -43,7 +43,7 @@ process MINIMAP2 {
 process FILTER_BAM {
     conda "$params.envs/map"
 
-    publishDir "$outdir/"
+    //publishDir "$outdir/"
 
     input:
     tuple val(barcode), path('ref.fasta'), path("${barcode}.bam"), path("${barcode}.bam.bai")
@@ -106,8 +106,8 @@ process FILTER_SISPA {
     conda "$params.envs/map"
     errorStrategy 'ignore'
     
-    publishDir "$params.output/bams", pattern: "*.bam"
-    publishDir "$params.output/alignment_info", pattern: "_alignments.csv", mode: 'copy'
+    //publishDir "$params.output/bams", pattern: "*.bam"
+    publishDir "$params.output/alignment_info", pattern: "*_alignments.csv", mode: 'copy'
     publishDir "$params.output/reports", pattern: "*.txt", mode: 'copy'
 
     input:
@@ -128,6 +128,27 @@ process FILTER_SISPA {
     filter_sispa_alignments.py -i ${barcode}.bam -o ${barcode}.filt.bam \
         -p ${barcode} -m $min_align_length -s $barcode
     samtools index ${barcode}.filt.bam
+    """
+}
+
+process CALC_OVERLAPS {
+    tag {barcode}
+    conda "$params.envs/bedtools"
+    errorStrategy 'ignore'
+
+    //publishDir "$params.output/alignment_info/overlaps", pattern: "*.csv", mode: 'copy'
+
+    input:
+    tuple val(barcode), path('ref.fasta'), path("${barcode}.bam"), path("${barcode}.bam.bai")
+
+    //output:
+    //tuple val(barcode), path("${barcode}_overlaps.csv"), emit: overlaps
+
+    script:
+    """
+    bedtools bamtobed -i ${barcode}.bam > reads.bed
+    bedtools merge -i reads.bed > merged_reads.bed
+    bedtools subtract -a reads.bed -b merged_reads.bed > non_overlapping_reads.bed
     """
 }
 
@@ -270,7 +291,7 @@ process GENOME_DEPTH {
     publishDir "$params.output/depths", overwrite: true, mode: 'copy'  
                                                                                 
     input:                                                                      
-    tuple val(barcode), path('ref.fasta'), path("${barcode}.sorted.bam"), path("${barcode}.sorted.bam.bai"), path("alignment_counts.csv")
+    tuple val(barcode), path('ref.fasta'), path("${barcode}.sorted.bam"), path("${barcode}.sorted.bam.bai"), path("alignment_counts.csv"), path("alignment_info.csv")
     each path("multi_segment_pathogens.csv")
 
     output:                                                                     
@@ -281,7 +302,7 @@ process GENOME_DEPTH {
     script:                                                                     
     """                                                                         
     samtools depth -aa ${barcode}.sorted.bam > ${barcode}_depth.tsv                
-    coverageStats.py ${barcode}_depth.tsv  ${barcode} alignment_counts.csv  multi_segment_pathogens.csv                     
+    coverageStats.py ${barcode}_depth.tsv  ${barcode} alignment_counts.csv  multi_segment_pathogens.csv alignment_info.csv                    
                                                                                 
     mv coverage_stats.csv ${barcode}_depth.csv                                 
     """                                                  
@@ -389,7 +410,9 @@ process PLOT_BACTERIAL {
 }
 
 process GRAPH_COVERAGE_SEPARATE {
+    tag {sampleName}
     conda "$params.envs/r"
+    errorStrategy 'ignore'
 
     publishDir "$params.output/coverage_graphs", mode: 'copy'
 

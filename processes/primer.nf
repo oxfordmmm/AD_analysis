@@ -22,7 +22,7 @@ process BLASTN {
     //cpus 4
 
     conda "$params.envs/blast"
-    publishDir "$params.output/primer_blast", mode: 'copy', saveAs: { filename -> "${barcode}_${split}_primer_blast.tsv" }
+    //publishDir "$params.output/primer_blast", mode: 'copy', saveAs: { filename -> "${barcode}_${split}_primer_blast.tsv" }
 
     input:
     tuple val(barcode), val(split), path(reads)
@@ -125,7 +125,7 @@ process SISPA_TRIM_PRIMER {
 process PHI_MERGE_SPLITTING_OUTPUTS{
     label 'online'
 
-    publishDir "$params.output/splitting", mode: 'copy', pattern: "*.fastq.gz"
+    //publishDir "$params.output/splitting", mode: 'copy', pattern: "*.fastq.gz"
     publishDir "$params.output/alignment_info", mode: 'copy', pattern: '*.csv'
     
     input:

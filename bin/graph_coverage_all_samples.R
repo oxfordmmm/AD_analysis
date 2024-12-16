@@ -28,9 +28,15 @@ cat(cutoff, sep = "\n")
 
 all_data <- data.frame()
 
+bacterial_chroms=c('CP085971.1','NZ_CP025371.1','NC_005043.1','NZ_LR214945.1')
+
 for (file in files) {
   # Read data from the current file
   depth_df <- read_tsv(file, col_names = c('id', 'locus', 'depth'))
+  # filter bacterial chromosomes
+  depth_df <- depth_df %>% 
+     filter(locus %in% bacterial_chroms)
+  depth_df
 
   # Extract the sample name from the file name
   sample_name <- gsub("_depth.tsv", "", basename(file))
