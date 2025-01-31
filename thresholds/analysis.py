@@ -7,10 +7,14 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_curve, auc, roc_auc_score
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
+from sklearn.metrics import log_loss 
+from sklearn.metrics import accuracy_score
 from sklearn import metrics
 from scipy.stats import spearmanr
 import os
 import joblib
+from patsy import dmatrices
+import statsmodels.api as sm 
 
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -302,6 +306,7 @@ def checkSensSpec(data, metaDict, metaDF, path_dict, path_dict_reduced, num_path
         return None, None, None
 
 def getAdditionalMetrics(fpr, tpr, thresholds, pathogen, metric):
+    '''Calculate sensitivity, specificity, Youden J statistic, F1 score and accuracy and return the top threshold'''
     df=pd.DataFrame({'fpr':fpr, 'tpr':tpr, 'thresholds':thresholds})
     df['sensitivity']=df['tpr']
     df['specificity']=1-df['fpr']
@@ -332,7 +337,7 @@ def getPPV_NPV_MLR(thresh_df, df, pathogen, metric):
     thresh_df['NPV']=NPV
     print(f'PPV: {PPV}, NPV: {NPV}')
     thresh_df.to_csv(f'additional_stats/{pathogen}_{metric}_predictions.csv')
-    return thresh_df
+    return df, thresh_df
 
 def getPPV_NPV(thresh_df, df, pathogen, metric):
     '''Calculate the positive predictive value and negative predictive value'''
@@ -491,7 +496,7 @@ def box_plots(df):
           'sample num reads','total run reads mapped', 'total run reads inc unmapped', 
           'Sample_reads_percent_of_run', 'Sample_reads_percent_of_refs', 'Sample_reads_percent_of_type_run', 'Sample_reads_percent_of_type_sample',
           'median_read_length', 'median_aligned_length', 'mean_read_length', 'mean_aligned_length',
-          'Sample_num_reads_300', 'Sample_num_reads_500', 'Sample_num_reads_1000']
+          'Sample_num_reads_200', 'Sample_num_reads_300', 'Sample_num_reads_400']
     
     df2=df.melt(id_vars=['Run','seq_name','barcode','pathogen','Biofire positive','gold_standard'],
                 value_vars=metrics,
@@ -635,12 +640,18 @@ def plot_read_length_hist(input, pathogens, pathogens_reduced):
     plt.savefig('plots/align_length_boxplot.pdf')
     plt.clf()
 
-def multivariate_logistic_regression(df):
-    metrics=['AuG_trunc10', 'bases', 'sample num reads',
+def multivariate_logistic_regression(df, remove_no_data=False):
+    metrics=['AuG_trunc10', 'sample num reads', 'Cov1_perc',
           'Sample_reads_percent_of_run', 'Sample_reads_percent_of_refs', 
           'Sample_reads_percent_of_type_run', 'Sample_reads_percent_of_type_sample',
           'mean_read_length','mean_aligned_length']
     
+    if remove_no_data:
+        suffix='_no_zero'
+        df=df[~((df['sample num reads']==0) & (df['gold_standard']==1))]
+    else:
+        suffix=''
+
     X=df[metrics]
     y=df['gold_standard']
     #X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
@@ -652,13 +663,21 @@ def multivariate_logistic_regression(df):
     df['logit_pred']=y_pred
 
     # save model
-    joblib.dump(logreg, 'logit_model.pkl')
+    joblib.dump(logreg, f'logit_model{suffix}.pkl')
 
     #print('Accuracy of logistic regression classifier on test set: {:.2f}'.format(logreg.score(X_test, y_test)))
 
     # confusion matrix
     #confusion_matrix = confusion_matrix(y, y_pred)
     #print(confusion_matrix)
+
+    # calculate AIC
+    n = len(y)
+    k = len(metrics)+1
+    ll = log_loss(y, y_probs)
+    aic = 2*k - 2*ll
+    print(f'AIC: {aic}')
+
 
     # classification report
     print(classification_report(y, y_pred))
@@ -673,9 +692,9 @@ def multivariate_logistic_regression(df):
     plt.ylim([0.0, 1.05])
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
-    plt.title('Receiver operating characteristic')
+    plt.title(f'Receiver operating characteristic {suffix}')
     plt.legend(loc="lower right")
-    plt.savefig('rocs/Log_ROC.pdf')
+    plt.savefig(f'rocs/Log_ROC{suffix}.pdf')
     plt.clf()
     plt.close()
 
@@ -688,7 +707,7 @@ def multivariate_logistic_regression(df):
     df2['1-specificity']=df2['fpr']
     df2['Youden J statistic']=df2['sensitivity']+df2['specificity']-1
     df2['F1 score']=(2*df2['sensitivity']*df2['specificity'])/(df2['sensitivity']+df2['specificity'])
-    df2.to_csv('logit_thresholds.csv')
+    df2.to_csv(f'logit_thresholds{suffix}.csv')
     #print(thresholds)
 
     # print feature importance
@@ -702,7 +721,7 @@ def multivariate_logistic_regression(df):
         fi_list.append({'feature': feature_names[idx], 'importance':feature_importance[idx]})
         print(f"{feature_names[idx]}: {feature_importance[idx]}")
     fi_df=pd.DataFrame(fi_list)
-    fi_df.to_csv('logit_feature_importance.csv')
+    fi_df.to_csv(f'logit_feature_importance{suffix}.csv')
     # bar plot of feature importance
     plt.figure(figsize=(10, 6))
     sns.barplot(x=fi_df['importance'], y=fi_df['feature'])
@@ -712,7 +731,7 @@ def multivariate_logistic_regression(df):
     #plt.xscale('log')
     plt.grid(True)
     plt.tight_layout()
-    plt.savefig('features/logit_feature_importance.pdf')    
+    plt.savefig(f'features/logit_feature_importance{suffix}.pdf')    
     plt.clf()
     plt.close()
 
@@ -730,7 +749,7 @@ def multivariate_logistic_regression(df):
         plt.ylabel("Predicted Probability (P(y=1))")
         plt.colorbar(label='True Labels')  # Color represents true labels (y_test)
         plt.grid(True)
-        plt.savefig(f'features/logit_feature_{name}.pdf')
+        plt.savefig(f'features/logit_feature_{name}{suffix}.pdf')
         plt.clf()
         plt.close()
 
@@ -746,20 +765,20 @@ def multivariate_logistic_regression(df):
         plt.xlabel(f"Feature {name} Value")
         plt.ylabel("Predicted Probability (P(y=1))")
         plt.grid(True)
-        plt.savefig(f'features/logit_feature_{name}_smoothed.pdf')
+        plt.savefig(f'features/logit_feature_{name}_smoothed{suffix}.pdf')
         plt.clf()
         plt.close()
 
     ## PPV and NPV
-    pathogen='All_pathogens'
+    pathogen=f'All_pathogens{suffix}'
     metric='logit_probs'
     threshold=getAdditionalMetrics(fpr, tpr, thresholds, pathogen, metric)
-    df.to_csv('logit_predictions.csv')
-    thresh_df=getPPV_NPV_MLR(threshold, df, pathogen, metric)
+    df,thresh_df=getPPV_NPV_MLR(threshold, df, pathogen, metric)
     #df.to_csv('logit_predictions.csv')
+    df.to_csv(f'logit_predictions{suffix}.csv')
     thresh_df['remove_no_data']='remove_no_data'  
     thresh_df['AUC']=logit_roc_auc
-    thresh_df.to_csv('logit_thresholds_PPV_NPV.csv')
+    thresh_df.to_csv(f'logit_thresholds_PPV_NPV{suffix}.csv')
 
     # plot preds and probs by TP, FP, TN, FN
     cols=['logit_probs','logit_pred','gold_standard', 'pathogen', 'TP', 'FP', 'TN', 'FN']
@@ -769,12 +788,76 @@ def multivariate_logistic_regression(df):
                                value_vars=['TP','FP','TN','FN'],
                                var_name='Test result type',value_name='test result')
     df3=df3[df3['test result']==1]
-    g2=sns.boxplot(data=df3, x='Test result type', y='logit_probs')
+    g2=sns.boxplot(data=df3, x='Test result type', y='logit_probs', color='grey', fill=False)
     # add dots to boxplot
-    sns.stripplot(data=df3, x='Test result type', y='logit_probs')
-    plt.savefig('plots/logit_predictions_boxplot.pdf')
+    sns.stripplot(data=df3, x='Test result type', y='logit_probs', hue='pathogen', alpha=0.5)
+    # move legend outside of plot
+    plt.legend(bbox_to_anchor=(1.05, 1), loc=2, borderaxespad=0.)
+    plt.savefig(f'plots/logit_predictions_boxplot{suffix}.pdf')
+    plt.savefig(f'plots/logit_predictions_boxplot{suffix}.svg')
+    plt.clf()
+    plt.close()
 
-     
+def statsmodels_logistic_regression(df, remove_no_data=False):
+    metrics=['AuG_trunc10', 'bases', 'sample_num_reads', 'Cov1_perc',
+          'Sample_reads_percent_of_run', 'Sample_reads_percent_of_refs', 
+          'Sample_reads_percent_of_type_run', 'Sample_reads_percent_of_type_sample',
+          'mean_read_length','mean_aligned_length']
+    
+    if remove_no_data:
+        suffix='_no_zero'
+        df=df[~((df['sample num reads']==0) & (df['gold_standard']==1))]
+    else:
+        suffix=''
+    df.rename(columns={'sample num reads':'sample_num_reads'},inplace=True)
+    #X=df[metrics]
+    #y=df['gold_standard']
+
+    metrics_str=' + '.join(metrics)
+    print(metrics_str)
+    # AuG_trunc10 + bases + sample_num_reads + Cov1_perc + Sample_reads_percent_of_run + Sample_reads_percent_of_refs + Sample_reads_percent_of_type_run + Sample_reads_percent_of_type_sample + mean_read_length + mean_aligned_length
+    y, X = dmatrices( f'gold_standard ~ AuG_trunc10 + sample_num_reads + Cov1_perc + Sample_reads_percent_of_run + Sample_reads_percent_of_refs + Sample_reads_percent_of_type_run + Sample_reads_percent_of_type_sample + mean_read_length + mean_aligned_length',
+                      data=df, return_type='dataframe')
+    mod = sm.Logit(y, X)
+    res = mod.fit(maxiter=1000)
+    print('AIC: ',res.aic)
+    print(res.summary())
+
+    # plot odds ratios
+    fig, ax = plt.subplots(figsize=(10, 6))
+    conf = res.conf_int()
+    conf['OR'] = res.params
+    conf.columns = ['2.5%', '97.5%', 'OR']
+    conf = np.exp(conf)
+    conf = conf.sort_values('OR', ascending=True)
+    conf = conf.dropna()
+    conf['OR'].plot(kind='barh', color='blue', ax=ax)
+    ax.set_title('Odds Ratios')
+    plt.tight_layout()
+    plt.savefig(f'SM/features/logit_odds_ratios{suffix}.pdf')
+    plt.clf()
+    plt.close()
+
+    # plot ROC
+    y_probs = res.predict(X)
+    fpr, tpr, thresholds = roc_curve(y, y_probs)
+    logit_roc_auc = roc_auc_score(y, y_probs)
+    plt.figure()
+    plt.plot(fpr, tpr, label='Logistic Regression (area = %0.2f)' % logit_roc_auc)
+    plt.plot([0, 1], [0, 1],'r--')
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.05])
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title(f'Receiver operating characteristic {suffix}')
+    plt.legend(loc="lower right")
+    plt.savefig(f'SM/rocs/Log_ROC{suffix}.pdf')
+    plt.clf()
+    plt.close()
+
+    return res, mod
+
+
 def main(args):
     df=getDataFrame(args.input)
     keep_runs=[run.split('/')[-1] for run in args.input]
@@ -797,16 +880,20 @@ def main(args):
     df2.drop(columns=['pathogen_reduced','run','Sample name','batch','chrom'],inplace=True)
 
     # make box plots
-    box_plots(df2)
+    #box_plots(df2)
 
     df2.fillna(0,inplace=True)
     df2.to_csv('biofire_results_merged.csv', index=False)
 
     # plot ROC curves
-    plotROCs(df2)
+    #plotROCs(df2)
 
     # Multivariate logistic regression
     multivariate_logistic_regression(df2)
+    multivariate_logistic_regression(df2, remove_no_data=True)
+
+    res,mod=statsmodels_logistic_regression(df2)
+    #return res,mod, df2
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -824,8 +911,9 @@ if __name__ == '__main__':
                          help='Output file')
     args = parser.parse_args()
 
+    #res, mod2, df2 = main(args)
     main(args)
-    plot_read_length_hist(args.input, args.pathogens, args.pathogens_reduced)
+    #plot_read_length_hist(args.input, args.pathogens, args.pathogens_reduced)
     #df=pd.read_csv(args.output)
     #plotROC(df)
 

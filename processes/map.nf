@@ -4,7 +4,7 @@ Samtools is used to sort and filter,
 Tries to keep as many alignments as possible
 */
 process MASK_REF {
-    conda "$params.envs/map"
+    conda "$params.envs/blast"
     cpus 3
 
     input:
@@ -20,9 +20,11 @@ process MASK_REF {
 }
 
 process MINIMAP2 {
+    tag {barcode}
     conda "$params.envs/map"
     cpus 3
-    //publishDir "$params.output/bams", pattern: "*.bam*"
+    //publishDir "bams/minimap2"
+    publishDir "bams/minimap2_unfiltered"
 
     input:
     tuple val(barcode), path('sequences.fastq'), path('ref.fasta')
@@ -32,9 +34,7 @@ process MINIMAP2 {
 
     script:
     """
-    minimap2 -t $task.cpus -ax map-ont -N 1000 ref.fasta sequences.fastq > out.sam
-
-    samtools view -bS out.sam | \
+    minimap2 -t $task.cpus -ax map-ont -N 1000 ref.fasta sequences.fastq | samtools view -bS - | \
         samtools sort -o ${barcode}_minimap.bam
     samtools index ${barcode}_minimap.bam
     """
@@ -43,7 +43,7 @@ process MINIMAP2 {
 process FILTER_BAM {
     conda "$params.envs/map"
 
-    //publishDir "$outdir/"
+    publishDir "bams/filtered"
 
     input:
     tuple val(barcode), path('ref.fasta'), path("${barcode}.bam"), path("${barcode}.bam.bai")

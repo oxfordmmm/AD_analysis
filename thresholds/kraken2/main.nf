@@ -3,13 +3,46 @@
 params.fastqs = ''
 params.meta_pathogens="$projectDir/../meta.csv"
 
+process CAT_FASTQS {
+    tag {run + ' ' + barcode}
+    //publishDir "fastqs/${run}/", mode: 'copy'
+
+    //label 'cat'
+
+    input:
+    tuple val(run), val(barcode), path('???.fastq.gz')
+
+    output:
+    tuple val(run), val(barcode), path("${run}_${barcode}.fastq.gz")
+
+    script:
+    """
+    cat *.fastq.gz > ${run}_${barcode}.fastq.gz
+    """
+}
+
+process JOIN_FQS {
+    tag {barcode}
+
+    input:
+    tuple val(barcode), file('R1.fq.gz'), file('R2.fq.gz')
+
+    output:
+    tuple val(barcode),val(barcode), path("${barcode}.fq.gz")
+
+    script:
+    """
+
+    join_reads.py R1.fq.gz R2.fq.gz ${barcode}.fq.gz
+
+    """
+}
 
 process KRAKEN2SERVER {
     tag {run + ' ' + barcode}
     publishDir "classifications/${run}/${barcode}/", mode: 'copy'
     maxForks 15
 
-    label 'kraken2server'
 
     input:
     tuple val(run), val(barcode), file('in.fastq.gz')
@@ -85,21 +118,35 @@ process COMPILE_RESULTS {
 
 
 workflow {
-    fastqs=Channel.fromPath("$params.fastqs/**/*.fastq.gz")
-            .map {it ->
-                tuple(it.getParent().getName() , it.simpleName, it)
-            }
+    //fastqs=Channel.fromPath("$params.fastqs/**/*.fastq.gz")
+    //        .map {it ->
+    //            tuple(it.getParent().getName() , it.simpleName, it)
+    //        }
 
-    meta_pathogens = Channel.fromPath(params.meta_pathogens)
+    //fastqs=Channel.fromPath("$params.fastqs/**/*.fastq.gz")
+    //        .map {it ->
+    //            tuple(it.getParent().getParent().getParent().getName(),it.getParent().getName(), it)
+    //        }
+    //        .groupTuple(by: [0,1])
+
+    illumina_fastqs=Channel.fromFilePairs("$params.illuminafastqs/*{1,2}.fq.gz")
+        .map{it -> tuple(it[0], it[1][0], it[1][1])}
+        .view()
 
 
-    KRAKEN2SERVER(fastqs)
+    //meta_pathogens = Channel.fromPath(params.meta_pathogens)
+ 
+    fqs=JOIN_FQS(illumina_fastqs)
 
-    EXTRACT_RESULTS(KRAKEN2SERVER.out.reports)
+    //fqs=CAT_FASTQS(fastqs)
 
-    results=EXTRACT_RESULTS.out.tsv
-        .collect()
+    KRAKEN2SERVER(fqs)
 
-    COMPILE_RESULTS(results, meta_pathogens)
+    //EXTRACT_RESULTS(KRAKEN2SERVER.out.reports)
+
+    //results=EXTRACT_RESULTS.out.tsv
+    //    .collect()
+
+    //COMPILE_RESULTS(results, meta_pathogens)
 
 }
