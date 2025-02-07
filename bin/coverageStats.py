@@ -111,7 +111,7 @@ def coverageStats(df, df3, df4):
         sample_num_reads=df5.groupby('ref')['query'].count()
         df2[f'Sample_num_reads_{c}']=df2['chrom'].map(sample_num_reads)
 
-
+    df2['mapQ']=sys.argv[6]
     df2.to_csv('coverage_stats.csv',index=False)
     #print(df2)
     return

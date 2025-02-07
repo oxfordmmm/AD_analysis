@@ -15,6 +15,7 @@ include {SISPA_TRIMMING_REPORT} from './processes/primer.nf'  // may need to cha
 // mapping
 include {MASK_REF} from './processes/map.nf'
 include {MINIMAP2} from './processes/map.nf'
+include {FILTER_MAPQ} from './processes/map.nf'
 include {CALC_OVERLAPS} from './processes/map.nf'
 include {FILTER_BAM} from './processes/map.nf'
 include {FILTER_PHI} from './processes/map.nf'
@@ -71,7 +72,13 @@ workflow sispa_workflow {
                 .map {it ->
                     tuple(it.simpleName, it)
                 }
-    sispa(sispa_reads, references, masks, meta_pathogens, pathogens_reduced, multi_segment_pathogens)
+
+    //mapq_scores = Channel.of(0, 10, 20, 30, 40, 50, 60)
+    mapq_scores = Channel.of(40)
+
+    beds = Channel.of([params.bacteria_bed, params.virus_bed])
+
+    sispa(sispa_reads, references, masks, meta_pathogens, pathogens_reduced, multi_segment_pathogens, mapq_scores, beds)
 }
 
 
@@ -92,6 +99,8 @@ workflow sispa {
         meta_pathogens
         pathogens_reduced
         multi_segment_pathogens
+        mapq_scores
+        beds
 
     main:
 
@@ -140,8 +149,10 @@ workflow sispa {
     MASK_REF(references.combine(masks))
 
     MINIMAP2( SISPA_MERGE_TRIMMING_OUTPUTS.out.fastq.combine(MASK_REF.out.fasta) )
+
+    FILTER_MAPQ(MINIMAP2.out.bam.combine(mapq_scores).combine(beds))
     
-    FILTER_SISPA(MINIMAP2.out.bam, 20)
+    FILTER_SISPA(FILTER_MAPQ.out.bam, 20)
 
     //CALC_OVERLAPS(FILTER_SISPA.out.bam)
 
@@ -181,7 +192,7 @@ workflow consensus {
     //CLAIR3(bam_no_ref.combine(INDEX_REF.out.index))
 
     // get depth of reads along ref
-    GENOME_DEPTH(bam.combine(alignment_counts, by:0).combine(alignments_info, by:0), multi_segment_pathogens)
+    GENOME_DEPTH(bam.combine(alignment_counts, by:[0,1]).combine(alignments_info, by:[0,1]), multi_segment_pathogens)
 
     // sumarise the depth for all samples
     depths=GENOME_DEPTH.out.csv
@@ -189,7 +200,7 @@ workflow consensus {
 
     DEPTH_SUMMARY(depths, meta_pathogens, pathogens_reduced)
 
-    PLOT_BACTERIAL(GENOME_DEPTH.out.tsv)
+    //PLOT_BACTERIAL(GENOME_DEPTH.out.tsv)
 
     // create consensus file by applying vcf to ref. Depth is used to mask low depth regions
     //BCFTOOLS_CONSENSUS(CLAIR3.out.vcf.combine(INDEX_REF.out.index).combine(GENOME_DEPTH.out.tsv, by:0))

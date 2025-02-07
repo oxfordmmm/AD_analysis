@@ -68,6 +68,7 @@ if __name__ == '__main__':
                         help='min alignment length required to pass filtering')    
     parser.add_argument('-s', '--sample_name', required=True,
                         help='sample name')
+    
     args = parser.parse_args()
     input_bam = args.inBam
     output = args.outBam

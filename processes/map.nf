@@ -40,20 +40,41 @@ process MINIMAP2 {
     """
 }
 
-process FILTER_BAM {
+process FILTER_MAPQ {
+    tag {barcode + ' ' + min_mapq}
     conda "$params.envs/map"
-
-    publishDir "bams/filtered"
+    publishDir "bams/mapq_filtered/${min_mapq}"
 
     input:
-    tuple val(barcode), path('ref.fasta'), path("${barcode}.bam"), path("${barcode}.bam.bai")
+    tuple val(barcode), path('ref.fasta'), path("${barcode}.bam"), path("${barcode}.bam.bai"), val(min_mapq), path("bacteria.bed"), path("viruses.bed")
+
+    output:
+    tuple val(barcode), path('ref.fasta'), path("${barcode}.filt.bam"), path("${barcode}.bam.bai"),val(min_mapq), emit: bam
+
+    script:
+    """
+    samtools view -b -L bacteria.bed -q $min_mapq ${barcode}.bam > ${barcode}.bact.bam
+    samtools view -b -L viruses.bed ${barcode}.bam > ${barcode}.viruses.bam
+    samtools merge ${barcode}.filt.bam ${barcode}.bact.bam ${barcode}.viruses.bam
+    samtools index ${barcode}.filt.bam
+    """
+}
+
+process FILTER_BAM {
+    tag {barcode + ' ' + min_mapq}
+    conda "$params.envs/map"
+
+    publishDir "bams/filtered/${min_mapq}"
+
+    input:
+    tuple val(barcode), path('ref.fasta'), path("${barcode}.bam"), path("${barcode}.bam.bai"),val(min_mapq)
     val(min_pc_of_ref)
     val(min_read_length)
     val(outdir)
 
     output:
-    tuple val(barcode), path('ref.fasta'), path("${barcode}.filt.bam"), path("${barcode}.bam.bai"), emit: bam
-    tuple val(barcode), path("${barcode}.filt.bam"), path("${barcode}.filt.bam.bai"), emit: bam_no_ref
+    tuple val(barcode), path('ref.fasta'), path("${barcode}.filt.bam"), path("${barcode}.bam.bai"),val(min_mapq), emit: bam
+    tuple val(barcode), path("${barcode}.filt.bam"), path("${barcode}.filt.bam.bai"),val(min_mapq), emit: bam_no_ref
 
     script:
     """
@@ -103,6 +124,7 @@ Process filters bam file from minimap2.
 For SISPA we are just removing secondary alignments, are ones which are too short.
 */
 process FILTER_SISPA {
+    tag {barcode + ' ' + min_mapq}
     conda "$params.envs/map"
     errorStrategy 'ignore'
     
@@ -111,22 +133,22 @@ process FILTER_SISPA {
     publishDir "$params.output/reports", pattern: "*.txt", mode: 'copy'
 
     input:
-    tuple val(barcode), path('ref.fasta'), path("${barcode}.bam"), path("${barcode}.bam.bai")
+    tuple val(barcode), path('ref.fasta'), path("${barcode}.bam"), path("${barcode}.bam.bai"), val(min_mapq)
     val(min_align_length)
 
     output:
-    tuple val(barcode), path('ref.fasta'), path("${barcode}.filt.bam"), path("${barcode}.filt.bam.bai"), emit: bam, optional: true
-    tuple val(barcode), path("${barcode}.filt.bam"), path("${barcode}.filt.bam.bai"), emit: bam_no_ref, optional: true
-    tuple val(barcode), path("${barcode}*.csv"), emit: stats, optional: true
-    tuple val(barcode), path("${barcode}_alignments.csv"), emit: alignments, optional: true
-    tuple val(barcode), path("*_report.txt"), emit: report, optional: true
-    tuple val(barcode), path("${barcode}_alignment_counts.csv"), emit: alignment_counts
+    tuple val(barcode),val(min_mapq), path('ref.fasta'), path("${barcode}.filt.bam"), path("${barcode}.filt.bam.bai"),  emit: bam, optional: true
+    tuple val(barcode),val(min_mapq), path("${barcode}.filt.bam"), path("${barcode}.filt.bam.bai"), emit: bam_no_ref, optional: true
+    tuple val(barcode),val(min_mapq), path("${barcode}*.csv"), emit: stats, optional: true
+    tuple val(barcode),val(min_mapq), path("${barcode}_alignments.csv"), emit: alignments, optional: true
+    tuple val(barcode),val(min_mapq), path("*_report.txt"), emit: report, optional: true
+    tuple val(barcode),val(min_mapq), path("${barcode}_alignment_counts.csv"), emit: alignment_counts
 
     script:
     """
     echo barcode $barcode
     filter_sispa_alignments.py -i ${barcode}.bam -o ${barcode}.filt.bam \
-        -p ${barcode} -m $min_align_length -s $barcode
+        -p ${barcode} -m $min_align_length -s $barcode 
     samtools index ${barcode}.filt.bam
     """
 }
@@ -286,23 +308,23 @@ process CLAIR3 {
 Finds depth of read coverage across reference
 */
 process GENOME_DEPTH {     
-    tag {barcode}                                                      
+    tag {barcode + ' ' + min_mapq}                                                      
     conda "$params.envs/map"
-    publishDir "$params.output/depths", overwrite: true, mode: 'copy'  
+    publishDir "$params.output/depths/${min_mapq}", overwrite: true, mode: 'copy'  
                                                                                 
     input:                                                                      
-    tuple val(barcode), path('ref.fasta'), path("${barcode}.sorted.bam"), path("${barcode}.sorted.bam.bai"), path("alignment_counts.csv"), path("alignment_info.csv")
+    tuple val(barcode), val(min_mapq), path('ref.fasta'), path("${barcode}.sorted.bam"), path("${barcode}.sorted.bam.bai"), path("alignment_counts.csv"), path("alignment_info.csv")
     each path("multi_segment_pathogens.csv")
 
     output:                                                                     
-    tuple val(barcode), path("${barcode}_depth.csv"), emit: genomeDepths
-    tuple val(barcode), path("${barcode}_depth.tsv"), emit: tsv 
+    tuple val(barcode), path("${barcode}_depth.csv"), val(min_mapq), emit: genomeDepths
+    tuple val(barcode), path("${barcode}_depth.tsv"), val(min_mapq), emit: tsv 
     path("${barcode}_depth.csv"), emit: csv        
                                                                                 
     script:                                                                     
     """                                                                         
     samtools depth -aa ${barcode}.sorted.bam > ${barcode}_depth.tsv                
-    coverageStats.py ${barcode}_depth.tsv  ${barcode} alignment_counts.csv  multi_segment_pathogens.csv alignment_info.csv                    
+    coverageStats.py ${barcode}_depth.tsv  ${barcode} alignment_counts.csv  multi_segment_pathogens.csv alignment_info.csv  ${min_mapq}                  
                                                                                 
     mv coverage_stats.csv ${barcode}_depth.csv                                 
     """                                                  
@@ -392,12 +414,13 @@ process GRAPH_COVERAGE {
 }
 
 process PLOT_BACTERIAL {
+    tag {sampleName + ' ' + min_mapq}
     conda "$params.envs/pyplots"
 
     publishDir "$params.output/coverage_graphs/bacteria", mode: 'copy'
 
     input:
-    tuple val(sampleName), path(depth_file) 
+    tuple val(sampleName), path(depth_file), val(min_mapq)
     
     output:
     tuple val(sampleName), path("${sampleName}.pdf"), emit: 'pdf'

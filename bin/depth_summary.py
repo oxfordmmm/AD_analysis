@@ -71,7 +71,7 @@ def run(args):
     rename_dict={'position cov1':'Cov1','position cov3':'Cov3','position cov5':'Cov5','position cov10':'Cov10',
                  'covBreadth1x': 'Cov1_perc', 'covBreadth3x':'Cov3_perc','covBreadth5x':'Cov5_perc','covBreadth10x':'Cov10_perc'}
     df.rename(columns=rename_dict,inplace=True)
-    cols=['batch','Sample name','chrom', 'length','pathogen', 'pathogen_reduced',
+    cols=['batch','Sample name','chrom', 'length','pathogen', 'pathogen_reduced', 'mapQ',
           'meanDepth', 'meanDepth_trunc5', 'meanDepth_trunc10','AuG','AuG_trunc5','AuG_trunc10',
           'bases', 'bases_perc', 
           'Cov1', 'Cov3', 'Cov5', 'Cov10', 

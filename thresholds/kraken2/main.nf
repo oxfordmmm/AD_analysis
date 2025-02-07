@@ -118,10 +118,11 @@ process COMPILE_RESULTS {
 
 
 workflow {
-    //fastqs=Channel.fromPath("$params.fastqs/**/*.fastq.gz")
-    //        .map {it ->
-    //            tuple(it.getParent().getName() , it.simpleName, it)
-    //        }
+    fqs=Channel.fromPath("$params.fastqs/*.fastq.gz")
+            .map {it ->
+                tuple(it.simpleName, it.simpleName, it)
+            }
+            .view()
 
     //fastqs=Channel.fromPath("$params.fastqs/**/*.fastq.gz")
     //        .map {it ->
@@ -136,7 +137,7 @@ workflow {
 
     //meta_pathogens = Channel.fromPath(params.meta_pathogens)
  
-    fqs=JOIN_FQS(illumina_fastqs)
+    //fqs=JOIN_FQS(illumina_fastqs)
 
     //fqs=CAT_FASTQS(fastqs)
 

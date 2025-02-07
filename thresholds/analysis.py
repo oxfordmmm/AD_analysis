@@ -143,6 +143,12 @@ def getMeta(meta, pathogens, pathogens_reduced,biofire,keep_runs):
     # add all species not found as biofire negative
     #biofire_pathogens=df3['pathogen_reduced'].unique()
     #biofire_pathogens=list(set(biofire_pathogens)-set(positive_controls))
+
+    # add mapQs
+    #mapQs=[0, 10, 20, 30, 40, 50, 60]
+    mapQs=[40]
+    mapQDF=pd.DataFrame(mapQs,columns=['mapQ'])
+    metaDF=pd.merge(metaDF,mapQDF,how='cross')
     runs=metaDF['Run'].unique()
     additonal_rows=[]
     for run in runs:
@@ -152,8 +158,11 @@ def getMeta(meta, pathogens, pathogens_reduced,biofire,keep_runs):
             pathogens=metaDF[(metaDF['Run']==run) & (metaDF['barcode']==barcode)]['pathogen reduced'].unique()
             missed_pathogens=list(set(biofire_pathogens) - set(pathogens))
             for p in missed_pathogens:
-                d={'Run':run,'barcode':barcode,'seq_name':seq_name,'pathogen number':None,'pathogen':p,'pathogen reduced':p,'Biofire positive':0}
-                additonal_rows.append(d)
+                for mapQ in mapQs:
+                    d={'Run':run,'barcode':barcode,'seq_name':seq_name,
+                       'pathogen number':None,'pathogen':p,'pathogen reduced':p,'Biofire positive':0,
+                       'mapQ':mapQ}
+                    additonal_rows.append(d)
     if len(additonal_rows)>0:
         ar_df=pd.DataFrame(additonal_rows)
         metaDF=pd.concat([metaDF,ar_df])
@@ -166,7 +175,7 @@ def getMeta(meta, pathogens, pathogens_reduced,biofire,keep_runs):
     #keep_runs=['expt10_03072024', 'expt11_150824','expt10A_17072024']
     metaDF=metaDF[metaDF['Run'].isin(keep_runs)]
     
-    cols=['Run','barcode','seq_name','pathogen reduced','Biofire positive']
+    cols=['Run','barcode','seq_name','pathogen reduced','Biofire positive', 'mapQ']
     metaDF=metaDF[cols]
     metaDF.rename(columns={'pathogen reduced':'pathogen'},inplace=True)
 
@@ -865,7 +874,7 @@ def main(args):
     df.to_csv('all_results.csv')
     # remove duplicates for pathogen_reduced and keep row with highest sample num reads
     df=df.sort_values(by=['batch','Sample name','pathogen_reduced','sample num reads'],ascending=False)
-    df.drop_duplicates(subset=['batch','Sample name','pathogen_reduced'],inplace=True,keep='first')
+    df.drop_duplicates(subset=['batch','Sample name','pathogen_reduced','mapQ'],inplace=True,keep='first')
     df.to_csv('all_results_no_duplicates.csv')
 
     # remove _sup from batch
@@ -873,8 +882,8 @@ def main(args):
 
     # merge with metaDFbiofire_only
     df.drop(columns=['pathogen'],inplace=True)
-    df2=metaDFbiofire_only.merge(df,left_on=['Run','barcode','pathogen'],
-                                right_on=['Run','barcode','pathogen_reduced'],
+    df2=metaDFbiofire_only.merge(df,left_on=['Run','barcode','pathogen','mapQ'],
+                                right_on=['Run','barcode','pathogen_reduced','mapQ'],
                                 how='left')
     df2=adjust_gold_standard(df2)
     df2.drop(columns=['pathogen_reduced','run','Sample name','batch','chrom'],inplace=True)
@@ -889,10 +898,10 @@ def main(args):
     #plotROCs(df2)
 
     # Multivariate logistic regression
-    multivariate_logistic_regression(df2)
-    multivariate_logistic_regression(df2, remove_no_data=True)
+    #multivariate_logistic_regression(df2)
+    #multivariate_logistic_regression(df2, remove_no_data=True)
 
-    res,mod=statsmodels_logistic_regression(df2)
+    #res,mod=statsmodels_logistic_regression(df2)
     #return res,mod, df2
 
 if __name__ == '__main__':
