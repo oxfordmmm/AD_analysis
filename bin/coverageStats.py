@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import sys
 import os
+import argparse
 
 def is_non_zero_file(fpath):  
     return os.path.isfile(fpath) and os.path.getsize(fpath) > 0
@@ -29,7 +30,7 @@ def getData(f,f2, multiSegmentDict):
     
     return df, df3
 
-def coverageStats(df, df3, df4):
+def coverageStats(df, df3, df4, sample, mapQ):
     cov1=df[df.depth >= 1].groupby(['chrom']).count()
     cov3=df[df.depth >= 3].groupby(['chrom']).count()
     cov5=df[df.depth >= 5].groupby(['chrom']).count()
@@ -71,7 +72,7 @@ def coverageStats(df, df3, df4):
     df2['AuG_trunc10']=df2['AuG_trunc10_sum']/df2['length']
     df2['meanDepth_trunc5']=df2.chrom.map(meanDepth_trunc5)
     df2['meanDepth_trunc10']=df2.chrom.map(meanDepth_trunc10)
-    df2['Sample name']=sys.argv[2]
+    df2['Sample name']=sample
     df2['bases']=df2.chrom.map(bases)
     df2['AuG']=df2['bases']/df2['length']
     df2['Bases_perc']=df2['AuG']*100
@@ -93,8 +94,8 @@ def coverageStats(df, df3, df4):
         df2['mean_aligned_length']=None
         for c in [200, 300, 400]:
             df2[f'Sample_num_reads_{c}']=None
-        df2.to_csv('coverage_stats.csv',index=False)
-        return
+        #df2.to_csv('coverage_stats.csv',index=False)
+        return df2
 
     median_read_length=df4.groupby('ref')['read_len'].median()
     mean_read_length=df4.groupby('ref')['read_len'].mean()
@@ -111,30 +112,43 @@ def coverageStats(df, df3, df4):
         sample_num_reads=df5.groupby('ref')['query'].count()
         df2[f'Sample_num_reads_{c}']=df2['chrom'].map(sample_num_reads)
 
-    df2['mapQ']=sys.argv[6]
-    df2.to_csv('coverage_stats.csv',index=False)
-    #print(df2)
-    return
+    df2['mapQ']=mapQ
+    return df2
     
 
+def run(depth, sample, counts, multiSegmentFile, alignment, mapQ, output):
+    multiSegment=pd.read_csv(multiSegmentFile)
+    path_dict={}
+    for i,r in multiSegment.iterrows():
+        path_dict.setdefault(r['pathogen'],[]).append(r['reference'])
+    # reverse path_dict
 
-multiSegment=pd.read_csv(sys.argv[4])
-path_dict={}
-for i,r in multiSegment.iterrows():
-    path_dict.setdefault(r['pathogen'],[]).append(r['reference'])
-# reverse path_dict
+    multiSegmentDict={v:k for k,values in path_dict.items() for v in values}
+    df, df3=getData(depth, counts, multiSegmentDict)
 
-multiSegmentDict={v:k for k,values in path_dict.items() for v in values}
-df, df3=getData(sys.argv[1], sys.argv[3], multiSegmentDict)
+    try:
+        print('reading aligntment info')
+        df4=pd.read_csv(alignment)
+        df4['chrom2']=df4['ref'].map(multiSegmentDict)
+        df4['chrom2']=df4['chrom2'].fillna(df4['ref'])
+        df4['ref']=df4['chrom2']
+    except:
+        print('no alignment info')
+        df4=pd.DataFrame()
 
-try:
-    print('reading aligntment info')
-    df4=pd.read_csv(sys.argv[5])
-    df4['chrom2']=df4['ref'].map(multiSegmentDict)
-    df4['chrom2']=df4['chrom2'].fillna(df4['ref'])
-    df4['ref']=df4['chrom2']
-except:
-    print('no alignment info')
-    df4=pd.DataFrame()
+    df=coverageStats(df, df3, df4, sample, mapQ)
+    df.to_csv(output,index=False)
 
-coverageStats(df, df3, df4)
+if __name__ == '__main__':
+    argparser = argparse.ArgumentParser(description='calculate coverage stats')
+    argparser.add_argument('-d', '--depth', help='depth file')  
+    argparser.add_argument('-s', '--sample', help='sample name')
+    argparser.add_argument('-c', '--counts', help='counts file')
+    argparser.add_argument('-m','--multiSegment', help='multiSegment file')
+    argparser.add_argument('-a', '--alignment', help='alignment file')
+    argparser.add_argument('-q', '--mapQ', help='mapQ')
+    argparser.add_argument('-o', '--output', help='output file')
+    args = argparser.parse_args()
+    
+    run(args.depth, args.sample, args.counts,
+        args.multiSegment, args.alignment, args.mapQ, args.output)

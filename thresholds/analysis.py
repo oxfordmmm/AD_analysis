@@ -66,6 +66,10 @@ def getDataFrame(input):
     # remove SARS_coronavirus_Tor2
     df=df[df['chrom']!='SARS_coronavirus_Tor2']
 
+    df['pathogen']=np.where(df['chrom']=='unmapped','unmapped',df['pathogen'])
+    df['pathogen_reduced']=np.where(df['chrom']=='unmapped','unmapped',df['pathogen_reduced'])
+    df['mapQ']=np.where(df['mapQ'].isna(),40,df['mapQ'])
+
     # reduce fluA to one species 
     df=reduce_fluA(df)
     return df

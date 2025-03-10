@@ -1,0 +1,11 @@
+name: seqkit
+channels:
+  - conda-forge
+  - defaults
+  - bioconda
+dependencies:
+  - seqkit
+  - pandas 
+  - matplotlib
+  - numpy
+  - seaborn

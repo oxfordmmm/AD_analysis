@@ -19,6 +19,23 @@ process MASK_REF {
     """
 }
 
+process SEQKIT {
+    conda "$params.envs/seqkit"
+    cpus 3
+    publishDir "seqkitstats", mode: 'copy'
+
+    input:
+    tuple val(barcode), path("${barcode}")
+
+    output:
+    path("${barcode}_seqkit_stats.tsv"), emit: tsv
+
+    script:
+    """
+    seqkit stats -T -b ${barcode} > ${barcode}_seqkit_stats.tsv
+    """
+}
+
 process MINIMAP2 {
     tag {barcode}
     conda "$params.envs/map"
@@ -55,7 +72,8 @@ process FILTER_MAPQ {
     """
     samtools view -b -L bacteria.bed -q $min_mapq ${barcode}.bam > ${barcode}.bact.bam
     samtools view -b -L viruses.bed ${barcode}.bam > ${barcode}.viruses.bam
-    samtools merge ${barcode}.filt.bam ${barcode}.bact.bam ${barcode}.viruses.bam
+    samtools view -f 4 -b ${barcode}.bam > ${barcode}.unmapped.bam
+    samtools merge ${barcode}.filt.bam ${barcode}.bact.bam ${barcode}.viruses.bam ${barcode}.unmapped.bam
     samtools index ${barcode}.filt.bam
     """
 }
@@ -310,6 +328,7 @@ Finds depth of read coverage across reference
 process GENOME_DEPTH {     
     tag {barcode + ' ' + min_mapq}                                                      
     conda "$params.envs/map"
+    errorStrategy 'ignore'
     publishDir "$params.output/depths/${min_mapq}", overwrite: true, mode: 'copy'  
                                                                                 
     input:                                                                      
@@ -324,29 +343,35 @@ process GENOME_DEPTH {
     script:                                                                     
     """                                                                         
     samtools depth -aa ${barcode}.sorted.bam > ${barcode}_depth.tsv                
-    coverageStats.py ${barcode}_depth.tsv  ${barcode} alignment_counts.csv  multi_segment_pathogens.csv alignment_info.csv  ${min_mapq}                  
+    coverageStats.py -d ${barcode}_depth.tsv -s ${barcode} -c alignment_counts.csv \
+        -m multi_segment_pathogens.csv -a alignment_info.csv  -q${min_mapq} \
+        -o ${barcode}_depth.csv
                                                                                 
-    mv coverage_stats.csv ${barcode}_depth.csv                                 
     """                                                  
 }
 
 process DEPTH_SUMMARY {
     conda "$params.envs/map"
-    publishDir "$params.output/depth_summary", mode: 'copy'
+    publishDir "$params.output/depth_summary", mode: 'copy', pattern: "*depth_summary.csv"
+    publishDir "$params.output/pathogen_report", mode: 'copy', pattern: "*pathogen_report.csv"
+
 
     input:
     path("depths???.csv")
+    path("seqkit_stats???.tsv")
     path("meta_pathogens.csv")
     path("pathogens_reduced.csv")
 
     output:
     path("*depth_summary.csv"), emit: summary
+    path("*_pathogen_report.csv"), emit: pathogen_report
     //path("*depth_summary_pass.csv"), emit: pass_summary
 
     script:
     batch = params.batch
     """
-    depth_summary.py -i *.csv -o ${params.batch}_depth_summary.csv -b $batch -mp meta_pathogens.csv -pr pathogens_reduced.csv
+    depth_summary.py -i depths*.csv -t seqkit_stats*.tsv \
+        -o ${params.batch}_depth_summary.csv -b $batch -mp meta_pathogens.csv -pr pathogens_reduced.csv
     """
 }
 

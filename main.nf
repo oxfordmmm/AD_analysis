@@ -13,6 +13,7 @@ include {SISPA_TRIMMING_REPORT} from './processes/primer.nf'  // may need to cha
 // include {COMBINE_CSVS} from './processes/general.nf'
 
 // mapping
+include {SEQKIT} from './processes/map.nf'
 include {MASK_REF} from './processes/map.nf'
 include {MINIMAP2} from './processes/map.nf'
 include {FILTER_MAPQ} from './processes/map.nf'
@@ -104,6 +105,12 @@ workflow sispa {
 
     main:
 
+    // get some basic stats on the reads
+    SEQKIT(reads)
+
+    seqkit_stats=SEQKIT.out.tsv
+        .collect()
+
     // Split reads into batches of n=2500 as SISPA_TRIM_PRIMER is slow when n is large
     reads.splitFastq(by: 2500, file: true, elem: [1])
             .map{ fileTuple -> tuple(fileTuple[0], file(fileTuple[1]).baseName, fileTuple[1])}
@@ -163,7 +170,8 @@ workflow sispa {
 
     // pass to consensus workflow to produce consensus fasta and coverage graphs
     consensus(references, FILTER_SISPA.out.bam, FILTER_SISPA.out.bam_no_ref, FILTER_SISPA.out.alignment_counts, 
-                meta_pathogens, pathogens_reduced, multi_segment_pathogens, FILTER_SISPA.out.alignments)  
+                meta_pathogens, pathogens_reduced, multi_segment_pathogens, FILTER_SISPA.out.alignments,
+                seqkit_stats)  
 }
 
 /*
@@ -181,6 +189,7 @@ workflow consensus {
         pathogens_reduced
         multi_segment_pathogens
         alignments_info
+        seqkit_stats
 
     main:
 
@@ -198,7 +207,7 @@ workflow consensus {
     depths=GENOME_DEPTH.out.csv
         .collect()
 
-    DEPTH_SUMMARY(depths, meta_pathogens, pathogens_reduced)
+    DEPTH_SUMMARY(depths, seqkit_stats, meta_pathogens, pathogens_reduced )
 
     //PLOT_BACTERIAL(GENOME_DEPTH.out.tsv)
 

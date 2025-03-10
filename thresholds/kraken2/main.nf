@@ -72,6 +72,42 @@ process KRAKEN2SERVER {
 
 }
 
+process KRAKEN2{
+    tag {run + ' ' + barcode}
+    publishDir "classifications/${run}/${barcode}/", mode: 'copy', pattern:"*_report.txt"
+    publishDir "reads/${run}/${barcode}/", mode: 'copy', pattern:"*_reads.txt"
+
+    maxForks 6
+    cpus 4
+
+
+    input:
+    tuple val(run), val(barcode), file('in.fastq.gz')
+
+    output:
+    //tuple val(run), val(barcode), path("${run}_${barcode}_read_tax.txt"), emit: read_tax
+    tuple val(run), val(barcode), path("${run}_${barcode}_report.txt"), emit: reports
+    tuple val(run), val(barcode), path("${run}_${barcode}_reads.txt"), emit: txt
+    
+    script:
+    port=params.kraken2server_port
+    host=params.kraken2server_host
+    """
+    kraken2 --db /mnt/nanostore/dbs/k2_eupathdb48_20230407/ \
+        --report ${run}_${barcode}_report.txt \
+        --threads $task.cpus \
+        --report-minimizer-data \
+        --gzip-compressed in.fastq.gz \
+        > ${run}_${barcode}_reads.txt
+
+    """
+    stub:
+    """
+    touch kraken.txt.gz read_tax.txt "${barcode}_${batchID}_report.txt" "${barcode}_${batchID}.txt"
+    """
+
+}
+
 process EXTRACT_RESULTS {
     tag {run + ' ' + barcode}
     publishDir "results/${run}/${barcode}/", mode: 'copy'
@@ -118,17 +154,17 @@ process COMPILE_RESULTS {
 
 
 workflow {
-    fqs=Channel.fromPath("$params.fastqs/*.fastq.gz")
-            .map {it ->
-                tuple(it.simpleName, it.simpleName, it)
-            }
-            .view()
-
-    //fastqs=Channel.fromPath("$params.fastqs/**/*.fastq.gz")
+    //fqs=Channel.fromPath("$params.fastqs/**/*.fastq.gz")
     //        .map {it ->
-    //            tuple(it.getParent().getParent().getParent().getName(),it.getParent().getName(), it)
+    //            tuple(it.getParent(), it.simpleName, it)
     //        }
-    //        .groupTuple(by: [0,1])
+    //        .view()
+
+    fastqs=Channel.fromPath("$params.fastqs/**/*.fastq.gz")
+            .map {it ->
+                tuple(it.getParent().getParent().getParent().getParent().getParent().getName(),it.getParent().getName(), it)
+            }
+            .groupTuple(by: [0,1])
 
     illumina_fastqs=Channel.fromFilePairs("$params.illuminafastqs/*{1,2}.fq.gz")
         .map{it -> tuple(it[0], it[1][0], it[1][1])}
@@ -139,9 +175,11 @@ workflow {
  
     //fqs=JOIN_FQS(illumina_fastqs)
 
-    //fqs=CAT_FASTQS(fastqs)
+    fqs=CAT_FASTQS(fastqs)
 
-    KRAKEN2SERVER(fqs)
+    //KRAKEN2SERVER(fqs)
+
+    KRAKEN2(fqs)
 
     //EXTRACT_RESULTS(KRAKEN2SERVER.out.reports)
 
