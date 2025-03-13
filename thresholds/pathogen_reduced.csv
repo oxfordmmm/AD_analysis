@@ -1,13 +1,17 @@
 ﻿pathogen,pathogen_reduced
 Adeno,Adenovirus
+ADENOVIRUS,Adenovirus
 Corona 229E,Coronavirus 229E
 Corona OC43,Coronavirus OC43
 Coronavirus 229E,Coronavirus 229E
 Coronavirus HKU,Coronavirus HKU
 Coronavirus NL63,Coronavirus NL63
+CORONAVIRUS NL63,Coronavirus NL63
 Coronavirus OC43,Coronavirus OC43
 Enterovirus,Rhinovirus/enterovirus
 Flu A,Influenza A
+INFLUENZA A,Influenza A
+INFLUENZA A SUBTYPE H1,Influenza A/H1
 Flu A/H1-2009,Influenza A/H1-2009
 Flu A/H1,Influenza A/H1
 Flu A/H3,Influenza A/H3
@@ -21,15 +25,20 @@ Metapneumo,Metapneumovirus
 Metapneumovirus,Metapneumovirus
 MERS,MERS
 Paraflu 1,Parainfluenza 1
+PARAINFLUENZA TYPE 1,Parainfluenza 1
 Paraflu 2,Parainfluenza 2
+PARAINFLUENZA TYPE 2,Parainfluenza 2
 Paraflu 3,Parainfluenza 3
+PARAINFLUENZA TYPE 3,Parainfluenza 3
 Paraflu 4,Parainfluenza 4
 Paraflu 4 ,Parainfluenza 4
+PARAINFLUENZA TYPE 4,Parainfluenza 4
 Parainfluenza 3,Parainfluenza 3
 RSV,RSV
 SARS-CoV-2,SARS-CoV-2
 SARS-Cov-2,SARS-CoV-2
 SARSCoV2,SARS-CoV-2
+SARS-COV-2,SARS-CoV-2
 murine_respirovirus,murine_respirovirus
 orthoreovirus_1,orthoreovirus
 orthoreovirus_10,orthoreovirus
@@ -48,6 +57,7 @@ Human_coxsackievirus_A2_strain_Fleetwood,Coxsackievirus
 Poliovirus,Poliovirus
 Bordetella_parapertussis,Bordetella_parapertussis
 Bordetella_pertussis,Bordetella_pertussis
+BORDETELLA PERTUSSIS,Bordetella_pertussis
 Chlamydia_pneumoniae,Chlamydia_pneumoniae
 Mycoplasmoides_pneumoniae,Mycoplasma_pneumoniae
 unmapped,unmapped
