@@ -143,7 +143,7 @@ def getMeta(meta, pathogens, pathogens_reduced,biofire,keep_runs):
     metaDF=df.copy()
     # add Negavtive control where pathogen 1 is empty
     metaDF['pathogen_1']=np.where(metaDF['pathogen_1'].isnull(),'Negative control',metaDF['pathogen_1'])
-    metaDF=metaDF.melt(id_vars=['Run','barcode','sample_name','seq_name','Batch','Negative control','test','spiked', 'MS2_spike', 'IC_virus_spike'],
+    metaDF=metaDF.melt(id_vars=['Run','barcode','sample_name','seq_name','Batch','Negative control','test','spiked', 'MS2_spike', 'IC_virus_spike', 'ct_1', 'ct_2'],
                        value_vars=['pathogen_1','pathogen_2','pathogen_3'],
                        var_name='pathogen number',value_name='pathogen')
     metaDF['pathogen reduced']=metaDF['pathogen'].map(path_dict_reduced)
@@ -194,7 +194,7 @@ def getMeta(meta, pathogens, pathogens_reduced,biofire,keep_runs):
     #keep_runs=['expt10_03072024', 'expt11_150824','expt10A_17072024']
     metaDF=metaDF[metaDF['Run'].isin(keep_runs)]
     
-    cols=['Run','barcode','Batch','seq_name','pathogen reduced','Biofire positive', 'mapQ', 'Negative control','test', 'spiked', 'MS2_spike', 'IC_virus_spike']
+    cols=['Run','barcode','Batch','seq_name','pathogen reduced','Biofire positive', 'mapQ', 'Negative control','test', 'spiked', 'MS2_spike', 'IC_virus_spike', 'ct_1', 'ct_2']
     metaDF=metaDF[cols]
     metaDF.rename(columns={'pathogen reduced':'pathogen'},inplace=True)
 
@@ -885,6 +885,12 @@ def statsmodels_logistic_regression(df, remove_no_data=False):
 
     return res, mod
 
+def add_pass_criteria(df):
+    df['Sample_reads_percent_of_refs_AuG_truc10']=df['Sample_reads_percent_of_refs']/df['AuG_trunc10']
+    df['OR pass']=np.where((df['AuG_trunc10']>0.003) | (df['Cov1_perc']>0.25) | (df['Sample_reads_percent_of_refs']>0.007),True,False)
+    df['AND ratio pass']=np.where(df['Sample_reads_percent_of_refs_AuG_truc10']>0.1,True,False)
+    df['2 reads pass']=np.where(df['sample num reads']>=2,True,False)
+    return df
 
 def main(args):
     df=getDataFrame(args.input)
@@ -907,12 +913,13 @@ def main(args):
                                 right_on=['Run','barcode','pathogen_reduced','mapQ'],
                                 how='left')
     df2=adjust_gold_standard(df2)
-    df2.drop(columns=['pathogen_reduced','run','Sample name','batch','chrom'],inplace=True)
+    df2.drop(columns=['pathogen_reduced','run','Sample name','batch'],inplace=True)
 
     # make box plots
     #box_plots(df2)
 
     df2.fillna(0,inplace=True)
+    df2=add_pass_criteria(df2)
     df2.to_csv('biofire_results_merged.csv', index=False)
 
     # plot ROC curves

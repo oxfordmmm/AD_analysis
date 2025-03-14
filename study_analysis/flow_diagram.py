@@ -217,6 +217,14 @@ print(f'Number of samples passing positive controls X5: {df5.shape[0]}({df5.shap
 #print(f'Percentage of samples passing positive controls of total samples: {df5.shape[0]/total_samples*100:.2f}%')
 #print(f'Percentage of samples passing positive controls of samples passing negative controls: {df5.shape[0]/total_samples_passing_BNC*100:.2f}%')
 
+# print number of samples per test type
+bf=df4[df4['test_type']=='BIOFIRE']
+bf=bf.drop_duplicates(subset=['Run', 'barcode'])
+ac=df4[df4['test_type'].isin(['ALINITY', 'CEPHEID'])]
+ac=ac.drop_duplicates(subset=['Run', 'barcode'])
+total_samples=bf.shape[0]+ac.shape[0]
+print(f'Number of Biofire samples passing controls: \t\t{bf.shape[0]}')
+print(f'Number of Alinity Cepheid samples passsing controls: \t{ac.shape[0]}')
 
 # count the number of samples pathogens detected in gold_standard
 df5g=df4[df4['gold_standard']>=1]
@@ -264,7 +272,7 @@ df8n.drop_duplicates(subset=['Run', 'barcode'], inplace=True, keep='first')
 print(f'Samples negative on all targets assayed nZ: {df8n.shape[0]}')
 
 # count the number of samples where gold_standard is 0
-df9=df4[df4['gold_standard']==0]
+df9=df4[(df4['gold_standard']==0) & (df4['pathogen']!='unmapped')]
 print(f'Total W pathogens not identified from routine laboratory testing: {df9.shape[0]}')
 
 bf=df4[df4['test_type']=='BIOFIRE']
@@ -284,7 +292,7 @@ print(f'Total xS samples passing gold standard: {df10.shape[0]} ({df10.shape[0]/
 #print(f'Percentage of samples passing gold standard: {df10.shape[0]/df8.shape[0]*100:.2f}%')
 
 # Count the number of samples where pass is 0 and gold_standard is 0
-df11=df4[(df4['pass']!='True') & (df4['gold_standard']==0)]
+df11=df4[(df4['pass']!='True') & (df4['gold_standard']==0) & (df4['pathogen']!='unmapped')]
 print(f'Total x samples not identified by cMG xf: {df11.shape[0]} ({df11.shape[0]/df9.shape[0]*100}%)')
 #print(f'Percentage of samples not passing gold standard: {df11.shape[0]/df9.shape[0]*100}%')
 
