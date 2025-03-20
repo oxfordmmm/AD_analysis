@@ -287,7 +287,7 @@ print(f'Total XP pathogens not tested with routine laboratory testing XP: {X_not
 
 # count the number of samples where pass is 1
 #print(df4['pass'].unique()) 
-df10=df4[df4['pass']=='True']
+df10=df4[(df4['pass']=='True') & (df4['gold_standard']>=1)]
 print(f'Total xS samples passing gold standard: {df10.shape[0]} ({df10.shape[0]/df8.shape[0]*100:.0f}%)')
 #print(f'Percentage of samples passing gold standard: {df10.shape[0]/df8.shape[0]*100:.2f}%')
 

@@ -1,0 +1,4 @@
+python3 flow_diagram.py
+python3 upset_pass_plot.py biofire_results_merged_adjusted.csv
+python3 upset_spiked_plot.py biofire_results_merged_adjusted.csv
+python3  plots.py biofire_results_merged_adjusted.csv

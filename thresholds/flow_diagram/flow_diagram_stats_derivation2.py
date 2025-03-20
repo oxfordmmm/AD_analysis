@@ -2,6 +2,13 @@
 import pandas as pd
 import numpy as np
 
+def add_pass_criteria(df):
+    df['Sample_reads_percent_of_refs_AuG_truc10']=df['Sample_reads_percent_of_refs']/df['AuG_trunc10']
+    df['OR pass']=np.where((df['AuG_trunc10']>0.003) | (df['Cov1_perc']>0.25) | (df['Sample_reads_percent_of_refs']>0.007),True,False)
+    df['AND ratio pass']=np.where(df['Sample_reads_percent_of_refs_AuG_truc10']>0.1,True,False)
+    df['2 reads pass']=np.where(df['sample num reads']>=2,True,False)
+    return df
+
 biorifre_organisms=['Adenovirus',
 'Coronavirus 229E',
 'Coronavirus HKU',
@@ -83,6 +90,7 @@ df=df.merge(negative_meta, on=['Run', 'barcode'], how='left')
 df['MS2_spike']=df['spiked']
 df['IC_virus_spike']=df['spiked']
 
+df=add_pass_criteria(df)
 df.to_csv('biofire_results_merged_adjusted.csv', index=False)
 
 # remove negative controls
@@ -314,7 +322,8 @@ print(f'Total XP pathogens not tested with routine laboratory testing XP: {X_not
 
 # count the number of samples where pass is 1
 #print(df4['pass'].unique()) 
-df10=df4[df4['pass']=='True']
+df10=df4[(df4['pass']=='True') & (df4['gold_standard']==1)]
+df10.to_csv('xS_passing_samples.csv', index=False)
 print(f'Total xS samples passing gold standard: {df10.shape[0]} ({df10.shape[0]/df8.shape[0]*100:.0f}%)')
 #print(f'Percentage of samples passing gold standard: {df10.shape[0]/df8.shape[0]*100:.2f}%')
 
