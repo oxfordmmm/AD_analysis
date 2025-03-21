@@ -149,7 +149,7 @@ if len(df_negs_pass)>0:
     df_failed_negs=df_failed_negs[df_failed_negs['test_type'].isin(['BIOFIRE', 'ALINITY', 'CEPHEID'])] 
     print(f'Samples that failed negative controls but passed run/sample controls:Z {df_failed_negs.shape[0]}')
 else:
-    failed_runs=[]
+    failedruns=[]
     print('Batches that failed negative controls but passed run/sample controls:xB 0')
     print('Samples that failed negative controls but passed run/sample controls:Z 0')
 

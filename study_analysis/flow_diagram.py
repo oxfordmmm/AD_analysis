@@ -113,18 +113,28 @@ print(f'Percentage of samples with total sample reads higher than {min_reads:,}:
 
 # count number of samples that failed negative controls
 df_negs=df[(df['MS2_spike']==0) & (df['IC_virus_spike']==0)]
-df_negs_pass=df_negs[(df_negs['pass']==1) | (df_negs['PCs_passed']==1)]
+df_negs_pass=df_negs[(df_negs['pass']=='True') | (df_negs['PCs_passed']==1)]
 if len(df_negs_pass)>0:
-    unique_batches=len(df_negs_pass.drop_duplicates(['Run','Batch']).index)
+    unique_batches=len(df_negs_pass.drop_duplicates(['Run','Batch'], keep='first').index)
     print(f'Batches that failed negative controls but passed run/sample controls:xB {unique_batches}')
-    print('Samples that failed negative controls but passed run/sample controls:Z {df_negs_pass.shape[0]}')
+    failedruns=list(df_negs_pass['Run'].unique())
+    df_failed_negs=df[df['Run'].isin(failedruns)]
+    df_failed_negs=df_failed_negs.copy()
+    df_failed_negs.drop_duplicates(subset=['Run', 'barcode'], keep='first', inplace=True)
+    df_failed_negs=df_failed_negs[df_failed_negs['test_type'].isin(['BIOFIRE', 'ALINITY', 'CEPHEID'])] 
+    print(f'Samples that failed negative controls but passed run/sample controls:Z {df_failed_negs.shape[0]}')
 else:
+    failedruns=[]
     print('Batches that failed negative controls but passed run/sample controls:xB 0')
     print('Samples that failed negative controls but passed run/sample controls:Z 0')
 
 
 # samples that passed  negative controls passed
-df2=df.copy()
+if len(failedruns)>0:
+    df2=df[~df['Run'].isin(failedruns)]
+    df2=df2.copy()
+else:
+    df2=df.copy()
 
 bf=df2[df2['test_type']=='BIOFIRE']
 bf=bf.drop_duplicates(subset=['Run', 'barcode'])
