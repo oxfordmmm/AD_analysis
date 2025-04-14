@@ -23,6 +23,7 @@ Influenza A,Influenza A
 MS2,MS2
 Metapneumo,Metapneumovirus
 Metapneumovirus,Metapneumovirus
+METAPNEUMOVIRUS,Metapneumovirus
 MERS,MERS
 Paraflu 1,Parainfluenza 1
 PARAINFLUENZA TYPE 1,Parainfluenza 1
@@ -38,6 +39,7 @@ RSV,RSV
 SARS-CoV-2,SARS-CoV-2
 SARS-Cov-2,SARS-CoV-2
 SARSCoV2,SARS-CoV-2
+SARS-COV-2,SARS-CoV-2
 SARS-COV-2,SARS-CoV-2
 murine_respirovirus,murine_respirovirus
 orthoreovirus_1,orthoreovirus

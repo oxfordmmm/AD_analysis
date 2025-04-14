@@ -66,9 +66,13 @@ Metapneumo,Human_metapneumovirus_isolate_00-1
 Metapneumovirus,Human_metapneumovirus_isolate_00-1
 MERS,NC_019843.3
 Paraflu 1,Human_parainfluenza_virus_1
+PARAINFLUENZA TYPE 1,Human_parainfluenza_virus_1
 Paraflu 2,Human_rubulavirus_2
+PARAINFLUENZA TYPE 2,Human_rubulavirus_2
 Paraflu 3,Human_parainfluenza_virus_3
+PARAINFLUENZA TYPE 3,Human_parainfluenza_virus_3
 Paraflu 4,Human_parainfluenza_virus_4a_viral_cRNA
+PARAINFLUENZA TYPE 4,Human_parainfluenza_virus_4a_viral_cRNA
 Paraflu 4 ,Human_parainfluenza_virus_4a_viral_cRNA
 Parainfluenza 3,Human_parainfluenza_virus_3
 RSV,RSVB_Human_Respiratory_syncytial_virus_9320
@@ -76,6 +80,7 @@ RSV,RSVA_Human_respiratory_syncytial_virus_S2
 SARS-CoV-2,SARS-CoV-2
 SARS-Cov-2,SARS-CoV-2
 SARSCoV2,SARS-CoV-2
+SARS-COV-2,SARS-CoV-2
 murine_respirovirus,murine_respirovirus
 zika,zika
 MS2,MS2

@@ -112,8 +112,12 @@ print(f'Number of samples with total sample reads higher than {min_reads:,} X2: 
 print(f'Percentage of samples with total sample reads higher than {min_reads:,}: {dfSunique.shape[0]/total_samples*100:.2f}%')
 
 # count number of samples that failed negative controls
+# spike negs
 df_negs=df[(df['MS2_spike']==0) & (df['IC_virus_spike']==0)]
 df_negs_pass=df_negs[(df_negs['pass']=='True') | (df_negs['PCs_passed']==1)]
+# clinical negs
+df_negs_clinical=df[(df['Negative control']==1) & (df['pass']=='True')]
+#df_negs_pass=pd.concat([df_negs_pass, df_negs_clinical], ignore_index=True)
 if len(df_negs_pass)>0:
     unique_batches=len(df_negs_pass.drop_duplicates(['Run','Batch'], keep='first').index)
     print(f'Batches that failed negative controls but passed run/sample controls:xB {unique_batches}')
@@ -304,6 +308,7 @@ print(f'Total xS samples passing gold standard: {df10.shape[0]} ({df10.shape[0]/
 # Count the number of samples where pass is 0 and gold_standard is 0
 df11=df4[(df4['pass']!='True') & (df4['gold_standard']==0) & (df4['pathogen']!='unmapped')]
 print(f'Total x samples not identified by cMG xf: {df11.shape[0]} ({df11.shape[0]/df9.shape[0]*100}%)')
+df11.to_csv('xf.csv', index=False)
 #print(f'Percentage of samples not passing gold standard: {df11.shape[0]/df9.shape[0]*100}%')
 
 # count number of additional yield

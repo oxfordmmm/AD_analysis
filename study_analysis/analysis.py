@@ -37,6 +37,7 @@ positive_controls=['MS2',
 def reduce_fluA(df):
     df2=df.copy()
     df2=df[df['pathogen_reduced'].isin(['Influenza A/H1-2009','Influenza A/H3','Influenza A/H1'])]
+    df2=df2.copy()
     df2.sort_values(by=['sample num reads','Cov1_perc'],ascending=False, inplace=True)
     df2.drop_duplicates(subset=['run','barcode'],inplace=True, keep='first')
     df2['pathogen']='Influenza A'
@@ -115,6 +116,11 @@ def getMeta(meta, pathogens, pathogens_reduced,biofire,keep_runs):
 
     # reverse path_dict
     path_dict_rev={v:k for k,values in path_dict.items() for v in values}
+
+    # read pathogenes reduced and create a dictionary with pathogen as key and pathogen_reduced as value
+    df3=pd.read_csv(pathogens_reduced)
+    df3.set_index('pathogen',inplace=True)
+    path_dict_reduced=df3.to_dict()['pathogen_reduced']
     
     metaDict={}
     df['Run']=df['run_name']
@@ -124,17 +130,29 @@ def getMeta(meta, pathogens, pathogens_reduced,biofire,keep_runs):
     df=df[df['Run'].isin(keep_runs)]
     for i,r in df.iterrows():
         runBar=r['Run']+'_'+str(r['barcode'])
-        if r['pathogen_1'] in path_dict:
-            metaDict.setdefault(runBar,[]).extend(path_dict[r['pathogen_1']])
-        if r['pathogen_2'] in path_dict:
-            metaDict[runBar].extend(path_dict[r['pathogen_2']])
-        if r['pathogen_3'] in path_dict:
-            metaDict[runBar].extend(path_dict[r['pathogen_3']])
+        if r['pathogen_1'] in path_dict_reduced:
+            metaDict.setdefault(runBar,[]).extend(path_dict_reduced[r['pathogen_1']])
+        else:
+            if pd.isnull(r['pathogen_1']) or r['pathogen_1']=='NEGATIVE':
+                pass
+            else:
+                raise ValueError(f"Pathogen {r['pathogen_1']} not found in path_dict")
+        if r['pathogen_2'] in path_dict_reduced:
+            metaDict[runBar].extend(path_dict_reduced[r['pathogen_2']])
+        else:
+            if pd.isnull(r['pathogen_2']):
+                pass
+            else:
+                raise ValueError(f"Pathogen {r['pathogen_2']} not found in path_dict")
+        if r['pathogen_3'] in path_dict_reduced:
+            metaDict[runBar].extend(path_dict_reduced[r['pathogen_3']])
+        else:
+            if pd.isnull(r['pathogen_3']):
+                pass
+            else:
+                raise ValueError(f"Pathogen {r['pathogen_3']} not found in path_dict")
 
-    # read pathogenes reduced and create a dictionary with pathogen as key and pathogen_reduced as value
-    df3=pd.read_csv(pathogens_reduced)
-    df3.set_index('pathogen',inplace=True)
-    path_dict_reduced=df3.to_dict()['pathogen_reduced']
+
 
     ## count number of pathogens in the test to caluculate TN
     num_pathogens=len(df3['pathogen_reduced'].unique())
