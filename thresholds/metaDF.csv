@@ -1,1607 +1,2787 @@
-Run,barcode,pathogen,Biofire positive
-expt10A_17072024,1,Adenovirus,0
-expt10A_17072024,1,Bordetella_parapertussis,0
-expt10A_17072024,1,Bordetella_pertussis,0
-expt10A_17072024,1,Chlamydia_pneumoniae,0
-expt10A_17072024,1,Coronavirus 229E,0
-expt10A_17072024,1,Coronavirus HKU,0
-expt10A_17072024,1,Coronavirus NL63,0
-expt10A_17072024,1,Coronavirus OC43,0
-expt10A_17072024,1,Influenza A,0
-expt10A_17072024,1,Influenza A/H1,0
-expt10A_17072024,1,Influenza A/H1-2009,0
-expt10A_17072024,1,Influenza A/H3,0
-expt10A_17072024,1,Influenza B,0
-expt10A_17072024,1,Metapneumovirus,0
-expt10A_17072024,1,Mycoplasma_pneumoniae,0
-expt10A_17072024,1,Parainfluenza 1,0
-expt10A_17072024,1,Parainfluenza 2,0
-expt10A_17072024,1,Parainfluenza 3,0
-expt10A_17072024,1,Parainfluenza 4,0
-expt10A_17072024,1,RSV,1
-expt10A_17072024,1,Rhinovirus/enterovirus,0
-expt10A_17072024,1,SARS-CoV-2,0
-expt10A_17072024,2,Adenovirus,0
-expt10A_17072024,2,Bordetella_parapertussis,0
-expt10A_17072024,2,Bordetella_pertussis,0
-expt10A_17072024,2,Chlamydia_pneumoniae,0
-expt10A_17072024,2,Coronavirus 229E,0
-expt10A_17072024,2,Coronavirus HKU,0
-expt10A_17072024,2,Coronavirus NL63,0
-expt10A_17072024,2,Coronavirus OC43,0
-expt10A_17072024,2,Influenza A,0
-expt10A_17072024,2,Influenza A/H1,0
-expt10A_17072024,2,Influenza A/H1-2009,0
-expt10A_17072024,2,Influenza A/H3,0
-expt10A_17072024,2,Influenza B,0
-expt10A_17072024,2,Metapneumovirus,0
-expt10A_17072024,2,Mycoplasma_pneumoniae,0
-expt10A_17072024,2,Parainfluenza 1,0
-expt10A_17072024,2,Parainfluenza 2,0
-expt10A_17072024,2,Parainfluenza 3,0
-expt10A_17072024,2,Parainfluenza 4,0
-expt10A_17072024,2,RSV,1
-expt10A_17072024,2,Rhinovirus/enterovirus,0
-expt10A_17072024,2,SARS-CoV-2,0
-expt10A_17072024,3,Adenovirus,0
-expt10A_17072024,3,Bordetella_parapertussis,0
-expt10A_17072024,3,Bordetella_pertussis,0
-expt10A_17072024,3,Chlamydia_pneumoniae,0
-expt10A_17072024,3,Coronavirus 229E,0
-expt10A_17072024,3,Coronavirus HKU,0
-expt10A_17072024,3,Coronavirus NL63,0
-expt10A_17072024,3,Coronavirus OC43,0
-expt10A_17072024,3,Influenza A,0
-expt10A_17072024,3,Influenza A/H1,0
-expt10A_17072024,3,Influenza A/H1-2009,0
-expt10A_17072024,3,Influenza A/H3,0
-expt10A_17072024,3,Influenza B,0
-expt10A_17072024,3,Metapneumovirus,0
-expt10A_17072024,3,Mycoplasma_pneumoniae,0
-expt10A_17072024,3,Parainfluenza 1,0
-expt10A_17072024,3,Parainfluenza 2,0
-expt10A_17072024,3,Parainfluenza 3,0
-expt10A_17072024,3,Parainfluenza 4,0
-expt10A_17072024,3,RSV,0
-expt10A_17072024,3,Rhinovirus/enterovirus,0
-expt10A_17072024,3,SARS-CoV-2,1
-expt10A_17072024,4,Adenovirus,0
-expt10A_17072024,4,Bordetella_parapertussis,0
-expt10A_17072024,4,Bordetella_pertussis,0
-expt10A_17072024,4,Chlamydia_pneumoniae,0
-expt10A_17072024,4,Coronavirus 229E,0
-expt10A_17072024,4,Coronavirus HKU,0
-expt10A_17072024,4,Coronavirus NL63,0
-expt10A_17072024,4,Coronavirus OC43,0
-expt10A_17072024,4,Influenza A,0
-expt10A_17072024,4,Influenza A/H1,0
-expt10A_17072024,4,Influenza A/H1-2009,0
-expt10A_17072024,4,Influenza A/H3,0
-expt10A_17072024,4,Influenza B,0
-expt10A_17072024,4,Metapneumovirus,0
-expt10A_17072024,4,Mycoplasma_pneumoniae,0
-expt10A_17072024,4,Parainfluenza 1,0
-expt10A_17072024,4,Parainfluenza 2,0
-expt10A_17072024,4,Parainfluenza 3,0
-expt10A_17072024,4,Parainfluenza 4,0
-expt10A_17072024,4,RSV,0
-expt10A_17072024,4,Rhinovirus/enterovirus,0
-expt10A_17072024,4,SARS-CoV-2,1
-expt10A_17072024,5,Adenovirus,0
-expt10A_17072024,5,Bordetella_parapertussis,0
-expt10A_17072024,5,Bordetella_pertussis,0
-expt10A_17072024,5,Chlamydia_pneumoniae,0
-expt10A_17072024,5,Coronavirus 229E,0
-expt10A_17072024,5,Coronavirus HKU,0
-expt10A_17072024,5,Coronavirus NL63,0
-expt10A_17072024,5,Coronavirus OC43,0
-expt10A_17072024,5,Influenza A,0
-expt10A_17072024,5,Influenza A/H1,0
-expt10A_17072024,5,Influenza A/H1-2009,0
-expt10A_17072024,5,Influenza A/H3,0
-expt10A_17072024,5,Influenza B,0
-expt10A_17072024,5,Metapneumovirus,0
-expt10A_17072024,5,Mycoplasma_pneumoniae,0
-expt10A_17072024,5,Parainfluenza 2,1
-expt10A_17072024,5,Parainfluenza 1,0
-expt10A_17072024,5,Parainfluenza 3,0
-expt10A_17072024,5,Parainfluenza 4,0
-expt10A_17072024,5,RSV,0
-expt10A_17072024,5,Rhinovirus/enterovirus,0
-expt10A_17072024,5,SARS-CoV-2,0
-expt10A_17072024,6,Adenovirus,0
-expt10A_17072024,6,Bordetella_parapertussis,0
-expt10A_17072024,6,Bordetella_pertussis,0
-expt10A_17072024,6,Chlamydia_pneumoniae,0
-expt10A_17072024,6,Coronavirus 229E,0
-expt10A_17072024,6,Coronavirus HKU,0
-expt10A_17072024,6,Coronavirus NL63,0
-expt10A_17072024,6,Coronavirus OC43,0
-expt10A_17072024,6,Influenza A,0
-expt10A_17072024,6,Influenza A/H1,0
-expt10A_17072024,6,Influenza A/H1-2009,0
-expt10A_17072024,6,Influenza A/H3,0
-expt10A_17072024,6,Influenza B,0
-expt10A_17072024,6,Metapneumovirus,0
-expt10A_17072024,6,Mycoplasma_pneumoniae,0
-expt10A_17072024,6,Parainfluenza 2,1
-expt10A_17072024,6,Parainfluenza 1,0
-expt10A_17072024,6,Parainfluenza 3,0
-expt10A_17072024,6,Parainfluenza 4,0
-expt10A_17072024,6,RSV,0
-expt10A_17072024,6,Rhinovirus/enterovirus,0
-expt10A_17072024,6,SARS-CoV-2,0
-expt10A_17072024,7,Adenovirus,0
-expt10A_17072024,7,Bordetella_parapertussis,0
-expt10A_17072024,7,Bordetella_pertussis,0
-expt10A_17072024,7,Chlamydia_pneumoniae,0
-expt10A_17072024,7,Coronavirus 229E,0
-expt10A_17072024,7,Coronavirus HKU,0
-expt10A_17072024,7,Coronavirus NL63,0
-expt10A_17072024,7,Coronavirus OC43,0
-expt10A_17072024,7,Influenza A,0
-expt10A_17072024,7,Influenza A/H1,0
-expt10A_17072024,7,Influenza A/H1-2009,0
-expt10A_17072024,7,Influenza A/H3,0
-expt10A_17072024,7,Influenza B,0
-expt10A_17072024,7,Metapneumovirus,0
-expt10A_17072024,7,Mycoplasma_pneumoniae,0
-expt10A_17072024,7,Parainfluenza 3,1
-expt10A_17072024,7,Parainfluenza 1,0
-expt10A_17072024,7,Parainfluenza 2,0
-expt10A_17072024,7,Parainfluenza 4,0
-expt10A_17072024,7,RSV,0
-expt10A_17072024,7,Rhinovirus/enterovirus,0
-expt10A_17072024,7,SARS-CoV-2,0
-expt10A_17072024,8,Adenovirus,0
-expt10A_17072024,8,Bordetella_parapertussis,0
-expt10A_17072024,8,Bordetella_pertussis,0
-expt10A_17072024,8,Chlamydia_pneumoniae,0
-expt10A_17072024,8,Coronavirus 229E,0
-expt10A_17072024,8,Coronavirus HKU,0
-expt10A_17072024,8,Coronavirus NL63,0
-expt10A_17072024,8,Coronavirus OC43,0
-expt10A_17072024,8,Influenza A,0
-expt10A_17072024,8,Influenza A/H1,0
-expt10A_17072024,8,Influenza A/H1-2009,0
-expt10A_17072024,8,Influenza A/H3,0
-expt10A_17072024,8,Influenza B,0
-expt10A_17072024,8,Metapneumovirus,0
-expt10A_17072024,8,Mycoplasma_pneumoniae,0
-expt10A_17072024,8,Parainfluenza 3,1
-expt10A_17072024,8,Parainfluenza 1,0
-expt10A_17072024,8,Parainfluenza 2,0
-expt10A_17072024,8,Parainfluenza 4,0
-expt10A_17072024,8,RSV,0
-expt10A_17072024,8,Rhinovirus/enterovirus,0
-expt10A_17072024,8,SARS-CoV-2,0
-expt10A_17072024,9,Adenovirus,0
-expt10A_17072024,9,Bordetella_parapertussis,0
-expt10A_17072024,9,Bordetella_pertussis,0
-expt10A_17072024,9,Chlamydia_pneumoniae,0
-expt10A_17072024,9,Coronavirus 229E,0
-expt10A_17072024,9,Coronavirus HKU,0
-expt10A_17072024,9,Coronavirus NL63,0
-expt10A_17072024,9,Coronavirus OC43,0
-expt10A_17072024,9,Influenza A,0
-expt10A_17072024,9,Influenza A/H1,0
-expt10A_17072024,9,Influenza A/H1-2009,0
-expt10A_17072024,9,Influenza A/H3,0
-expt10A_17072024,9,Influenza B,0
-expt10A_17072024,9,Metapneumovirus,0
-expt10A_17072024,9,Mycoplasma_pneumoniae,0
-expt10A_17072024,9,Parainfluenza 1,0
-expt10A_17072024,9,Parainfluenza 2,0
-expt10A_17072024,9,Parainfluenza 3,0
-expt10A_17072024,9,Parainfluenza 4,0
-expt10A_17072024,9,RSV,1
-expt10A_17072024,9,Rhinovirus/enterovirus,0
-expt10A_17072024,9,SARS-CoV-2,0
-expt10A_17072024,10,Adenovirus,0
-expt10A_17072024,10,Bordetella_parapertussis,0
-expt10A_17072024,10,Bordetella_pertussis,0
-expt10A_17072024,10,Chlamydia_pneumoniae,0
-expt10A_17072024,10,Coronavirus 229E,0
-expt10A_17072024,10,Coronavirus HKU,0
-expt10A_17072024,10,Coronavirus NL63,0
-expt10A_17072024,10,Coronavirus OC43,0
-expt10A_17072024,10,Influenza A,0
-expt10A_17072024,10,Influenza A/H1,0
-expt10A_17072024,10,Influenza A/H1-2009,0
-expt10A_17072024,10,Influenza A/H3,0
-expt10A_17072024,10,Influenza B,0
-expt10A_17072024,10,Metapneumovirus,0
-expt10A_17072024,10,Mycoplasma_pneumoniae,0
-expt10A_17072024,10,Parainfluenza 1,0
-expt10A_17072024,10,Parainfluenza 2,0
-expt10A_17072024,10,Parainfluenza 3,0
-expt10A_17072024,10,Parainfluenza 4,0
-expt10A_17072024,10,RSV,1
-expt10A_17072024,10,Rhinovirus/enterovirus,0
-expt10A_17072024,10,SARS-CoV-2,0
-expt10A_17072024,11,Adenovirus,0
-expt10A_17072024,11,Bordetella_parapertussis,0
-expt10A_17072024,11,Bordetella_pertussis,0
-expt10A_17072024,11,Chlamydia_pneumoniae,0
-expt10A_17072024,11,Coronavirus 229E,0
-expt10A_17072024,11,Coronavirus HKU,0
-expt10A_17072024,11,Coronavirus NL63,0
-expt10A_17072024,11,Coronavirus OC43,0
-expt10A_17072024,11,Influenza A,0
-expt10A_17072024,11,Influenza A/H1,0
-expt10A_17072024,11,Influenza A/H1-2009,0
-expt10A_17072024,11,Influenza A/H3,0
-expt10A_17072024,11,Influenza B,0
-expt10A_17072024,11,Metapneumovirus,0
-expt10A_17072024,11,Mycoplasma_pneumoniae,0
-expt10A_17072024,11,Parainfluenza 1,0
-expt10A_17072024,11,Parainfluenza 2,0
-expt10A_17072024,11,Parainfluenza 3,0
-expt10A_17072024,11,Parainfluenza 4,0
-expt10A_17072024,11,RSV,1
-expt10A_17072024,11,Rhinovirus/enterovirus,0
-expt10A_17072024,11,SARS-CoV-2,0
-expt10A_17072024,12,Adenovirus,0
-expt10A_17072024,12,Bordetella_parapertussis,0
-expt10A_17072024,12,Bordetella_pertussis,0
-expt10A_17072024,12,Chlamydia_pneumoniae,0
-expt10A_17072024,12,Coronavirus 229E,0
-expt10A_17072024,12,Coronavirus HKU,0
-expt10A_17072024,12,Coronavirus NL63,0
-expt10A_17072024,12,Coronavirus OC43,0
-expt10A_17072024,12,Influenza A,0
-expt10A_17072024,12,Influenza A/H1,0
-expt10A_17072024,12,Influenza A/H1-2009,0
-expt10A_17072024,12,Influenza A/H3,0
-expt10A_17072024,12,Influenza B,0
-expt10A_17072024,12,Metapneumovirus,0
-expt10A_17072024,12,Mycoplasma_pneumoniae,0
-expt10A_17072024,12,Parainfluenza 1,0
-expt10A_17072024,12,Parainfluenza 2,0
-expt10A_17072024,12,Parainfluenza 3,0
-expt10A_17072024,12,Parainfluenza 4,0
-expt10A_17072024,12,RSV,1
-expt10A_17072024,12,Rhinovirus/enterovirus,0
-expt10A_17072024,12,SARS-CoV-2,0
-expt10A_17072024,13,Adenovirus,0
-expt10A_17072024,13,Bordetella_parapertussis,0
-expt10A_17072024,13,Bordetella_pertussis,0
-expt10A_17072024,13,Chlamydia_pneumoniae,0
-expt10A_17072024,13,Coronavirus 229E,0
-expt10A_17072024,13,Coronavirus HKU,0
-expt10A_17072024,13,Coronavirus NL63,0
-expt10A_17072024,13,Coronavirus OC43,0
-expt10A_17072024,13,Influenza A,1
-expt10A_17072024,13,Influenza A/H1-2009,1
-expt10A_17072024,13,Influenza A/H1,0
-expt10A_17072024,13,Influenza A/H3,0
-expt10A_17072024,13,Influenza B,0
-expt10A_17072024,13,Metapneumovirus,0
-expt10A_17072024,13,Mycoplasma_pneumoniae,0
-expt10A_17072024,13,Parainfluenza 1,0
-expt10A_17072024,13,Parainfluenza 2,0
-expt10A_17072024,13,Parainfluenza 3,0
-expt10A_17072024,13,Parainfluenza 4,0
-expt10A_17072024,13,RSV,0
-expt10A_17072024,13,Rhinovirus/enterovirus,0
-expt10A_17072024,13,SARS-CoV-2,0
-expt10A_17072024,14,Adenovirus,0
-expt10A_17072024,14,Bordetella_parapertussis,0
-expt10A_17072024,14,Bordetella_pertussis,0
-expt10A_17072024,14,Chlamydia_pneumoniae,0
-expt10A_17072024,14,Coronavirus 229E,0
-expt10A_17072024,14,Coronavirus HKU,0
-expt10A_17072024,14,Coronavirus NL63,0
-expt10A_17072024,14,Coronavirus OC43,0
-expt10A_17072024,14,Influenza A,1
-expt10A_17072024,14,Influenza A/H1-2009,1
-expt10A_17072024,14,Influenza A/H1,0
-expt10A_17072024,14,Influenza A/H3,0
-expt10A_17072024,14,Influenza B,0
-expt10A_17072024,14,Metapneumovirus,0
-expt10A_17072024,14,Mycoplasma_pneumoniae,0
-expt10A_17072024,14,Parainfluenza 1,0
-expt10A_17072024,14,Parainfluenza 2,0
-expt10A_17072024,14,Parainfluenza 3,0
-expt10A_17072024,14,Parainfluenza 4,0
-expt10A_17072024,14,RSV,0
-expt10A_17072024,14,Rhinovirus/enterovirus,0
-expt10A_17072024,14,SARS-CoV-2,0
-expt10A_17072024,15,Adenovirus,0
-expt10A_17072024,15,Bordetella_parapertussis,0
-expt10A_17072024,15,Bordetella_pertussis,0
-expt10A_17072024,15,Chlamydia_pneumoniae,0
-expt10A_17072024,15,Coronavirus 229E,0
-expt10A_17072024,15,Coronavirus HKU,0
-expt10A_17072024,15,Coronavirus NL63,0
-expt10A_17072024,15,Coronavirus OC43,0
-expt10A_17072024,15,Influenza A,1
-expt10A_17072024,15,Influenza A/H1-2009,1
-expt10A_17072024,15,Influenza A/H1,0
-expt10A_17072024,15,Influenza A/H3,0
-expt10A_17072024,15,Influenza B,0
-expt10A_17072024,15,Metapneumovirus,0
-expt10A_17072024,15,Mycoplasma_pneumoniae,0
-expt10A_17072024,15,Parainfluenza 1,0
-expt10A_17072024,15,Parainfluenza 2,0
-expt10A_17072024,15,Parainfluenza 3,0
-expt10A_17072024,15,Parainfluenza 4,0
-expt10A_17072024,15,RSV,0
-expt10A_17072024,15,Rhinovirus/enterovirus,0
-expt10A_17072024,15,SARS-CoV-2,0
-expt10A_17072024,16,Adenovirus,0
-expt10A_17072024,16,Bordetella_parapertussis,0
-expt10A_17072024,16,Bordetella_pertussis,0
-expt10A_17072024,16,Chlamydia_pneumoniae,0
-expt10A_17072024,16,Coronavirus 229E,0
-expt10A_17072024,16,Coronavirus HKU,0
-expt10A_17072024,16,Coronavirus NL63,0
-expt10A_17072024,16,Coronavirus OC43,0
-expt10A_17072024,16,Influenza A,1
-expt10A_17072024,16,Influenza A/H1-2009,1
-expt10A_17072024,16,Influenza A/H1,0
-expt10A_17072024,16,Influenza A/H3,0
-expt10A_17072024,16,Influenza B,0
-expt10A_17072024,16,Metapneumovirus,0
-expt10A_17072024,16,Mycoplasma_pneumoniae,0
-expt10A_17072024,16,Parainfluenza 1,0
-expt10A_17072024,16,Parainfluenza 2,0
-expt10A_17072024,16,Parainfluenza 3,0
-expt10A_17072024,16,Parainfluenza 4,0
-expt10A_17072024,16,RSV,0
-expt10A_17072024,16,Rhinovirus/enterovirus,0
-expt10A_17072024,16,SARS-CoV-2,0
-expt10A_17072024,17,Adenovirus,0
-expt10A_17072024,17,Bordetella_parapertussis,0
-expt10A_17072024,17,Bordetella_pertussis,0
-expt10A_17072024,17,Chlamydia_pneumoniae,0
-expt10A_17072024,17,Coronavirus 229E,0
-expt10A_17072024,17,Coronavirus HKU,0
-expt10A_17072024,17,Coronavirus NL63,0
-expt10A_17072024,17,Coronavirus OC43,0
-expt10A_17072024,17,Influenza A,0
-expt10A_17072024,17,Influenza A/H1,0
-expt10A_17072024,17,Influenza A/H1-2009,0
-expt10A_17072024,17,Influenza A/H3,0
-expt10A_17072024,17,Influenza B,0
-expt10A_17072024,17,Metapneumovirus,0
-expt10A_17072024,17,Mycoplasma_pneumoniae,0
-expt10A_17072024,17,Parainfluenza 3,1
-expt10A_17072024,17,Parainfluenza 1,0
-expt10A_17072024,17,Parainfluenza 2,0
-expt10A_17072024,17,Parainfluenza 4,0
-expt10A_17072024,17,RSV,0
-expt10A_17072024,17,Rhinovirus/enterovirus,0
-expt10A_17072024,17,SARS-CoV-2,0
-expt10A_17072024,18,Adenovirus,0
-expt10A_17072024,18,Bordetella_parapertussis,0
-expt10A_17072024,18,Bordetella_pertussis,0
-expt10A_17072024,18,Chlamydia_pneumoniae,0
-expt10A_17072024,18,Coronavirus 229E,0
-expt10A_17072024,18,Coronavirus HKU,0
-expt10A_17072024,18,Coronavirus NL63,0
-expt10A_17072024,18,Coronavirus OC43,0
-expt10A_17072024,18,Influenza A,0
-expt10A_17072024,18,Influenza A/H1,0
-expt10A_17072024,18,Influenza A/H1-2009,0
-expt10A_17072024,18,Influenza A/H3,0
-expt10A_17072024,18,Influenza B,0
-expt10A_17072024,18,Metapneumovirus,0
-expt10A_17072024,18,Mycoplasma_pneumoniae,0
-expt10A_17072024,18,Parainfluenza 3,1
-expt10A_17072024,18,Parainfluenza 1,0
-expt10A_17072024,18,Parainfluenza 2,0
-expt10A_17072024,18,Parainfluenza 4,0
-expt10A_17072024,18,RSV,0
-expt10A_17072024,18,Rhinovirus/enterovirus,0
-expt10A_17072024,18,SARS-CoV-2,0
-expt10A_17072024,19,Adenovirus,0
-expt10A_17072024,19,Bordetella_parapertussis,0
-expt10A_17072024,19,Bordetella_pertussis,0
-expt10A_17072024,19,Chlamydia_pneumoniae,0
-expt10A_17072024,19,Coronavirus 229E,0
-expt10A_17072024,19,Coronavirus HKU,0
-expt10A_17072024,19,Coronavirus NL63,0
-expt10A_17072024,19,Coronavirus OC43,0
-expt10A_17072024,19,Rhinovirus/enterovirus,1
-expt10A_17072024,19,Influenza A,0
-expt10A_17072024,19,Influenza A/H1,0
-expt10A_17072024,19,Influenza A/H1-2009,0
-expt10A_17072024,19,Influenza A/H3,0
-expt10A_17072024,19,Influenza B,0
-expt10A_17072024,19,Metapneumovirus,0
-expt10A_17072024,19,Mycoplasma_pneumoniae,0
-expt10A_17072024,19,Parainfluenza 3,1
-expt10A_17072024,19,Parainfluenza 1,0
-expt10A_17072024,19,Parainfluenza 2,0
-expt10A_17072024,19,Parainfluenza 4,0
-expt10A_17072024,19,RSV,0
-expt10A_17072024,19,SARS-CoV-2,0
-expt10A_17072024,20,Adenovirus,0
-expt10A_17072024,20,Bordetella_parapertussis,0
-expt10A_17072024,20,Bordetella_pertussis,0
-expt10A_17072024,20,Chlamydia_pneumoniae,0
-expt10A_17072024,20,Coronavirus 229E,0
-expt10A_17072024,20,Coronavirus HKU,0
-expt10A_17072024,20,Coronavirus NL63,0
-expt10A_17072024,20,Coronavirus OC43,0
-expt10A_17072024,20,Rhinovirus/enterovirus,1
-expt10A_17072024,20,Influenza A,0
-expt10A_17072024,20,Influenza A/H1,0
-expt10A_17072024,20,Influenza A/H1-2009,0
-expt10A_17072024,20,Influenza A/H3,0
-expt10A_17072024,20,Influenza B,0
-expt10A_17072024,20,Metapneumovirus,0
-expt10A_17072024,20,Mycoplasma_pneumoniae,0
-expt10A_17072024,20,Parainfluenza 3,1
-expt10A_17072024,20,Parainfluenza 1,0
-expt10A_17072024,20,Parainfluenza 2,0
-expt10A_17072024,20,Parainfluenza 4,0
-expt10A_17072024,20,RSV,0
-expt10A_17072024,20,SARS-CoV-2,0
-expt10A_17072024,21,Adenovirus,0
-expt10A_17072024,21,Bordetella_parapertussis,0
-expt10A_17072024,21,Bordetella_pertussis,0
-expt10A_17072024,21,Chlamydia_pneumoniae,0
-expt10A_17072024,21,Coronavirus 229E,0
-expt10A_17072024,21,Coronavirus HKU,0
-expt10A_17072024,21,Coronavirus NL63,0
-expt10A_17072024,21,Coronavirus OC43,0
-expt10A_17072024,21,Influenza A,0
-expt10A_17072024,21,Influenza A/H1,0
-expt10A_17072024,21,Influenza A/H1-2009,0
-expt10A_17072024,21,Influenza A/H3,0
-expt10A_17072024,21,Influenza B,0
-expt10A_17072024,21,Metapneumovirus,0
-expt10A_17072024,21,Mycoplasma_pneumoniae,0
-expt10A_17072024,21,Parainfluenza 1,0
-expt10A_17072024,21,Parainfluenza 2,0
-expt10A_17072024,21,Parainfluenza 3,0
-expt10A_17072024,21,Parainfluenza 4,0
-expt10A_17072024,21,RSV,0
-expt10A_17072024,21,Rhinovirus/enterovirus,0
-expt10A_17072024,21,SARS-CoV-2,0
-expt10A_17072024,22,Adenovirus,0
-expt10A_17072024,22,Bordetella_parapertussis,0
-expt10A_17072024,22,Bordetella_pertussis,0
-expt10A_17072024,22,Chlamydia_pneumoniae,0
-expt10A_17072024,22,Coronavirus 229E,0
-expt10A_17072024,22,Coronavirus HKU,0
-expt10A_17072024,22,Coronavirus NL63,0
-expt10A_17072024,22,Coronavirus OC43,0
-expt10A_17072024,22,Influenza A,0
-expt10A_17072024,22,Influenza A/H1,0
-expt10A_17072024,22,Influenza A/H1-2009,0
-expt10A_17072024,22,Influenza A/H3,0
-expt10A_17072024,22,Influenza B,0
-expt10A_17072024,22,Metapneumovirus,0
-expt10A_17072024,22,Mycoplasma_pneumoniae,0
-expt10A_17072024,22,Parainfluenza 1,0
-expt10A_17072024,22,Parainfluenza 2,0
-expt10A_17072024,22,Parainfluenza 3,0
-expt10A_17072024,22,Parainfluenza 4,0
-expt10A_17072024,22,RSV,0
-expt10A_17072024,22,Rhinovirus/enterovirus,0
-expt10A_17072024,22,SARS-CoV-2,0
-expt10A_17072024,23,Adenovirus,0
-expt10A_17072024,23,Bordetella_parapertussis,0
-expt10A_17072024,23,Bordetella_pertussis,0
-expt10A_17072024,23,Chlamydia_pneumoniae,0
-expt10A_17072024,23,Coronavirus 229E,0
-expt10A_17072024,23,Coronavirus HKU,0
-expt10A_17072024,23,Coronavirus NL63,0
-expt10A_17072024,23,Coronavirus OC43,0
-expt10A_17072024,23,Influenza A,0
-expt10A_17072024,23,Influenza A/H1,0
-expt10A_17072024,23,Influenza A/H1-2009,0
-expt10A_17072024,23,Influenza A/H3,0
-expt10A_17072024,23,Influenza B,0
-expt10A_17072024,23,Metapneumovirus,0
-expt10A_17072024,23,Mycoplasma_pneumoniae,0
-expt10A_17072024,23,Parainfluenza 1,0
-expt10A_17072024,23,Parainfluenza 2,0
-expt10A_17072024,23,Parainfluenza 3,0
-expt10A_17072024,23,Parainfluenza 4,0
-expt10A_17072024,23,RSV,0
-expt10A_17072024,23,Rhinovirus/enterovirus,0
-expt10A_17072024,23,SARS-CoV-2,0
-expt10A_17072024,24,Adenovirus,0
-expt10A_17072024,24,Bordetella_parapertussis,0
-expt10A_17072024,24,Bordetella_pertussis,0
-expt10A_17072024,24,Chlamydia_pneumoniae,0
-expt10A_17072024,24,Coronavirus 229E,0
-expt10A_17072024,24,Coronavirus HKU,0
-expt10A_17072024,24,Coronavirus NL63,0
-expt10A_17072024,24,Coronavirus OC43,0
-expt10A_17072024,24,Influenza A,0
-expt10A_17072024,24,Influenza A/H1,0
-expt10A_17072024,24,Influenza A/H1-2009,0
-expt10A_17072024,24,Influenza A/H3,0
-expt10A_17072024,24,Influenza B,0
-expt10A_17072024,24,Metapneumovirus,0
-expt10A_17072024,24,Mycoplasma_pneumoniae,0
-expt10A_17072024,24,Parainfluenza 1,0
-expt10A_17072024,24,Parainfluenza 2,0
-expt10A_17072024,24,Parainfluenza 3,0
-expt10A_17072024,24,Parainfluenza 4,0
-expt10A_17072024,24,RSV,0
-expt10A_17072024,24,Rhinovirus/enterovirus,0
-expt10A_17072024,24,SARS-CoV-2,0
-expt10A_17072024,25,Adenovirus,0
-expt10A_17072024,25,Bordetella_parapertussis,0
-expt10A_17072024,25,Bordetella_pertussis,0
-expt10A_17072024,25,Chlamydia_pneumoniae,0
-expt10A_17072024,25,Coronavirus 229E,0
-expt10A_17072024,25,Coronavirus HKU,0
-expt10A_17072024,25,Coronavirus NL63,0
-expt10A_17072024,25,Coronavirus OC43,0
-expt10A_17072024,25,Influenza A,0
-expt10A_17072024,25,Influenza A/H1,0
-expt10A_17072024,25,Influenza A/H1-2009,0
-expt10A_17072024,25,Influenza A/H3,0
-expt10A_17072024,25,Influenza B,0
-expt10A_17072024,25,Metapneumovirus,0
-expt10A_17072024,25,Mycoplasma_pneumoniae,0
-expt10A_17072024,25,Parainfluenza 1,0
-expt10A_17072024,25,Parainfluenza 2,0
-expt10A_17072024,25,Parainfluenza 3,0
-expt10A_17072024,25,Parainfluenza 4,0
-expt10A_17072024,25,RSV,0
-expt10A_17072024,25,Rhinovirus/enterovirus,0
-expt10A_17072024,25,SARS-CoV-2,0
-expt10_03072024,57,Adenovirus,0
-expt10_03072024,57,Bordetella_parapertussis,0
-expt10_03072024,57,Bordetella_pertussis,0
-expt10_03072024,57,Chlamydia_pneumoniae,0
-expt10_03072024,57,Coronavirus 229E,0
-expt10_03072024,57,Coronavirus HKU,0
-expt10_03072024,57,Coronavirus NL63,0
-expt10_03072024,57,Coronavirus OC43,0
-expt10_03072024,57,Influenza A,1
-expt10_03072024,57,Influenza A/H1,0
-expt10_03072024,57,Influenza A/H1-2009,0
-expt10_03072024,57,Influenza A/H3,0
-expt10_03072024,57,Influenza B,0
-expt10_03072024,57,Metapneumovirus,0
-expt10_03072024,57,Mycoplasma_pneumoniae,0
-expt10_03072024,57,Parainfluenza 1,0
-expt10_03072024,57,Parainfluenza 2,0
-expt10_03072024,57,Parainfluenza 3,0
-expt10_03072024,57,Parainfluenza 4,0
-expt10_03072024,57,RSV,0
-expt10_03072024,57,Rhinovirus/enterovirus,0
-expt10_03072024,57,SARS-CoV-2,0
-expt10_03072024,58,Adenovirus,0
-expt10_03072024,58,Bordetella_parapertussis,0
-expt10_03072024,58,Bordetella_pertussis,0
-expt10_03072024,58,Chlamydia_pneumoniae,0
-expt10_03072024,58,Coronavirus 229E,0
-expt10_03072024,58,Coronavirus HKU,0
-expt10_03072024,58,Coronavirus NL63,0
-expt10_03072024,58,Coronavirus OC43,0
-expt10_03072024,58,Influenza A,1
-expt10_03072024,58,Influenza A/H1,0
-expt10_03072024,58,Influenza A/H1-2009,0
-expt10_03072024,58,Influenza A/H3,0
-expt10_03072024,58,Influenza B,0
-expt10_03072024,58,Metapneumovirus,0
-expt10_03072024,58,Mycoplasma_pneumoniae,0
-expt10_03072024,58,Parainfluenza 1,0
-expt10_03072024,58,Parainfluenza 2,0
-expt10_03072024,58,Parainfluenza 3,0
-expt10_03072024,58,Parainfluenza 4,0
-expt10_03072024,58,RSV,0
-expt10_03072024,58,Rhinovirus/enterovirus,0
-expt10_03072024,58,SARS-CoV-2,0
-expt10_03072024,59,Adenovirus,0
-expt10_03072024,59,Bordetella_parapertussis,0
-expt10_03072024,59,Bordetella_pertussis,0
-expt10_03072024,59,Chlamydia_pneumoniae,0
-expt10_03072024,59,Coronavirus 229E,0
-expt10_03072024,59,Coronavirus HKU,0
-expt10_03072024,59,Coronavirus NL63,0
-expt10_03072024,59,Coronavirus OC43,0
-expt10_03072024,59,Influenza A,1
-expt10_03072024,59,Influenza A/H1,0
-expt10_03072024,59,Influenza A/H1-2009,0
-expt10_03072024,59,Influenza A/H3,0
-expt10_03072024,59,Influenza B,0
-expt10_03072024,59,Metapneumovirus,0
-expt10_03072024,59,Mycoplasma_pneumoniae,0
-expt10_03072024,59,Parainfluenza 1,0
-expt10_03072024,59,Parainfluenza 2,0
-expt10_03072024,59,Parainfluenza 3,0
-expt10_03072024,59,Parainfluenza 4,0
-expt10_03072024,59,RSV,0
-expt10_03072024,59,Rhinovirus/enterovirus,0
-expt10_03072024,59,SARS-CoV-2,0
-expt10_03072024,60,Adenovirus,0
-expt10_03072024,60,Bordetella_parapertussis,0
-expt10_03072024,60,Bordetella_pertussis,0
-expt10_03072024,60,Chlamydia_pneumoniae,0
-expt10_03072024,60,Coronavirus 229E,0
-expt10_03072024,60,Coronavirus HKU,0
-expt10_03072024,60,Coronavirus NL63,0
-expt10_03072024,60,Coronavirus OC43,0
-expt10_03072024,60,Influenza A,0
-expt10_03072024,60,Influenza A/H1,0
-expt10_03072024,60,Influenza A/H1-2009,0
-expt10_03072024,60,Influenza A/H3,0
-expt10_03072024,60,Influenza B,0
-expt10_03072024,60,Metapneumovirus,0
-expt10_03072024,60,Mycoplasma_pneumoniae,0
-expt10_03072024,60,Parainfluenza 3,1
-expt10_03072024,60,Parainfluenza 1,0
-expt10_03072024,60,Parainfluenza 2,0
-expt10_03072024,60,Parainfluenza 4,0
-expt10_03072024,60,RSV,0
-expt10_03072024,60,Rhinovirus/enterovirus,0
-expt10_03072024,60,SARS-CoV-2,0
-expt10_03072024,61,Adenovirus,0
-expt10_03072024,61,Bordetella_parapertussis,0
-expt10_03072024,61,Bordetella_pertussis,0
-expt10_03072024,61,Chlamydia_pneumoniae,0
-expt10_03072024,61,Coronavirus 229E,0
-expt10_03072024,61,Coronavirus HKU,0
-expt10_03072024,61,Coronavirus NL63,0
-expt10_03072024,61,Coronavirus OC43,0
-expt10_03072024,61,Influenza A,0
-expt10_03072024,61,Influenza A/H1,0
-expt10_03072024,61,Influenza A/H1-2009,0
-expt10_03072024,61,Influenza A/H3,0
-expt10_03072024,61,Influenza B,0
-expt10_03072024,61,Metapneumovirus,0
-expt10_03072024,61,Mycoplasma_pneumoniae,0
-expt10_03072024,61,Parainfluenza 3,1
-expt10_03072024,61,Parainfluenza 1,0
-expt10_03072024,61,Parainfluenza 2,0
-expt10_03072024,61,Parainfluenza 4,0
-expt10_03072024,61,RSV,0
-expt10_03072024,61,Rhinovirus/enterovirus,0
-expt10_03072024,61,SARS-CoV-2,0
-expt10_03072024,62,Adenovirus,0
-expt10_03072024,62,Bordetella_parapertussis,0
-expt10_03072024,62,Bordetella_pertussis,0
-expt10_03072024,62,Chlamydia_pneumoniae,0
-expt10_03072024,62,Coronavirus 229E,0
-expt10_03072024,62,Coronavirus HKU,0
-expt10_03072024,62,Coronavirus NL63,0
-expt10_03072024,62,Coronavirus OC43,0
-expt10_03072024,62,Influenza A,0
-expt10_03072024,62,Influenza A/H1,0
-expt10_03072024,62,Influenza A/H1-2009,0
-expt10_03072024,62,Influenza A/H3,0
-expt10_03072024,62,Influenza B,0
-expt10_03072024,62,Metapneumovirus,0
-expt10_03072024,62,Mycoplasma_pneumoniae,0
-expt10_03072024,62,Parainfluenza 3,1
-expt10_03072024,62,Parainfluenza 1,0
-expt10_03072024,62,Parainfluenza 2,0
-expt10_03072024,62,Parainfluenza 4,0
-expt10_03072024,62,RSV,0
-expt10_03072024,62,Rhinovirus/enterovirus,0
-expt10_03072024,62,SARS-CoV-2,0
-expt10_03072024,63,Adenovirus,0
-expt10_03072024,63,Bordetella_parapertussis,0
-expt10_03072024,63,Bordetella_pertussis,0
-expt10_03072024,63,Chlamydia_pneumoniae,0
-expt10_03072024,63,Coronavirus 229E,0
-expt10_03072024,63,Coronavirus HKU,0
-expt10_03072024,63,Coronavirus NL63,0
-expt10_03072024,63,Coronavirus OC43,0
-expt10_03072024,63,Influenza A,0
-expt10_03072024,63,Influenza A/H1,0
-expt10_03072024,63,Influenza A/H1-2009,0
-expt10_03072024,63,Influenza A/H3,0
-expt10_03072024,63,Influenza B,0
-expt10_03072024,63,Metapneumovirus,0
-expt10_03072024,63,Mycoplasma_pneumoniae,0
-expt10_03072024,63,Parainfluenza 1,0
-expt10_03072024,63,Parainfluenza 2,0
-expt10_03072024,63,Parainfluenza 3,0
-expt10_03072024,63,Parainfluenza 4,0
-expt10_03072024,63,RSV,0
-expt10_03072024,63,Rhinovirus/enterovirus,0
-expt10_03072024,63,SARS-CoV-2,1
-expt10_03072024,64,Adenovirus,0
-expt10_03072024,64,Bordetella_parapertussis,0
-expt10_03072024,64,Bordetella_pertussis,0
-expt10_03072024,64,Chlamydia_pneumoniae,0
-expt10_03072024,64,Coronavirus 229E,0
-expt10_03072024,64,Coronavirus HKU,0
-expt10_03072024,64,Coronavirus NL63,0
-expt10_03072024,64,Coronavirus OC43,0
-expt10_03072024,64,Influenza A,0
-expt10_03072024,64,Influenza A/H1,0
-expt10_03072024,64,Influenza A/H1-2009,0
-expt10_03072024,64,Influenza A/H3,0
-expt10_03072024,64,Influenza B,0
-expt10_03072024,64,Metapneumovirus,0
-expt10_03072024,64,Mycoplasma_pneumoniae,0
-expt10_03072024,64,Parainfluenza 1,0
-expt10_03072024,64,Parainfluenza 2,0
-expt10_03072024,64,Parainfluenza 3,0
-expt10_03072024,64,Parainfluenza 4,0
-expt10_03072024,64,RSV,0
-expt10_03072024,64,Rhinovirus/enterovirus,0
-expt10_03072024,64,SARS-CoV-2,1
-expt10_03072024,65,Adenovirus,0
-expt10_03072024,65,Bordetella_parapertussis,0
-expt10_03072024,65,Bordetella_pertussis,0
-expt10_03072024,65,Chlamydia_pneumoniae,0
-expt10_03072024,65,Coronavirus 229E,0
-expt10_03072024,65,Coronavirus HKU,0
-expt10_03072024,65,Coronavirus NL63,0
-expt10_03072024,65,Coronavirus OC43,0
-expt10_03072024,65,Influenza A,0
-expt10_03072024,65,Influenza A/H1,0
-expt10_03072024,65,Influenza A/H1-2009,0
-expt10_03072024,65,Influenza A/H3,0
-expt10_03072024,65,Influenza B,0
-expt10_03072024,65,Metapneumovirus,0
-expt10_03072024,65,Mycoplasma_pneumoniae,0
-expt10_03072024,65,Parainfluenza 1,0
-expt10_03072024,65,Parainfluenza 2,0
-expt10_03072024,65,Parainfluenza 3,0
-expt10_03072024,65,Parainfluenza 4,0
-expt10_03072024,65,RSV,0
-expt10_03072024,65,Rhinovirus/enterovirus,0
-expt10_03072024,65,SARS-CoV-2,1
-expt10_03072024,66,Adenovirus,0
-expt10_03072024,66,Bordetella_parapertussis,0
-expt10_03072024,66,Bordetella_pertussis,0
-expt10_03072024,66,Chlamydia_pneumoniae,0
-expt10_03072024,66,Coronavirus 229E,0
-expt10_03072024,66,Coronavirus HKU,0
-expt10_03072024,66,Coronavirus NL63,0
-expt10_03072024,66,Coronavirus OC43,0
-expt10_03072024,66,Influenza A,0
-expt10_03072024,66,Influenza A/H1,0
-expt10_03072024,66,Influenza A/H1-2009,0
-expt10_03072024,66,Influenza A/H3,0
-expt10_03072024,66,Influenza B,0
-expt10_03072024,66,Metapneumovirus,1
-expt10_03072024,66,Mycoplasma_pneumoniae,0
-expt10_03072024,66,Parainfluenza 1,0
-expt10_03072024,66,Parainfluenza 2,0
-expt10_03072024,66,Parainfluenza 3,0
-expt10_03072024,66,Parainfluenza 4,0
-expt10_03072024,66,RSV,0
-expt10_03072024,66,Rhinovirus/enterovirus,0
-expt10_03072024,66,SARS-CoV-2,0
-expt10_03072024,67,Adenovirus,0
-expt10_03072024,67,Bordetella_parapertussis,0
-expt10_03072024,67,Bordetella_pertussis,0
-expt10_03072024,67,Chlamydia_pneumoniae,0
-expt10_03072024,67,Coronavirus 229E,0
-expt10_03072024,67,Coronavirus HKU,0
-expt10_03072024,67,Coronavirus NL63,0
-expt10_03072024,67,Coronavirus OC43,0
-expt10_03072024,67,Influenza A,0
-expt10_03072024,67,Influenza A/H1,0
-expt10_03072024,67,Influenza A/H1-2009,0
-expt10_03072024,67,Influenza A/H3,0
-expt10_03072024,67,Influenza B,0
-expt10_03072024,67,Metapneumovirus,1
-expt10_03072024,67,Mycoplasma_pneumoniae,0
-expt10_03072024,67,Parainfluenza 1,0
-expt10_03072024,67,Parainfluenza 2,0
-expt10_03072024,67,Parainfluenza 3,0
-expt10_03072024,67,Parainfluenza 4,0
-expt10_03072024,67,RSV,0
-expt10_03072024,67,Rhinovirus/enterovirus,0
-expt10_03072024,67,SARS-CoV-2,0
-expt10_03072024,68,Adenovirus,0
-expt10_03072024,68,Bordetella_parapertussis,0
-expt10_03072024,68,Bordetella_pertussis,0
-expt10_03072024,68,Chlamydia_pneumoniae,0
-expt10_03072024,68,Coronavirus 229E,0
-expt10_03072024,68,Coronavirus HKU,0
-expt10_03072024,68,Coronavirus NL63,0
-expt10_03072024,68,Coronavirus OC43,0
-expt10_03072024,68,Influenza A,0
-expt10_03072024,68,Influenza A/H1,0
-expt10_03072024,68,Influenza A/H1-2009,0
-expt10_03072024,68,Influenza A/H3,0
-expt10_03072024,68,Influenza B,0
-expt10_03072024,68,Metapneumovirus,1
-expt10_03072024,68,Mycoplasma_pneumoniae,0
-expt10_03072024,68,Parainfluenza 1,0
-expt10_03072024,68,Parainfluenza 2,0
-expt10_03072024,68,Parainfluenza 3,0
-expt10_03072024,68,Parainfluenza 4,0
-expt10_03072024,68,RSV,0
-expt10_03072024,68,Rhinovirus/enterovirus,0
-expt10_03072024,68,SARS-CoV-2,0
-expt10_03072024,69,Adenovirus,0
-expt10_03072024,69,Bordetella_parapertussis,0
-expt10_03072024,69,Bordetella_pertussis,0
-expt10_03072024,69,Chlamydia_pneumoniae,0
-expt10_03072024,69,Coronavirus 229E,0
-expt10_03072024,69,Coronavirus HKU,0
-expt10_03072024,69,Coronavirus NL63,0
-expt10_03072024,69,Coronavirus OC43,0
-expt10_03072024,69,Influenza A,0
-expt10_03072024,69,Influenza A/H1,0
-expt10_03072024,69,Influenza A/H1-2009,0
-expt10_03072024,69,Influenza A/H3,0
-expt10_03072024,69,Influenza B,0
-expt10_03072024,69,Metapneumovirus,0
-expt10_03072024,69,Mycoplasma_pneumoniae,0
-expt10_03072024,69,Parainfluenza 1,0
-expt10_03072024,69,Parainfluenza 2,0
-expt10_03072024,69,Parainfluenza 3,0
-expt10_03072024,69,Parainfluenza 4,0
-expt10_03072024,69,RSV,0
-expt10_03072024,69,Rhinovirus/enterovirus,0
-expt10_03072024,69,SARS-CoV-2,0
-expt10_03072024,70,Adenovirus,0
-expt10_03072024,70,Bordetella_parapertussis,0
-expt10_03072024,70,Bordetella_pertussis,0
-expt10_03072024,70,Chlamydia_pneumoniae,0
-expt10_03072024,70,Coronavirus 229E,0
-expt10_03072024,70,Coronavirus HKU,0
-expt10_03072024,70,Coronavirus NL63,1
-expt10_03072024,70,Coronavirus OC43,0
-expt10_03072024,70,Influenza A,0
-expt10_03072024,70,Influenza A/H1,0
-expt10_03072024,70,Influenza A/H1-2009,0
-expt10_03072024,70,Influenza A/H3,0
-expt10_03072024,70,Influenza B,0
-expt10_03072024,70,Metapneumovirus,0
-expt10_03072024,70,Mycoplasma_pneumoniae,0
-expt10_03072024,70,Parainfluenza 1,0
-expt10_03072024,70,Parainfluenza 2,0
-expt10_03072024,70,Parainfluenza 3,0
-expt10_03072024,70,Parainfluenza 4,0
-expt10_03072024,70,RSV,0
-expt10_03072024,70,Rhinovirus/enterovirus,0
-expt10_03072024,70,SARS-CoV-2,0
-expt10_03072024,71,Adenovirus,0
-expt10_03072024,71,Bordetella_parapertussis,0
-expt10_03072024,71,Bordetella_pertussis,0
-expt10_03072024,71,Chlamydia_pneumoniae,0
-expt10_03072024,71,Coronavirus 229E,0
-expt10_03072024,71,Coronavirus HKU,0
-expt10_03072024,71,Coronavirus NL63,1
-expt10_03072024,71,Coronavirus OC43,0
-expt10_03072024,71,Influenza A,0
-expt10_03072024,71,Influenza A/H1,0
-expt10_03072024,71,Influenza A/H1-2009,0
-expt10_03072024,71,Influenza A/H3,0
-expt10_03072024,71,Influenza B,0
-expt10_03072024,71,Metapneumovirus,0
-expt10_03072024,71,Mycoplasma_pneumoniae,0
-expt10_03072024,71,Parainfluenza 1,0
-expt10_03072024,71,Parainfluenza 2,0
-expt10_03072024,71,Parainfluenza 3,0
-expt10_03072024,71,Parainfluenza 4,0
-expt10_03072024,71,RSV,0
-expt10_03072024,71,Rhinovirus/enterovirus,0
-expt10_03072024,71,SARS-CoV-2,0
-expt10_03072024,72,Adenovirus,0
-expt10_03072024,72,Bordetella_parapertussis,0
-expt10_03072024,72,Bordetella_pertussis,0
-expt10_03072024,72,Chlamydia_pneumoniae,0
-expt10_03072024,72,Coronavirus 229E,0
-expt10_03072024,72,Coronavirus HKU,0
-expt10_03072024,72,Coronavirus NL63,1
-expt10_03072024,72,Coronavirus OC43,0
-expt10_03072024,72,Influenza A,0
-expt10_03072024,72,Influenza A/H1,0
-expt10_03072024,72,Influenza A/H1-2009,0
-expt10_03072024,72,Influenza A/H3,0
-expt10_03072024,72,Influenza B,0
-expt10_03072024,72,Metapneumovirus,0
-expt10_03072024,72,Mycoplasma_pneumoniae,0
-expt10_03072024,72,Parainfluenza 1,0
-expt10_03072024,72,Parainfluenza 2,0
-expt10_03072024,72,Parainfluenza 3,0
-expt10_03072024,72,Parainfluenza 4,0
-expt10_03072024,72,RSV,0
-expt10_03072024,72,Rhinovirus/enterovirus,0
-expt10_03072024,72,SARS-CoV-2,0
-expt10_03072024,73,Adenovirus,0
-expt10_03072024,73,Bordetella_parapertussis,0
-expt10_03072024,73,Bordetella_pertussis,0
-expt10_03072024,73,Chlamydia_pneumoniae,0
-expt10_03072024,73,Coronavirus 229E,0
-expt10_03072024,73,Coronavirus HKU,0
-expt10_03072024,73,Coronavirus NL63,0
-expt10_03072024,73,Coronavirus OC43,0
-expt10_03072024,73,Influenza A,0
-expt10_03072024,73,Influenza A/H1,0
-expt10_03072024,73,Influenza A/H1-2009,0
-expt10_03072024,73,Influenza A/H3,0
-expt10_03072024,73,Influenza B,0
-expt10_03072024,73,Metapneumovirus,0
-expt10_03072024,73,Mycoplasma_pneumoniae,0
-expt10_03072024,73,Parainfluenza 3,1
-expt10_03072024,73,Parainfluenza 1,0
-expt10_03072024,73,Parainfluenza 2,0
-expt10_03072024,73,Parainfluenza 4,0
-expt10_03072024,73,RSV,0
-expt10_03072024,73,Rhinovirus/enterovirus,0
-expt10_03072024,73,SARS-CoV-2,0
-expt10_03072024,74,Adenovirus,0
-expt10_03072024,74,Bordetella_parapertussis,0
-expt10_03072024,74,Bordetella_pertussis,0
-expt10_03072024,74,Chlamydia_pneumoniae,0
-expt10_03072024,74,Coronavirus 229E,0
-expt10_03072024,74,Coronavirus HKU,0
-expt10_03072024,74,Coronavirus NL63,0
-expt10_03072024,74,Coronavirus OC43,0
-expt10_03072024,74,Influenza A,0
-expt10_03072024,74,Influenza A/H1,0
-expt10_03072024,74,Influenza A/H1-2009,0
-expt10_03072024,74,Influenza A/H3,0
-expt10_03072024,74,Influenza B,0
-expt10_03072024,74,Metapneumovirus,0
-expt10_03072024,74,Mycoplasma_pneumoniae,0
-expt10_03072024,74,Parainfluenza 3,1
-expt10_03072024,74,Parainfluenza 1,0
-expt10_03072024,74,Parainfluenza 2,0
-expt10_03072024,74,Parainfluenza 4,0
-expt10_03072024,74,RSV,0
-expt10_03072024,74,Rhinovirus/enterovirus,0
-expt10_03072024,74,SARS-CoV-2,0
-expt10_03072024,75,Adenovirus,0
-expt10_03072024,75,Bordetella_parapertussis,0
-expt10_03072024,75,Bordetella_pertussis,0
-expt10_03072024,75,Chlamydia_pneumoniae,0
-expt10_03072024,75,Coronavirus 229E,0
-expt10_03072024,75,Coronavirus HKU,0
-expt10_03072024,75,Coronavirus NL63,0
-expt10_03072024,75,Coronavirus OC43,0
-expt10_03072024,75,Influenza A,0
-expt10_03072024,75,Influenza A/H1,0
-expt10_03072024,75,Influenza A/H1-2009,0
-expt10_03072024,75,Influenza A/H3,0
-expt10_03072024,75,Influenza B,0
-expt10_03072024,75,Metapneumovirus,0
-expt10_03072024,75,Mycoplasma_pneumoniae,0
-expt10_03072024,75,Parainfluenza 3,1
-expt10_03072024,75,Parainfluenza 1,0
-expt10_03072024,75,Parainfluenza 2,0
-expt10_03072024,75,Parainfluenza 4,0
-expt10_03072024,75,RSV,0
-expt10_03072024,75,Rhinovirus/enterovirus,0
-expt10_03072024,75,SARS-CoV-2,0
-expt10_03072024,76,Adenovirus,0
-expt10_03072024,76,Bordetella_parapertussis,0
-expt10_03072024,76,Bordetella_pertussis,0
-expt10_03072024,76,Chlamydia_pneumoniae,0
-expt10_03072024,76,Coronavirus 229E,0
-expt10_03072024,76,Coronavirus HKU,0
-expt10_03072024,76,Coronavirus NL63,0
-expt10_03072024,76,Coronavirus OC43,0
-expt10_03072024,76,Influenza A,0
-expt10_03072024,76,Influenza A/H1,0
-expt10_03072024,76,Influenza A/H1-2009,0
-expt10_03072024,76,Influenza A/H3,0
-expt10_03072024,76,Influenza B,0
-expt10_03072024,76,Metapneumovirus,0
-expt10_03072024,76,Mycoplasma_pneumoniae,0
-expt10_03072024,76,Parainfluenza 1,1
-expt10_03072024,76,Parainfluenza 2,0
-expt10_03072024,76,Parainfluenza 3,0
-expt10_03072024,76,Parainfluenza 4,0
-expt10_03072024,76,RSV,0
-expt10_03072024,76,Rhinovirus/enterovirus,0
-expt10_03072024,76,SARS-CoV-2,0
-expt10_03072024,77,Adenovirus,0
-expt10_03072024,77,Bordetella_parapertussis,0
-expt10_03072024,77,Bordetella_pertussis,0
-expt10_03072024,77,Chlamydia_pneumoniae,0
-expt10_03072024,77,Coronavirus 229E,0
-expt10_03072024,77,Coronavirus HKU,0
-expt10_03072024,77,Coronavirus NL63,0
-expt10_03072024,77,Coronavirus OC43,0
-expt10_03072024,77,Influenza A,0
-expt10_03072024,77,Influenza A/H1,0
-expt10_03072024,77,Influenza A/H1-2009,0
-expt10_03072024,77,Influenza A/H3,0
-expt10_03072024,77,Influenza B,0
-expt10_03072024,77,Metapneumovirus,0
-expt10_03072024,77,Mycoplasma_pneumoniae,0
-expt10_03072024,77,Parainfluenza 1,1
-expt10_03072024,77,Parainfluenza 2,0
-expt10_03072024,77,Parainfluenza 3,0
-expt10_03072024,77,Parainfluenza 4,0
-expt10_03072024,77,RSV,0
-expt10_03072024,77,Rhinovirus/enterovirus,0
-expt10_03072024,77,SARS-CoV-2,0
-expt10_03072024,78,Adenovirus,0
-expt10_03072024,78,Bordetella_parapertussis,0
-expt10_03072024,78,Bordetella_pertussis,0
-expt10_03072024,78,Chlamydia_pneumoniae,0
-expt10_03072024,78,Coronavirus 229E,0
-expt10_03072024,78,Coronavirus HKU,0
-expt10_03072024,78,Coronavirus NL63,0
-expt10_03072024,78,Coronavirus OC43,0
-expt10_03072024,78,Influenza A,0
-expt10_03072024,78,Influenza A/H1,0
-expt10_03072024,78,Influenza A/H1-2009,0
-expt10_03072024,78,Influenza A/H3,0
-expt10_03072024,78,Influenza B,0
-expt10_03072024,78,Metapneumovirus,0
-expt10_03072024,78,Mycoplasma_pneumoniae,0
-expt10_03072024,78,Parainfluenza 1,1
-expt10_03072024,78,Parainfluenza 2,0
-expt10_03072024,78,Parainfluenza 3,0
-expt10_03072024,78,Parainfluenza 4,0
-expt10_03072024,78,RSV,0
-expt10_03072024,78,Rhinovirus/enterovirus,0
-expt10_03072024,78,SARS-CoV-2,0
-expt10_03072024,79,Adenovirus,0
-expt10_03072024,79,Bordetella_parapertussis,0
-expt10_03072024,79,Bordetella_pertussis,0
-expt10_03072024,79,Chlamydia_pneumoniae,0
-expt10_03072024,79,Coronavirus 229E,0
-expt10_03072024,79,Coronavirus HKU,0
-expt10_03072024,79,Coronavirus NL63,0
-expt10_03072024,79,Coronavirus OC43,0
-expt10_03072024,79,Rhinovirus/enterovirus,1
-expt10_03072024,79,Influenza A,0
-expt10_03072024,79,Influenza A/H1,0
-expt10_03072024,79,Influenza A/H1-2009,0
-expt10_03072024,79,Influenza A/H3,0
-expt10_03072024,79,Influenza B,0
-expt10_03072024,79,Metapneumovirus,0
-expt10_03072024,79,Mycoplasma_pneumoniae,0
-expt10_03072024,79,Parainfluenza 1,0
-expt10_03072024,79,Parainfluenza 2,0
-expt10_03072024,79,Parainfluenza 3,0
-expt10_03072024,79,Parainfluenza 4,0
-expt10_03072024,79,RSV,0
-expt10_03072024,79,SARS-CoV-2,0
-expt10_03072024,80,Adenovirus,0
-expt10_03072024,80,Bordetella_parapertussis,0
-expt10_03072024,80,Bordetella_pertussis,0
-expt10_03072024,80,Chlamydia_pneumoniae,0
-expt10_03072024,80,Coronavirus 229E,0
-expt10_03072024,80,Coronavirus HKU,0
-expt10_03072024,80,Coronavirus NL63,0
-expt10_03072024,80,Coronavirus OC43,0
-expt10_03072024,80,Rhinovirus/enterovirus,1
-expt10_03072024,80,Influenza A,0
-expt10_03072024,80,Influenza A/H1,0
-expt10_03072024,80,Influenza A/H1-2009,0
-expt10_03072024,80,Influenza A/H3,0
-expt10_03072024,80,Influenza B,0
-expt10_03072024,80,Metapneumovirus,0
-expt10_03072024,80,Mycoplasma_pneumoniae,0
-expt10_03072024,80,Parainfluenza 1,0
-expt10_03072024,80,Parainfluenza 2,0
-expt10_03072024,80,Parainfluenza 3,0
-expt10_03072024,80,Parainfluenza 4,0
-expt10_03072024,80,RSV,0
-expt10_03072024,80,SARS-CoV-2,0
-expt10_03072024,81,Adenovirus,0
-expt10_03072024,81,Bordetella_parapertussis,0
-expt10_03072024,81,Bordetella_pertussis,0
-expt10_03072024,81,Chlamydia_pneumoniae,0
-expt10_03072024,81,Coronavirus 229E,0
-expt10_03072024,81,Coronavirus HKU,0
-expt10_03072024,81,Coronavirus NL63,0
-expt10_03072024,81,Coronavirus OC43,0
-expt10_03072024,81,Rhinovirus/enterovirus,1
-expt10_03072024,81,Influenza A,0
-expt10_03072024,81,Influenza A/H1,0
-expt10_03072024,81,Influenza A/H1-2009,0
-expt10_03072024,81,Influenza A/H3,0
-expt10_03072024,81,Influenza B,0
-expt10_03072024,81,Metapneumovirus,0
-expt10_03072024,81,Mycoplasma_pneumoniae,0
-expt10_03072024,81,Parainfluenza 1,0
-expt10_03072024,81,Parainfluenza 2,0
-expt10_03072024,81,Parainfluenza 3,0
-expt10_03072024,81,Parainfluenza 4,0
-expt10_03072024,81,RSV,0
-expt10_03072024,81,SARS-CoV-2,0
-expt10_03072024,82,Adenovirus,0
-expt10_03072024,82,Bordetella_parapertussis,0
-expt10_03072024,82,Bordetella_pertussis,0
-expt10_03072024,82,Chlamydia_pneumoniae,0
-expt10_03072024,82,Coronavirus 229E,0
-expt10_03072024,82,Coronavirus HKU,0
-expt10_03072024,82,Coronavirus NL63,0
-expt10_03072024,82,Coronavirus OC43,0
-expt10_03072024,82,Influenza A,0
-expt10_03072024,82,Influenza A/H1,0
-expt10_03072024,82,Influenza A/H1-2009,0
-expt10_03072024,82,Influenza A/H3,0
-expt10_03072024,82,Influenza B,0
-expt10_03072024,82,Metapneumovirus,0
-expt10_03072024,82,Mycoplasma_pneumoniae,0
-expt10_03072024,82,Parainfluenza 1,0
-expt10_03072024,82,Parainfluenza 2,0
-expt10_03072024,82,Parainfluenza 3,0
-expt10_03072024,82,Parainfluenza 4,0
-expt10_03072024,82,RSV,0
-expt10_03072024,82,Rhinovirus/enterovirus,0
-expt10_03072024,82,SARS-CoV-2,0
-expt11_150824,33,Adenovirus,0
-expt11_150824,33,Bordetella_parapertussis,0
-expt11_150824,33,Bordetella_pertussis,0
-expt11_150824,33,Chlamydia_pneumoniae,0
-expt11_150824,33,Coronavirus 229E,0
-expt11_150824,33,Coronavirus HKU,0
-expt11_150824,33,Coronavirus NL63,0
-expt11_150824,33,Coronavirus OC43,0
-expt11_150824,33,Influenza A,0
-expt11_150824,33,Influenza A/H1,0
-expt11_150824,33,Influenza A/H1-2009,0
-expt11_150824,33,Influenza A/H3,0
-expt11_150824,33,Influenza B,0
-expt11_150824,33,Metapneumovirus,0
-expt11_150824,33,Mycoplasma_pneumoniae,0
-expt11_150824,33,Parainfluenza 1,0
-expt11_150824,33,Parainfluenza 2,0
-expt11_150824,33,Parainfluenza 3,0
-expt11_150824,33,Parainfluenza 4,0
-expt11_150824,33,RSV,0
-expt11_150824,33,Rhinovirus/enterovirus,0
-expt11_150824,33,SARS-CoV-2,1
-expt11_150824,34,Adenovirus,0
-expt11_150824,34,Bordetella_parapertussis,0
-expt11_150824,34,Bordetella_pertussis,0
-expt11_150824,34,Chlamydia_pneumoniae,0
-expt11_150824,34,Coronavirus 229E,0
-expt11_150824,34,Coronavirus HKU,0
-expt11_150824,34,Coronavirus NL63,0
-expt11_150824,34,Coronavirus OC43,1
-expt11_150824,34,Influenza A,0
-expt11_150824,34,Influenza A/H1,0
-expt11_150824,34,Influenza A/H1-2009,0
-expt11_150824,34,Influenza A/H3,0
-expt11_150824,34,Influenza B,0
-expt11_150824,34,Metapneumovirus,0
-expt11_150824,34,Mycoplasma_pneumoniae,0
-expt11_150824,34,Parainfluenza 1,0
-expt11_150824,34,Parainfluenza 2,0
-expt11_150824,34,Parainfluenza 3,0
-expt11_150824,34,Parainfluenza 4,0
-expt11_150824,34,RSV,0
-expt11_150824,34,Rhinovirus/enterovirus,0
-expt11_150824,34,SARS-CoV-2,0
-expt11_150824,35,Adenovirus,0
-expt11_150824,35,Bordetella_parapertussis,0
-expt11_150824,35,Bordetella_pertussis,0
-expt11_150824,35,Chlamydia_pneumoniae,0
-expt11_150824,35,Coronavirus 229E,0
-expt11_150824,35,Coronavirus HKU,0
-expt11_150824,35,Coronavirus NL63,0
-expt11_150824,35,Coronavirus OC43,0
-expt11_150824,35,Rhinovirus/enterovirus,1
-expt11_150824,35,Influenza A,0
-expt11_150824,35,Influenza A/H1,0
-expt11_150824,35,Influenza A/H1-2009,0
-expt11_150824,35,Influenza A/H3,0
-expt11_150824,35,Influenza B,0
-expt11_150824,35,Metapneumovirus,0
-expt11_150824,35,Mycoplasma_pneumoniae,0
-expt11_150824,35,Parainfluenza 1,0
-expt11_150824,35,Parainfluenza 2,0
-expt11_150824,35,Parainfluenza 3,0
-expt11_150824,35,Parainfluenza 4,0
-expt11_150824,35,RSV,0
-expt11_150824,35,SARS-CoV-2,0
-expt11_150824,36,Adenovirus,0
-expt11_150824,36,Bordetella_parapertussis,0
-expt11_150824,36,Bordetella_pertussis,0
-expt11_150824,36,Chlamydia_pneumoniae,0
-expt11_150824,36,Coronavirus 229E,0
-expt11_150824,36,Coronavirus HKU,0
-expt11_150824,36,Coronavirus NL63,1
-expt11_150824,36,Coronavirus OC43,0
-expt11_150824,36,Influenza A,0
-expt11_150824,36,Influenza A/H1,0
-expt11_150824,36,Influenza A/H1-2009,0
-expt11_150824,36,Influenza A/H3,0
-expt11_150824,36,Influenza B,0
-expt11_150824,36,Metapneumovirus,0
-expt11_150824,36,Mycoplasma_pneumoniae,0
-expt11_150824,36,Parainfluenza 1,0
-expt11_150824,36,Parainfluenza 2,0
-expt11_150824,36,Parainfluenza 3,0
-expt11_150824,36,Parainfluenza 4,0
-expt11_150824,36,RSV,0
-expt11_150824,36,Rhinovirus/enterovirus,0
-expt11_150824,36,SARS-CoV-2,0
-expt11_150824,37,Adenovirus,0
-expt11_150824,37,Bordetella_parapertussis,0
-expt11_150824,37,Bordetella_pertussis,0
-expt11_150824,37,Chlamydia_pneumoniae,0
-expt11_150824,37,Coronavirus 229E,0
-expt11_150824,37,Coronavirus HKU,0
-expt11_150824,37,Coronavirus NL63,0
-expt11_150824,37,Coronavirus OC43,0
-expt11_150824,37,Influenza A,0
-expt11_150824,37,Influenza A/H1,0
-expt11_150824,37,Influenza A/H1-2009,0
-expt11_150824,37,Influenza A/H3,0
-expt11_150824,37,Influenza B,0
-expt11_150824,37,Metapneumovirus,0
-expt11_150824,37,Mycoplasma_pneumoniae,0
-expt11_150824,37,Parainfluenza 1,0
-expt11_150824,37,Parainfluenza 2,0
-expt11_150824,37,Parainfluenza 3,0
-expt11_150824,37,Parainfluenza 4,0
-expt11_150824,37,RSV,0
-expt11_150824,37,Rhinovirus/enterovirus,0
-expt11_150824,37,SARS-CoV-2,1
-expt11_150824,38,Adenovirus,0
-expt11_150824,38,Bordetella_parapertussis,0
-expt11_150824,38,Bordetella_pertussis,0
-expt11_150824,38,Chlamydia_pneumoniae,0
-expt11_150824,38,Coronavirus 229E,0
-expt11_150824,38,Coronavirus HKU,0
-expt11_150824,38,Coronavirus NL63,0
-expt11_150824,38,Coronavirus OC43,0
-expt11_150824,38,Influenza A,0
-expt11_150824,38,Influenza A/H1,0
-expt11_150824,38,Influenza A/H1-2009,0
-expt11_150824,38,Influenza A/H3,0
-expt11_150824,38,Influenza B,0
-expt11_150824,38,Metapneumovirus,0
-expt11_150824,38,Mycoplasma_pneumoniae,0
-expt11_150824,38,Parainfluenza 1,0
-expt11_150824,38,Parainfluenza 2,0
-expt11_150824,38,Parainfluenza 3,0
-expt11_150824,38,Parainfluenza 4,0
-expt11_150824,38,RSV,0
-expt11_150824,38,Rhinovirus/enterovirus,0
-expt11_150824,38,SARS-CoV-2,1
-expt11_150824,39,Adenovirus,0
-expt11_150824,39,Bordetella_parapertussis,0
-expt11_150824,39,Bordetella_pertussis,0
-expt11_150824,39,Chlamydia_pneumoniae,0
-expt11_150824,39,Coronavirus 229E,0
-expt11_150824,39,Coronavirus HKU,0
-expt11_150824,39,Coronavirus NL63,0
-expt11_150824,39,Coronavirus OC43,0
-expt11_150824,39,Influenza A,0
-expt11_150824,39,Influenza A/H1,0
-expt11_150824,39,Influenza A/H1-2009,0
-expt11_150824,39,Influenza A/H3,0
-expt11_150824,39,Influenza B,0
-expt11_150824,39,Metapneumovirus,0
-expt11_150824,39,Mycoplasma_pneumoniae,0
-expt11_150824,39,Parainfluenza 3,1
-expt11_150824,39,Parainfluenza 1,0
-expt11_150824,39,Parainfluenza 2,0
-expt11_150824,39,Parainfluenza 4,0
-expt11_150824,39,RSV,0
-expt11_150824,39,Rhinovirus/enterovirus,0
-expt11_150824,39,SARS-CoV-2,0
-expt11_150824,40,Adenovirus,0
-expt11_150824,40,Bordetella_parapertussis,0
-expt11_150824,40,Bordetella_pertussis,0
-expt11_150824,40,Chlamydia_pneumoniae,0
-expt11_150824,40,Coronavirus 229E,0
-expt11_150824,40,Coronavirus HKU,0
-expt11_150824,40,Coronavirus NL63,0
-expt11_150824,40,Coronavirus OC43,0
-expt11_150824,40,Rhinovirus/enterovirus,1
-expt11_150824,40,Influenza A,0
-expt11_150824,40,Influenza A/H1,0
-expt11_150824,40,Influenza A/H1-2009,0
-expt11_150824,40,Influenza A/H3,0
-expt11_150824,40,Influenza B,0
-expt11_150824,40,Metapneumovirus,0
-expt11_150824,40,Mycoplasma_pneumoniae,0
-expt11_150824,40,Parainfluenza 1,0
-expt11_150824,40,Parainfluenza 2,0
-expt11_150824,40,Parainfluenza 3,0
-expt11_150824,40,Parainfluenza 4,0
-expt11_150824,40,RSV,0
-expt11_150824,40,SARS-CoV-2,0
-expt11_150824,41,Adenovirus,0
-expt11_150824,41,Bordetella_parapertussis,0
-expt11_150824,41,Bordetella_pertussis,0
-expt11_150824,41,Chlamydia_pneumoniae,0
-expt11_150824,41,Coronavirus 229E,0
-expt11_150824,41,Coronavirus HKU,0
-expt11_150824,41,Coronavirus NL63,0
-expt11_150824,41,Coronavirus OC43,0
-expt11_150824,41,Influenza A,0
-expt11_150824,41,Influenza A/H1,0
-expt11_150824,41,Influenza A/H1-2009,0
-expt11_150824,41,Influenza A/H3,0
-expt11_150824,41,Influenza B,0
-expt11_150824,41,Metapneumovirus,1
-expt11_150824,41,Mycoplasma_pneumoniae,0
-expt11_150824,41,Parainfluenza 1,0
-expt11_150824,41,Parainfluenza 2,0
-expt11_150824,41,Parainfluenza 3,0
-expt11_150824,41,Parainfluenza 4,0
-expt11_150824,41,RSV,0
-expt11_150824,41,Rhinovirus/enterovirus,0
-expt11_150824,41,SARS-CoV-2,0
-expt11_150824,42,Adenovirus,0
-expt11_150824,42,Bordetella_parapertussis,0
-expt11_150824,42,Bordetella_pertussis,0
-expt11_150824,42,Chlamydia_pneumoniae,0
-expt11_150824,42,Coronavirus 229E,0
-expt11_150824,42,Coronavirus HKU,0
-expt11_150824,42,Coronavirus NL63,0
-expt11_150824,42,Coronavirus OC43,0
-expt11_150824,42,Influenza A,0
-expt11_150824,42,Influenza A/H1,0
-expt11_150824,42,Influenza A/H1-2009,0
-expt11_150824,42,Influenza A/H3,0
-expt11_150824,42,Influenza B,0
-expt11_150824,42,Metapneumovirus,0
-expt11_150824,42,Mycoplasma_pneumoniae,0
-expt11_150824,42,Parainfluenza 1,0
-expt11_150824,42,Parainfluenza 2,0
-expt11_150824,42,Parainfluenza 3,0
-expt11_150824,42,Parainfluenza 4,0
-expt11_150824,42,RSV,0
-expt11_150824,42,Rhinovirus/enterovirus,0
-expt11_150824,42,SARS-CoV-2,1
-expt11_150824,43,Adenovirus,0
-expt11_150824,43,Bordetella_parapertussis,0
-expt11_150824,43,Bordetella_pertussis,0
-expt11_150824,43,Chlamydia_pneumoniae,0
-expt11_150824,43,Coronavirus 229E,0
-expt11_150824,43,Coronavirus HKU,0
-expt11_150824,43,Coronavirus NL63,0
-expt11_150824,43,Coronavirus OC43,0
-expt11_150824,43,Influenza A,0
-expt11_150824,43,Influenza A/H1,0
-expt11_150824,43,Influenza A/H1-2009,0
-expt11_150824,43,Influenza A/H3,0
-expt11_150824,43,Influenza B,0
-expt11_150824,43,Metapneumovirus,0
-expt11_150824,43,Mycoplasma_pneumoniae,0
-expt11_150824,43,Parainfluenza 1,0
-expt11_150824,43,Parainfluenza 2,0
-expt11_150824,43,Parainfluenza 3,0
-expt11_150824,43,Parainfluenza 4,0
-expt11_150824,43,RSV,0
-expt11_150824,43,Rhinovirus/enterovirus,0
-expt11_150824,43,SARS-CoV-2,0
-expt11_150824,44,Adenovirus,0
-expt11_150824,44,Bordetella_parapertussis,0
-expt11_150824,44,Bordetella_pertussis,0
-expt11_150824,44,Chlamydia_pneumoniae,0
-expt11_150824,44,Coronavirus 229E,0
-expt11_150824,44,Coronavirus HKU,0
-expt11_150824,44,Coronavirus NL63,0
-expt11_150824,44,Coronavirus OC43,0
-expt11_150824,44,Influenza A,0
-expt11_150824,44,Influenza A/H1,0
-expt11_150824,44,Influenza A/H1-2009,0
-expt11_150824,44,Influenza A/H3,0
-expt11_150824,44,Influenza B,0
-expt11_150824,44,Metapneumovirus,0
-expt11_150824,44,Mycoplasma_pneumoniae,0
-expt11_150824,44,Parainfluenza 1,0
-expt11_150824,44,Parainfluenza 2,0
-expt11_150824,44,Parainfluenza 3,0
-expt11_150824,44,Parainfluenza 4,0
-expt11_150824,44,RSV,0
-expt11_150824,44,Rhinovirus/enterovirus,0
-expt11_150824,44,SARS-CoV-2,1
-expt11_150824,45,Adenovirus,0
-expt11_150824,45,Bordetella_parapertussis,0
-expt11_150824,45,Bordetella_pertussis,0
-expt11_150824,45,Chlamydia_pneumoniae,0
-expt11_150824,45,Coronavirus 229E,0
-expt11_150824,45,Coronavirus HKU,0
-expt11_150824,45,Coronavirus NL63,0
-expt11_150824,45,Coronavirus OC43,1
-expt11_150824,45,Influenza A,0
-expt11_150824,45,Influenza A/H1,0
-expt11_150824,45,Influenza A/H1-2009,0
-expt11_150824,45,Influenza A/H3,0
-expt11_150824,45,Influenza B,0
-expt11_150824,45,Metapneumovirus,0
-expt11_150824,45,Mycoplasma_pneumoniae,0
-expt11_150824,45,Parainfluenza 1,0
-expt11_150824,45,Parainfluenza 2,0
-expt11_150824,45,Parainfluenza 3,0
-expt11_150824,45,Parainfluenza 4,0
-expt11_150824,45,RSV,0
-expt11_150824,45,Rhinovirus/enterovirus,0
-expt11_150824,45,SARS-CoV-2,0
-expt11_150824,46,Adenovirus,0
-expt11_150824,46,Bordetella_parapertussis,0
-expt11_150824,46,Bordetella_pertussis,0
-expt11_150824,46,Chlamydia_pneumoniae,0
-expt11_150824,46,Coronavirus 229E,0
-expt11_150824,46,Coronavirus HKU,0
-expt11_150824,46,Coronavirus NL63,0
-expt11_150824,46,Coronavirus OC43,0
-expt11_150824,46,Rhinovirus/enterovirus,1
-expt11_150824,46,Influenza A,0
-expt11_150824,46,Influenza A/H1,0
-expt11_150824,46,Influenza A/H1-2009,0
-expt11_150824,46,Influenza A/H3,0
-expt11_150824,46,Influenza B,0
-expt11_150824,46,Metapneumovirus,0
-expt11_150824,46,Mycoplasma_pneumoniae,0
-expt11_150824,46,Parainfluenza 1,0
-expt11_150824,46,Parainfluenza 2,0
-expt11_150824,46,Parainfluenza 3,0
-expt11_150824,46,Parainfluenza 4,0
-expt11_150824,46,RSV,0
-expt11_150824,46,SARS-CoV-2,0
-expt11_150824,47,Adenovirus,0
-expt11_150824,47,Bordetella_parapertussis,0
-expt11_150824,47,Bordetella_pertussis,0
-expt11_150824,47,Chlamydia_pneumoniae,0
-expt11_150824,47,Coronavirus 229E,0
-expt11_150824,47,Coronavirus HKU,0
-expt11_150824,47,Coronavirus NL63,1
-expt11_150824,47,Coronavirus OC43,0
-expt11_150824,47,Influenza A,0
-expt11_150824,47,Influenza A/H1,0
-expt11_150824,47,Influenza A/H1-2009,0
-expt11_150824,47,Influenza A/H3,0
-expt11_150824,47,Influenza B,0
-expt11_150824,47,Metapneumovirus,0
-expt11_150824,47,Mycoplasma_pneumoniae,0
-expt11_150824,47,Parainfluenza 1,0
-expt11_150824,47,Parainfluenza 2,0
-expt11_150824,47,Parainfluenza 3,0
-expt11_150824,47,Parainfluenza 4,0
-expt11_150824,47,RSV,0
-expt11_150824,47,Rhinovirus/enterovirus,0
-expt11_150824,47,SARS-CoV-2,0
-expt11_150824,48,Adenovirus,0
-expt11_150824,48,Bordetella_parapertussis,0
-expt11_150824,48,Bordetella_pertussis,0
-expt11_150824,48,Chlamydia_pneumoniae,0
-expt11_150824,48,Coronavirus 229E,0
-expt11_150824,48,Coronavirus HKU,0
-expt11_150824,48,Coronavirus NL63,0
-expt11_150824,48,Coronavirus OC43,0
-expt11_150824,48,Influenza A,0
-expt11_150824,48,Influenza A/H1,0
-expt11_150824,48,Influenza A/H1-2009,0
-expt11_150824,48,Influenza A/H3,0
-expt11_150824,48,Influenza B,0
-expt11_150824,48,Metapneumovirus,0
-expt11_150824,48,Mycoplasma_pneumoniae,0
-expt11_150824,48,Parainfluenza 1,0
-expt11_150824,48,Parainfluenza 2,0
-expt11_150824,48,Parainfluenza 3,0
-expt11_150824,48,Parainfluenza 4,0
-expt11_150824,48,RSV,0
-expt11_150824,48,Rhinovirus/enterovirus,0
-expt11_150824,48,SARS-CoV-2,1
-expt11_150824,49,Adenovirus,0
-expt11_150824,49,Bordetella_parapertussis,0
-expt11_150824,49,Bordetella_pertussis,0
-expt11_150824,49,Chlamydia_pneumoniae,0
-expt11_150824,49,Coronavirus 229E,0
-expt11_150824,49,Coronavirus HKU,0
-expt11_150824,49,Coronavirus NL63,0
-expt11_150824,49,Coronavirus OC43,0
-expt11_150824,49,Influenza A,0
-expt11_150824,49,Influenza A/H1,0
-expt11_150824,49,Influenza A/H1-2009,0
-expt11_150824,49,Influenza A/H3,0
-expt11_150824,49,Influenza B,0
-expt11_150824,49,Metapneumovirus,0
-expt11_150824,49,Mycoplasma_pneumoniae,0
-expt11_150824,49,Parainfluenza 1,0
-expt11_150824,49,Parainfluenza 2,0
-expt11_150824,49,Parainfluenza 3,0
-expt11_150824,49,Parainfluenza 4,0
-expt11_150824,49,RSV,0
-expt11_150824,49,Rhinovirus/enterovirus,0
-expt11_150824,49,SARS-CoV-2,1
-expt11_150824,50,Adenovirus,0
-expt11_150824,50,Bordetella_parapertussis,0
-expt11_150824,50,Bordetella_pertussis,0
-expt11_150824,50,Chlamydia_pneumoniae,0
-expt11_150824,50,Coronavirus 229E,0
-expt11_150824,50,Coronavirus HKU,0
-expt11_150824,50,Coronavirus NL63,0
-expt11_150824,50,Coronavirus OC43,0
-expt11_150824,50,Influenza A,0
-expt11_150824,50,Influenza A/H1,0
-expt11_150824,50,Influenza A/H1-2009,0
-expt11_150824,50,Influenza A/H3,0
-expt11_150824,50,Influenza B,0
-expt11_150824,50,Metapneumovirus,0
-expt11_150824,50,Mycoplasma_pneumoniae,0
-expt11_150824,50,Parainfluenza 3,1
-expt11_150824,50,Parainfluenza 1,0
-expt11_150824,50,Parainfluenza 2,0
-expt11_150824,50,Parainfluenza 4,0
-expt11_150824,50,RSV,0
-expt11_150824,50,Rhinovirus/enterovirus,0
-expt11_150824,50,SARS-CoV-2,0
-expt11_150824,51,Adenovirus,0
-expt11_150824,51,Bordetella_parapertussis,0
-expt11_150824,51,Bordetella_pertussis,0
-expt11_150824,51,Chlamydia_pneumoniae,0
-expt11_150824,51,Coronavirus 229E,0
-expt11_150824,51,Coronavirus HKU,0
-expt11_150824,51,Coronavirus NL63,0
-expt11_150824,51,Coronavirus OC43,0
-expt11_150824,51,Rhinovirus/enterovirus,1
-expt11_150824,51,Influenza A,0
-expt11_150824,51,Influenza A/H1,0
-expt11_150824,51,Influenza A/H1-2009,0
-expt11_150824,51,Influenza A/H3,0
-expt11_150824,51,Influenza B,0
-expt11_150824,51,Metapneumovirus,0
-expt11_150824,51,Mycoplasma_pneumoniae,0
-expt11_150824,51,Parainfluenza 1,0
-expt11_150824,51,Parainfluenza 2,0
-expt11_150824,51,Parainfluenza 3,0
-expt11_150824,51,Parainfluenza 4,0
-expt11_150824,51,RSV,0
-expt11_150824,51,SARS-CoV-2,0
-expt11_150824,52,Adenovirus,0
-expt11_150824,52,Bordetella_parapertussis,0
-expt11_150824,52,Bordetella_pertussis,0
-expt11_150824,52,Chlamydia_pneumoniae,0
-expt11_150824,52,Coronavirus 229E,0
-expt11_150824,52,Coronavirus HKU,0
-expt11_150824,52,Coronavirus NL63,0
-expt11_150824,52,Coronavirus OC43,0
-expt11_150824,52,Influenza A,0
-expt11_150824,52,Influenza A/H1,0
-expt11_150824,52,Influenza A/H1-2009,0
-expt11_150824,52,Influenza A/H3,0
-expt11_150824,52,Influenza B,0
-expt11_150824,52,Metapneumovirus,1
-expt11_150824,52,Mycoplasma_pneumoniae,0
-expt11_150824,52,Parainfluenza 1,0
-expt11_150824,52,Parainfluenza 2,0
-expt11_150824,52,Parainfluenza 3,0
-expt11_150824,52,Parainfluenza 4,0
-expt11_150824,52,RSV,0
-expt11_150824,52,Rhinovirus/enterovirus,0
-expt11_150824,52,SARS-CoV-2,0
-expt11_150824,53,Adenovirus,0
-expt11_150824,53,Bordetella_parapertussis,0
-expt11_150824,53,Bordetella_pertussis,0
-expt11_150824,53,Chlamydia_pneumoniae,0
-expt11_150824,53,Coronavirus 229E,0
-expt11_150824,53,Coronavirus HKU,0
-expt11_150824,53,Coronavirus NL63,0
-expt11_150824,53,Coronavirus OC43,0
-expt11_150824,53,Influenza A,0
-expt11_150824,53,Influenza A/H1,0
-expt11_150824,53,Influenza A/H1-2009,0
-expt11_150824,53,Influenza A/H3,0
-expt11_150824,53,Influenza B,0
-expt11_150824,53,Metapneumovirus,0
-expt11_150824,53,Mycoplasma_pneumoniae,0
-expt11_150824,53,Parainfluenza 1,0
-expt11_150824,53,Parainfluenza 2,0
-expt11_150824,53,Parainfluenza 3,0
-expt11_150824,53,Parainfluenza 4,0
-expt11_150824,53,RSV,0
-expt11_150824,53,Rhinovirus/enterovirus,0
-expt11_150824,53,SARS-CoV-2,1
-expt11_150824,54,Adenovirus,0
-expt11_150824,54,Bordetella_parapertussis,0
-expt11_150824,54,Bordetella_pertussis,0
-expt11_150824,54,Chlamydia_pneumoniae,0
-expt11_150824,54,Coronavirus 229E,0
-expt11_150824,54,Coronavirus HKU,0
-expt11_150824,54,Coronavirus NL63,0
-expt11_150824,54,Coronavirus OC43,0
-expt11_150824,54,Influenza A,0
-expt11_150824,54,Influenza A/H1,0
-expt11_150824,54,Influenza A/H1-2009,0
-expt11_150824,54,Influenza A/H3,0
-expt11_150824,54,Influenza B,0
-expt11_150824,54,Metapneumovirus,0
-expt11_150824,54,Mycoplasma_pneumoniae,0
-expt11_150824,54,Parainfluenza 1,0
-expt11_150824,54,Parainfluenza 2,0
-expt11_150824,54,Parainfluenza 3,0
-expt11_150824,54,Parainfluenza 4,0
-expt11_150824,54,RSV,0
-expt11_150824,54,Rhinovirus/enterovirus,0
-expt11_150824,54,SARS-CoV-2,0
+Run,barcode,seq_name,pathogen,Biofire positive,mapQ
+010524_Expt9_SISPA_Daisy,66,S1P1,Adenovirus,0,40
+010524_Expt9_SISPA_Daisy,66,S1P1,Bordetella_parapertussis,0,40
+010524_Expt9_SISPA_Daisy,66,S1P1,Bordetella_pertussis,0,40
+010524_Expt9_SISPA_Daisy,66,S1P1,Chlamydia_pneumoniae,0,40
+010524_Expt9_SISPA_Daisy,66,S1P1,Coronavirus 229E,0,40
+010524_Expt9_SISPA_Daisy,66,S1P1,Coronavirus HKU,0,40
+010524_Expt9_SISPA_Daisy,66,S1P1,Coronavirus NL63,0,40
+010524_Expt9_SISPA_Daisy,66,S1P1,Coronavirus OC43,0,40
+010524_Expt9_SISPA_Daisy,66,S1P1,Influenza A,0,40
+010524_Expt9_SISPA_Daisy,66,S1P1,Influenza A/H1,0,40
+010524_Expt9_SISPA_Daisy,66,S1P1,Influenza A/H1-2009,0,40
+010524_Expt9_SISPA_Daisy,66,S1P1,Influenza A/H3,0,40
+010524_Expt9_SISPA_Daisy,66,S1P1,Influenza B,0,40
+010524_Expt9_SISPA_Daisy,66,S1P1,MERS,0,40
+010524_Expt9_SISPA_Daisy,66,S1P1,Metapneumovirus,0,40
+010524_Expt9_SISPA_Daisy,66,S1P1,Mycoplasma_pneumoniae,0,40
+010524_Expt9_SISPA_Daisy,66,S1P1,Parainfluenza 1,0,40
+010524_Expt9_SISPA_Daisy,66,S1P1,Parainfluenza 2,0,40
+010524_Expt9_SISPA_Daisy,66,S1P1,Parainfluenza 3,0,40
+010524_Expt9_SISPA_Daisy,66,S1P1,Parainfluenza 4,0,40
+010524_Expt9_SISPA_Daisy,66,S1P1,RSV,1,40
+010524_Expt9_SISPA_Daisy,66,S1P1,Rhinovirus/enterovirus,0,40
+010524_Expt9_SISPA_Daisy,66,S1P1,SARS-CoV-2,0,40
+010524_Expt9_SISPA_Daisy,66,S1P1,unmapped,0,40
+010524_Expt9_SISPA_Daisy,67,S2P1,Adenovirus,0,40
+010524_Expt9_SISPA_Daisy,67,S2P1,Bordetella_parapertussis,0,40
+010524_Expt9_SISPA_Daisy,67,S2P1,Bordetella_pertussis,0,40
+010524_Expt9_SISPA_Daisy,67,S2P1,Chlamydia_pneumoniae,0,40
+010524_Expt9_SISPA_Daisy,67,S2P1,Coronavirus 229E,0,40
+010524_Expt9_SISPA_Daisy,67,S2P1,Coronavirus HKU,0,40
+010524_Expt9_SISPA_Daisy,67,S2P1,Coronavirus NL63,0,40
+010524_Expt9_SISPA_Daisy,67,S2P1,Coronavirus OC43,0,40
+010524_Expt9_SISPA_Daisy,67,S2P1,Influenza A,1,40
+010524_Expt9_SISPA_Daisy,67,S2P1,Influenza A/H1,0,40
+010524_Expt9_SISPA_Daisy,67,S2P1,Influenza A/H1-2009,0,40
+010524_Expt9_SISPA_Daisy,67,S2P1,Influenza A/H3,0,40
+010524_Expt9_SISPA_Daisy,67,S2P1,Influenza B,0,40
+010524_Expt9_SISPA_Daisy,67,S2P1,MERS,0,40
+010524_Expt9_SISPA_Daisy,67,S2P1,Metapneumovirus,0,40
+010524_Expt9_SISPA_Daisy,67,S2P1,Mycoplasma_pneumoniae,0,40
+010524_Expt9_SISPA_Daisy,67,S2P1,Parainfluenza 1,0,40
+010524_Expt9_SISPA_Daisy,67,S2P1,Parainfluenza 2,0,40
+010524_Expt9_SISPA_Daisy,67,S2P1,Parainfluenza 3,0,40
+010524_Expt9_SISPA_Daisy,67,S2P1,Parainfluenza 4,0,40
+010524_Expt9_SISPA_Daisy,67,S2P1,RSV,0,40
+010524_Expt9_SISPA_Daisy,67,S2P1,Rhinovirus/enterovirus,0,40
+010524_Expt9_SISPA_Daisy,67,S2P1,SARS-CoV-2,0,40
+010524_Expt9_SISPA_Daisy,67,S2P1,unmapped,0,40
+010524_Expt9_SISPA_Daisy,68,S1P2,Adenovirus,0,40
+010524_Expt9_SISPA_Daisy,68,S1P2,Bordetella_parapertussis,0,40
+010524_Expt9_SISPA_Daisy,68,S1P2,Bordetella_pertussis,0,40
+010524_Expt9_SISPA_Daisy,68,S1P2,Chlamydia_pneumoniae,0,40
+010524_Expt9_SISPA_Daisy,68,S1P2,Coronavirus 229E,0,40
+010524_Expt9_SISPA_Daisy,68,S1P2,Coronavirus HKU,0,40
+010524_Expt9_SISPA_Daisy,68,S1P2,Coronavirus NL63,0,40
+010524_Expt9_SISPA_Daisy,68,S1P2,Coronavirus OC43,0,40
+010524_Expt9_SISPA_Daisy,68,S1P2,Influenza A,0,40
+010524_Expt9_SISPA_Daisy,68,S1P2,Influenza A/H1,0,40
+010524_Expt9_SISPA_Daisy,68,S1P2,Influenza A/H1-2009,0,40
+010524_Expt9_SISPA_Daisy,68,S1P2,Influenza A/H3,0,40
+010524_Expt9_SISPA_Daisy,68,S1P2,Influenza B,0,40
+010524_Expt9_SISPA_Daisy,68,S1P2,MERS,0,40
+010524_Expt9_SISPA_Daisy,68,S1P2,Metapneumovirus,0,40
+010524_Expt9_SISPA_Daisy,68,S1P2,Mycoplasma_pneumoniae,0,40
+010524_Expt9_SISPA_Daisy,68,S1P2,Parainfluenza 1,0,40
+010524_Expt9_SISPA_Daisy,68,S1P2,Parainfluenza 2,0,40
+010524_Expt9_SISPA_Daisy,68,S1P2,Parainfluenza 3,0,40
+010524_Expt9_SISPA_Daisy,68,S1P2,Parainfluenza 4,0,40
+010524_Expt9_SISPA_Daisy,68,S1P2,RSV,1,40
+010524_Expt9_SISPA_Daisy,68,S1P2,Rhinovirus/enterovirus,0,40
+010524_Expt9_SISPA_Daisy,68,S1P2,SARS-CoV-2,0,40
+010524_Expt9_SISPA_Daisy,68,S1P2,unmapped,0,40
+010524_Expt9_SISPA_Daisy,69,S2P2,Adenovirus,0,40
+010524_Expt9_SISPA_Daisy,69,S2P2,Bordetella_parapertussis,0,40
+010524_Expt9_SISPA_Daisy,69,S2P2,Bordetella_pertussis,0,40
+010524_Expt9_SISPA_Daisy,69,S2P2,Chlamydia_pneumoniae,0,40
+010524_Expt9_SISPA_Daisy,69,S2P2,Coronavirus 229E,0,40
+010524_Expt9_SISPA_Daisy,69,S2P2,Coronavirus HKU,0,40
+010524_Expt9_SISPA_Daisy,69,S2P2,Coronavirus NL63,0,40
+010524_Expt9_SISPA_Daisy,69,S2P2,Coronavirus OC43,0,40
+010524_Expt9_SISPA_Daisy,69,S2P2,Influenza A,1,40
+010524_Expt9_SISPA_Daisy,69,S2P2,Influenza A/H1,0,40
+010524_Expt9_SISPA_Daisy,69,S2P2,Influenza A/H1-2009,0,40
+010524_Expt9_SISPA_Daisy,69,S2P2,Influenza A/H3,0,40
+010524_Expt9_SISPA_Daisy,69,S2P2,Influenza B,0,40
+010524_Expt9_SISPA_Daisy,69,S2P2,MERS,0,40
+010524_Expt9_SISPA_Daisy,69,S2P2,Metapneumovirus,0,40
+010524_Expt9_SISPA_Daisy,69,S2P2,Mycoplasma_pneumoniae,0,40
+010524_Expt9_SISPA_Daisy,69,S2P2,Parainfluenza 1,0,40
+010524_Expt9_SISPA_Daisy,69,S2P2,Parainfluenza 2,0,40
+010524_Expt9_SISPA_Daisy,69,S2P2,Parainfluenza 3,0,40
+010524_Expt9_SISPA_Daisy,69,S2P2,Parainfluenza 4,0,40
+010524_Expt9_SISPA_Daisy,69,S2P2,RSV,0,40
+010524_Expt9_SISPA_Daisy,69,S2P2,Rhinovirus/enterovirus,0,40
+010524_Expt9_SISPA_Daisy,69,S2P2,SARS-CoV-2,0,40
+010524_Expt9_SISPA_Daisy,69,S2P2,unmapped,0,40
+010524_Expt9_SISPA_Daisy,70,S1P3,Adenovirus,0,40
+010524_Expt9_SISPA_Daisy,70,S1P3,Bordetella_parapertussis,0,40
+010524_Expt9_SISPA_Daisy,70,S1P3,Bordetella_pertussis,0,40
+010524_Expt9_SISPA_Daisy,70,S1P3,Chlamydia_pneumoniae,0,40
+010524_Expt9_SISPA_Daisy,70,S1P3,Coronavirus 229E,0,40
+010524_Expt9_SISPA_Daisy,70,S1P3,Coronavirus HKU,0,40
+010524_Expt9_SISPA_Daisy,70,S1P3,Coronavirus NL63,0,40
+010524_Expt9_SISPA_Daisy,70,S1P3,Coronavirus OC43,0,40
+010524_Expt9_SISPA_Daisy,70,S1P3,Influenza A,0,40
+010524_Expt9_SISPA_Daisy,70,S1P3,Influenza A/H1,0,40
+010524_Expt9_SISPA_Daisy,70,S1P3,Influenza A/H1-2009,0,40
+010524_Expt9_SISPA_Daisy,70,S1P3,Influenza A/H3,0,40
+010524_Expt9_SISPA_Daisy,70,S1P3,Influenza B,0,40
+010524_Expt9_SISPA_Daisy,70,S1P3,MERS,0,40
+010524_Expt9_SISPA_Daisy,70,S1P3,Metapneumovirus,0,40
+010524_Expt9_SISPA_Daisy,70,S1P3,Mycoplasma_pneumoniae,0,40
+010524_Expt9_SISPA_Daisy,70,S1P3,Parainfluenza 1,0,40
+010524_Expt9_SISPA_Daisy,70,S1P3,Parainfluenza 2,0,40
+010524_Expt9_SISPA_Daisy,70,S1P3,Parainfluenza 3,0,40
+010524_Expt9_SISPA_Daisy,70,S1P3,Parainfluenza 4,0,40
+010524_Expt9_SISPA_Daisy,70,S1P3,RSV,1,40
+010524_Expt9_SISPA_Daisy,70,S1P3,Rhinovirus/enterovirus,0,40
+010524_Expt9_SISPA_Daisy,70,S1P3,SARS-CoV-2,0,40
+010524_Expt9_SISPA_Daisy,70,S1P3,unmapped,0,40
+010524_Expt9_SISPA_Daisy,71,S2P3,Adenovirus,0,40
+010524_Expt9_SISPA_Daisy,71,S2P3,Bordetella_parapertussis,0,40
+010524_Expt9_SISPA_Daisy,71,S2P3,Bordetella_pertussis,0,40
+010524_Expt9_SISPA_Daisy,71,S2P3,Chlamydia_pneumoniae,0,40
+010524_Expt9_SISPA_Daisy,71,S2P3,Coronavirus 229E,0,40
+010524_Expt9_SISPA_Daisy,71,S2P3,Coronavirus HKU,0,40
+010524_Expt9_SISPA_Daisy,71,S2P3,Coronavirus NL63,0,40
+010524_Expt9_SISPA_Daisy,71,S2P3,Coronavirus OC43,0,40
+010524_Expt9_SISPA_Daisy,71,S2P3,Influenza A,1,40
+010524_Expt9_SISPA_Daisy,71,S2P3,Influenza A/H1,0,40
+010524_Expt9_SISPA_Daisy,71,S2P3,Influenza A/H1-2009,0,40
+010524_Expt9_SISPA_Daisy,71,S2P3,Influenza A/H3,0,40
+010524_Expt9_SISPA_Daisy,71,S2P3,Influenza B,0,40
+010524_Expt9_SISPA_Daisy,71,S2P3,MERS,0,40
+010524_Expt9_SISPA_Daisy,71,S2P3,Metapneumovirus,0,40
+010524_Expt9_SISPA_Daisy,71,S2P3,Mycoplasma_pneumoniae,0,40
+010524_Expt9_SISPA_Daisy,71,S2P3,Parainfluenza 1,0,40
+010524_Expt9_SISPA_Daisy,71,S2P3,Parainfluenza 2,0,40
+010524_Expt9_SISPA_Daisy,71,S2P3,Parainfluenza 3,0,40
+010524_Expt9_SISPA_Daisy,71,S2P3,Parainfluenza 4,0,40
+010524_Expt9_SISPA_Daisy,71,S2P3,RSV,0,40
+010524_Expt9_SISPA_Daisy,71,S2P3,Rhinovirus/enterovirus,0,40
+010524_Expt9_SISPA_Daisy,71,S2P3,SARS-CoV-2,0,40
+010524_Expt9_SISPA_Daisy,71,S2P3,unmapped,0,40
+010524_Expt9_SISPA_Daisy,72,S1P4,Adenovirus,0,40
+010524_Expt9_SISPA_Daisy,72,S1P4,Bordetella_parapertussis,0,40
+010524_Expt9_SISPA_Daisy,72,S1P4,Bordetella_pertussis,0,40
+010524_Expt9_SISPA_Daisy,72,S1P4,Chlamydia_pneumoniae,0,40
+010524_Expt9_SISPA_Daisy,72,S1P4,Coronavirus 229E,0,40
+010524_Expt9_SISPA_Daisy,72,S1P4,Coronavirus HKU,0,40
+010524_Expt9_SISPA_Daisy,72,S1P4,Coronavirus NL63,0,40
+010524_Expt9_SISPA_Daisy,72,S1P4,Coronavirus OC43,0,40
+010524_Expt9_SISPA_Daisy,72,S1P4,Influenza A,0,40
+010524_Expt9_SISPA_Daisy,72,S1P4,Influenza A/H1,0,40
+010524_Expt9_SISPA_Daisy,72,S1P4,Influenza A/H1-2009,0,40
+010524_Expt9_SISPA_Daisy,72,S1P4,Influenza A/H3,0,40
+010524_Expt9_SISPA_Daisy,72,S1P4,Influenza B,0,40
+010524_Expt9_SISPA_Daisy,72,S1P4,MERS,0,40
+010524_Expt9_SISPA_Daisy,72,S1P4,Metapneumovirus,0,40
+010524_Expt9_SISPA_Daisy,72,S1P4,Mycoplasma_pneumoniae,0,40
+010524_Expt9_SISPA_Daisy,72,S1P4,Parainfluenza 1,0,40
+010524_Expt9_SISPA_Daisy,72,S1P4,Parainfluenza 2,0,40
+010524_Expt9_SISPA_Daisy,72,S1P4,Parainfluenza 3,0,40
+010524_Expt9_SISPA_Daisy,72,S1P4,Parainfluenza 4,0,40
+010524_Expt9_SISPA_Daisy,72,S1P4,RSV,1,40
+010524_Expt9_SISPA_Daisy,72,S1P4,Rhinovirus/enterovirus,0,40
+010524_Expt9_SISPA_Daisy,72,S1P4,SARS-CoV-2,0,40
+010524_Expt9_SISPA_Daisy,72,S1P4,unmapped,0,40
+010524_Expt9_SISPA_Daisy,73,S2P4,Adenovirus,0,40
+010524_Expt9_SISPA_Daisy,73,S2P4,Bordetella_parapertussis,0,40
+010524_Expt9_SISPA_Daisy,73,S2P4,Bordetella_pertussis,0,40
+010524_Expt9_SISPA_Daisy,73,S2P4,Chlamydia_pneumoniae,0,40
+010524_Expt9_SISPA_Daisy,73,S2P4,Coronavirus 229E,0,40
+010524_Expt9_SISPA_Daisy,73,S2P4,Coronavirus HKU,0,40
+010524_Expt9_SISPA_Daisy,73,S2P4,Coronavirus NL63,0,40
+010524_Expt9_SISPA_Daisy,73,S2P4,Coronavirus OC43,0,40
+010524_Expt9_SISPA_Daisy,73,S2P4,Influenza A,1,40
+010524_Expt9_SISPA_Daisy,73,S2P4,Influenza A/H1,0,40
+010524_Expt9_SISPA_Daisy,73,S2P4,Influenza A/H1-2009,0,40
+010524_Expt9_SISPA_Daisy,73,S2P4,Influenza A/H3,0,40
+010524_Expt9_SISPA_Daisy,73,S2P4,Influenza B,0,40
+010524_Expt9_SISPA_Daisy,73,S2P4,MERS,0,40
+010524_Expt9_SISPA_Daisy,73,S2P4,Metapneumovirus,0,40
+010524_Expt9_SISPA_Daisy,73,S2P4,Mycoplasma_pneumoniae,0,40
+010524_Expt9_SISPA_Daisy,73,S2P4,Parainfluenza 1,0,40
+010524_Expt9_SISPA_Daisy,73,S2P4,Parainfluenza 2,0,40
+010524_Expt9_SISPA_Daisy,73,S2P4,Parainfluenza 3,0,40
+010524_Expt9_SISPA_Daisy,73,S2P4,Parainfluenza 4,0,40
+010524_Expt9_SISPA_Daisy,73,S2P4,RSV,0,40
+010524_Expt9_SISPA_Daisy,73,S2P4,Rhinovirus/enterovirus,0,40
+010524_Expt9_SISPA_Daisy,73,S2P4,SARS-CoV-2,0,40
+010524_Expt9_SISPA_Daisy,73,S2P4,unmapped,0,40
+010524_Expt9_SISPA_Daisy,74,Negative,Adenovirus,0,40
+010524_Expt9_SISPA_Daisy,74,Negative,Bordetella_parapertussis,0,40
+010524_Expt9_SISPA_Daisy,74,Negative,Bordetella_pertussis,0,40
+010524_Expt9_SISPA_Daisy,74,Negative,Chlamydia_pneumoniae,0,40
+010524_Expt9_SISPA_Daisy,74,Negative,Coronavirus 229E,0,40
+010524_Expt9_SISPA_Daisy,74,Negative,Coronavirus HKU,0,40
+010524_Expt9_SISPA_Daisy,74,Negative,Coronavirus NL63,0,40
+010524_Expt9_SISPA_Daisy,74,Negative,Coronavirus OC43,0,40
+010524_Expt9_SISPA_Daisy,74,Negative,Influenza A,0,40
+010524_Expt9_SISPA_Daisy,74,Negative,Influenza A/H1,0,40
+010524_Expt9_SISPA_Daisy,74,Negative,Influenza A/H1-2009,0,40
+010524_Expt9_SISPA_Daisy,74,Negative,Influenza A/H3,0,40
+010524_Expt9_SISPA_Daisy,74,Negative,Influenza B,0,40
+010524_Expt9_SISPA_Daisy,74,Negative,MERS,0,40
+010524_Expt9_SISPA_Daisy,74,Negative,Metapneumovirus,0,40
+010524_Expt9_SISPA_Daisy,74,Negative,Mycoplasma_pneumoniae,0,40
+010524_Expt9_SISPA_Daisy,74,Negative,,1,40
+010524_Expt9_SISPA_Daisy,74,Negative,Parainfluenza 1,0,40
+010524_Expt9_SISPA_Daisy,74,Negative,Parainfluenza 2,0,40
+010524_Expt9_SISPA_Daisy,74,Negative,Parainfluenza 3,0,40
+010524_Expt9_SISPA_Daisy,74,Negative,Parainfluenza 4,0,40
+010524_Expt9_SISPA_Daisy,74,Negative,RSV,0,40
+010524_Expt9_SISPA_Daisy,74,Negative,Rhinovirus/enterovirus,0,40
+010524_Expt9_SISPA_Daisy,74,Negative,SARS-CoV-2,0,40
+010524_Expt9_SISPA_Daisy,74,Negative,unmapped,0,40
+010524_Expt9_SISPA_Kate,66,S1P1,Adenovirus,0,40
+010524_Expt9_SISPA_Kate,66,S1P1,Bordetella_parapertussis,0,40
+010524_Expt9_SISPA_Kate,66,S1P1,Bordetella_pertussis,0,40
+010524_Expt9_SISPA_Kate,66,S1P1,Chlamydia_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,66,S1P1,Coronavirus 229E,0,40
+010524_Expt9_SISPA_Kate,66,S1P1,Coronavirus HKU,0,40
+010524_Expt9_SISPA_Kate,66,S1P1,Coronavirus NL63,0,40
+010524_Expt9_SISPA_Kate,66,S1P1,Coronavirus OC43,0,40
+010524_Expt9_SISPA_Kate,66,S1P1,Influenza A,0,40
+010524_Expt9_SISPA_Kate,66,S1P1,Influenza A/H1,0,40
+010524_Expt9_SISPA_Kate,66,S1P1,Influenza A/H1-2009,0,40
+010524_Expt9_SISPA_Kate,66,S1P1,Influenza A/H3,0,40
+010524_Expt9_SISPA_Kate,66,S1P1,Influenza B,0,40
+010524_Expt9_SISPA_Kate,66,S1P1,MERS,0,40
+010524_Expt9_SISPA_Kate,66,S1P1,Metapneumovirus,0,40
+010524_Expt9_SISPA_Kate,66,S1P1,Mycoplasma_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,66,S1P1,Parainfluenza 1,0,40
+010524_Expt9_SISPA_Kate,66,S1P1,Parainfluenza 2,0,40
+010524_Expt9_SISPA_Kate,66,S1P1,Parainfluenza 3,1,40
+010524_Expt9_SISPA_Kate,66,S1P1,Parainfluenza 4,0,40
+010524_Expt9_SISPA_Kate,66,S1P1,RSV,1,40
+010524_Expt9_SISPA_Kate,66,S1P1,Rhinovirus/enterovirus,0,40
+010524_Expt9_SISPA_Kate,66,S1P1,SARS-CoV-2,0,40
+010524_Expt9_SISPA_Kate,66,S1P1,unmapped,0,40
+010524_Expt9_SISPA_Kate,67,S2P1,Adenovirus,0,40
+010524_Expt9_SISPA_Kate,67,S2P1,Bordetella_parapertussis,0,40
+010524_Expt9_SISPA_Kate,67,S2P1,Bordetella_pertussis,0,40
+010524_Expt9_SISPA_Kate,67,S2P1,Chlamydia_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,67,S2P1,Coronavirus 229E,0,40
+010524_Expt9_SISPA_Kate,67,S2P1,Coronavirus HKU,1,40
+010524_Expt9_SISPA_Kate,67,S2P1,Coronavirus NL63,0,40
+010524_Expt9_SISPA_Kate,67,S2P1,Coronavirus OC43,0,40
+010524_Expt9_SISPA_Kate,67,S2P1,Influenza A,0,40
+010524_Expt9_SISPA_Kate,67,S2P1,Influenza A/H1,0,40
+010524_Expt9_SISPA_Kate,67,S2P1,Influenza A/H1-2009,0,40
+010524_Expt9_SISPA_Kate,67,S2P1,Influenza A/H3,0,40
+010524_Expt9_SISPA_Kate,67,S2P1,Influenza B,0,40
+010524_Expt9_SISPA_Kate,67,S2P1,MERS,0,40
+010524_Expt9_SISPA_Kate,67,S2P1,Metapneumovirus,0,40
+010524_Expt9_SISPA_Kate,67,S2P1,Mycoplasma_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,67,S2P1,Parainfluenza 1,0,40
+010524_Expt9_SISPA_Kate,67,S2P1,Parainfluenza 2,0,40
+010524_Expt9_SISPA_Kate,67,S2P1,Parainfluenza 3,0,40
+010524_Expt9_SISPA_Kate,67,S2P1,Parainfluenza 4,0,40
+010524_Expt9_SISPA_Kate,67,S2P1,RSV,0,40
+010524_Expt9_SISPA_Kate,67,S2P1,Rhinovirus/enterovirus,0,40
+010524_Expt9_SISPA_Kate,67,S2P1,SARS-CoV-2,0,40
+010524_Expt9_SISPA_Kate,67,S2P1,unmapped,0,40
+010524_Expt9_SISPA_Kate,68,S3P1,Adenovirus,0,40
+010524_Expt9_SISPA_Kate,68,S3P1,Bordetella_parapertussis,0,40
+010524_Expt9_SISPA_Kate,68,S3P1,Bordetella_pertussis,0,40
+010524_Expt9_SISPA_Kate,68,S3P1,Chlamydia_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,68,S3P1,Coronavirus 229E,0,40
+010524_Expt9_SISPA_Kate,68,S3P1,Coronavirus HKU,0,40
+010524_Expt9_SISPA_Kate,68,S3P1,Coronavirus NL63,0,40
+010524_Expt9_SISPA_Kate,68,S3P1,Coronavirus OC43,0,40
+010524_Expt9_SISPA_Kate,68,S3P1,Influenza A,0,40
+010524_Expt9_SISPA_Kate,68,S3P1,Influenza A/H1,0,40
+010524_Expt9_SISPA_Kate,68,S3P1,Influenza A/H1-2009,0,40
+010524_Expt9_SISPA_Kate,68,S3P1,Influenza A/H3,0,40
+010524_Expt9_SISPA_Kate,68,S3P1,Influenza B,0,40
+010524_Expt9_SISPA_Kate,68,S3P1,MERS,0,40
+010524_Expt9_SISPA_Kate,68,S3P1,Metapneumovirus,0,40
+010524_Expt9_SISPA_Kate,68,S3P1,Mycoplasma_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,68,S3P1,Parainfluenza 1,0,40
+010524_Expt9_SISPA_Kate,68,S3P1,Parainfluenza 2,0,40
+010524_Expt9_SISPA_Kate,68,S3P1,Parainfluenza 3,1,40
+010524_Expt9_SISPA_Kate,68,S3P1,Parainfluenza 4,0,40
+010524_Expt9_SISPA_Kate,68,S3P1,RSV,0,40
+010524_Expt9_SISPA_Kate,68,S3P1,Rhinovirus/enterovirus,0,40
+010524_Expt9_SISPA_Kate,68,S3P1,SARS-CoV-2,0,40
+010524_Expt9_SISPA_Kate,68,S3P1,unmapped,0,40
+010524_Expt9_SISPA_Kate,69,S4P1,Adenovirus,0,40
+010524_Expt9_SISPA_Kate,69,S4P1,Bordetella_parapertussis,0,40
+010524_Expt9_SISPA_Kate,69,S4P1,Bordetella_pertussis,0,40
+010524_Expt9_SISPA_Kate,69,S4P1,Chlamydia_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,69,S4P1,Coronavirus 229E,0,40
+010524_Expt9_SISPA_Kate,69,S4P1,Coronavirus HKU,0,40
+010524_Expt9_SISPA_Kate,69,S4P1,Coronavirus NL63,0,40
+010524_Expt9_SISPA_Kate,69,S4P1,Coronavirus OC43,1,40
+010524_Expt9_SISPA_Kate,69,S4P1,Influenza A,0,40
+010524_Expt9_SISPA_Kate,69,S4P1,Influenza A/H1,0,40
+010524_Expt9_SISPA_Kate,69,S4P1,Influenza A/H1-2009,0,40
+010524_Expt9_SISPA_Kate,69,S4P1,Influenza A/H3,0,40
+010524_Expt9_SISPA_Kate,69,S4P1,Influenza B,0,40
+010524_Expt9_SISPA_Kate,69,S4P1,MERS,0,40
+010524_Expt9_SISPA_Kate,69,S4P1,Metapneumovirus,0,40
+010524_Expt9_SISPA_Kate,69,S4P1,Mycoplasma_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,69,S4P1,Parainfluenza 1,0,40
+010524_Expt9_SISPA_Kate,69,S4P1,Parainfluenza 2,0,40
+010524_Expt9_SISPA_Kate,69,S4P1,Parainfluenza 3,0,40
+010524_Expt9_SISPA_Kate,69,S4P1,Parainfluenza 4,0,40
+010524_Expt9_SISPA_Kate,69,S4P1,RSV,0,40
+010524_Expt9_SISPA_Kate,69,S4P1,Rhinovirus/enterovirus,0,40
+010524_Expt9_SISPA_Kate,69,S4P1,SARS-CoV-2,0,40
+010524_Expt9_SISPA_Kate,69,S4P1,unmapped,0,40
+010524_Expt9_SISPA_Kate,70,S1P2,Adenovirus,0,40
+010524_Expt9_SISPA_Kate,70,S1P2,Bordetella_parapertussis,0,40
+010524_Expt9_SISPA_Kate,70,S1P2,Bordetella_pertussis,0,40
+010524_Expt9_SISPA_Kate,70,S1P2,Chlamydia_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,70,S1P2,Coronavirus 229E,0,40
+010524_Expt9_SISPA_Kate,70,S1P2,Coronavirus HKU,0,40
+010524_Expt9_SISPA_Kate,70,S1P2,Coronavirus NL63,0,40
+010524_Expt9_SISPA_Kate,70,S1P2,Coronavirus OC43,0,40
+010524_Expt9_SISPA_Kate,70,S1P2,Influenza A,0,40
+010524_Expt9_SISPA_Kate,70,S1P2,Influenza A/H1,0,40
+010524_Expt9_SISPA_Kate,70,S1P2,Influenza A/H1-2009,0,40
+010524_Expt9_SISPA_Kate,70,S1P2,Influenza A/H3,0,40
+010524_Expt9_SISPA_Kate,70,S1P2,Influenza B,0,40
+010524_Expt9_SISPA_Kate,70,S1P2,MERS,0,40
+010524_Expt9_SISPA_Kate,70,S1P2,Metapneumovirus,0,40
+010524_Expt9_SISPA_Kate,70,S1P2,Mycoplasma_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,70,S1P2,Parainfluenza 1,0,40
+010524_Expt9_SISPA_Kate,70,S1P2,Parainfluenza 2,0,40
+010524_Expt9_SISPA_Kate,70,S1P2,Parainfluenza 3,1,40
+010524_Expt9_SISPA_Kate,70,S1P2,Parainfluenza 4,0,40
+010524_Expt9_SISPA_Kate,70,S1P2,RSV,1,40
+010524_Expt9_SISPA_Kate,70,S1P2,Rhinovirus/enterovirus,0,40
+010524_Expt9_SISPA_Kate,70,S1P2,SARS-CoV-2,0,40
+010524_Expt9_SISPA_Kate,70,S1P2,unmapped,0,40
+010524_Expt9_SISPA_Kate,71,S2P2,Adenovirus,0,40
+010524_Expt9_SISPA_Kate,71,S2P2,Bordetella_parapertussis,0,40
+010524_Expt9_SISPA_Kate,71,S2P2,Bordetella_pertussis,0,40
+010524_Expt9_SISPA_Kate,71,S2P2,Chlamydia_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,71,S2P2,Coronavirus 229E,0,40
+010524_Expt9_SISPA_Kate,71,S2P2,Coronavirus HKU,1,40
+010524_Expt9_SISPA_Kate,71,S2P2,Coronavirus NL63,0,40
+010524_Expt9_SISPA_Kate,71,S2P2,Coronavirus OC43,0,40
+010524_Expt9_SISPA_Kate,71,S2P2,Influenza A,0,40
+010524_Expt9_SISPA_Kate,71,S2P2,Influenza A/H1,0,40
+010524_Expt9_SISPA_Kate,71,S2P2,Influenza A/H1-2009,0,40
+010524_Expt9_SISPA_Kate,71,S2P2,Influenza A/H3,0,40
+010524_Expt9_SISPA_Kate,71,S2P2,Influenza B,0,40
+010524_Expt9_SISPA_Kate,71,S2P2,MERS,0,40
+010524_Expt9_SISPA_Kate,71,S2P2,Metapneumovirus,0,40
+010524_Expt9_SISPA_Kate,71,S2P2,Mycoplasma_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,71,S2P2,Parainfluenza 1,0,40
+010524_Expt9_SISPA_Kate,71,S2P2,Parainfluenza 2,0,40
+010524_Expt9_SISPA_Kate,71,S2P2,Parainfluenza 3,0,40
+010524_Expt9_SISPA_Kate,71,S2P2,Parainfluenza 4,0,40
+010524_Expt9_SISPA_Kate,71,S2P2,RSV,0,40
+010524_Expt9_SISPA_Kate,71,S2P2,Rhinovirus/enterovirus,0,40
+010524_Expt9_SISPA_Kate,71,S2P2,SARS-CoV-2,0,40
+010524_Expt9_SISPA_Kate,71,S2P2,unmapped,0,40
+010524_Expt9_SISPA_Kate,72,S3P2,Adenovirus,0,40
+010524_Expt9_SISPA_Kate,72,S3P2,Bordetella_parapertussis,0,40
+010524_Expt9_SISPA_Kate,72,S3P2,Bordetella_pertussis,0,40
+010524_Expt9_SISPA_Kate,72,S3P2,Chlamydia_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,72,S3P2,Coronavirus 229E,0,40
+010524_Expt9_SISPA_Kate,72,S3P2,Coronavirus HKU,0,40
+010524_Expt9_SISPA_Kate,72,S3P2,Coronavirus NL63,0,40
+010524_Expt9_SISPA_Kate,72,S3P2,Coronavirus OC43,0,40
+010524_Expt9_SISPA_Kate,72,S3P2,Influenza A,0,40
+010524_Expt9_SISPA_Kate,72,S3P2,Influenza A/H1,0,40
+010524_Expt9_SISPA_Kate,72,S3P2,Influenza A/H1-2009,0,40
+010524_Expt9_SISPA_Kate,72,S3P2,Influenza A/H3,0,40
+010524_Expt9_SISPA_Kate,72,S3P2,Influenza B,0,40
+010524_Expt9_SISPA_Kate,72,S3P2,MERS,0,40
+010524_Expt9_SISPA_Kate,72,S3P2,Metapneumovirus,0,40
+010524_Expt9_SISPA_Kate,72,S3P2,Mycoplasma_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,72,S3P2,Parainfluenza 1,0,40
+010524_Expt9_SISPA_Kate,72,S3P2,Parainfluenza 2,0,40
+010524_Expt9_SISPA_Kate,72,S3P2,Parainfluenza 3,1,40
+010524_Expt9_SISPA_Kate,72,S3P2,Parainfluenza 4,0,40
+010524_Expt9_SISPA_Kate,72,S3P2,RSV,0,40
+010524_Expt9_SISPA_Kate,72,S3P2,Rhinovirus/enterovirus,0,40
+010524_Expt9_SISPA_Kate,72,S3P2,SARS-CoV-2,0,40
+010524_Expt9_SISPA_Kate,72,S3P2,unmapped,0,40
+010524_Expt9_SISPA_Kate,73,S4P2,Adenovirus,0,40
+010524_Expt9_SISPA_Kate,73,S4P2,Bordetella_parapertussis,0,40
+010524_Expt9_SISPA_Kate,73,S4P2,Bordetella_pertussis,0,40
+010524_Expt9_SISPA_Kate,73,S4P2,Chlamydia_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,73,S4P2,Coronavirus 229E,0,40
+010524_Expt9_SISPA_Kate,73,S4P2,Coronavirus HKU,0,40
+010524_Expt9_SISPA_Kate,73,S4P2,Coronavirus NL63,0,40
+010524_Expt9_SISPA_Kate,73,S4P2,Coronavirus OC43,1,40
+010524_Expt9_SISPA_Kate,73,S4P2,Influenza A,0,40
+010524_Expt9_SISPA_Kate,73,S4P2,Influenza A/H1,0,40
+010524_Expt9_SISPA_Kate,73,S4P2,Influenza A/H1-2009,0,40
+010524_Expt9_SISPA_Kate,73,S4P2,Influenza A/H3,0,40
+010524_Expt9_SISPA_Kate,73,S4P2,Influenza B,0,40
+010524_Expt9_SISPA_Kate,73,S4P2,MERS,0,40
+010524_Expt9_SISPA_Kate,73,S4P2,Metapneumovirus,0,40
+010524_Expt9_SISPA_Kate,73,S4P2,Mycoplasma_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,73,S4P2,Parainfluenza 1,0,40
+010524_Expt9_SISPA_Kate,73,S4P2,Parainfluenza 2,0,40
+010524_Expt9_SISPA_Kate,73,S4P2,Parainfluenza 3,0,40
+010524_Expt9_SISPA_Kate,73,S4P2,Parainfluenza 4,0,40
+010524_Expt9_SISPA_Kate,73,S4P2,RSV,0,40
+010524_Expt9_SISPA_Kate,73,S4P2,Rhinovirus/enterovirus,0,40
+010524_Expt9_SISPA_Kate,73,S4P2,SARS-CoV-2,0,40
+010524_Expt9_SISPA_Kate,73,S4P2,unmapped,0,40
+010524_Expt9_SISPA_Kate,74,S1P3,Adenovirus,0,40
+010524_Expt9_SISPA_Kate,74,S1P3,Bordetella_parapertussis,0,40
+010524_Expt9_SISPA_Kate,74,S1P3,Bordetella_pertussis,0,40
+010524_Expt9_SISPA_Kate,74,S1P3,Chlamydia_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,74,S1P3,Coronavirus 229E,0,40
+010524_Expt9_SISPA_Kate,74,S1P3,Coronavirus HKU,0,40
+010524_Expt9_SISPA_Kate,74,S1P3,Coronavirus NL63,0,40
+010524_Expt9_SISPA_Kate,74,S1P3,Coronavirus OC43,0,40
+010524_Expt9_SISPA_Kate,74,S1P3,Influenza A,0,40
+010524_Expt9_SISPA_Kate,74,S1P3,Influenza A/H1,0,40
+010524_Expt9_SISPA_Kate,74,S1P3,Influenza A/H1-2009,0,40
+010524_Expt9_SISPA_Kate,74,S1P3,Influenza A/H3,0,40
+010524_Expt9_SISPA_Kate,74,S1P3,Influenza B,0,40
+010524_Expt9_SISPA_Kate,74,S1P3,MERS,0,40
+010524_Expt9_SISPA_Kate,74,S1P3,Metapneumovirus,0,40
+010524_Expt9_SISPA_Kate,74,S1P3,Mycoplasma_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,74,S1P3,Parainfluenza 1,0,40
+010524_Expt9_SISPA_Kate,74,S1P3,Parainfluenza 2,0,40
+010524_Expt9_SISPA_Kate,74,S1P3,Parainfluenza 3,1,40
+010524_Expt9_SISPA_Kate,74,S1P3,Parainfluenza 4,0,40
+010524_Expt9_SISPA_Kate,74,S1P3,RSV,1,40
+010524_Expt9_SISPA_Kate,74,S1P3,Rhinovirus/enterovirus,0,40
+010524_Expt9_SISPA_Kate,74,S1P3,SARS-CoV-2,0,40
+010524_Expt9_SISPA_Kate,74,S1P3,unmapped,0,40
+010524_Expt9_SISPA_Kate,75,S2P3,Adenovirus,0,40
+010524_Expt9_SISPA_Kate,75,S2P3,Bordetella_parapertussis,0,40
+010524_Expt9_SISPA_Kate,75,S2P3,Bordetella_pertussis,0,40
+010524_Expt9_SISPA_Kate,75,S2P3,Chlamydia_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,75,S2P3,Coronavirus 229E,0,40
+010524_Expt9_SISPA_Kate,75,S2P3,Coronavirus HKU,1,40
+010524_Expt9_SISPA_Kate,75,S2P3,Coronavirus NL63,0,40
+010524_Expt9_SISPA_Kate,75,S2P3,Coronavirus OC43,0,40
+010524_Expt9_SISPA_Kate,75,S2P3,Influenza A,0,40
+010524_Expt9_SISPA_Kate,75,S2P3,Influenza A/H1,0,40
+010524_Expt9_SISPA_Kate,75,S2P3,Influenza A/H1-2009,0,40
+010524_Expt9_SISPA_Kate,75,S2P3,Influenza A/H3,0,40
+010524_Expt9_SISPA_Kate,75,S2P3,Influenza B,0,40
+010524_Expt9_SISPA_Kate,75,S2P3,MERS,0,40
+010524_Expt9_SISPA_Kate,75,S2P3,Metapneumovirus,0,40
+010524_Expt9_SISPA_Kate,75,S2P3,Mycoplasma_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,75,S2P3,Parainfluenza 1,0,40
+010524_Expt9_SISPA_Kate,75,S2P3,Parainfluenza 2,0,40
+010524_Expt9_SISPA_Kate,75,S2P3,Parainfluenza 3,0,40
+010524_Expt9_SISPA_Kate,75,S2P3,Parainfluenza 4,0,40
+010524_Expt9_SISPA_Kate,75,S2P3,RSV,0,40
+010524_Expt9_SISPA_Kate,75,S2P3,Rhinovirus/enterovirus,0,40
+010524_Expt9_SISPA_Kate,75,S2P3,SARS-CoV-2,0,40
+010524_Expt9_SISPA_Kate,75,S2P3,unmapped,0,40
+010524_Expt9_SISPA_Kate,76,S3P3,Adenovirus,0,40
+010524_Expt9_SISPA_Kate,76,S3P3,Bordetella_parapertussis,0,40
+010524_Expt9_SISPA_Kate,76,S3P3,Bordetella_pertussis,0,40
+010524_Expt9_SISPA_Kate,76,S3P3,Chlamydia_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,76,S3P3,Coronavirus 229E,0,40
+010524_Expt9_SISPA_Kate,76,S3P3,Coronavirus HKU,0,40
+010524_Expt9_SISPA_Kate,76,S3P3,Coronavirus NL63,0,40
+010524_Expt9_SISPA_Kate,76,S3P3,Coronavirus OC43,0,40
+010524_Expt9_SISPA_Kate,76,S3P3,Influenza A,0,40
+010524_Expt9_SISPA_Kate,76,S3P3,Influenza A/H1,0,40
+010524_Expt9_SISPA_Kate,76,S3P3,Influenza A/H1-2009,0,40
+010524_Expt9_SISPA_Kate,76,S3P3,Influenza A/H3,0,40
+010524_Expt9_SISPA_Kate,76,S3P3,Influenza B,0,40
+010524_Expt9_SISPA_Kate,76,S3P3,MERS,0,40
+010524_Expt9_SISPA_Kate,76,S3P3,Metapneumovirus,0,40
+010524_Expt9_SISPA_Kate,76,S3P3,Mycoplasma_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,76,S3P3,Parainfluenza 1,0,40
+010524_Expt9_SISPA_Kate,76,S3P3,Parainfluenza 2,0,40
+010524_Expt9_SISPA_Kate,76,S3P3,Parainfluenza 3,1,40
+010524_Expt9_SISPA_Kate,76,S3P3,Parainfluenza 4,0,40
+010524_Expt9_SISPA_Kate,76,S3P3,RSV,0,40
+010524_Expt9_SISPA_Kate,76,S3P3,Rhinovirus/enterovirus,0,40
+010524_Expt9_SISPA_Kate,76,S3P3,SARS-CoV-2,0,40
+010524_Expt9_SISPA_Kate,76,S3P3,unmapped,0,40
+010524_Expt9_SISPA_Kate,77,S4P3,Adenovirus,0,40
+010524_Expt9_SISPA_Kate,77,S4P3,Bordetella_parapertussis,0,40
+010524_Expt9_SISPA_Kate,77,S4P3,Bordetella_pertussis,0,40
+010524_Expt9_SISPA_Kate,77,S4P3,Chlamydia_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,77,S4P3,Coronavirus 229E,0,40
+010524_Expt9_SISPA_Kate,77,S4P3,Coronavirus HKU,0,40
+010524_Expt9_SISPA_Kate,77,S4P3,Coronavirus NL63,0,40
+010524_Expt9_SISPA_Kate,77,S4P3,Coronavirus OC43,1,40
+010524_Expt9_SISPA_Kate,77,S4P3,Influenza A,0,40
+010524_Expt9_SISPA_Kate,77,S4P3,Influenza A/H1,0,40
+010524_Expt9_SISPA_Kate,77,S4P3,Influenza A/H1-2009,0,40
+010524_Expt9_SISPA_Kate,77,S4P3,Influenza A/H3,0,40
+010524_Expt9_SISPA_Kate,77,S4P3,Influenza B,0,40
+010524_Expt9_SISPA_Kate,77,S4P3,MERS,0,40
+010524_Expt9_SISPA_Kate,77,S4P3,Metapneumovirus,0,40
+010524_Expt9_SISPA_Kate,77,S4P3,Mycoplasma_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,77,S4P3,Parainfluenza 1,0,40
+010524_Expt9_SISPA_Kate,77,S4P3,Parainfluenza 2,0,40
+010524_Expt9_SISPA_Kate,77,S4P3,Parainfluenza 3,0,40
+010524_Expt9_SISPA_Kate,77,S4P3,Parainfluenza 4,0,40
+010524_Expt9_SISPA_Kate,77,S4P3,RSV,0,40
+010524_Expt9_SISPA_Kate,77,S4P3,Rhinovirus/enterovirus,0,40
+010524_Expt9_SISPA_Kate,77,S4P3,SARS-CoV-2,0,40
+010524_Expt9_SISPA_Kate,77,S4P3,unmapped,0,40
+010524_Expt9_SISPA_Kate,78,S1P4,Adenovirus,0,40
+010524_Expt9_SISPA_Kate,78,S1P4,Bordetella_parapertussis,0,40
+010524_Expt9_SISPA_Kate,78,S1P4,Bordetella_pertussis,0,40
+010524_Expt9_SISPA_Kate,78,S1P4,Chlamydia_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,78,S1P4,Coronavirus 229E,0,40
+010524_Expt9_SISPA_Kate,78,S1P4,Coronavirus HKU,0,40
+010524_Expt9_SISPA_Kate,78,S1P4,Coronavirus NL63,0,40
+010524_Expt9_SISPA_Kate,78,S1P4,Coronavirus OC43,0,40
+010524_Expt9_SISPA_Kate,78,S1P4,Influenza A,0,40
+010524_Expt9_SISPA_Kate,78,S1P4,Influenza A/H1,0,40
+010524_Expt9_SISPA_Kate,78,S1P4,Influenza A/H1-2009,0,40
+010524_Expt9_SISPA_Kate,78,S1P4,Influenza A/H3,0,40
+010524_Expt9_SISPA_Kate,78,S1P4,Influenza B,0,40
+010524_Expt9_SISPA_Kate,78,S1P4,MERS,0,40
+010524_Expt9_SISPA_Kate,78,S1P4,Metapneumovirus,0,40
+010524_Expt9_SISPA_Kate,78,S1P4,Mycoplasma_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,78,S1P4,Parainfluenza 1,0,40
+010524_Expt9_SISPA_Kate,78,S1P4,Parainfluenza 2,0,40
+010524_Expt9_SISPA_Kate,78,S1P4,Parainfluenza 3,1,40
+010524_Expt9_SISPA_Kate,78,S1P4,Parainfluenza 4,0,40
+010524_Expt9_SISPA_Kate,78,S1P4,RSV,1,40
+010524_Expt9_SISPA_Kate,78,S1P4,Rhinovirus/enterovirus,0,40
+010524_Expt9_SISPA_Kate,78,S1P4,SARS-CoV-2,0,40
+010524_Expt9_SISPA_Kate,78,S1P4,unmapped,0,40
+010524_Expt9_SISPA_Kate,79,S2P4,Adenovirus,0,40
+010524_Expt9_SISPA_Kate,79,S2P4,Bordetella_parapertussis,0,40
+010524_Expt9_SISPA_Kate,79,S2P4,Bordetella_pertussis,0,40
+010524_Expt9_SISPA_Kate,79,S2P4,Chlamydia_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,79,S2P4,Coronavirus 229E,0,40
+010524_Expt9_SISPA_Kate,79,S2P4,Coronavirus HKU,1,40
+010524_Expt9_SISPA_Kate,79,S2P4,Coronavirus NL63,0,40
+010524_Expt9_SISPA_Kate,79,S2P4,Coronavirus OC43,0,40
+010524_Expt9_SISPA_Kate,79,S2P4,Influenza A,0,40
+010524_Expt9_SISPA_Kate,79,S2P4,Influenza A/H1,0,40
+010524_Expt9_SISPA_Kate,79,S2P4,Influenza A/H1-2009,0,40
+010524_Expt9_SISPA_Kate,79,S2P4,Influenza A/H3,0,40
+010524_Expt9_SISPA_Kate,79,S2P4,Influenza B,0,40
+010524_Expt9_SISPA_Kate,79,S2P4,MERS,0,40
+010524_Expt9_SISPA_Kate,79,S2P4,Metapneumovirus,0,40
+010524_Expt9_SISPA_Kate,79,S2P4,Mycoplasma_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,79,S2P4,Parainfluenza 1,0,40
+010524_Expt9_SISPA_Kate,79,S2P4,Parainfluenza 2,0,40
+010524_Expt9_SISPA_Kate,79,S2P4,Parainfluenza 3,0,40
+010524_Expt9_SISPA_Kate,79,S2P4,Parainfluenza 4,0,40
+010524_Expt9_SISPA_Kate,79,S2P4,RSV,0,40
+010524_Expt9_SISPA_Kate,79,S2P4,Rhinovirus/enterovirus,0,40
+010524_Expt9_SISPA_Kate,79,S2P4,SARS-CoV-2,0,40
+010524_Expt9_SISPA_Kate,79,S2P4,unmapped,0,40
+010524_Expt9_SISPA_Kate,80,S3P4,Adenovirus,0,40
+010524_Expt9_SISPA_Kate,80,S3P4,Bordetella_parapertussis,0,40
+010524_Expt9_SISPA_Kate,80,S3P4,Bordetella_pertussis,0,40
+010524_Expt9_SISPA_Kate,80,S3P4,Chlamydia_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,80,S3P4,Coronavirus 229E,0,40
+010524_Expt9_SISPA_Kate,80,S3P4,Coronavirus HKU,0,40
+010524_Expt9_SISPA_Kate,80,S3P4,Coronavirus NL63,0,40
+010524_Expt9_SISPA_Kate,80,S3P4,Coronavirus OC43,0,40
+010524_Expt9_SISPA_Kate,80,S3P4,Influenza A,0,40
+010524_Expt9_SISPA_Kate,80,S3P4,Influenza A/H1,0,40
+010524_Expt9_SISPA_Kate,80,S3P4,Influenza A/H1-2009,0,40
+010524_Expt9_SISPA_Kate,80,S3P4,Influenza A/H3,0,40
+010524_Expt9_SISPA_Kate,80,S3P4,Influenza B,0,40
+010524_Expt9_SISPA_Kate,80,S3P4,MERS,0,40
+010524_Expt9_SISPA_Kate,80,S3P4,Metapneumovirus,0,40
+010524_Expt9_SISPA_Kate,80,S3P4,Mycoplasma_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,80,S3P4,Parainfluenza 1,0,40
+010524_Expt9_SISPA_Kate,80,S3P4,Parainfluenza 2,0,40
+010524_Expt9_SISPA_Kate,80,S3P4,Parainfluenza 3,1,40
+010524_Expt9_SISPA_Kate,80,S3P4,Parainfluenza 4,0,40
+010524_Expt9_SISPA_Kate,80,S3P4,RSV,0,40
+010524_Expt9_SISPA_Kate,80,S3P4,Rhinovirus/enterovirus,0,40
+010524_Expt9_SISPA_Kate,80,S3P4,SARS-CoV-2,0,40
+010524_Expt9_SISPA_Kate,80,S3P4,unmapped,0,40
+010524_Expt9_SISPA_Kate,81,S4P4,Adenovirus,0,40
+010524_Expt9_SISPA_Kate,81,S4P4,Bordetella_parapertussis,0,40
+010524_Expt9_SISPA_Kate,81,S4P4,Bordetella_pertussis,0,40
+010524_Expt9_SISPA_Kate,81,S4P4,Chlamydia_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,81,S4P4,Coronavirus 229E,0,40
+010524_Expt9_SISPA_Kate,81,S4P4,Coronavirus HKU,0,40
+010524_Expt9_SISPA_Kate,81,S4P4,Coronavirus NL63,0,40
+010524_Expt9_SISPA_Kate,81,S4P4,Coronavirus OC43,1,40
+010524_Expt9_SISPA_Kate,81,S4P4,Influenza A,0,40
+010524_Expt9_SISPA_Kate,81,S4P4,Influenza A/H1,0,40
+010524_Expt9_SISPA_Kate,81,S4P4,Influenza A/H1-2009,0,40
+010524_Expt9_SISPA_Kate,81,S4P4,Influenza A/H3,0,40
+010524_Expt9_SISPA_Kate,81,S4P4,Influenza B,0,40
+010524_Expt9_SISPA_Kate,81,S4P4,MERS,0,40
+010524_Expt9_SISPA_Kate,81,S4P4,Metapneumovirus,0,40
+010524_Expt9_SISPA_Kate,81,S4P4,Mycoplasma_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,81,S4P4,Parainfluenza 1,0,40
+010524_Expt9_SISPA_Kate,81,S4P4,Parainfluenza 2,0,40
+010524_Expt9_SISPA_Kate,81,S4P4,Parainfluenza 3,0,40
+010524_Expt9_SISPA_Kate,81,S4P4,Parainfluenza 4,0,40
+010524_Expt9_SISPA_Kate,81,S4P4,RSV,0,40
+010524_Expt9_SISPA_Kate,81,S4P4,Rhinovirus/enterovirus,0,40
+010524_Expt9_SISPA_Kate,81,S4P4,SARS-CoV-2,0,40
+010524_Expt9_SISPA_Kate,81,S4P4,unmapped,0,40
+010524_Expt9_SISPA_Kate,82,Negative control,Adenovirus,0,40
+010524_Expt9_SISPA_Kate,82,Negative control,Bordetella_parapertussis,0,40
+010524_Expt9_SISPA_Kate,82,Negative control,Bordetella_pertussis,0,40
+010524_Expt9_SISPA_Kate,82,Negative control,Chlamydia_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,82,Negative control,Coronavirus 229E,0,40
+010524_Expt9_SISPA_Kate,82,Negative control,Coronavirus HKU,0,40
+010524_Expt9_SISPA_Kate,82,Negative control,Coronavirus NL63,0,40
+010524_Expt9_SISPA_Kate,82,Negative control,Coronavirus OC43,0,40
+010524_Expt9_SISPA_Kate,82,Negative control,Influenza A,0,40
+010524_Expt9_SISPA_Kate,82,Negative control,Influenza A/H1,0,40
+010524_Expt9_SISPA_Kate,82,Negative control,Influenza A/H1-2009,0,40
+010524_Expt9_SISPA_Kate,82,Negative control,Influenza A/H3,0,40
+010524_Expt9_SISPA_Kate,82,Negative control,Influenza B,0,40
+010524_Expt9_SISPA_Kate,82,Negative control,MERS,0,40
+010524_Expt9_SISPA_Kate,82,Negative control,Metapneumovirus,0,40
+010524_Expt9_SISPA_Kate,82,Negative control,Mycoplasma_pneumoniae,0,40
+010524_Expt9_SISPA_Kate,82,Negative control,,1,40
+010524_Expt9_SISPA_Kate,82,Negative control,Parainfluenza 1,0,40
+010524_Expt9_SISPA_Kate,82,Negative control,Parainfluenza 2,0,40
+010524_Expt9_SISPA_Kate,82,Negative control,Parainfluenza 3,0,40
+010524_Expt9_SISPA_Kate,82,Negative control,Parainfluenza 4,0,40
+010524_Expt9_SISPA_Kate,82,Negative control,RSV,0,40
+010524_Expt9_SISPA_Kate,82,Negative control,Rhinovirus/enterovirus,0,40
+010524_Expt9_SISPA_Kate,82,Negative control,SARS-CoV-2,0,40
+010524_Expt9_SISPA_Kate,82,Negative control,unmapped,0,40
+Expt9A_SISPA_Katie,1,S1C,Adenovirus,0,40
+Expt9A_SISPA_Katie,1,S1C,Bordetella_parapertussis,0,40
+Expt9A_SISPA_Katie,1,S1C,Bordetella_pertussis,0,40
+Expt9A_SISPA_Katie,1,S1C,Chlamydia_pneumoniae,0,40
+Expt9A_SISPA_Katie,1,S1C,Coronavirus 229E,0,40
+Expt9A_SISPA_Katie,1,S1C,Coronavirus HKU,0,40
+Expt9A_SISPA_Katie,1,S1C,Coronavirus NL63,0,40
+Expt9A_SISPA_Katie,1,S1C,Coronavirus OC43,0,40
+Expt9A_SISPA_Katie,1,S1C,Influenza A,0,40
+Expt9A_SISPA_Katie,1,S1C,Influenza A/H1,0,40
+Expt9A_SISPA_Katie,1,S1C,Influenza A/H1-2009,0,40
+Expt9A_SISPA_Katie,1,S1C,Influenza A/H3,0,40
+Expt9A_SISPA_Katie,1,S1C,Influenza B,0,40
+Expt9A_SISPA_Katie,1,S1C,MERS,0,40
+Expt9A_SISPA_Katie,1,S1C,Metapneumovirus,1,40
+Expt9A_SISPA_Katie,1,S1C,Mycoplasma_pneumoniae,0,40
+Expt9A_SISPA_Katie,1,S1C,Parainfluenza 1,0,40
+Expt9A_SISPA_Katie,1,S1C,Parainfluenza 2,0,40
+Expt9A_SISPA_Katie,1,S1C,Parainfluenza 3,0,40
+Expt9A_SISPA_Katie,1,S1C,Parainfluenza 4,0,40
+Expt9A_SISPA_Katie,1,S1C,RSV,0,40
+Expt9A_SISPA_Katie,1,S1C,Rhinovirus/enterovirus,0,40
+Expt9A_SISPA_Katie,1,S1C,SARS-CoV-2,0,40
+Expt9A_SISPA_Katie,1,S1C,unmapped,0,40
+Expt9A_SISPA_Katie,2,S1P1,Adenovirus,0,40
+Expt9A_SISPA_Katie,2,S1P1,Bordetella_parapertussis,0,40
+Expt9A_SISPA_Katie,2,S1P1,Bordetella_pertussis,0,40
+Expt9A_SISPA_Katie,2,S1P1,Chlamydia_pneumoniae,0,40
+Expt9A_SISPA_Katie,2,S1P1,Coronavirus 229E,0,40
+Expt9A_SISPA_Katie,2,S1P1,Coronavirus HKU,0,40
+Expt9A_SISPA_Katie,2,S1P1,Coronavirus NL63,0,40
+Expt9A_SISPA_Katie,2,S1P1,Coronavirus OC43,0,40
+Expt9A_SISPA_Katie,2,S1P1,Influenza A,0,40
+Expt9A_SISPA_Katie,2,S1P1,Influenza A/H1,0,40
+Expt9A_SISPA_Katie,2,S1P1,Influenza A/H1-2009,0,40
+Expt9A_SISPA_Katie,2,S1P1,Influenza A/H3,0,40
+Expt9A_SISPA_Katie,2,S1P1,Influenza B,0,40
+Expt9A_SISPA_Katie,2,S1P1,MERS,0,40
+Expt9A_SISPA_Katie,2,S1P1,Metapneumovirus,1,40
+Expt9A_SISPA_Katie,2,S1P1,Mycoplasma_pneumoniae,0,40
+Expt9A_SISPA_Katie,2,S1P1,Parainfluenza 1,0,40
+Expt9A_SISPA_Katie,2,S1P1,Parainfluenza 2,0,40
+Expt9A_SISPA_Katie,2,S1P1,Parainfluenza 3,0,40
+Expt9A_SISPA_Katie,2,S1P1,Parainfluenza 4,0,40
+Expt9A_SISPA_Katie,2,S1P1,RSV,0,40
+Expt9A_SISPA_Katie,2,S1P1,Rhinovirus/enterovirus,0,40
+Expt9A_SISPA_Katie,2,S1P1,SARS-CoV-2,0,40
+Expt9A_SISPA_Katie,2,S1P1,unmapped,0,40
+Expt9A_SISPA_Katie,3,S1P2,Adenovirus,0,40
+Expt9A_SISPA_Katie,3,S1P2,Bordetella_parapertussis,0,40
+Expt9A_SISPA_Katie,3,S1P2,Bordetella_pertussis,0,40
+Expt9A_SISPA_Katie,3,S1P2,Chlamydia_pneumoniae,0,40
+Expt9A_SISPA_Katie,3,S1P2,Coronavirus 229E,0,40
+Expt9A_SISPA_Katie,3,S1P2,Coronavirus HKU,0,40
+Expt9A_SISPA_Katie,3,S1P2,Coronavirus NL63,0,40
+Expt9A_SISPA_Katie,3,S1P2,Coronavirus OC43,0,40
+Expt9A_SISPA_Katie,3,S1P2,Influenza A,0,40
+Expt9A_SISPA_Katie,3,S1P2,Influenza A/H1,0,40
+Expt9A_SISPA_Katie,3,S1P2,Influenza A/H1-2009,0,40
+Expt9A_SISPA_Katie,3,S1P2,Influenza A/H3,0,40
+Expt9A_SISPA_Katie,3,S1P2,Influenza B,0,40
+Expt9A_SISPA_Katie,3,S1P2,MERS,0,40
+Expt9A_SISPA_Katie,3,S1P2,Metapneumovirus,1,40
+Expt9A_SISPA_Katie,3,S1P2,Mycoplasma_pneumoniae,0,40
+Expt9A_SISPA_Katie,3,S1P2,Parainfluenza 1,0,40
+Expt9A_SISPA_Katie,3,S1P2,Parainfluenza 2,0,40
+Expt9A_SISPA_Katie,3,S1P2,Parainfluenza 3,0,40
+Expt9A_SISPA_Katie,3,S1P2,Parainfluenza 4,0,40
+Expt9A_SISPA_Katie,3,S1P2,RSV,0,40
+Expt9A_SISPA_Katie,3,S1P2,Rhinovirus/enterovirus,0,40
+Expt9A_SISPA_Katie,3,S1P2,SARS-CoV-2,0,40
+Expt9A_SISPA_Katie,3,S1P2,unmapped,0,40
+Expt9A_SISPA_Katie,4,S1P3,Adenovirus,0,40
+Expt9A_SISPA_Katie,4,S1P3,Bordetella_parapertussis,0,40
+Expt9A_SISPA_Katie,4,S1P3,Bordetella_pertussis,0,40
+Expt9A_SISPA_Katie,4,S1P3,Chlamydia_pneumoniae,0,40
+Expt9A_SISPA_Katie,4,S1P3,Coronavirus 229E,0,40
+Expt9A_SISPA_Katie,4,S1P3,Coronavirus HKU,0,40
+Expt9A_SISPA_Katie,4,S1P3,Coronavirus NL63,0,40
+Expt9A_SISPA_Katie,4,S1P3,Coronavirus OC43,0,40
+Expt9A_SISPA_Katie,4,S1P3,Influenza A,0,40
+Expt9A_SISPA_Katie,4,S1P3,Influenza A/H1,0,40
+Expt9A_SISPA_Katie,4,S1P3,Influenza A/H1-2009,0,40
+Expt9A_SISPA_Katie,4,S1P3,Influenza A/H3,0,40
+Expt9A_SISPA_Katie,4,S1P3,Influenza B,0,40
+Expt9A_SISPA_Katie,4,S1P3,MERS,0,40
+Expt9A_SISPA_Katie,4,S1P3,Metapneumovirus,1,40
+Expt9A_SISPA_Katie,4,S1P3,Mycoplasma_pneumoniae,0,40
+Expt9A_SISPA_Katie,4,S1P3,Parainfluenza 1,0,40
+Expt9A_SISPA_Katie,4,S1P3,Parainfluenza 2,0,40
+Expt9A_SISPA_Katie,4,S1P3,Parainfluenza 3,0,40
+Expt9A_SISPA_Katie,4,S1P3,Parainfluenza 4,0,40
+Expt9A_SISPA_Katie,4,S1P3,RSV,0,40
+Expt9A_SISPA_Katie,4,S1P3,Rhinovirus/enterovirus,0,40
+Expt9A_SISPA_Katie,4,S1P3,SARS-CoV-2,0,40
+Expt9A_SISPA_Katie,4,S1P3,unmapped,0,40
+Expt9A_SISPA_Katie,5,S2C,Adenovirus,0,40
+Expt9A_SISPA_Katie,5,S2C,Bordetella_parapertussis,0,40
+Expt9A_SISPA_Katie,5,S2C,Bordetella_pertussis,0,40
+Expt9A_SISPA_Katie,5,S2C,Chlamydia_pneumoniae,0,40
+Expt9A_SISPA_Katie,5,S2C,Coronavirus 229E,0,40
+Expt9A_SISPA_Katie,5,S2C,Coronavirus HKU,0,40
+Expt9A_SISPA_Katie,5,S2C,Coronavirus NL63,0,40
+Expt9A_SISPA_Katie,5,S2C,Coronavirus OC43,0,40
+Expt9A_SISPA_Katie,5,S2C,Rhinovirus/enterovirus,1,40
+Expt9A_SISPA_Katie,5,S2C,Influenza A,0,40
+Expt9A_SISPA_Katie,5,S2C,Influenza A/H1,0,40
+Expt9A_SISPA_Katie,5,S2C,Influenza A/H1-2009,0,40
+Expt9A_SISPA_Katie,5,S2C,Influenza A/H3,0,40
+Expt9A_SISPA_Katie,5,S2C,Influenza B,0,40
+Expt9A_SISPA_Katie,5,S2C,MERS,0,40
+Expt9A_SISPA_Katie,5,S2C,Metapneumovirus,0,40
+Expt9A_SISPA_Katie,5,S2C,Mycoplasma_pneumoniae,0,40
+Expt9A_SISPA_Katie,5,S2C,Parainfluenza 1,0,40
+Expt9A_SISPA_Katie,5,S2C,Parainfluenza 2,0,40
+Expt9A_SISPA_Katie,5,S2C,Parainfluenza 3,0,40
+Expt9A_SISPA_Katie,5,S2C,Parainfluenza 4,0,40
+Expt9A_SISPA_Katie,5,S2C,RSV,0,40
+Expt9A_SISPA_Katie,5,S2C,SARS-CoV-2,0,40
+Expt9A_SISPA_Katie,5,S2C,unmapped,0,40
+Expt9A_SISPA_Katie,6,S2P1,Adenovirus,0,40
+Expt9A_SISPA_Katie,6,S2P1,Bordetella_parapertussis,0,40
+Expt9A_SISPA_Katie,6,S2P1,Bordetella_pertussis,0,40
+Expt9A_SISPA_Katie,6,S2P1,Chlamydia_pneumoniae,0,40
+Expt9A_SISPA_Katie,6,S2P1,Coronavirus 229E,0,40
+Expt9A_SISPA_Katie,6,S2P1,Coronavirus HKU,0,40
+Expt9A_SISPA_Katie,6,S2P1,Coronavirus NL63,0,40
+Expt9A_SISPA_Katie,6,S2P1,Coronavirus OC43,0,40
+Expt9A_SISPA_Katie,6,S2P1,Rhinovirus/enterovirus,1,40
+Expt9A_SISPA_Katie,6,S2P1,Influenza A,0,40
+Expt9A_SISPA_Katie,6,S2P1,Influenza A/H1,0,40
+Expt9A_SISPA_Katie,6,S2P1,Influenza A/H1-2009,0,40
+Expt9A_SISPA_Katie,6,S2P1,Influenza A/H3,0,40
+Expt9A_SISPA_Katie,6,S2P1,Influenza B,0,40
+Expt9A_SISPA_Katie,6,S2P1,MERS,0,40
+Expt9A_SISPA_Katie,6,S2P1,Metapneumovirus,0,40
+Expt9A_SISPA_Katie,6,S2P1,Mycoplasma_pneumoniae,0,40
+Expt9A_SISPA_Katie,6,S2P1,Parainfluenza 1,0,40
+Expt9A_SISPA_Katie,6,S2P1,Parainfluenza 2,0,40
+Expt9A_SISPA_Katie,6,S2P1,Parainfluenza 3,0,40
+Expt9A_SISPA_Katie,6,S2P1,Parainfluenza 4,0,40
+Expt9A_SISPA_Katie,6,S2P1,RSV,0,40
+Expt9A_SISPA_Katie,6,S2P1,SARS-CoV-2,0,40
+Expt9A_SISPA_Katie,6,S2P1,unmapped,0,40
+Expt9A_SISPA_Katie,7,S2P2,Adenovirus,0,40
+Expt9A_SISPA_Katie,7,S2P2,Bordetella_parapertussis,0,40
+Expt9A_SISPA_Katie,7,S2P2,Bordetella_pertussis,0,40
+Expt9A_SISPA_Katie,7,S2P2,Chlamydia_pneumoniae,0,40
+Expt9A_SISPA_Katie,7,S2P2,Coronavirus 229E,0,40
+Expt9A_SISPA_Katie,7,S2P2,Coronavirus HKU,0,40
+Expt9A_SISPA_Katie,7,S2P2,Coronavirus NL63,0,40
+Expt9A_SISPA_Katie,7,S2P2,Coronavirus OC43,0,40
+Expt9A_SISPA_Katie,7,S2P2,Rhinovirus/enterovirus,1,40
+Expt9A_SISPA_Katie,7,S2P2,Influenza A,0,40
+Expt9A_SISPA_Katie,7,S2P2,Influenza A/H1,0,40
+Expt9A_SISPA_Katie,7,S2P2,Influenza A/H1-2009,0,40
+Expt9A_SISPA_Katie,7,S2P2,Influenza A/H3,0,40
+Expt9A_SISPA_Katie,7,S2P2,Influenza B,0,40
+Expt9A_SISPA_Katie,7,S2P2,MERS,0,40
+Expt9A_SISPA_Katie,7,S2P2,Metapneumovirus,0,40
+Expt9A_SISPA_Katie,7,S2P2,Mycoplasma_pneumoniae,0,40
+Expt9A_SISPA_Katie,7,S2P2,Parainfluenza 1,0,40
+Expt9A_SISPA_Katie,7,S2P2,Parainfluenza 2,0,40
+Expt9A_SISPA_Katie,7,S2P2,Parainfluenza 3,0,40
+Expt9A_SISPA_Katie,7,S2P2,Parainfluenza 4,0,40
+Expt9A_SISPA_Katie,7,S2P2,RSV,0,40
+Expt9A_SISPA_Katie,7,S2P2,SARS-CoV-2,0,40
+Expt9A_SISPA_Katie,7,S2P2,unmapped,0,40
+Expt9A_SISPA_Katie,8,S2P3,Adenovirus,0,40
+Expt9A_SISPA_Katie,8,S2P3,Bordetella_parapertussis,0,40
+Expt9A_SISPA_Katie,8,S2P3,Bordetella_pertussis,0,40
+Expt9A_SISPA_Katie,8,S2P3,Chlamydia_pneumoniae,0,40
+Expt9A_SISPA_Katie,8,S2P3,Coronavirus 229E,0,40
+Expt9A_SISPA_Katie,8,S2P3,Coronavirus HKU,0,40
+Expt9A_SISPA_Katie,8,S2P3,Coronavirus NL63,0,40
+Expt9A_SISPA_Katie,8,S2P3,Coronavirus OC43,0,40
+Expt9A_SISPA_Katie,8,S2P3,Rhinovirus/enterovirus,1,40
+Expt9A_SISPA_Katie,8,S2P3,Influenza A,0,40
+Expt9A_SISPA_Katie,8,S2P3,Influenza A/H1,0,40
+Expt9A_SISPA_Katie,8,S2P3,Influenza A/H1-2009,0,40
+Expt9A_SISPA_Katie,8,S2P3,Influenza A/H3,0,40
+Expt9A_SISPA_Katie,8,S2P3,Influenza B,0,40
+Expt9A_SISPA_Katie,8,S2P3,MERS,0,40
+Expt9A_SISPA_Katie,8,S2P3,Metapneumovirus,0,40
+Expt9A_SISPA_Katie,8,S2P3,Mycoplasma_pneumoniae,0,40
+Expt9A_SISPA_Katie,8,S2P3,Parainfluenza 1,0,40
+Expt9A_SISPA_Katie,8,S2P3,Parainfluenza 2,0,40
+Expt9A_SISPA_Katie,8,S2P3,Parainfluenza 3,0,40
+Expt9A_SISPA_Katie,8,S2P3,Parainfluenza 4,0,40
+Expt9A_SISPA_Katie,8,S2P3,RSV,0,40
+Expt9A_SISPA_Katie,8,S2P3,SARS-CoV-2,0,40
+Expt9A_SISPA_Katie,8,S2P3,unmapped,0,40
+Expt9A_SISPA_Katie,9,S3C,Adenovirus,0,40
+Expt9A_SISPA_Katie,9,S3C,Bordetella_parapertussis,0,40
+Expt9A_SISPA_Katie,9,S3C,Bordetella_pertussis,0,40
+Expt9A_SISPA_Katie,9,S3C,Chlamydia_pneumoniae,0,40
+Expt9A_SISPA_Katie,9,S3C,Coronavirus 229E,0,40
+Expt9A_SISPA_Katie,9,S3C,Coronavirus HKU,0,40
+Expt9A_SISPA_Katie,9,S3C,Coronavirus NL63,0,40
+Expt9A_SISPA_Katie,9,S3C,Coronavirus OC43,0,40
+Expt9A_SISPA_Katie,9,S3C,Rhinovirus/enterovirus,1,40
+Expt9A_SISPA_Katie,9,S3C,Influenza A,0,40
+Expt9A_SISPA_Katie,9,S3C,Influenza A/H1,0,40
+Expt9A_SISPA_Katie,9,S3C,Influenza A/H1-2009,0,40
+Expt9A_SISPA_Katie,9,S3C,Influenza A/H3,0,40
+Expt9A_SISPA_Katie,9,S3C,Influenza B,0,40
+Expt9A_SISPA_Katie,9,S3C,MERS,0,40
+Expt9A_SISPA_Katie,9,S3C,Metapneumovirus,0,40
+Expt9A_SISPA_Katie,9,S3C,Mycoplasma_pneumoniae,0,40
+Expt9A_SISPA_Katie,9,S3C,Parainfluenza 1,0,40
+Expt9A_SISPA_Katie,9,S3C,Parainfluenza 2,0,40
+Expt9A_SISPA_Katie,9,S3C,Parainfluenza 3,0,40
+Expt9A_SISPA_Katie,9,S3C,Parainfluenza 4,0,40
+Expt9A_SISPA_Katie,9,S3C,RSV,0,40
+Expt9A_SISPA_Katie,9,S3C,SARS-CoV-2,0,40
+Expt9A_SISPA_Katie,9,S3C,unmapped,0,40
+Expt9A_SISPA_Katie,10,S3P1,Adenovirus,0,40
+Expt9A_SISPA_Katie,10,S3P1,Bordetella_parapertussis,0,40
+Expt9A_SISPA_Katie,10,S3P1,Bordetella_pertussis,0,40
+Expt9A_SISPA_Katie,10,S3P1,Chlamydia_pneumoniae,0,40
+Expt9A_SISPA_Katie,10,S3P1,Coronavirus 229E,0,40
+Expt9A_SISPA_Katie,10,S3P1,Coronavirus HKU,0,40
+Expt9A_SISPA_Katie,10,S3P1,Coronavirus NL63,0,40
+Expt9A_SISPA_Katie,10,S3P1,Coronavirus OC43,0,40
+Expt9A_SISPA_Katie,10,S3P1,Rhinovirus/enterovirus,1,40
+Expt9A_SISPA_Katie,10,S3P1,Influenza A,0,40
+Expt9A_SISPA_Katie,10,S3P1,Influenza A/H1,0,40
+Expt9A_SISPA_Katie,10,S3P1,Influenza A/H1-2009,0,40
+Expt9A_SISPA_Katie,10,S3P1,Influenza A/H3,0,40
+Expt9A_SISPA_Katie,10,S3P1,Influenza B,0,40
+Expt9A_SISPA_Katie,10,S3P1,MERS,0,40
+Expt9A_SISPA_Katie,10,S3P1,Metapneumovirus,0,40
+Expt9A_SISPA_Katie,10,S3P1,Mycoplasma_pneumoniae,0,40
+Expt9A_SISPA_Katie,10,S3P1,Parainfluenza 1,0,40
+Expt9A_SISPA_Katie,10,S3P1,Parainfluenza 2,0,40
+Expt9A_SISPA_Katie,10,S3P1,Parainfluenza 3,0,40
+Expt9A_SISPA_Katie,10,S3P1,Parainfluenza 4,0,40
+Expt9A_SISPA_Katie,10,S3P1,RSV,0,40
+Expt9A_SISPA_Katie,10,S3P1,SARS-CoV-2,0,40
+Expt9A_SISPA_Katie,10,S3P1,unmapped,0,40
+Expt9A_SISPA_Katie,11,S3P2,Adenovirus,0,40
+Expt9A_SISPA_Katie,11,S3P2,Bordetella_parapertussis,0,40
+Expt9A_SISPA_Katie,11,S3P2,Bordetella_pertussis,0,40
+Expt9A_SISPA_Katie,11,S3P2,Chlamydia_pneumoniae,0,40
+Expt9A_SISPA_Katie,11,S3P2,Coronavirus 229E,0,40
+Expt9A_SISPA_Katie,11,S3P2,Coronavirus HKU,0,40
+Expt9A_SISPA_Katie,11,S3P2,Coronavirus NL63,0,40
+Expt9A_SISPA_Katie,11,S3P2,Coronavirus OC43,0,40
+Expt9A_SISPA_Katie,11,S3P2,Rhinovirus/enterovirus,1,40
+Expt9A_SISPA_Katie,11,S3P2,Influenza A,0,40
+Expt9A_SISPA_Katie,11,S3P2,Influenza A/H1,0,40
+Expt9A_SISPA_Katie,11,S3P2,Influenza A/H1-2009,0,40
+Expt9A_SISPA_Katie,11,S3P2,Influenza A/H3,0,40
+Expt9A_SISPA_Katie,11,S3P2,Influenza B,0,40
+Expt9A_SISPA_Katie,11,S3P2,MERS,0,40
+Expt9A_SISPA_Katie,11,S3P2,Metapneumovirus,0,40
+Expt9A_SISPA_Katie,11,S3P2,Mycoplasma_pneumoniae,0,40
+Expt9A_SISPA_Katie,11,S3P2,Parainfluenza 1,0,40
+Expt9A_SISPA_Katie,11,S3P2,Parainfluenza 2,0,40
+Expt9A_SISPA_Katie,11,S3P2,Parainfluenza 3,0,40
+Expt9A_SISPA_Katie,11,S3P2,Parainfluenza 4,0,40
+Expt9A_SISPA_Katie,11,S3P2,RSV,0,40
+Expt9A_SISPA_Katie,11,S3P2,SARS-CoV-2,0,40
+Expt9A_SISPA_Katie,11,S3P2,unmapped,0,40
+Expt9A_SISPA_Katie,12,S3P3,Adenovirus,0,40
+Expt9A_SISPA_Katie,12,S3P3,Bordetella_parapertussis,0,40
+Expt9A_SISPA_Katie,12,S3P3,Bordetella_pertussis,0,40
+Expt9A_SISPA_Katie,12,S3P3,Chlamydia_pneumoniae,0,40
+Expt9A_SISPA_Katie,12,S3P3,Coronavirus 229E,0,40
+Expt9A_SISPA_Katie,12,S3P3,Coronavirus HKU,0,40
+Expt9A_SISPA_Katie,12,S3P3,Coronavirus NL63,0,40
+Expt9A_SISPA_Katie,12,S3P3,Coronavirus OC43,0,40
+Expt9A_SISPA_Katie,12,S3P3,Rhinovirus/enterovirus,1,40
+Expt9A_SISPA_Katie,12,S3P3,Influenza A,0,40
+Expt9A_SISPA_Katie,12,S3P3,Influenza A/H1,0,40
+Expt9A_SISPA_Katie,12,S3P3,Influenza A/H1-2009,0,40
+Expt9A_SISPA_Katie,12,S3P3,Influenza A/H3,0,40
+Expt9A_SISPA_Katie,12,S3P3,Influenza B,0,40
+Expt9A_SISPA_Katie,12,S3P3,MERS,0,40
+Expt9A_SISPA_Katie,12,S3P3,Metapneumovirus,0,40
+Expt9A_SISPA_Katie,12,S3P3,Mycoplasma_pneumoniae,0,40
+Expt9A_SISPA_Katie,12,S3P3,Parainfluenza 1,0,40
+Expt9A_SISPA_Katie,12,S3P3,Parainfluenza 2,0,40
+Expt9A_SISPA_Katie,12,S3P3,Parainfluenza 3,0,40
+Expt9A_SISPA_Katie,12,S3P3,Parainfluenza 4,0,40
+Expt9A_SISPA_Katie,12,S3P3,RSV,0,40
+Expt9A_SISPA_Katie,12,S3P3,SARS-CoV-2,0,40
+Expt9A_SISPA_Katie,12,S3P3,unmapped,0,40
+Expt9A_SISPA_Katie,13,S4C,Adenovirus,0,40
+Expt9A_SISPA_Katie,13,S4C,Bordetella_parapertussis,0,40
+Expt9A_SISPA_Katie,13,S4C,Bordetella_pertussis,0,40
+Expt9A_SISPA_Katie,13,S4C,Chlamydia_pneumoniae,0,40
+Expt9A_SISPA_Katie,13,S4C,Coronavirus 229E,0,40
+Expt9A_SISPA_Katie,13,S4C,Coronavirus HKU,0,40
+Expt9A_SISPA_Katie,13,S4C,Coronavirus NL63,0,40
+Expt9A_SISPA_Katie,13,S4C,Coronavirus OC43,0,40
+Expt9A_SISPA_Katie,13,S4C,Influenza A,0,40
+Expt9A_SISPA_Katie,13,S4C,Influenza A/H1,0,40
+Expt9A_SISPA_Katie,13,S4C,Influenza A/H1-2009,0,40
+Expt9A_SISPA_Katie,13,S4C,Influenza A/H3,0,40
+Expt9A_SISPA_Katie,13,S4C,Influenza B,0,40
+Expt9A_SISPA_Katie,13,S4C,MERS,0,40
+Expt9A_SISPA_Katie,13,S4C,Metapneumovirus,0,40
+Expt9A_SISPA_Katie,13,S4C,Mycoplasma_pneumoniae,0,40
+Expt9A_SISPA_Katie,13,S4C,Parainfluenza 1,0,40
+Expt9A_SISPA_Katie,13,S4C,Parainfluenza 2,0,40
+Expt9A_SISPA_Katie,13,S4C,Parainfluenza 3,0,40
+Expt9A_SISPA_Katie,13,S4C,Parainfluenza 4,0,40
+Expt9A_SISPA_Katie,13,S4C,RSV,1,40
+Expt9A_SISPA_Katie,13,S4C,Rhinovirus/enterovirus,0,40
+Expt9A_SISPA_Katie,13,S4C,SARS-CoV-2,0,40
+Expt9A_SISPA_Katie,13,S4C,unmapped,0,40
+Expt9A_SISPA_Katie,14,S4P1,Adenovirus,0,40
+Expt9A_SISPA_Katie,14,S4P1,Bordetella_parapertussis,0,40
+Expt9A_SISPA_Katie,14,S4P1,Bordetella_pertussis,0,40
+Expt9A_SISPA_Katie,14,S4P1,Chlamydia_pneumoniae,0,40
+Expt9A_SISPA_Katie,14,S4P1,Coronavirus 229E,0,40
+Expt9A_SISPA_Katie,14,S4P1,Coronavirus HKU,0,40
+Expt9A_SISPA_Katie,14,S4P1,Coronavirus NL63,0,40
+Expt9A_SISPA_Katie,14,S4P1,Coronavirus OC43,0,40
+Expt9A_SISPA_Katie,14,S4P1,Influenza A,0,40
+Expt9A_SISPA_Katie,14,S4P1,Influenza A/H1,0,40
+Expt9A_SISPA_Katie,14,S4P1,Influenza A/H1-2009,0,40
+Expt9A_SISPA_Katie,14,S4P1,Influenza A/H3,0,40
+Expt9A_SISPA_Katie,14,S4P1,Influenza B,0,40
+Expt9A_SISPA_Katie,14,S4P1,MERS,0,40
+Expt9A_SISPA_Katie,14,S4P1,Metapneumovirus,0,40
+Expt9A_SISPA_Katie,14,S4P1,Mycoplasma_pneumoniae,0,40
+Expt9A_SISPA_Katie,14,S4P1,Parainfluenza 1,0,40
+Expt9A_SISPA_Katie,14,S4P1,Parainfluenza 2,0,40
+Expt9A_SISPA_Katie,14,S4P1,Parainfluenza 3,0,40
+Expt9A_SISPA_Katie,14,S4P1,Parainfluenza 4,0,40
+Expt9A_SISPA_Katie,14,S4P1,RSV,1,40
+Expt9A_SISPA_Katie,14,S4P1,Rhinovirus/enterovirus,0,40
+Expt9A_SISPA_Katie,14,S4P1,SARS-CoV-2,0,40
+Expt9A_SISPA_Katie,14,S4P1,unmapped,0,40
+Expt9A_SISPA_Katie,15,S4P2,Adenovirus,0,40
+Expt9A_SISPA_Katie,15,S4P2,Bordetella_parapertussis,0,40
+Expt9A_SISPA_Katie,15,S4P2,Bordetella_pertussis,0,40
+Expt9A_SISPA_Katie,15,S4P2,Chlamydia_pneumoniae,0,40
+Expt9A_SISPA_Katie,15,S4P2,Coronavirus 229E,0,40
+Expt9A_SISPA_Katie,15,S4P2,Coronavirus HKU,0,40
+Expt9A_SISPA_Katie,15,S4P2,Coronavirus NL63,0,40
+Expt9A_SISPA_Katie,15,S4P2,Coronavirus OC43,0,40
+Expt9A_SISPA_Katie,15,S4P2,Influenza A,0,40
+Expt9A_SISPA_Katie,15,S4P2,Influenza A/H1,0,40
+Expt9A_SISPA_Katie,15,S4P2,Influenza A/H1-2009,0,40
+Expt9A_SISPA_Katie,15,S4P2,Influenza A/H3,0,40
+Expt9A_SISPA_Katie,15,S4P2,Influenza B,0,40
+Expt9A_SISPA_Katie,15,S4P2,MERS,0,40
+Expt9A_SISPA_Katie,15,S4P2,Metapneumovirus,0,40
+Expt9A_SISPA_Katie,15,S4P2,Mycoplasma_pneumoniae,0,40
+Expt9A_SISPA_Katie,15,S4P2,Parainfluenza 1,0,40
+Expt9A_SISPA_Katie,15,S4P2,Parainfluenza 2,0,40
+Expt9A_SISPA_Katie,15,S4P2,Parainfluenza 3,0,40
+Expt9A_SISPA_Katie,15,S4P2,Parainfluenza 4,0,40
+Expt9A_SISPA_Katie,15,S4P2,RSV,1,40
+Expt9A_SISPA_Katie,15,S4P2,Rhinovirus/enterovirus,0,40
+Expt9A_SISPA_Katie,15,S4P2,SARS-CoV-2,0,40
+Expt9A_SISPA_Katie,15,S4P2,unmapped,0,40
+Expt9A_SISPA_Katie,16,S4P3,Adenovirus,0,40
+Expt9A_SISPA_Katie,16,S4P3,Bordetella_parapertussis,0,40
+Expt9A_SISPA_Katie,16,S4P3,Bordetella_pertussis,0,40
+Expt9A_SISPA_Katie,16,S4P3,Chlamydia_pneumoniae,0,40
+Expt9A_SISPA_Katie,16,S4P3,Coronavirus 229E,0,40
+Expt9A_SISPA_Katie,16,S4P3,Coronavirus HKU,0,40
+Expt9A_SISPA_Katie,16,S4P3,Coronavirus NL63,0,40
+Expt9A_SISPA_Katie,16,S4P3,Coronavirus OC43,0,40
+Expt9A_SISPA_Katie,16,S4P3,Influenza A,0,40
+Expt9A_SISPA_Katie,16,S4P3,Influenza A/H1,0,40
+Expt9A_SISPA_Katie,16,S4P3,Influenza A/H1-2009,0,40
+Expt9A_SISPA_Katie,16,S4P3,Influenza A/H3,0,40
+Expt9A_SISPA_Katie,16,S4P3,Influenza B,0,40
+Expt9A_SISPA_Katie,16,S4P3,MERS,0,40
+Expt9A_SISPA_Katie,16,S4P3,Metapneumovirus,0,40
+Expt9A_SISPA_Katie,16,S4P3,Mycoplasma_pneumoniae,0,40
+Expt9A_SISPA_Katie,16,S4P3,Parainfluenza 1,0,40
+Expt9A_SISPA_Katie,16,S4P3,Parainfluenza 2,0,40
+Expt9A_SISPA_Katie,16,S4P3,Parainfluenza 3,0,40
+Expt9A_SISPA_Katie,16,S4P3,Parainfluenza 4,0,40
+Expt9A_SISPA_Katie,16,S4P3,RSV,1,40
+Expt9A_SISPA_Katie,16,S4P3,Rhinovirus/enterovirus,0,40
+Expt9A_SISPA_Katie,16,S4P3,SARS-CoV-2,0,40
+Expt9A_SISPA_Katie,16,S4P3,unmapped,0,40
+Expt9A_SISPA_Katie,17,NC,Adenovirus,0,40
+Expt9A_SISPA_Katie,17,NC,Bordetella_parapertussis,0,40
+Expt9A_SISPA_Katie,17,NC,Bordetella_pertussis,0,40
+Expt9A_SISPA_Katie,17,NC,Chlamydia_pneumoniae,0,40
+Expt9A_SISPA_Katie,17,NC,Coronavirus 229E,0,40
+Expt9A_SISPA_Katie,17,NC,Coronavirus HKU,0,40
+Expt9A_SISPA_Katie,17,NC,Coronavirus NL63,0,40
+Expt9A_SISPA_Katie,17,NC,Coronavirus OC43,0,40
+Expt9A_SISPA_Katie,17,NC,Influenza A,0,40
+Expt9A_SISPA_Katie,17,NC,Influenza A/H1,0,40
+Expt9A_SISPA_Katie,17,NC,Influenza A/H1-2009,0,40
+Expt9A_SISPA_Katie,17,NC,Influenza A/H3,0,40
+Expt9A_SISPA_Katie,17,NC,Influenza B,0,40
+Expt9A_SISPA_Katie,17,NC,MERS,0,40
+Expt9A_SISPA_Katie,17,NC,Metapneumovirus,0,40
+Expt9A_SISPA_Katie,17,NC,Mycoplasma_pneumoniae,0,40
+Expt9A_SISPA_Katie,17,NC,Parainfluenza 1,0,40
+Expt9A_SISPA_Katie,17,NC,Parainfluenza 2,0,40
+Expt9A_SISPA_Katie,17,NC,Parainfluenza 3,0,40
+Expt9A_SISPA_Katie,17,NC,Parainfluenza 4,0,40
+Expt9A_SISPA_Katie,17,NC,RSV,0,40
+Expt9A_SISPA_Katie,17,NC,Rhinovirus/enterovirus,0,40
+Expt9A_SISPA_Katie,17,NC,SARS-CoV-2,0,40
+Expt9A_SISPA_Katie,17,NC,unmapped,0,40
+expt10A_17072024,1,1A,Adenovirus,0,40
+expt10A_17072024,1,1A,Bordetella_parapertussis,0,40
+expt10A_17072024,1,1A,Bordetella_pertussis,0,40
+expt10A_17072024,1,1A,Chlamydia_pneumoniae,0,40
+expt10A_17072024,1,1A,Coronavirus 229E,0,40
+expt10A_17072024,1,1A,Coronavirus HKU,0,40
+expt10A_17072024,1,1A,Coronavirus NL63,0,40
+expt10A_17072024,1,1A,Coronavirus OC43,0,40
+expt10A_17072024,1,1A,Influenza A,0,40
+expt10A_17072024,1,1A,Influenza A/H1,0,40
+expt10A_17072024,1,1A,Influenza A/H1-2009,0,40
+expt10A_17072024,1,1A,Influenza A/H3,0,40
+expt10A_17072024,1,1A,Influenza B,0,40
+expt10A_17072024,1,1A,MERS,0,40
+expt10A_17072024,1,1A,Metapneumovirus,0,40
+expt10A_17072024,1,1A,Mycoplasma_pneumoniae,0,40
+expt10A_17072024,1,1A,Parainfluenza 1,0,40
+expt10A_17072024,1,1A,Parainfluenza 2,0,40
+expt10A_17072024,1,1A,Parainfluenza 3,0,40
+expt10A_17072024,1,1A,Parainfluenza 4,0,40
+expt10A_17072024,1,1A,RSV,1,40
+expt10A_17072024,1,1A,Rhinovirus/enterovirus,0,40
+expt10A_17072024,1,1A,SARS-CoV-2,0,40
+expt10A_17072024,1,1A,unmapped,0,40
+expt10A_17072024,2,1B,Adenovirus,0,40
+expt10A_17072024,2,1B,Bordetella_parapertussis,0,40
+expt10A_17072024,2,1B,Bordetella_pertussis,0,40
+expt10A_17072024,2,1B,Chlamydia_pneumoniae,0,40
+expt10A_17072024,2,1B,Coronavirus 229E,0,40
+expt10A_17072024,2,1B,Coronavirus HKU,0,40
+expt10A_17072024,2,1B,Coronavirus NL63,0,40
+expt10A_17072024,2,1B,Coronavirus OC43,0,40
+expt10A_17072024,2,1B,Influenza A,0,40
+expt10A_17072024,2,1B,Influenza A/H1,0,40
+expt10A_17072024,2,1B,Influenza A/H1-2009,0,40
+expt10A_17072024,2,1B,Influenza A/H3,0,40
+expt10A_17072024,2,1B,Influenza B,0,40
+expt10A_17072024,2,1B,MERS,0,40
+expt10A_17072024,2,1B,Metapneumovirus,0,40
+expt10A_17072024,2,1B,Mycoplasma_pneumoniae,0,40
+expt10A_17072024,2,1B,Parainfluenza 1,0,40
+expt10A_17072024,2,1B,Parainfluenza 2,0,40
+expt10A_17072024,2,1B,Parainfluenza 3,0,40
+expt10A_17072024,2,1B,Parainfluenza 4,0,40
+expt10A_17072024,2,1B,RSV,1,40
+expt10A_17072024,2,1B,Rhinovirus/enterovirus,0,40
+expt10A_17072024,2,1B,SARS-CoV-2,0,40
+expt10A_17072024,2,1B,unmapped,0,40
+expt10A_17072024,3,2A,Adenovirus,0,40
+expt10A_17072024,3,2A,Bordetella_parapertussis,0,40
+expt10A_17072024,3,2A,Bordetella_pertussis,0,40
+expt10A_17072024,3,2A,Chlamydia_pneumoniae,0,40
+expt10A_17072024,3,2A,Coronavirus 229E,0,40
+expt10A_17072024,3,2A,Coronavirus HKU,0,40
+expt10A_17072024,3,2A,Coronavirus NL63,0,40
+expt10A_17072024,3,2A,Coronavirus OC43,0,40
+expt10A_17072024,3,2A,Influenza A,0,40
+expt10A_17072024,3,2A,Influenza A/H1,0,40
+expt10A_17072024,3,2A,Influenza A/H1-2009,0,40
+expt10A_17072024,3,2A,Influenza A/H3,0,40
+expt10A_17072024,3,2A,Influenza B,0,40
+expt10A_17072024,3,2A,MERS,0,40
+expt10A_17072024,3,2A,Metapneumovirus,0,40
+expt10A_17072024,3,2A,Mycoplasma_pneumoniae,0,40
+expt10A_17072024,3,2A,Parainfluenza 1,0,40
+expt10A_17072024,3,2A,Parainfluenza 2,0,40
+expt10A_17072024,3,2A,Parainfluenza 3,0,40
+expt10A_17072024,3,2A,Parainfluenza 4,0,40
+expt10A_17072024,3,2A,RSV,0,40
+expt10A_17072024,3,2A,Rhinovirus/enterovirus,0,40
+expt10A_17072024,3,2A,SARS-CoV-2,1,40
+expt10A_17072024,3,2A,unmapped,0,40
+expt10A_17072024,4,2B,Adenovirus,0,40
+expt10A_17072024,4,2B,Bordetella_parapertussis,0,40
+expt10A_17072024,4,2B,Bordetella_pertussis,0,40
+expt10A_17072024,4,2B,Chlamydia_pneumoniae,0,40
+expt10A_17072024,4,2B,Coronavirus 229E,0,40
+expt10A_17072024,4,2B,Coronavirus HKU,0,40
+expt10A_17072024,4,2B,Coronavirus NL63,0,40
+expt10A_17072024,4,2B,Coronavirus OC43,0,40
+expt10A_17072024,4,2B,Influenza A,0,40
+expt10A_17072024,4,2B,Influenza A/H1,0,40
+expt10A_17072024,4,2B,Influenza A/H1-2009,0,40
+expt10A_17072024,4,2B,Influenza A/H3,0,40
+expt10A_17072024,4,2B,Influenza B,0,40
+expt10A_17072024,4,2B,MERS,0,40
+expt10A_17072024,4,2B,Metapneumovirus,0,40
+expt10A_17072024,4,2B,Mycoplasma_pneumoniae,0,40
+expt10A_17072024,4,2B,Parainfluenza 1,0,40
+expt10A_17072024,4,2B,Parainfluenza 2,0,40
+expt10A_17072024,4,2B,Parainfluenza 3,0,40
+expt10A_17072024,4,2B,Parainfluenza 4,0,40
+expt10A_17072024,4,2B,RSV,0,40
+expt10A_17072024,4,2B,Rhinovirus/enterovirus,0,40
+expt10A_17072024,4,2B,SARS-CoV-2,1,40
+expt10A_17072024,4,2B,unmapped,0,40
+expt10A_17072024,5,3A,Adenovirus,0,40
+expt10A_17072024,5,3A,Bordetella_parapertussis,0,40
+expt10A_17072024,5,3A,Bordetella_pertussis,0,40
+expt10A_17072024,5,3A,Chlamydia_pneumoniae,0,40
+expt10A_17072024,5,3A,Coronavirus 229E,0,40
+expt10A_17072024,5,3A,Coronavirus HKU,0,40
+expt10A_17072024,5,3A,Coronavirus NL63,0,40
+expt10A_17072024,5,3A,Coronavirus OC43,0,40
+expt10A_17072024,5,3A,Influenza A,0,40
+expt10A_17072024,5,3A,Influenza A/H1,0,40
+expt10A_17072024,5,3A,Influenza A/H1-2009,0,40
+expt10A_17072024,5,3A,Influenza A/H3,0,40
+expt10A_17072024,5,3A,Influenza B,0,40
+expt10A_17072024,5,3A,MERS,0,40
+expt10A_17072024,5,3A,Metapneumovirus,0,40
+expt10A_17072024,5,3A,Mycoplasma_pneumoniae,0,40
+expt10A_17072024,5,3A,Parainfluenza 2,1,40
+expt10A_17072024,5,3A,Parainfluenza 1,0,40
+expt10A_17072024,5,3A,Parainfluenza 3,0,40
+expt10A_17072024,5,3A,Parainfluenza 4,0,40
+expt10A_17072024,5,3A,RSV,0,40
+expt10A_17072024,5,3A,Rhinovirus/enterovirus,0,40
+expt10A_17072024,5,3A,SARS-CoV-2,0,40
+expt10A_17072024,5,3A,unmapped,0,40
+expt10A_17072024,6,3B,Adenovirus,0,40
+expt10A_17072024,6,3B,Bordetella_parapertussis,0,40
+expt10A_17072024,6,3B,Bordetella_pertussis,0,40
+expt10A_17072024,6,3B,Chlamydia_pneumoniae,0,40
+expt10A_17072024,6,3B,Coronavirus 229E,0,40
+expt10A_17072024,6,3B,Coronavirus HKU,0,40
+expt10A_17072024,6,3B,Coronavirus NL63,0,40
+expt10A_17072024,6,3B,Coronavirus OC43,0,40
+expt10A_17072024,6,3B,Influenza A,0,40
+expt10A_17072024,6,3B,Influenza A/H1,0,40
+expt10A_17072024,6,3B,Influenza A/H1-2009,0,40
+expt10A_17072024,6,3B,Influenza A/H3,0,40
+expt10A_17072024,6,3B,Influenza B,0,40
+expt10A_17072024,6,3B,MERS,0,40
+expt10A_17072024,6,3B,Metapneumovirus,0,40
+expt10A_17072024,6,3B,Mycoplasma_pneumoniae,0,40
+expt10A_17072024,6,3B,Parainfluenza 2,1,40
+expt10A_17072024,6,3B,Parainfluenza 1,0,40
+expt10A_17072024,6,3B,Parainfluenza 3,0,40
+expt10A_17072024,6,3B,Parainfluenza 4,0,40
+expt10A_17072024,6,3B,RSV,0,40
+expt10A_17072024,6,3B,Rhinovirus/enterovirus,0,40
+expt10A_17072024,6,3B,SARS-CoV-2,0,40
+expt10A_17072024,6,3B,unmapped,0,40
+expt10A_17072024,7,4A,Adenovirus,0,40
+expt10A_17072024,7,4A,Bordetella_parapertussis,0,40
+expt10A_17072024,7,4A,Bordetella_pertussis,0,40
+expt10A_17072024,7,4A,Chlamydia_pneumoniae,0,40
+expt10A_17072024,7,4A,Coronavirus 229E,0,40
+expt10A_17072024,7,4A,Coronavirus HKU,0,40
+expt10A_17072024,7,4A,Coronavirus NL63,0,40
+expt10A_17072024,7,4A,Coronavirus OC43,0,40
+expt10A_17072024,7,4A,Influenza A,0,40
+expt10A_17072024,7,4A,Influenza A/H1,0,40
+expt10A_17072024,7,4A,Influenza A/H1-2009,0,40
+expt10A_17072024,7,4A,Influenza A/H3,0,40
+expt10A_17072024,7,4A,Influenza B,0,40
+expt10A_17072024,7,4A,MERS,0,40
+expt10A_17072024,7,4A,Metapneumovirus,0,40
+expt10A_17072024,7,4A,Mycoplasma_pneumoniae,0,40
+expt10A_17072024,7,4A,Parainfluenza 3,1,40
+expt10A_17072024,7,4A,Parainfluenza 1,0,40
+expt10A_17072024,7,4A,Parainfluenza 2,0,40
+expt10A_17072024,7,4A,Parainfluenza 4,0,40
+expt10A_17072024,7,4A,RSV,0,40
+expt10A_17072024,7,4A,Rhinovirus/enterovirus,0,40
+expt10A_17072024,7,4A,SARS-CoV-2,0,40
+expt10A_17072024,7,4A,unmapped,0,40
+expt10A_17072024,8,4B,Adenovirus,0,40
+expt10A_17072024,8,4B,Bordetella_parapertussis,0,40
+expt10A_17072024,8,4B,Bordetella_pertussis,0,40
+expt10A_17072024,8,4B,Chlamydia_pneumoniae,0,40
+expt10A_17072024,8,4B,Coronavirus 229E,0,40
+expt10A_17072024,8,4B,Coronavirus HKU,0,40
+expt10A_17072024,8,4B,Coronavirus NL63,0,40
+expt10A_17072024,8,4B,Coronavirus OC43,0,40
+expt10A_17072024,8,4B,Influenza A,0,40
+expt10A_17072024,8,4B,Influenza A/H1,0,40
+expt10A_17072024,8,4B,Influenza A/H1-2009,0,40
+expt10A_17072024,8,4B,Influenza A/H3,0,40
+expt10A_17072024,8,4B,Influenza B,0,40
+expt10A_17072024,8,4B,MERS,0,40
+expt10A_17072024,8,4B,Metapneumovirus,0,40
+expt10A_17072024,8,4B,Mycoplasma_pneumoniae,0,40
+expt10A_17072024,8,4B,Parainfluenza 3,1,40
+expt10A_17072024,8,4B,Parainfluenza 1,0,40
+expt10A_17072024,8,4B,Parainfluenza 2,0,40
+expt10A_17072024,8,4B,Parainfluenza 4,0,40
+expt10A_17072024,8,4B,RSV,0,40
+expt10A_17072024,8,4B,Rhinovirus/enterovirus,0,40
+expt10A_17072024,8,4B,SARS-CoV-2,0,40
+expt10A_17072024,8,4B,unmapped,0,40
+expt10A_17072024,9,5A,Adenovirus,0,40
+expt10A_17072024,9,5A,Bordetella_parapertussis,0,40
+expt10A_17072024,9,5A,Bordetella_pertussis,0,40
+expt10A_17072024,9,5A,Chlamydia_pneumoniae,0,40
+expt10A_17072024,9,5A,Coronavirus 229E,0,40
+expt10A_17072024,9,5A,Coronavirus HKU,0,40
+expt10A_17072024,9,5A,Coronavirus NL63,0,40
+expt10A_17072024,9,5A,Coronavirus OC43,0,40
+expt10A_17072024,9,5A,Influenza A,0,40
+expt10A_17072024,9,5A,Influenza A/H1,0,40
+expt10A_17072024,9,5A,Influenza A/H1-2009,0,40
+expt10A_17072024,9,5A,Influenza A/H3,0,40
+expt10A_17072024,9,5A,Influenza B,0,40
+expt10A_17072024,9,5A,MERS,0,40
+expt10A_17072024,9,5A,Metapneumovirus,0,40
+expt10A_17072024,9,5A,Mycoplasma_pneumoniae,0,40
+expt10A_17072024,9,5A,Parainfluenza 1,0,40
+expt10A_17072024,9,5A,Parainfluenza 2,0,40
+expt10A_17072024,9,5A,Parainfluenza 3,0,40
+expt10A_17072024,9,5A,Parainfluenza 4,0,40
+expt10A_17072024,9,5A,RSV,1,40
+expt10A_17072024,9,5A,Rhinovirus/enterovirus,0,40
+expt10A_17072024,9,5A,SARS-CoV-2,0,40
+expt10A_17072024,9,5A,unmapped,0,40
+expt10A_17072024,10,5B,Adenovirus,0,40
+expt10A_17072024,10,5B,Bordetella_parapertussis,0,40
+expt10A_17072024,10,5B,Bordetella_pertussis,0,40
+expt10A_17072024,10,5B,Chlamydia_pneumoniae,0,40
+expt10A_17072024,10,5B,Coronavirus 229E,0,40
+expt10A_17072024,10,5B,Coronavirus HKU,0,40
+expt10A_17072024,10,5B,Coronavirus NL63,0,40
+expt10A_17072024,10,5B,Coronavirus OC43,0,40
+expt10A_17072024,10,5B,Influenza A,0,40
+expt10A_17072024,10,5B,Influenza A/H1,0,40
+expt10A_17072024,10,5B,Influenza A/H1-2009,0,40
+expt10A_17072024,10,5B,Influenza A/H3,0,40
+expt10A_17072024,10,5B,Influenza B,0,40
+expt10A_17072024,10,5B,MERS,0,40
+expt10A_17072024,10,5B,Metapneumovirus,0,40
+expt10A_17072024,10,5B,Mycoplasma_pneumoniae,0,40
+expt10A_17072024,10,5B,Parainfluenza 1,0,40
+expt10A_17072024,10,5B,Parainfluenza 2,0,40
+expt10A_17072024,10,5B,Parainfluenza 3,0,40
+expt10A_17072024,10,5B,Parainfluenza 4,0,40
+expt10A_17072024,10,5B,RSV,1,40
+expt10A_17072024,10,5B,Rhinovirus/enterovirus,0,40
+expt10A_17072024,10,5B,SARS-CoV-2,0,40
+expt10A_17072024,10,5B,unmapped,0,40
+expt10A_17072024,11,6A,Adenovirus,0,40
+expt10A_17072024,11,6A,Bordetella_parapertussis,0,40
+expt10A_17072024,11,6A,Bordetella_pertussis,0,40
+expt10A_17072024,11,6A,Chlamydia_pneumoniae,0,40
+expt10A_17072024,11,6A,Coronavirus 229E,0,40
+expt10A_17072024,11,6A,Coronavirus HKU,0,40
+expt10A_17072024,11,6A,Coronavirus NL63,0,40
+expt10A_17072024,11,6A,Coronavirus OC43,0,40
+expt10A_17072024,11,6A,Influenza A,0,40
+expt10A_17072024,11,6A,Influenza A/H1,0,40
+expt10A_17072024,11,6A,Influenza A/H1-2009,0,40
+expt10A_17072024,11,6A,Influenza A/H3,0,40
+expt10A_17072024,11,6A,Influenza B,0,40
+expt10A_17072024,11,6A,MERS,0,40
+expt10A_17072024,11,6A,Metapneumovirus,0,40
+expt10A_17072024,11,6A,Mycoplasma_pneumoniae,0,40
+expt10A_17072024,11,6A,Parainfluenza 1,0,40
+expt10A_17072024,11,6A,Parainfluenza 2,0,40
+expt10A_17072024,11,6A,Parainfluenza 3,0,40
+expt10A_17072024,11,6A,Parainfluenza 4,0,40
+expt10A_17072024,11,6A,RSV,1,40
+expt10A_17072024,11,6A,Rhinovirus/enterovirus,0,40
+expt10A_17072024,11,6A,SARS-CoV-2,0,40
+expt10A_17072024,11,6A,unmapped,0,40
+expt10A_17072024,12,6B,Adenovirus,0,40
+expt10A_17072024,12,6B,Bordetella_parapertussis,0,40
+expt10A_17072024,12,6B,Bordetella_pertussis,0,40
+expt10A_17072024,12,6B,Chlamydia_pneumoniae,0,40
+expt10A_17072024,12,6B,Coronavirus 229E,0,40
+expt10A_17072024,12,6B,Coronavirus HKU,0,40
+expt10A_17072024,12,6B,Coronavirus NL63,0,40
+expt10A_17072024,12,6B,Coronavirus OC43,0,40
+expt10A_17072024,12,6B,Influenza A,0,40
+expt10A_17072024,12,6B,Influenza A/H1,0,40
+expt10A_17072024,12,6B,Influenza A/H1-2009,0,40
+expt10A_17072024,12,6B,Influenza A/H3,0,40
+expt10A_17072024,12,6B,Influenza B,0,40
+expt10A_17072024,12,6B,MERS,0,40
+expt10A_17072024,12,6B,Metapneumovirus,0,40
+expt10A_17072024,12,6B,Mycoplasma_pneumoniae,0,40
+expt10A_17072024,12,6B,Parainfluenza 1,0,40
+expt10A_17072024,12,6B,Parainfluenza 2,0,40
+expt10A_17072024,12,6B,Parainfluenza 3,0,40
+expt10A_17072024,12,6B,Parainfluenza 4,0,40
+expt10A_17072024,12,6B,RSV,1,40
+expt10A_17072024,12,6B,Rhinovirus/enterovirus,0,40
+expt10A_17072024,12,6B,SARS-CoV-2,0,40
+expt10A_17072024,12,6B,unmapped,0,40
+expt10A_17072024,13,7A,Adenovirus,0,40
+expt10A_17072024,13,7A,Bordetella_parapertussis,0,40
+expt10A_17072024,13,7A,Bordetella_pertussis,0,40
+expt10A_17072024,13,7A,Chlamydia_pneumoniae,0,40
+expt10A_17072024,13,7A,Coronavirus 229E,0,40
+expt10A_17072024,13,7A,Coronavirus HKU,0,40
+expt10A_17072024,13,7A,Coronavirus NL63,0,40
+expt10A_17072024,13,7A,Coronavirus OC43,0,40
+expt10A_17072024,13,7A,Influenza A,1,40
+expt10A_17072024,13,7A,Influenza A/H1-2009,1,40
+expt10A_17072024,13,7A,Influenza A/H1,0,40
+expt10A_17072024,13,7A,Influenza A/H3,0,40
+expt10A_17072024,13,7A,Influenza B,0,40
+expt10A_17072024,13,7A,MERS,0,40
+expt10A_17072024,13,7A,Metapneumovirus,0,40
+expt10A_17072024,13,7A,Mycoplasma_pneumoniae,0,40
+expt10A_17072024,13,7A,Parainfluenza 1,0,40
+expt10A_17072024,13,7A,Parainfluenza 2,0,40
+expt10A_17072024,13,7A,Parainfluenza 3,0,40
+expt10A_17072024,13,7A,Parainfluenza 4,0,40
+expt10A_17072024,13,7A,RSV,0,40
+expt10A_17072024,13,7A,Rhinovirus/enterovirus,0,40
+expt10A_17072024,13,7A,SARS-CoV-2,0,40
+expt10A_17072024,13,7A,unmapped,0,40
+expt10A_17072024,14,7B,Adenovirus,0,40
+expt10A_17072024,14,7B,Bordetella_parapertussis,0,40
+expt10A_17072024,14,7B,Bordetella_pertussis,0,40
+expt10A_17072024,14,7B,Chlamydia_pneumoniae,0,40
+expt10A_17072024,14,7B,Coronavirus 229E,0,40
+expt10A_17072024,14,7B,Coronavirus HKU,0,40
+expt10A_17072024,14,7B,Coronavirus NL63,0,40
+expt10A_17072024,14,7B,Coronavirus OC43,0,40
+expt10A_17072024,14,7B,Influenza A,1,40
+expt10A_17072024,14,7B,Influenza A/H1-2009,1,40
+expt10A_17072024,14,7B,Influenza A/H1,0,40
+expt10A_17072024,14,7B,Influenza A/H3,0,40
+expt10A_17072024,14,7B,Influenza B,0,40
+expt10A_17072024,14,7B,MERS,0,40
+expt10A_17072024,14,7B,Metapneumovirus,0,40
+expt10A_17072024,14,7B,Mycoplasma_pneumoniae,0,40
+expt10A_17072024,14,7B,Parainfluenza 1,0,40
+expt10A_17072024,14,7B,Parainfluenza 2,0,40
+expt10A_17072024,14,7B,Parainfluenza 3,0,40
+expt10A_17072024,14,7B,Parainfluenza 4,0,40
+expt10A_17072024,14,7B,RSV,0,40
+expt10A_17072024,14,7B,Rhinovirus/enterovirus,0,40
+expt10A_17072024,14,7B,SARS-CoV-2,0,40
+expt10A_17072024,14,7B,unmapped,0,40
+expt10A_17072024,15,8A,Adenovirus,0,40
+expt10A_17072024,15,8A,Bordetella_parapertussis,0,40
+expt10A_17072024,15,8A,Bordetella_pertussis,0,40
+expt10A_17072024,15,8A,Chlamydia_pneumoniae,0,40
+expt10A_17072024,15,8A,Coronavirus 229E,0,40
+expt10A_17072024,15,8A,Coronavirus HKU,0,40
+expt10A_17072024,15,8A,Coronavirus NL63,0,40
+expt10A_17072024,15,8A,Coronavirus OC43,0,40
+expt10A_17072024,15,8A,Influenza A,1,40
+expt10A_17072024,15,8A,Influenza A/H1-2009,1,40
+expt10A_17072024,15,8A,Influenza A/H1,0,40
+expt10A_17072024,15,8A,Influenza A/H3,0,40
+expt10A_17072024,15,8A,Influenza B,0,40
+expt10A_17072024,15,8A,MERS,0,40
+expt10A_17072024,15,8A,Metapneumovirus,0,40
+expt10A_17072024,15,8A,Mycoplasma_pneumoniae,0,40
+expt10A_17072024,15,8A,Parainfluenza 1,0,40
+expt10A_17072024,15,8A,Parainfluenza 2,0,40
+expt10A_17072024,15,8A,Parainfluenza 3,0,40
+expt10A_17072024,15,8A,Parainfluenza 4,0,40
+expt10A_17072024,15,8A,RSV,0,40
+expt10A_17072024,15,8A,Rhinovirus/enterovirus,0,40
+expt10A_17072024,15,8A,SARS-CoV-2,0,40
+expt10A_17072024,15,8A,unmapped,0,40
+expt10A_17072024,16,8B,Adenovirus,0,40
+expt10A_17072024,16,8B,Bordetella_parapertussis,0,40
+expt10A_17072024,16,8B,Bordetella_pertussis,0,40
+expt10A_17072024,16,8B,Chlamydia_pneumoniae,0,40
+expt10A_17072024,16,8B,Coronavirus 229E,0,40
+expt10A_17072024,16,8B,Coronavirus HKU,0,40
+expt10A_17072024,16,8B,Coronavirus NL63,0,40
+expt10A_17072024,16,8B,Coronavirus OC43,0,40
+expt10A_17072024,16,8B,Influenza A,1,40
+expt10A_17072024,16,8B,Influenza A/H1-2009,1,40
+expt10A_17072024,16,8B,Influenza A/H1,0,40
+expt10A_17072024,16,8B,Influenza A/H3,0,40
+expt10A_17072024,16,8B,Influenza B,0,40
+expt10A_17072024,16,8B,MERS,0,40
+expt10A_17072024,16,8B,Metapneumovirus,0,40
+expt10A_17072024,16,8B,Mycoplasma_pneumoniae,0,40
+expt10A_17072024,16,8B,Parainfluenza 1,0,40
+expt10A_17072024,16,8B,Parainfluenza 2,0,40
+expt10A_17072024,16,8B,Parainfluenza 3,0,40
+expt10A_17072024,16,8B,Parainfluenza 4,0,40
+expt10A_17072024,16,8B,RSV,0,40
+expt10A_17072024,16,8B,Rhinovirus/enterovirus,0,40
+expt10A_17072024,16,8B,SARS-CoV-2,0,40
+expt10A_17072024,16,8B,unmapped,0,40
+expt10A_17072024,17,9A,Adenovirus,0,40
+expt10A_17072024,17,9A,Bordetella_parapertussis,0,40
+expt10A_17072024,17,9A,Bordetella_pertussis,0,40
+expt10A_17072024,17,9A,Chlamydia_pneumoniae,0,40
+expt10A_17072024,17,9A,Coronavirus 229E,0,40
+expt10A_17072024,17,9A,Coronavirus HKU,0,40
+expt10A_17072024,17,9A,Coronavirus NL63,0,40
+expt10A_17072024,17,9A,Coronavirus OC43,0,40
+expt10A_17072024,17,9A,Influenza A,0,40
+expt10A_17072024,17,9A,Influenza A/H1,0,40
+expt10A_17072024,17,9A,Influenza A/H1-2009,0,40
+expt10A_17072024,17,9A,Influenza A/H3,0,40
+expt10A_17072024,17,9A,Influenza B,0,40
+expt10A_17072024,17,9A,MERS,0,40
+expt10A_17072024,17,9A,Metapneumovirus,0,40
+expt10A_17072024,17,9A,Mycoplasma_pneumoniae,0,40
+expt10A_17072024,17,9A,Parainfluenza 3,1,40
+expt10A_17072024,17,9A,Parainfluenza 1,0,40
+expt10A_17072024,17,9A,Parainfluenza 2,0,40
+expt10A_17072024,17,9A,Parainfluenza 4,0,40
+expt10A_17072024,17,9A,RSV,0,40
+expt10A_17072024,17,9A,Rhinovirus/enterovirus,0,40
+expt10A_17072024,17,9A,SARS-CoV-2,0,40
+expt10A_17072024,17,9A,unmapped,0,40
+expt10A_17072024,18,9B,Adenovirus,0,40
+expt10A_17072024,18,9B,Bordetella_parapertussis,0,40
+expt10A_17072024,18,9B,Bordetella_pertussis,0,40
+expt10A_17072024,18,9B,Chlamydia_pneumoniae,0,40
+expt10A_17072024,18,9B,Coronavirus 229E,0,40
+expt10A_17072024,18,9B,Coronavirus HKU,0,40
+expt10A_17072024,18,9B,Coronavirus NL63,0,40
+expt10A_17072024,18,9B,Coronavirus OC43,0,40
+expt10A_17072024,18,9B,Influenza A,0,40
+expt10A_17072024,18,9B,Influenza A/H1,0,40
+expt10A_17072024,18,9B,Influenza A/H1-2009,0,40
+expt10A_17072024,18,9B,Influenza A/H3,0,40
+expt10A_17072024,18,9B,Influenza B,0,40
+expt10A_17072024,18,9B,MERS,0,40
+expt10A_17072024,18,9B,Metapneumovirus,0,40
+expt10A_17072024,18,9B,Mycoplasma_pneumoniae,0,40
+expt10A_17072024,18,9B,Parainfluenza 3,1,40
+expt10A_17072024,18,9B,Parainfluenza 1,0,40
+expt10A_17072024,18,9B,Parainfluenza 2,0,40
+expt10A_17072024,18,9B,Parainfluenza 4,0,40
+expt10A_17072024,18,9B,RSV,0,40
+expt10A_17072024,18,9B,Rhinovirus/enterovirus,0,40
+expt10A_17072024,18,9B,SARS-CoV-2,0,40
+expt10A_17072024,18,9B,unmapped,0,40
+expt10A_17072024,19,10A,Adenovirus,0,40
+expt10A_17072024,19,10A,Bordetella_parapertussis,0,40
+expt10A_17072024,19,10A,Bordetella_pertussis,0,40
+expt10A_17072024,19,10A,Chlamydia_pneumoniae,0,40
+expt10A_17072024,19,10A,Coronavirus 229E,0,40
+expt10A_17072024,19,10A,Coronavirus HKU,0,40
+expt10A_17072024,19,10A,Coronavirus NL63,0,40
+expt10A_17072024,19,10A,Coronavirus OC43,0,40
+expt10A_17072024,19,10A,Rhinovirus/enterovirus,1,40
+expt10A_17072024,19,10A,Influenza A,0,40
+expt10A_17072024,19,10A,Influenza A/H1,0,40
+expt10A_17072024,19,10A,Influenza A/H1-2009,0,40
+expt10A_17072024,19,10A,Influenza A/H3,0,40
+expt10A_17072024,19,10A,Influenza B,0,40
+expt10A_17072024,19,10A,MERS,0,40
+expt10A_17072024,19,10A,Metapneumovirus,0,40
+expt10A_17072024,19,10A,Mycoplasma_pneumoniae,0,40
+expt10A_17072024,19,10A,Parainfluenza 3,1,40
+expt10A_17072024,19,10A,Parainfluenza 1,0,40
+expt10A_17072024,19,10A,Parainfluenza 2,0,40
+expt10A_17072024,19,10A,Parainfluenza 4,0,40
+expt10A_17072024,19,10A,RSV,0,40
+expt10A_17072024,19,10A,SARS-CoV-2,0,40
+expt10A_17072024,19,10A,unmapped,0,40
+expt10A_17072024,20,10B,Adenovirus,0,40
+expt10A_17072024,20,10B,Bordetella_parapertussis,0,40
+expt10A_17072024,20,10B,Bordetella_pertussis,0,40
+expt10A_17072024,20,10B,Chlamydia_pneumoniae,0,40
+expt10A_17072024,20,10B,Coronavirus 229E,0,40
+expt10A_17072024,20,10B,Coronavirus HKU,0,40
+expt10A_17072024,20,10B,Coronavirus NL63,0,40
+expt10A_17072024,20,10B,Coronavirus OC43,0,40
+expt10A_17072024,20,10B,Rhinovirus/enterovirus,1,40
+expt10A_17072024,20,10B,Influenza A,0,40
+expt10A_17072024,20,10B,Influenza A/H1,0,40
+expt10A_17072024,20,10B,Influenza A/H1-2009,0,40
+expt10A_17072024,20,10B,Influenza A/H3,0,40
+expt10A_17072024,20,10B,Influenza B,0,40
+expt10A_17072024,20,10B,MERS,0,40
+expt10A_17072024,20,10B,Metapneumovirus,0,40
+expt10A_17072024,20,10B,Mycoplasma_pneumoniae,0,40
+expt10A_17072024,20,10B,Parainfluenza 3,1,40
+expt10A_17072024,20,10B,Parainfluenza 1,0,40
+expt10A_17072024,20,10B,Parainfluenza 2,0,40
+expt10A_17072024,20,10B,Parainfluenza 4,0,40
+expt10A_17072024,20,10B,RSV,0,40
+expt10A_17072024,20,10B,SARS-CoV-2,0,40
+expt10A_17072024,20,10B,unmapped,0,40
+expt10A_17072024,21,NC1,Adenovirus,0,40
+expt10A_17072024,21,NC1,Bordetella_parapertussis,0,40
+expt10A_17072024,21,NC1,Bordetella_pertussis,0,40
+expt10A_17072024,21,NC1,Chlamydia_pneumoniae,0,40
+expt10A_17072024,21,NC1,Coronavirus 229E,0,40
+expt10A_17072024,21,NC1,Coronavirus HKU,0,40
+expt10A_17072024,21,NC1,Coronavirus NL63,0,40
+expt10A_17072024,21,NC1,Coronavirus OC43,0,40
+expt10A_17072024,21,NC1,Influenza A,0,40
+expt10A_17072024,21,NC1,Influenza A/H1,0,40
+expt10A_17072024,21,NC1,Influenza A/H1-2009,0,40
+expt10A_17072024,21,NC1,Influenza A/H3,0,40
+expt10A_17072024,21,NC1,Influenza B,0,40
+expt10A_17072024,21,NC1,MERS,0,40
+expt10A_17072024,21,NC1,Metapneumovirus,0,40
+expt10A_17072024,21,NC1,Mycoplasma_pneumoniae,0,40
+expt10A_17072024,21,NC1,Parainfluenza 1,0,40
+expt10A_17072024,21,NC1,Parainfluenza 2,0,40
+expt10A_17072024,21,NC1,Parainfluenza 3,0,40
+expt10A_17072024,21,NC1,Parainfluenza 4,0,40
+expt10A_17072024,21,NC1,RSV,0,40
+expt10A_17072024,21,NC1,Rhinovirus/enterovirus,0,40
+expt10A_17072024,21,NC1,SARS-CoV-2,0,40
+expt10A_17072024,21,NC1,unmapped,0,40
+expt10A_17072024,22,NC2,Adenovirus,0,40
+expt10A_17072024,22,NC2,Bordetella_parapertussis,0,40
+expt10A_17072024,22,NC2,Bordetella_pertussis,0,40
+expt10A_17072024,22,NC2,Chlamydia_pneumoniae,0,40
+expt10A_17072024,22,NC2,Coronavirus 229E,0,40
+expt10A_17072024,22,NC2,Coronavirus HKU,0,40
+expt10A_17072024,22,NC2,Coronavirus NL63,0,40
+expt10A_17072024,22,NC2,Coronavirus OC43,0,40
+expt10A_17072024,22,NC2,Influenza A,0,40
+expt10A_17072024,22,NC2,Influenza A/H1,0,40
+expt10A_17072024,22,NC2,Influenza A/H1-2009,0,40
+expt10A_17072024,22,NC2,Influenza A/H3,0,40
+expt10A_17072024,22,NC2,Influenza B,0,40
+expt10A_17072024,22,NC2,MERS,0,40
+expt10A_17072024,22,NC2,Metapneumovirus,0,40
+expt10A_17072024,22,NC2,Mycoplasma_pneumoniae,0,40
+expt10A_17072024,22,NC2,Parainfluenza 1,0,40
+expt10A_17072024,22,NC2,Parainfluenza 2,0,40
+expt10A_17072024,22,NC2,Parainfluenza 3,0,40
+expt10A_17072024,22,NC2,Parainfluenza 4,0,40
+expt10A_17072024,22,NC2,RSV,0,40
+expt10A_17072024,22,NC2,Rhinovirus/enterovirus,0,40
+expt10A_17072024,22,NC2,SARS-CoV-2,0,40
+expt10A_17072024,22,NC2,unmapped,0,40
+expt10A_17072024,23,NC3,Adenovirus,0,40
+expt10A_17072024,23,NC3,Bordetella_parapertussis,0,40
+expt10A_17072024,23,NC3,Bordetella_pertussis,0,40
+expt10A_17072024,23,NC3,Chlamydia_pneumoniae,0,40
+expt10A_17072024,23,NC3,Coronavirus 229E,0,40
+expt10A_17072024,23,NC3,Coronavirus HKU,0,40
+expt10A_17072024,23,NC3,Coronavirus NL63,0,40
+expt10A_17072024,23,NC3,Coronavirus OC43,0,40
+expt10A_17072024,23,NC3,Influenza A,0,40
+expt10A_17072024,23,NC3,Influenza A/H1,0,40
+expt10A_17072024,23,NC3,Influenza A/H1-2009,0,40
+expt10A_17072024,23,NC3,Influenza A/H3,0,40
+expt10A_17072024,23,NC3,Influenza B,0,40
+expt10A_17072024,23,NC3,MERS,0,40
+expt10A_17072024,23,NC3,Metapneumovirus,0,40
+expt10A_17072024,23,NC3,Mycoplasma_pneumoniae,0,40
+expt10A_17072024,23,NC3,Parainfluenza 1,0,40
+expt10A_17072024,23,NC3,Parainfluenza 2,0,40
+expt10A_17072024,23,NC3,Parainfluenza 3,0,40
+expt10A_17072024,23,NC3,Parainfluenza 4,0,40
+expt10A_17072024,23,NC3,RSV,0,40
+expt10A_17072024,23,NC3,Rhinovirus/enterovirus,0,40
+expt10A_17072024,23,NC3,SARS-CoV-2,0,40
+expt10A_17072024,23,NC3,unmapped,0,40
+expt10A_17072024,24,NC4,Adenovirus,0,40
+expt10A_17072024,24,NC4,Bordetella_parapertussis,0,40
+expt10A_17072024,24,NC4,Bordetella_pertussis,0,40
+expt10A_17072024,24,NC4,Chlamydia_pneumoniae,0,40
+expt10A_17072024,24,NC4,Coronavirus 229E,0,40
+expt10A_17072024,24,NC4,Coronavirus HKU,0,40
+expt10A_17072024,24,NC4,Coronavirus NL63,0,40
+expt10A_17072024,24,NC4,Coronavirus OC43,0,40
+expt10A_17072024,24,NC4,Influenza A,0,40
+expt10A_17072024,24,NC4,Influenza A/H1,0,40
+expt10A_17072024,24,NC4,Influenza A/H1-2009,0,40
+expt10A_17072024,24,NC4,Influenza A/H3,0,40
+expt10A_17072024,24,NC4,Influenza B,0,40
+expt10A_17072024,24,NC4,MERS,0,40
+expt10A_17072024,24,NC4,Metapneumovirus,0,40
+expt10A_17072024,24,NC4,Mycoplasma_pneumoniae,0,40
+expt10A_17072024,24,NC4,Parainfluenza 1,0,40
+expt10A_17072024,24,NC4,Parainfluenza 2,0,40
+expt10A_17072024,24,NC4,Parainfluenza 3,0,40
+expt10A_17072024,24,NC4,Parainfluenza 4,0,40
+expt10A_17072024,24,NC4,RSV,0,40
+expt10A_17072024,24,NC4,Rhinovirus/enterovirus,0,40
+expt10A_17072024,24,NC4,SARS-CoV-2,0,40
+expt10A_17072024,24,NC4,unmapped,0,40
+expt10A_17072024,25,NC5,Adenovirus,0,40
+expt10A_17072024,25,NC5,Bordetella_parapertussis,0,40
+expt10A_17072024,25,NC5,Bordetella_pertussis,0,40
+expt10A_17072024,25,NC5,Chlamydia_pneumoniae,0,40
+expt10A_17072024,25,NC5,Coronavirus 229E,0,40
+expt10A_17072024,25,NC5,Coronavirus HKU,0,40
+expt10A_17072024,25,NC5,Coronavirus NL63,0,40
+expt10A_17072024,25,NC5,Coronavirus OC43,0,40
+expt10A_17072024,25,NC5,Influenza A,0,40
+expt10A_17072024,25,NC5,Influenza A/H1,0,40
+expt10A_17072024,25,NC5,Influenza A/H1-2009,0,40
+expt10A_17072024,25,NC5,Influenza A/H3,0,40
+expt10A_17072024,25,NC5,Influenza B,0,40
+expt10A_17072024,25,NC5,MERS,0,40
+expt10A_17072024,25,NC5,Metapneumovirus,0,40
+expt10A_17072024,25,NC5,Mycoplasma_pneumoniae,0,40
+expt10A_17072024,25,NC5,Parainfluenza 1,0,40
+expt10A_17072024,25,NC5,Parainfluenza 2,0,40
+expt10A_17072024,25,NC5,Parainfluenza 3,0,40
+expt10A_17072024,25,NC5,Parainfluenza 4,0,40
+expt10A_17072024,25,NC5,RSV,0,40
+expt10A_17072024,25,NC5,Rhinovirus/enterovirus,0,40
+expt10A_17072024,25,NC5,SARS-CoV-2,0,40
+expt10A_17072024,25,NC5,unmapped,0,40
+expt10_03072024,57,1A,Adenovirus,0,40
+expt10_03072024,57,1A,Bordetella_parapertussis,0,40
+expt10_03072024,57,1A,Bordetella_pertussis,0,40
+expt10_03072024,57,1A,Chlamydia_pneumoniae,0,40
+expt10_03072024,57,1A,Coronavirus 229E,0,40
+expt10_03072024,57,1A,Coronavirus HKU,0,40
+expt10_03072024,57,1A,Coronavirus NL63,0,40
+expt10_03072024,57,1A,Coronavirus OC43,0,40
+expt10_03072024,57,1A,Influenza A,1,40
+expt10_03072024,57,1A,Influenza A/H1,0,40
+expt10_03072024,57,1A,Influenza A/H1-2009,0,40
+expt10_03072024,57,1A,Influenza A/H3,0,40
+expt10_03072024,57,1A,Influenza B,0,40
+expt10_03072024,57,1A,MERS,0,40
+expt10_03072024,57,1A,Metapneumovirus,0,40
+expt10_03072024,57,1A,Mycoplasma_pneumoniae,0,40
+expt10_03072024,57,1A,Parainfluenza 1,0,40
+expt10_03072024,57,1A,Parainfluenza 2,0,40
+expt10_03072024,57,1A,Parainfluenza 3,0,40
+expt10_03072024,57,1A,Parainfluenza 4,0,40
+expt10_03072024,57,1A,RSV,0,40
+expt10_03072024,57,1A,Rhinovirus/enterovirus,0,40
+expt10_03072024,57,1A,SARS-CoV-2,0,40
+expt10_03072024,57,1A,unmapped,0,40
+expt10_03072024,58,1B,Adenovirus,0,40
+expt10_03072024,58,1B,Bordetella_parapertussis,0,40
+expt10_03072024,58,1B,Bordetella_pertussis,0,40
+expt10_03072024,58,1B,Chlamydia_pneumoniae,0,40
+expt10_03072024,58,1B,Coronavirus 229E,0,40
+expt10_03072024,58,1B,Coronavirus HKU,0,40
+expt10_03072024,58,1B,Coronavirus NL63,0,40
+expt10_03072024,58,1B,Coronavirus OC43,0,40
+expt10_03072024,58,1B,Influenza A,1,40
+expt10_03072024,58,1B,Influenza A/H1,0,40
+expt10_03072024,58,1B,Influenza A/H1-2009,0,40
+expt10_03072024,58,1B,Influenza A/H3,0,40
+expt10_03072024,58,1B,Influenza B,0,40
+expt10_03072024,58,1B,MERS,0,40
+expt10_03072024,58,1B,Metapneumovirus,0,40
+expt10_03072024,58,1B,Mycoplasma_pneumoniae,0,40
+expt10_03072024,58,1B,Parainfluenza 1,0,40
+expt10_03072024,58,1B,Parainfluenza 2,0,40
+expt10_03072024,58,1B,Parainfluenza 3,0,40
+expt10_03072024,58,1B,Parainfluenza 4,0,40
+expt10_03072024,58,1B,RSV,0,40
+expt10_03072024,58,1B,Rhinovirus/enterovirus,0,40
+expt10_03072024,58,1B,SARS-CoV-2,0,40
+expt10_03072024,58,1B,unmapped,0,40
+expt10_03072024,59,1C,Adenovirus,0,40
+expt10_03072024,59,1C,Bordetella_parapertussis,0,40
+expt10_03072024,59,1C,Bordetella_pertussis,0,40
+expt10_03072024,59,1C,Chlamydia_pneumoniae,0,40
+expt10_03072024,59,1C,Coronavirus 229E,0,40
+expt10_03072024,59,1C,Coronavirus HKU,0,40
+expt10_03072024,59,1C,Coronavirus NL63,0,40
+expt10_03072024,59,1C,Coronavirus OC43,0,40
+expt10_03072024,59,1C,Influenza A,1,40
+expt10_03072024,59,1C,Influenza A/H1,0,40
+expt10_03072024,59,1C,Influenza A/H1-2009,0,40
+expt10_03072024,59,1C,Influenza A/H3,0,40
+expt10_03072024,59,1C,Influenza B,0,40
+expt10_03072024,59,1C,MERS,0,40
+expt10_03072024,59,1C,Metapneumovirus,0,40
+expt10_03072024,59,1C,Mycoplasma_pneumoniae,0,40
+expt10_03072024,59,1C,Parainfluenza 1,0,40
+expt10_03072024,59,1C,Parainfluenza 2,0,40
+expt10_03072024,59,1C,Parainfluenza 3,0,40
+expt10_03072024,59,1C,Parainfluenza 4,0,40
+expt10_03072024,59,1C,RSV,0,40
+expt10_03072024,59,1C,Rhinovirus/enterovirus,0,40
+expt10_03072024,59,1C,SARS-CoV-2,0,40
+expt10_03072024,59,1C,unmapped,0,40
+expt10_03072024,60,2A,Adenovirus,0,40
+expt10_03072024,60,2A,Bordetella_parapertussis,0,40
+expt10_03072024,60,2A,Bordetella_pertussis,0,40
+expt10_03072024,60,2A,Chlamydia_pneumoniae,0,40
+expt10_03072024,60,2A,Coronavirus 229E,0,40
+expt10_03072024,60,2A,Coronavirus HKU,0,40
+expt10_03072024,60,2A,Coronavirus NL63,0,40
+expt10_03072024,60,2A,Coronavirus OC43,0,40
+expt10_03072024,60,2A,Influenza A,0,40
+expt10_03072024,60,2A,Influenza A/H1,0,40
+expt10_03072024,60,2A,Influenza A/H1-2009,0,40
+expt10_03072024,60,2A,Influenza A/H3,0,40
+expt10_03072024,60,2A,Influenza B,0,40
+expt10_03072024,60,2A,MERS,0,40
+expt10_03072024,60,2A,Metapneumovirus,0,40
+expt10_03072024,60,2A,Mycoplasma_pneumoniae,0,40
+expt10_03072024,60,2A,Parainfluenza 3,1,40
+expt10_03072024,60,2A,Parainfluenza 1,0,40
+expt10_03072024,60,2A,Parainfluenza 2,0,40
+expt10_03072024,60,2A,Parainfluenza 4,0,40
+expt10_03072024,60,2A,RSV,0,40
+expt10_03072024,60,2A,Rhinovirus/enterovirus,0,40
+expt10_03072024,60,2A,SARS-CoV-2,0,40
+expt10_03072024,60,2A,unmapped,0,40
+expt10_03072024,61,2B,Adenovirus,0,40
+expt10_03072024,61,2B,Bordetella_parapertussis,0,40
+expt10_03072024,61,2B,Bordetella_pertussis,0,40
+expt10_03072024,61,2B,Chlamydia_pneumoniae,0,40
+expt10_03072024,61,2B,Coronavirus 229E,0,40
+expt10_03072024,61,2B,Coronavirus HKU,0,40
+expt10_03072024,61,2B,Coronavirus NL63,0,40
+expt10_03072024,61,2B,Coronavirus OC43,0,40
+expt10_03072024,61,2B,Influenza A,0,40
+expt10_03072024,61,2B,Influenza A/H1,0,40
+expt10_03072024,61,2B,Influenza A/H1-2009,0,40
+expt10_03072024,61,2B,Influenza A/H3,0,40
+expt10_03072024,61,2B,Influenza B,0,40
+expt10_03072024,61,2B,MERS,0,40
+expt10_03072024,61,2B,Metapneumovirus,0,40
+expt10_03072024,61,2B,Mycoplasma_pneumoniae,0,40
+expt10_03072024,61,2B,Parainfluenza 3,1,40
+expt10_03072024,61,2B,Parainfluenza 1,0,40
+expt10_03072024,61,2B,Parainfluenza 2,0,40
+expt10_03072024,61,2B,Parainfluenza 4,0,40
+expt10_03072024,61,2B,RSV,0,40
+expt10_03072024,61,2B,Rhinovirus/enterovirus,0,40
+expt10_03072024,61,2B,SARS-CoV-2,0,40
+expt10_03072024,61,2B,unmapped,0,40
+expt10_03072024,62,2C,Adenovirus,0,40
+expt10_03072024,62,2C,Bordetella_parapertussis,0,40
+expt10_03072024,62,2C,Bordetella_pertussis,0,40
+expt10_03072024,62,2C,Chlamydia_pneumoniae,0,40
+expt10_03072024,62,2C,Coronavirus 229E,0,40
+expt10_03072024,62,2C,Coronavirus HKU,0,40
+expt10_03072024,62,2C,Coronavirus NL63,0,40
+expt10_03072024,62,2C,Coronavirus OC43,0,40
+expt10_03072024,62,2C,Influenza A,0,40
+expt10_03072024,62,2C,Influenza A/H1,0,40
+expt10_03072024,62,2C,Influenza A/H1-2009,0,40
+expt10_03072024,62,2C,Influenza A/H3,0,40
+expt10_03072024,62,2C,Influenza B,0,40
+expt10_03072024,62,2C,MERS,0,40
+expt10_03072024,62,2C,Metapneumovirus,0,40
+expt10_03072024,62,2C,Mycoplasma_pneumoniae,0,40
+expt10_03072024,62,2C,Parainfluenza 3,1,40
+expt10_03072024,62,2C,Parainfluenza 1,0,40
+expt10_03072024,62,2C,Parainfluenza 2,0,40
+expt10_03072024,62,2C,Parainfluenza 4,0,40
+expt10_03072024,62,2C,RSV,0,40
+expt10_03072024,62,2C,Rhinovirus/enterovirus,0,40
+expt10_03072024,62,2C,SARS-CoV-2,0,40
+expt10_03072024,62,2C,unmapped,0,40
+expt10_03072024,63,3A,Adenovirus,0,40
+expt10_03072024,63,3A,Bordetella_parapertussis,0,40
+expt10_03072024,63,3A,Bordetella_pertussis,0,40
+expt10_03072024,63,3A,Chlamydia_pneumoniae,0,40
+expt10_03072024,63,3A,Coronavirus 229E,0,40
+expt10_03072024,63,3A,Coronavirus HKU,0,40
+expt10_03072024,63,3A,Coronavirus NL63,0,40
+expt10_03072024,63,3A,Coronavirus OC43,0,40
+expt10_03072024,63,3A,Influenza A,0,40
+expt10_03072024,63,3A,Influenza A/H1,0,40
+expt10_03072024,63,3A,Influenza A/H1-2009,0,40
+expt10_03072024,63,3A,Influenza A/H3,0,40
+expt10_03072024,63,3A,Influenza B,0,40
+expt10_03072024,63,3A,MERS,0,40
+expt10_03072024,63,3A,Metapneumovirus,0,40
+expt10_03072024,63,3A,Mycoplasma_pneumoniae,0,40
+expt10_03072024,63,3A,Parainfluenza 1,0,40
+expt10_03072024,63,3A,Parainfluenza 2,0,40
+expt10_03072024,63,3A,Parainfluenza 3,0,40
+expt10_03072024,63,3A,Parainfluenza 4,0,40
+expt10_03072024,63,3A,RSV,0,40
+expt10_03072024,63,3A,Rhinovirus/enterovirus,0,40
+expt10_03072024,63,3A,SARS-CoV-2,1,40
+expt10_03072024,63,3A,unmapped,0,40
+expt10_03072024,64,3B,Adenovirus,0,40
+expt10_03072024,64,3B,Bordetella_parapertussis,0,40
+expt10_03072024,64,3B,Bordetella_pertussis,0,40
+expt10_03072024,64,3B,Chlamydia_pneumoniae,0,40
+expt10_03072024,64,3B,Coronavirus 229E,0,40
+expt10_03072024,64,3B,Coronavirus HKU,0,40
+expt10_03072024,64,3B,Coronavirus NL63,0,40
+expt10_03072024,64,3B,Coronavirus OC43,0,40
+expt10_03072024,64,3B,Influenza A,0,40
+expt10_03072024,64,3B,Influenza A/H1,0,40
+expt10_03072024,64,3B,Influenza A/H1-2009,0,40
+expt10_03072024,64,3B,Influenza A/H3,0,40
+expt10_03072024,64,3B,Influenza B,0,40
+expt10_03072024,64,3B,MERS,0,40
+expt10_03072024,64,3B,Metapneumovirus,0,40
+expt10_03072024,64,3B,Mycoplasma_pneumoniae,0,40
+expt10_03072024,64,3B,Parainfluenza 1,0,40
+expt10_03072024,64,3B,Parainfluenza 2,0,40
+expt10_03072024,64,3B,Parainfluenza 3,0,40
+expt10_03072024,64,3B,Parainfluenza 4,0,40
+expt10_03072024,64,3B,RSV,0,40
+expt10_03072024,64,3B,Rhinovirus/enterovirus,0,40
+expt10_03072024,64,3B,SARS-CoV-2,1,40
+expt10_03072024,64,3B,unmapped,0,40
+expt10_03072024,65,3C,Adenovirus,0,40
+expt10_03072024,65,3C,Bordetella_parapertussis,0,40
+expt10_03072024,65,3C,Bordetella_pertussis,0,40
+expt10_03072024,65,3C,Chlamydia_pneumoniae,0,40
+expt10_03072024,65,3C,Coronavirus 229E,0,40
+expt10_03072024,65,3C,Coronavirus HKU,0,40
+expt10_03072024,65,3C,Coronavirus NL63,0,40
+expt10_03072024,65,3C,Coronavirus OC43,0,40
+expt10_03072024,65,3C,Influenza A,0,40
+expt10_03072024,65,3C,Influenza A/H1,0,40
+expt10_03072024,65,3C,Influenza A/H1-2009,0,40
+expt10_03072024,65,3C,Influenza A/H3,0,40
+expt10_03072024,65,3C,Influenza B,0,40
+expt10_03072024,65,3C,MERS,0,40
+expt10_03072024,65,3C,Metapneumovirus,0,40
+expt10_03072024,65,3C,Mycoplasma_pneumoniae,0,40
+expt10_03072024,65,3C,Parainfluenza 1,0,40
+expt10_03072024,65,3C,Parainfluenza 2,0,40
+expt10_03072024,65,3C,Parainfluenza 3,0,40
+expt10_03072024,65,3C,Parainfluenza 4,0,40
+expt10_03072024,65,3C,RSV,0,40
+expt10_03072024,65,3C,Rhinovirus/enterovirus,0,40
+expt10_03072024,65,3C,SARS-CoV-2,1,40
+expt10_03072024,65,3C,unmapped,0,40
+expt10_03072024,66,4A,Adenovirus,0,40
+expt10_03072024,66,4A,Bordetella_parapertussis,0,40
+expt10_03072024,66,4A,Bordetella_pertussis,0,40
+expt10_03072024,66,4A,Chlamydia_pneumoniae,0,40
+expt10_03072024,66,4A,Coronavirus 229E,0,40
+expt10_03072024,66,4A,Coronavirus HKU,0,40
+expt10_03072024,66,4A,Coronavirus NL63,0,40
+expt10_03072024,66,4A,Coronavirus OC43,0,40
+expt10_03072024,66,4A,Influenza A,0,40
+expt10_03072024,66,4A,Influenza A/H1,0,40
+expt10_03072024,66,4A,Influenza A/H1-2009,0,40
+expt10_03072024,66,4A,Influenza A/H3,0,40
+expt10_03072024,66,4A,Influenza B,0,40
+expt10_03072024,66,4A,MERS,0,40
+expt10_03072024,66,4A,Metapneumovirus,1,40
+expt10_03072024,66,4A,Mycoplasma_pneumoniae,0,40
+expt10_03072024,66,4A,Parainfluenza 1,0,40
+expt10_03072024,66,4A,Parainfluenza 2,0,40
+expt10_03072024,66,4A,Parainfluenza 3,0,40
+expt10_03072024,66,4A,Parainfluenza 4,0,40
+expt10_03072024,66,4A,RSV,0,40
+expt10_03072024,66,4A,Rhinovirus/enterovirus,0,40
+expt10_03072024,66,4A,SARS-CoV-2,0,40
+expt10_03072024,66,4A,unmapped,0,40
+expt10_03072024,67,4B,Adenovirus,0,40
+expt10_03072024,67,4B,Bordetella_parapertussis,0,40
+expt10_03072024,67,4B,Bordetella_pertussis,0,40
+expt10_03072024,67,4B,Chlamydia_pneumoniae,0,40
+expt10_03072024,67,4B,Coronavirus 229E,0,40
+expt10_03072024,67,4B,Coronavirus HKU,0,40
+expt10_03072024,67,4B,Coronavirus NL63,0,40
+expt10_03072024,67,4B,Coronavirus OC43,0,40
+expt10_03072024,67,4B,Influenza A,0,40
+expt10_03072024,67,4B,Influenza A/H1,0,40
+expt10_03072024,67,4B,Influenza A/H1-2009,0,40
+expt10_03072024,67,4B,Influenza A/H3,0,40
+expt10_03072024,67,4B,Influenza B,0,40
+expt10_03072024,67,4B,MERS,0,40
+expt10_03072024,67,4B,Metapneumovirus,1,40
+expt10_03072024,67,4B,Mycoplasma_pneumoniae,0,40
+expt10_03072024,67,4B,Parainfluenza 1,0,40
+expt10_03072024,67,4B,Parainfluenza 2,0,40
+expt10_03072024,67,4B,Parainfluenza 3,0,40
+expt10_03072024,67,4B,Parainfluenza 4,0,40
+expt10_03072024,67,4B,RSV,0,40
+expt10_03072024,67,4B,Rhinovirus/enterovirus,0,40
+expt10_03072024,67,4B,SARS-CoV-2,0,40
+expt10_03072024,67,4B,unmapped,0,40
+expt10_03072024,68,4C,Adenovirus,0,40
+expt10_03072024,68,4C,Bordetella_parapertussis,0,40
+expt10_03072024,68,4C,Bordetella_pertussis,0,40
+expt10_03072024,68,4C,Chlamydia_pneumoniae,0,40
+expt10_03072024,68,4C,Coronavirus 229E,0,40
+expt10_03072024,68,4C,Coronavirus HKU,0,40
+expt10_03072024,68,4C,Coronavirus NL63,0,40
+expt10_03072024,68,4C,Coronavirus OC43,0,40
+expt10_03072024,68,4C,Influenza A,0,40
+expt10_03072024,68,4C,Influenza A/H1,0,40
+expt10_03072024,68,4C,Influenza A/H1-2009,0,40
+expt10_03072024,68,4C,Influenza A/H3,0,40
+expt10_03072024,68,4C,Influenza B,0,40
+expt10_03072024,68,4C,MERS,0,40
+expt10_03072024,68,4C,Metapneumovirus,1,40
+expt10_03072024,68,4C,Mycoplasma_pneumoniae,0,40
+expt10_03072024,68,4C,Parainfluenza 1,0,40
+expt10_03072024,68,4C,Parainfluenza 2,0,40
+expt10_03072024,68,4C,Parainfluenza 3,0,40
+expt10_03072024,68,4C,Parainfluenza 4,0,40
+expt10_03072024,68,4C,RSV,0,40
+expt10_03072024,68,4C,Rhinovirus/enterovirus,0,40
+expt10_03072024,68,4C,SARS-CoV-2,0,40
+expt10_03072024,68,4C,unmapped,0,40
+expt10_03072024,69,NC1,Adenovirus,0,40
+expt10_03072024,69,NC1,Bordetella_parapertussis,0,40
+expt10_03072024,69,NC1,Bordetella_pertussis,0,40
+expt10_03072024,69,NC1,Chlamydia_pneumoniae,0,40
+expt10_03072024,69,NC1,Coronavirus 229E,0,40
+expt10_03072024,69,NC1,Coronavirus HKU,0,40
+expt10_03072024,69,NC1,Coronavirus NL63,0,40
+expt10_03072024,69,NC1,Coronavirus OC43,0,40
+expt10_03072024,69,NC1,Influenza A,0,40
+expt10_03072024,69,NC1,Influenza A/H1,0,40
+expt10_03072024,69,NC1,Influenza A/H1-2009,0,40
+expt10_03072024,69,NC1,Influenza A/H3,0,40
+expt10_03072024,69,NC1,Influenza B,0,40
+expt10_03072024,69,NC1,MERS,0,40
+expt10_03072024,69,NC1,Metapneumovirus,0,40
+expt10_03072024,69,NC1,Mycoplasma_pneumoniae,0,40
+expt10_03072024,69,NC1,Parainfluenza 1,0,40
+expt10_03072024,69,NC1,Parainfluenza 2,0,40
+expt10_03072024,69,NC1,Parainfluenza 3,0,40
+expt10_03072024,69,NC1,Parainfluenza 4,0,40
+expt10_03072024,69,NC1,RSV,0,40
+expt10_03072024,69,NC1,Rhinovirus/enterovirus,0,40
+expt10_03072024,69,NC1,SARS-CoV-2,0,40
+expt10_03072024,69,NC1,unmapped,0,40
+expt10_03072024,70,5A,Adenovirus,0,40
+expt10_03072024,70,5A,Bordetella_parapertussis,0,40
+expt10_03072024,70,5A,Bordetella_pertussis,0,40
+expt10_03072024,70,5A,Chlamydia_pneumoniae,0,40
+expt10_03072024,70,5A,Coronavirus 229E,0,40
+expt10_03072024,70,5A,Coronavirus HKU,0,40
+expt10_03072024,70,5A,Coronavirus NL63,1,40
+expt10_03072024,70,5A,Coronavirus OC43,0,40
+expt10_03072024,70,5A,Influenza A,0,40
+expt10_03072024,70,5A,Influenza A/H1,0,40
+expt10_03072024,70,5A,Influenza A/H1-2009,0,40
+expt10_03072024,70,5A,Influenza A/H3,0,40
+expt10_03072024,70,5A,Influenza B,0,40
+expt10_03072024,70,5A,MERS,0,40
+expt10_03072024,70,5A,Metapneumovirus,0,40
+expt10_03072024,70,5A,Mycoplasma_pneumoniae,0,40
+expt10_03072024,70,5A,Parainfluenza 1,0,40
+expt10_03072024,70,5A,Parainfluenza 2,0,40
+expt10_03072024,70,5A,Parainfluenza 3,0,40
+expt10_03072024,70,5A,Parainfluenza 4,0,40
+expt10_03072024,70,5A,RSV,0,40
+expt10_03072024,70,5A,Rhinovirus/enterovirus,0,40
+expt10_03072024,70,5A,SARS-CoV-2,0,40
+expt10_03072024,70,5A,unmapped,0,40
+expt10_03072024,71,5B,Adenovirus,0,40
+expt10_03072024,71,5B,Bordetella_parapertussis,0,40
+expt10_03072024,71,5B,Bordetella_pertussis,0,40
+expt10_03072024,71,5B,Chlamydia_pneumoniae,0,40
+expt10_03072024,71,5B,Coronavirus 229E,0,40
+expt10_03072024,71,5B,Coronavirus HKU,0,40
+expt10_03072024,71,5B,Coronavirus NL63,1,40
+expt10_03072024,71,5B,Coronavirus OC43,0,40
+expt10_03072024,71,5B,Influenza A,0,40
+expt10_03072024,71,5B,Influenza A/H1,0,40
+expt10_03072024,71,5B,Influenza A/H1-2009,0,40
+expt10_03072024,71,5B,Influenza A/H3,0,40
+expt10_03072024,71,5B,Influenza B,0,40
+expt10_03072024,71,5B,MERS,0,40
+expt10_03072024,71,5B,Metapneumovirus,0,40
+expt10_03072024,71,5B,Mycoplasma_pneumoniae,0,40
+expt10_03072024,71,5B,Parainfluenza 1,0,40
+expt10_03072024,71,5B,Parainfluenza 2,0,40
+expt10_03072024,71,5B,Parainfluenza 3,0,40
+expt10_03072024,71,5B,Parainfluenza 4,0,40
+expt10_03072024,71,5B,RSV,0,40
+expt10_03072024,71,5B,Rhinovirus/enterovirus,0,40
+expt10_03072024,71,5B,SARS-CoV-2,0,40
+expt10_03072024,71,5B,unmapped,0,40
+expt10_03072024,72,5C,Adenovirus,0,40
+expt10_03072024,72,5C,Bordetella_parapertussis,0,40
+expt10_03072024,72,5C,Bordetella_pertussis,0,40
+expt10_03072024,72,5C,Chlamydia_pneumoniae,0,40
+expt10_03072024,72,5C,Coronavirus 229E,0,40
+expt10_03072024,72,5C,Coronavirus HKU,0,40
+expt10_03072024,72,5C,Coronavirus NL63,1,40
+expt10_03072024,72,5C,Coronavirus OC43,0,40
+expt10_03072024,72,5C,Influenza A,0,40
+expt10_03072024,72,5C,Influenza A/H1,0,40
+expt10_03072024,72,5C,Influenza A/H1-2009,0,40
+expt10_03072024,72,5C,Influenza A/H3,0,40
+expt10_03072024,72,5C,Influenza B,0,40
+expt10_03072024,72,5C,MERS,0,40
+expt10_03072024,72,5C,Metapneumovirus,0,40
+expt10_03072024,72,5C,Mycoplasma_pneumoniae,0,40
+expt10_03072024,72,5C,Parainfluenza 1,0,40
+expt10_03072024,72,5C,Parainfluenza 2,0,40
+expt10_03072024,72,5C,Parainfluenza 3,0,40
+expt10_03072024,72,5C,Parainfluenza 4,0,40
+expt10_03072024,72,5C,RSV,0,40
+expt10_03072024,72,5C,Rhinovirus/enterovirus,0,40
+expt10_03072024,72,5C,SARS-CoV-2,0,40
+expt10_03072024,72,5C,unmapped,0,40
+expt10_03072024,73,6A,Adenovirus,0,40
+expt10_03072024,73,6A,Bordetella_parapertussis,0,40
+expt10_03072024,73,6A,Bordetella_pertussis,0,40
+expt10_03072024,73,6A,Chlamydia_pneumoniae,0,40
+expt10_03072024,73,6A,Coronavirus 229E,0,40
+expt10_03072024,73,6A,Coronavirus HKU,0,40
+expt10_03072024,73,6A,Coronavirus NL63,0,40
+expt10_03072024,73,6A,Coronavirus OC43,0,40
+expt10_03072024,73,6A,Influenza A,0,40
+expt10_03072024,73,6A,Influenza A/H1,0,40
+expt10_03072024,73,6A,Influenza A/H1-2009,0,40
+expt10_03072024,73,6A,Influenza A/H3,0,40
+expt10_03072024,73,6A,Influenza B,0,40
+expt10_03072024,73,6A,MERS,0,40
+expt10_03072024,73,6A,Metapneumovirus,0,40
+expt10_03072024,73,6A,Mycoplasma_pneumoniae,0,40
+expt10_03072024,73,6A,Parainfluenza 3,1,40
+expt10_03072024,73,6A,Parainfluenza 1,0,40
+expt10_03072024,73,6A,Parainfluenza 2,0,40
+expt10_03072024,73,6A,Parainfluenza 4,0,40
+expt10_03072024,73,6A,RSV,0,40
+expt10_03072024,73,6A,Rhinovirus/enterovirus,0,40
+expt10_03072024,73,6A,SARS-CoV-2,0,40
+expt10_03072024,73,6A,unmapped,0,40
+expt10_03072024,74,6B,Adenovirus,0,40
+expt10_03072024,74,6B,Bordetella_parapertussis,0,40
+expt10_03072024,74,6B,Bordetella_pertussis,0,40
+expt10_03072024,74,6B,Chlamydia_pneumoniae,0,40
+expt10_03072024,74,6B,Coronavirus 229E,0,40
+expt10_03072024,74,6B,Coronavirus HKU,0,40
+expt10_03072024,74,6B,Coronavirus NL63,0,40
+expt10_03072024,74,6B,Coronavirus OC43,0,40
+expt10_03072024,74,6B,Influenza A,0,40
+expt10_03072024,74,6B,Influenza A/H1,0,40
+expt10_03072024,74,6B,Influenza A/H1-2009,0,40
+expt10_03072024,74,6B,Influenza A/H3,0,40
+expt10_03072024,74,6B,Influenza B,0,40
+expt10_03072024,74,6B,MERS,0,40
+expt10_03072024,74,6B,Metapneumovirus,0,40
+expt10_03072024,74,6B,Mycoplasma_pneumoniae,0,40
+expt10_03072024,74,6B,Parainfluenza 3,1,40
+expt10_03072024,74,6B,Parainfluenza 1,0,40
+expt10_03072024,74,6B,Parainfluenza 2,0,40
+expt10_03072024,74,6B,Parainfluenza 4,0,40
+expt10_03072024,74,6B,RSV,0,40
+expt10_03072024,74,6B,Rhinovirus/enterovirus,0,40
+expt10_03072024,74,6B,SARS-CoV-2,0,40
+expt10_03072024,74,6B,unmapped,0,40
+expt10_03072024,75,6C,Adenovirus,0,40
+expt10_03072024,75,6C,Bordetella_parapertussis,0,40
+expt10_03072024,75,6C,Bordetella_pertussis,0,40
+expt10_03072024,75,6C,Chlamydia_pneumoniae,0,40
+expt10_03072024,75,6C,Coronavirus 229E,0,40
+expt10_03072024,75,6C,Coronavirus HKU,0,40
+expt10_03072024,75,6C,Coronavirus NL63,0,40
+expt10_03072024,75,6C,Coronavirus OC43,0,40
+expt10_03072024,75,6C,Influenza A,0,40
+expt10_03072024,75,6C,Influenza A/H1,0,40
+expt10_03072024,75,6C,Influenza A/H1-2009,0,40
+expt10_03072024,75,6C,Influenza A/H3,0,40
+expt10_03072024,75,6C,Influenza B,0,40
+expt10_03072024,75,6C,MERS,0,40
+expt10_03072024,75,6C,Metapneumovirus,0,40
+expt10_03072024,75,6C,Mycoplasma_pneumoniae,0,40
+expt10_03072024,75,6C,Parainfluenza 3,1,40
+expt10_03072024,75,6C,Parainfluenza 1,0,40
+expt10_03072024,75,6C,Parainfluenza 2,0,40
+expt10_03072024,75,6C,Parainfluenza 4,0,40
+expt10_03072024,75,6C,RSV,0,40
+expt10_03072024,75,6C,Rhinovirus/enterovirus,0,40
+expt10_03072024,75,6C,SARS-CoV-2,0,40
+expt10_03072024,75,6C,unmapped,0,40
+expt10_03072024,76,7A,Adenovirus,0,40
+expt10_03072024,76,7A,Bordetella_parapertussis,0,40
+expt10_03072024,76,7A,Bordetella_pertussis,0,40
+expt10_03072024,76,7A,Chlamydia_pneumoniae,0,40
+expt10_03072024,76,7A,Coronavirus 229E,0,40
+expt10_03072024,76,7A,Coronavirus HKU,0,40
+expt10_03072024,76,7A,Coronavirus NL63,0,40
+expt10_03072024,76,7A,Coronavirus OC43,0,40
+expt10_03072024,76,7A,Influenza A,0,40
+expt10_03072024,76,7A,Influenza A/H1,0,40
+expt10_03072024,76,7A,Influenza A/H1-2009,0,40
+expt10_03072024,76,7A,Influenza A/H3,0,40
+expt10_03072024,76,7A,Influenza B,0,40
+expt10_03072024,76,7A,MERS,0,40
+expt10_03072024,76,7A,Metapneumovirus,0,40
+expt10_03072024,76,7A,Mycoplasma_pneumoniae,0,40
+expt10_03072024,76,7A,Parainfluenza 1,1,40
+expt10_03072024,76,7A,Parainfluenza 2,0,40
+expt10_03072024,76,7A,Parainfluenza 3,0,40
+expt10_03072024,76,7A,Parainfluenza 4,0,40
+expt10_03072024,76,7A,RSV,0,40
+expt10_03072024,76,7A,Rhinovirus/enterovirus,0,40
+expt10_03072024,76,7A,SARS-CoV-2,0,40
+expt10_03072024,76,7A,unmapped,0,40
+expt10_03072024,77,7B,Adenovirus,0,40
+expt10_03072024,77,7B,Bordetella_parapertussis,0,40
+expt10_03072024,77,7B,Bordetella_pertussis,0,40
+expt10_03072024,77,7B,Chlamydia_pneumoniae,0,40
+expt10_03072024,77,7B,Coronavirus 229E,0,40
+expt10_03072024,77,7B,Coronavirus HKU,0,40
+expt10_03072024,77,7B,Coronavirus NL63,0,40
+expt10_03072024,77,7B,Coronavirus OC43,0,40
+expt10_03072024,77,7B,Influenza A,0,40
+expt10_03072024,77,7B,Influenza A/H1,0,40
+expt10_03072024,77,7B,Influenza A/H1-2009,0,40
+expt10_03072024,77,7B,Influenza A/H3,0,40
+expt10_03072024,77,7B,Influenza B,0,40
+expt10_03072024,77,7B,MERS,0,40
+expt10_03072024,77,7B,Metapneumovirus,0,40
+expt10_03072024,77,7B,Mycoplasma_pneumoniae,0,40
+expt10_03072024,77,7B,Parainfluenza 1,1,40
+expt10_03072024,77,7B,Parainfluenza 2,0,40
+expt10_03072024,77,7B,Parainfluenza 3,0,40
+expt10_03072024,77,7B,Parainfluenza 4,0,40
+expt10_03072024,77,7B,RSV,0,40
+expt10_03072024,77,7B,Rhinovirus/enterovirus,0,40
+expt10_03072024,77,7B,SARS-CoV-2,0,40
+expt10_03072024,77,7B,unmapped,0,40
+expt10_03072024,78,7C,Adenovirus,0,40
+expt10_03072024,78,7C,Bordetella_parapertussis,0,40
+expt10_03072024,78,7C,Bordetella_pertussis,0,40
+expt10_03072024,78,7C,Chlamydia_pneumoniae,0,40
+expt10_03072024,78,7C,Coronavirus 229E,0,40
+expt10_03072024,78,7C,Coronavirus HKU,0,40
+expt10_03072024,78,7C,Coronavirus NL63,0,40
+expt10_03072024,78,7C,Coronavirus OC43,0,40
+expt10_03072024,78,7C,Influenza A,0,40
+expt10_03072024,78,7C,Influenza A/H1,0,40
+expt10_03072024,78,7C,Influenza A/H1-2009,0,40
+expt10_03072024,78,7C,Influenza A/H3,0,40
+expt10_03072024,78,7C,Influenza B,0,40
+expt10_03072024,78,7C,MERS,0,40
+expt10_03072024,78,7C,Metapneumovirus,0,40
+expt10_03072024,78,7C,Mycoplasma_pneumoniae,0,40
+expt10_03072024,78,7C,Parainfluenza 1,1,40
+expt10_03072024,78,7C,Parainfluenza 2,0,40
+expt10_03072024,78,7C,Parainfluenza 3,0,40
+expt10_03072024,78,7C,Parainfluenza 4,0,40
+expt10_03072024,78,7C,RSV,0,40
+expt10_03072024,78,7C,Rhinovirus/enterovirus,0,40
+expt10_03072024,78,7C,SARS-CoV-2,0,40
+expt10_03072024,78,7C,unmapped,0,40
+expt10_03072024,79,8A,Adenovirus,0,40
+expt10_03072024,79,8A,Bordetella_parapertussis,0,40
+expt10_03072024,79,8A,Bordetella_pertussis,0,40
+expt10_03072024,79,8A,Chlamydia_pneumoniae,0,40
+expt10_03072024,79,8A,Coronavirus 229E,0,40
+expt10_03072024,79,8A,Coronavirus HKU,0,40
+expt10_03072024,79,8A,Coronavirus NL63,0,40
+expt10_03072024,79,8A,Coronavirus OC43,0,40
+expt10_03072024,79,8A,Rhinovirus/enterovirus,1,40
+expt10_03072024,79,8A,Influenza A,0,40
+expt10_03072024,79,8A,Influenza A/H1,0,40
+expt10_03072024,79,8A,Influenza A/H1-2009,0,40
+expt10_03072024,79,8A,Influenza A/H3,0,40
+expt10_03072024,79,8A,Influenza B,0,40
+expt10_03072024,79,8A,MERS,0,40
+expt10_03072024,79,8A,Metapneumovirus,0,40
+expt10_03072024,79,8A,Mycoplasma_pneumoniae,0,40
+expt10_03072024,79,8A,Parainfluenza 1,0,40
+expt10_03072024,79,8A,Parainfluenza 2,0,40
+expt10_03072024,79,8A,Parainfluenza 3,0,40
+expt10_03072024,79,8A,Parainfluenza 4,0,40
+expt10_03072024,79,8A,RSV,0,40
+expt10_03072024,79,8A,SARS-CoV-2,0,40
+expt10_03072024,79,8A,unmapped,0,40
+expt10_03072024,80,8B,Adenovirus,0,40
+expt10_03072024,80,8B,Bordetella_parapertussis,0,40
+expt10_03072024,80,8B,Bordetella_pertussis,0,40
+expt10_03072024,80,8B,Chlamydia_pneumoniae,0,40
+expt10_03072024,80,8B,Coronavirus 229E,0,40
+expt10_03072024,80,8B,Coronavirus HKU,0,40
+expt10_03072024,80,8B,Coronavirus NL63,0,40
+expt10_03072024,80,8B,Coronavirus OC43,0,40
+expt10_03072024,80,8B,Rhinovirus/enterovirus,1,40
+expt10_03072024,80,8B,Influenza A,0,40
+expt10_03072024,80,8B,Influenza A/H1,0,40
+expt10_03072024,80,8B,Influenza A/H1-2009,0,40
+expt10_03072024,80,8B,Influenza A/H3,0,40
+expt10_03072024,80,8B,Influenza B,0,40
+expt10_03072024,80,8B,MERS,0,40
+expt10_03072024,80,8B,Metapneumovirus,0,40
+expt10_03072024,80,8B,Mycoplasma_pneumoniae,0,40
+expt10_03072024,80,8B,Parainfluenza 1,0,40
+expt10_03072024,80,8B,Parainfluenza 2,0,40
+expt10_03072024,80,8B,Parainfluenza 3,0,40
+expt10_03072024,80,8B,Parainfluenza 4,0,40
+expt10_03072024,80,8B,RSV,0,40
+expt10_03072024,80,8B,SARS-CoV-2,0,40
+expt10_03072024,80,8B,unmapped,0,40
+expt10_03072024,81,8C,Adenovirus,0,40
+expt10_03072024,81,8C,Bordetella_parapertussis,0,40
+expt10_03072024,81,8C,Bordetella_pertussis,0,40
+expt10_03072024,81,8C,Chlamydia_pneumoniae,0,40
+expt10_03072024,81,8C,Coronavirus 229E,0,40
+expt10_03072024,81,8C,Coronavirus HKU,0,40
+expt10_03072024,81,8C,Coronavirus NL63,0,40
+expt10_03072024,81,8C,Coronavirus OC43,0,40
+expt10_03072024,81,8C,Rhinovirus/enterovirus,1,40
+expt10_03072024,81,8C,Influenza A,0,40
+expt10_03072024,81,8C,Influenza A/H1,0,40
+expt10_03072024,81,8C,Influenza A/H1-2009,0,40
+expt10_03072024,81,8C,Influenza A/H3,0,40
+expt10_03072024,81,8C,Influenza B,0,40
+expt10_03072024,81,8C,MERS,0,40
+expt10_03072024,81,8C,Metapneumovirus,0,40
+expt10_03072024,81,8C,Mycoplasma_pneumoniae,0,40
+expt10_03072024,81,8C,Parainfluenza 1,0,40
+expt10_03072024,81,8C,Parainfluenza 2,0,40
+expt10_03072024,81,8C,Parainfluenza 3,0,40
+expt10_03072024,81,8C,Parainfluenza 4,0,40
+expt10_03072024,81,8C,RSV,0,40
+expt10_03072024,81,8C,SARS-CoV-2,0,40
+expt10_03072024,81,8C,unmapped,0,40
+expt10_03072024,82,NC2,Adenovirus,0,40
+expt10_03072024,82,NC2,Bordetella_parapertussis,0,40
+expt10_03072024,82,NC2,Bordetella_pertussis,0,40
+expt10_03072024,82,NC2,Chlamydia_pneumoniae,0,40
+expt10_03072024,82,NC2,Coronavirus 229E,0,40
+expt10_03072024,82,NC2,Coronavirus HKU,0,40
+expt10_03072024,82,NC2,Coronavirus NL63,0,40
+expt10_03072024,82,NC2,Coronavirus OC43,0,40
+expt10_03072024,82,NC2,Influenza A,0,40
+expt10_03072024,82,NC2,Influenza A/H1,0,40
+expt10_03072024,82,NC2,Influenza A/H1-2009,0,40
+expt10_03072024,82,NC2,Influenza A/H3,0,40
+expt10_03072024,82,NC2,Influenza B,0,40
+expt10_03072024,82,NC2,MERS,0,40
+expt10_03072024,82,NC2,Metapneumovirus,0,40
+expt10_03072024,82,NC2,Mycoplasma_pneumoniae,0,40
+expt10_03072024,82,NC2,Parainfluenza 1,0,40
+expt10_03072024,82,NC2,Parainfluenza 2,0,40
+expt10_03072024,82,NC2,Parainfluenza 3,0,40
+expt10_03072024,82,NC2,Parainfluenza 4,0,40
+expt10_03072024,82,NC2,RSV,0,40
+expt10_03072024,82,NC2,Rhinovirus/enterovirus,0,40
+expt10_03072024,82,NC2,SARS-CoV-2,0,40
+expt10_03072024,82,NC2,unmapped,0,40
+expt11_150824,33,1A,Adenovirus,0,40
+expt11_150824,33,1A,Bordetella_parapertussis,0,40
+expt11_150824,33,1A,Bordetella_pertussis,0,40
+expt11_150824,33,1A,Chlamydia_pneumoniae,0,40
+expt11_150824,33,1A,Coronavirus 229E,0,40
+expt11_150824,33,1A,Coronavirus HKU,0,40
+expt11_150824,33,1A,Coronavirus NL63,0,40
+expt11_150824,33,1A,Coronavirus OC43,0,40
+expt11_150824,33,1A,Influenza A,0,40
+expt11_150824,33,1A,Influenza A/H1,0,40
+expt11_150824,33,1A,Influenza A/H1-2009,0,40
+expt11_150824,33,1A,Influenza A/H3,0,40
+expt11_150824,33,1A,Influenza B,0,40
+expt11_150824,33,1A,MERS,0,40
+expt11_150824,33,1A,Metapneumovirus,0,40
+expt11_150824,33,1A,Mycoplasma_pneumoniae,0,40
+expt11_150824,33,1A,Parainfluenza 1,0,40
+expt11_150824,33,1A,Parainfluenza 2,0,40
+expt11_150824,33,1A,Parainfluenza 3,0,40
+expt11_150824,33,1A,Parainfluenza 4,0,40
+expt11_150824,33,1A,RSV,0,40
+expt11_150824,33,1A,Rhinovirus/enterovirus,0,40
+expt11_150824,33,1A,SARS-CoV-2,1,40
+expt11_150824,33,1A,unmapped,0,40
+expt11_150824,34,2A,Adenovirus,0,40
+expt11_150824,34,2A,Bordetella_parapertussis,0,40
+expt11_150824,34,2A,Bordetella_pertussis,0,40
+expt11_150824,34,2A,Chlamydia_pneumoniae,0,40
+expt11_150824,34,2A,Coronavirus 229E,0,40
+expt11_150824,34,2A,Coronavirus HKU,0,40
+expt11_150824,34,2A,Coronavirus NL63,0,40
+expt11_150824,34,2A,Coronavirus OC43,1,40
+expt11_150824,34,2A,Influenza A,0,40
+expt11_150824,34,2A,Influenza A/H1,0,40
+expt11_150824,34,2A,Influenza A/H1-2009,0,40
+expt11_150824,34,2A,Influenza A/H3,0,40
+expt11_150824,34,2A,Influenza B,0,40
+expt11_150824,34,2A,MERS,0,40
+expt11_150824,34,2A,Metapneumovirus,0,40
+expt11_150824,34,2A,Mycoplasma_pneumoniae,0,40
+expt11_150824,34,2A,Parainfluenza 1,0,40
+expt11_150824,34,2A,Parainfluenza 2,0,40
+expt11_150824,34,2A,Parainfluenza 3,0,40
+expt11_150824,34,2A,Parainfluenza 4,0,40
+expt11_150824,34,2A,RSV,0,40
+expt11_150824,34,2A,Rhinovirus/enterovirus,0,40
+expt11_150824,34,2A,SARS-CoV-2,0,40
+expt11_150824,34,2A,unmapped,0,40
+expt11_150824,35,3A,Adenovirus,0,40
+expt11_150824,35,3A,Bordetella_parapertussis,0,40
+expt11_150824,35,3A,Bordetella_pertussis,0,40
+expt11_150824,35,3A,Chlamydia_pneumoniae,0,40
+expt11_150824,35,3A,Coronavirus 229E,0,40
+expt11_150824,35,3A,Coronavirus HKU,0,40
+expt11_150824,35,3A,Coronavirus NL63,0,40
+expt11_150824,35,3A,Coronavirus OC43,0,40
+expt11_150824,35,3A,Rhinovirus/enterovirus,1,40
+expt11_150824,35,3A,Influenza A,0,40
+expt11_150824,35,3A,Influenza A/H1,0,40
+expt11_150824,35,3A,Influenza A/H1-2009,0,40
+expt11_150824,35,3A,Influenza A/H3,0,40
+expt11_150824,35,3A,Influenza B,0,40
+expt11_150824,35,3A,MERS,0,40
+expt11_150824,35,3A,Metapneumovirus,0,40
+expt11_150824,35,3A,Mycoplasma_pneumoniae,0,40
+expt11_150824,35,3A,Parainfluenza 1,0,40
+expt11_150824,35,3A,Parainfluenza 2,0,40
+expt11_150824,35,3A,Parainfluenza 3,0,40
+expt11_150824,35,3A,Parainfluenza 4,0,40
+expt11_150824,35,3A,RSV,0,40
+expt11_150824,35,3A,SARS-CoV-2,0,40
+expt11_150824,35,3A,unmapped,0,40
+expt11_150824,36,4A,Adenovirus,0,40
+expt11_150824,36,4A,Bordetella_parapertussis,0,40
+expt11_150824,36,4A,Bordetella_pertussis,0,40
+expt11_150824,36,4A,Chlamydia_pneumoniae,0,40
+expt11_150824,36,4A,Coronavirus 229E,0,40
+expt11_150824,36,4A,Coronavirus HKU,0,40
+expt11_150824,36,4A,Coronavirus NL63,1,40
+expt11_150824,36,4A,Coronavirus OC43,0,40
+expt11_150824,36,4A,Influenza A,0,40
+expt11_150824,36,4A,Influenza A/H1,0,40
+expt11_150824,36,4A,Influenza A/H1-2009,0,40
+expt11_150824,36,4A,Influenza A/H3,0,40
+expt11_150824,36,4A,Influenza B,0,40
+expt11_150824,36,4A,MERS,0,40
+expt11_150824,36,4A,Metapneumovirus,0,40
+expt11_150824,36,4A,Mycoplasma_pneumoniae,0,40
+expt11_150824,36,4A,Parainfluenza 1,0,40
+expt11_150824,36,4A,Parainfluenza 2,0,40
+expt11_150824,36,4A,Parainfluenza 3,0,40
+expt11_150824,36,4A,Parainfluenza 4,0,40
+expt11_150824,36,4A,RSV,0,40
+expt11_150824,36,4A,Rhinovirus/enterovirus,0,40
+expt11_150824,36,4A,SARS-CoV-2,0,40
+expt11_150824,36,4A,unmapped,0,40
+expt11_150824,37,5A,Adenovirus,0,40
+expt11_150824,37,5A,Bordetella_parapertussis,0,40
+expt11_150824,37,5A,Bordetella_pertussis,0,40
+expt11_150824,37,5A,Chlamydia_pneumoniae,0,40
+expt11_150824,37,5A,Coronavirus 229E,0,40
+expt11_150824,37,5A,Coronavirus HKU,0,40
+expt11_150824,37,5A,Coronavirus NL63,0,40
+expt11_150824,37,5A,Coronavirus OC43,0,40
+expt11_150824,37,5A,Influenza A,0,40
+expt11_150824,37,5A,Influenza A/H1,0,40
+expt11_150824,37,5A,Influenza A/H1-2009,0,40
+expt11_150824,37,5A,Influenza A/H3,0,40
+expt11_150824,37,5A,Influenza B,0,40
+expt11_150824,37,5A,MERS,0,40
+expt11_150824,37,5A,Metapneumovirus,0,40
+expt11_150824,37,5A,Mycoplasma_pneumoniae,0,40
+expt11_150824,37,5A,Parainfluenza 1,0,40
+expt11_150824,37,5A,Parainfluenza 2,0,40
+expt11_150824,37,5A,Parainfluenza 3,0,40
+expt11_150824,37,5A,Parainfluenza 4,0,40
+expt11_150824,37,5A,RSV,0,40
+expt11_150824,37,5A,Rhinovirus/enterovirus,0,40
+expt11_150824,37,5A,SARS-CoV-2,1,40
+expt11_150824,37,5A,unmapped,0,40
+expt11_150824,38,6A,Adenovirus,0,40
+expt11_150824,38,6A,Bordetella_parapertussis,0,40
+expt11_150824,38,6A,Bordetella_pertussis,0,40
+expt11_150824,38,6A,Chlamydia_pneumoniae,0,40
+expt11_150824,38,6A,Coronavirus 229E,0,40
+expt11_150824,38,6A,Coronavirus HKU,0,40
+expt11_150824,38,6A,Coronavirus NL63,0,40
+expt11_150824,38,6A,Coronavirus OC43,0,40
+expt11_150824,38,6A,Influenza A,0,40
+expt11_150824,38,6A,Influenza A/H1,0,40
+expt11_150824,38,6A,Influenza A/H1-2009,0,40
+expt11_150824,38,6A,Influenza A/H3,0,40
+expt11_150824,38,6A,Influenza B,0,40
+expt11_150824,38,6A,MERS,0,40
+expt11_150824,38,6A,Metapneumovirus,0,40
+expt11_150824,38,6A,Mycoplasma_pneumoniae,0,40
+expt11_150824,38,6A,Parainfluenza 1,0,40
+expt11_150824,38,6A,Parainfluenza 2,0,40
+expt11_150824,38,6A,Parainfluenza 3,0,40
+expt11_150824,38,6A,Parainfluenza 4,0,40
+expt11_150824,38,6A,RSV,0,40
+expt11_150824,38,6A,Rhinovirus/enterovirus,0,40
+expt11_150824,38,6A,SARS-CoV-2,1,40
+expt11_150824,38,6A,unmapped,0,40
+expt11_150824,39,8A,Adenovirus,0,40
+expt11_150824,39,8A,Bordetella_parapertussis,0,40
+expt11_150824,39,8A,Bordetella_pertussis,0,40
+expt11_150824,39,8A,Chlamydia_pneumoniae,0,40
+expt11_150824,39,8A,Coronavirus 229E,0,40
+expt11_150824,39,8A,Coronavirus HKU,0,40
+expt11_150824,39,8A,Coronavirus NL63,0,40
+expt11_150824,39,8A,Coronavirus OC43,0,40
+expt11_150824,39,8A,Influenza A,0,40
+expt11_150824,39,8A,Influenza A/H1,0,40
+expt11_150824,39,8A,Influenza A/H1-2009,0,40
+expt11_150824,39,8A,Influenza A/H3,0,40
+expt11_150824,39,8A,Influenza B,0,40
+expt11_150824,39,8A,MERS,0,40
+expt11_150824,39,8A,Metapneumovirus,0,40
+expt11_150824,39,8A,Mycoplasma_pneumoniae,0,40
+expt11_150824,39,8A,Parainfluenza 3,1,40
+expt11_150824,39,8A,Parainfluenza 1,0,40
+expt11_150824,39,8A,Parainfluenza 2,0,40
+expt11_150824,39,8A,Parainfluenza 4,0,40
+expt11_150824,39,8A,RSV,0,40
+expt11_150824,39,8A,Rhinovirus/enterovirus,0,40
+expt11_150824,39,8A,SARS-CoV-2,0,40
+expt11_150824,39,8A,unmapped,0,40
+expt11_150824,40,9A,Adenovirus,0,40
+expt11_150824,40,9A,Bordetella_parapertussis,0,40
+expt11_150824,40,9A,Bordetella_pertussis,0,40
+expt11_150824,40,9A,Chlamydia_pneumoniae,0,40
+expt11_150824,40,9A,Coronavirus 229E,0,40
+expt11_150824,40,9A,Coronavirus HKU,0,40
+expt11_150824,40,9A,Coronavirus NL63,0,40
+expt11_150824,40,9A,Coronavirus OC43,0,40
+expt11_150824,40,9A,Rhinovirus/enterovirus,1,40
+expt11_150824,40,9A,Influenza A,0,40
+expt11_150824,40,9A,Influenza A/H1,0,40
+expt11_150824,40,9A,Influenza A/H1-2009,0,40
+expt11_150824,40,9A,Influenza A/H3,0,40
+expt11_150824,40,9A,Influenza B,0,40
+expt11_150824,40,9A,MERS,0,40
+expt11_150824,40,9A,Metapneumovirus,0,40
+expt11_150824,40,9A,Mycoplasma_pneumoniae,0,40
+expt11_150824,40,9A,Parainfluenza 1,0,40
+expt11_150824,40,9A,Parainfluenza 2,0,40
+expt11_150824,40,9A,Parainfluenza 3,0,40
+expt11_150824,40,9A,Parainfluenza 4,0,40
+expt11_150824,40,9A,RSV,0,40
+expt11_150824,40,9A,SARS-CoV-2,0,40
+expt11_150824,40,9A,unmapped,0,40
+expt11_150824,41,10A,Adenovirus,0,40
+expt11_150824,41,10A,Bordetella_parapertussis,0,40
+expt11_150824,41,10A,Bordetella_pertussis,0,40
+expt11_150824,41,10A,Chlamydia_pneumoniae,0,40
+expt11_150824,41,10A,Coronavirus 229E,0,40
+expt11_150824,41,10A,Coronavirus HKU,0,40
+expt11_150824,41,10A,Coronavirus NL63,0,40
+expt11_150824,41,10A,Coronavirus OC43,0,40
+expt11_150824,41,10A,Influenza A,0,40
+expt11_150824,41,10A,Influenza A/H1,0,40
+expt11_150824,41,10A,Influenza A/H1-2009,0,40
+expt11_150824,41,10A,Influenza A/H3,0,40
+expt11_150824,41,10A,Influenza B,0,40
+expt11_150824,41,10A,MERS,0,40
+expt11_150824,41,10A,Metapneumovirus,1,40
+expt11_150824,41,10A,Mycoplasma_pneumoniae,0,40
+expt11_150824,41,10A,Parainfluenza 1,0,40
+expt11_150824,41,10A,Parainfluenza 2,0,40
+expt11_150824,41,10A,Parainfluenza 3,0,40
+expt11_150824,41,10A,Parainfluenza 4,0,40
+expt11_150824,41,10A,RSV,0,40
+expt11_150824,41,10A,Rhinovirus/enterovirus,0,40
+expt11_150824,41,10A,SARS-CoV-2,0,40
+expt11_150824,41,10A,unmapped,0,40
+expt11_150824,42,11A,Adenovirus,0,40
+expt11_150824,42,11A,Bordetella_parapertussis,0,40
+expt11_150824,42,11A,Bordetella_pertussis,0,40
+expt11_150824,42,11A,Chlamydia_pneumoniae,0,40
+expt11_150824,42,11A,Coronavirus 229E,0,40
+expt11_150824,42,11A,Coronavirus HKU,0,40
+expt11_150824,42,11A,Coronavirus NL63,0,40
+expt11_150824,42,11A,Coronavirus OC43,0,40
+expt11_150824,42,11A,Influenza A,0,40
+expt11_150824,42,11A,Influenza A/H1,0,40
+expt11_150824,42,11A,Influenza A/H1-2009,0,40
+expt11_150824,42,11A,Influenza A/H3,0,40
+expt11_150824,42,11A,Influenza B,0,40
+expt11_150824,42,11A,MERS,0,40
+expt11_150824,42,11A,Metapneumovirus,0,40
+expt11_150824,42,11A,Mycoplasma_pneumoniae,0,40
+expt11_150824,42,11A,Parainfluenza 1,0,40
+expt11_150824,42,11A,Parainfluenza 2,0,40
+expt11_150824,42,11A,Parainfluenza 3,0,40
+expt11_150824,42,11A,Parainfluenza 4,0,40
+expt11_150824,42,11A,RSV,0,40
+expt11_150824,42,11A,Rhinovirus/enterovirus,0,40
+expt11_150824,42,11A,SARS-CoV-2,1,40
+expt11_150824,42,11A,unmapped,0,40
+expt11_150824,43,NC1,Adenovirus,0,40
+expt11_150824,43,NC1,Bordetella_parapertussis,0,40
+expt11_150824,43,NC1,Bordetella_pertussis,0,40
+expt11_150824,43,NC1,Chlamydia_pneumoniae,0,40
+expt11_150824,43,NC1,Coronavirus 229E,0,40
+expt11_150824,43,NC1,Coronavirus HKU,0,40
+expt11_150824,43,NC1,Coronavirus NL63,0,40
+expt11_150824,43,NC1,Coronavirus OC43,0,40
+expt11_150824,43,NC1,Influenza A,0,40
+expt11_150824,43,NC1,Influenza A/H1,0,40
+expt11_150824,43,NC1,Influenza A/H1-2009,0,40
+expt11_150824,43,NC1,Influenza A/H3,0,40
+expt11_150824,43,NC1,Influenza B,0,40
+expt11_150824,43,NC1,MERS,0,40
+expt11_150824,43,NC1,Metapneumovirus,0,40
+expt11_150824,43,NC1,Mycoplasma_pneumoniae,0,40
+expt11_150824,43,NC1,Parainfluenza 1,0,40
+expt11_150824,43,NC1,Parainfluenza 2,0,40
+expt11_150824,43,NC1,Parainfluenza 3,0,40
+expt11_150824,43,NC1,Parainfluenza 4,0,40
+expt11_150824,43,NC1,RSV,0,40
+expt11_150824,43,NC1,Rhinovirus/enterovirus,0,40
+expt11_150824,43,NC1,SARS-CoV-2,0,40
+expt11_150824,43,NC1,unmapped,0,40
+expt11_150824,44,1B,Adenovirus,0,40
+expt11_150824,44,1B,Bordetella_parapertussis,0,40
+expt11_150824,44,1B,Bordetella_pertussis,0,40
+expt11_150824,44,1B,Chlamydia_pneumoniae,0,40
+expt11_150824,44,1B,Coronavirus 229E,0,40
+expt11_150824,44,1B,Coronavirus HKU,0,40
+expt11_150824,44,1B,Coronavirus NL63,0,40
+expt11_150824,44,1B,Coronavirus OC43,0,40
+expt11_150824,44,1B,Influenza A,0,40
+expt11_150824,44,1B,Influenza A/H1,0,40
+expt11_150824,44,1B,Influenza A/H1-2009,0,40
+expt11_150824,44,1B,Influenza A/H3,0,40
+expt11_150824,44,1B,Influenza B,0,40
+expt11_150824,44,1B,MERS,0,40
+expt11_150824,44,1B,Metapneumovirus,0,40
+expt11_150824,44,1B,Mycoplasma_pneumoniae,0,40
+expt11_150824,44,1B,Parainfluenza 1,0,40
+expt11_150824,44,1B,Parainfluenza 2,0,40
+expt11_150824,44,1B,Parainfluenza 3,0,40
+expt11_150824,44,1B,Parainfluenza 4,0,40
+expt11_150824,44,1B,RSV,0,40
+expt11_150824,44,1B,Rhinovirus/enterovirus,0,40
+expt11_150824,44,1B,SARS-CoV-2,1,40
+expt11_150824,44,1B,unmapped,0,40
+expt11_150824,45,2B,Adenovirus,0,40
+expt11_150824,45,2B,Bordetella_parapertussis,0,40
+expt11_150824,45,2B,Bordetella_pertussis,0,40
+expt11_150824,45,2B,Chlamydia_pneumoniae,0,40
+expt11_150824,45,2B,Coronavirus 229E,0,40
+expt11_150824,45,2B,Coronavirus HKU,0,40
+expt11_150824,45,2B,Coronavirus NL63,0,40
+expt11_150824,45,2B,Coronavirus OC43,1,40
+expt11_150824,45,2B,Influenza A,0,40
+expt11_150824,45,2B,Influenza A/H1,0,40
+expt11_150824,45,2B,Influenza A/H1-2009,0,40
+expt11_150824,45,2B,Influenza A/H3,0,40
+expt11_150824,45,2B,Influenza B,0,40
+expt11_150824,45,2B,MERS,0,40
+expt11_150824,45,2B,Metapneumovirus,0,40
+expt11_150824,45,2B,Mycoplasma_pneumoniae,0,40
+expt11_150824,45,2B,Parainfluenza 1,0,40
+expt11_150824,45,2B,Parainfluenza 2,0,40
+expt11_150824,45,2B,Parainfluenza 3,0,40
+expt11_150824,45,2B,Parainfluenza 4,0,40
+expt11_150824,45,2B,RSV,0,40
+expt11_150824,45,2B,Rhinovirus/enterovirus,0,40
+expt11_150824,45,2B,SARS-CoV-2,0,40
+expt11_150824,45,2B,unmapped,0,40
+expt11_150824,46,3B,Adenovirus,0,40
+expt11_150824,46,3B,Bordetella_parapertussis,0,40
+expt11_150824,46,3B,Bordetella_pertussis,0,40
+expt11_150824,46,3B,Chlamydia_pneumoniae,0,40
+expt11_150824,46,3B,Coronavirus 229E,0,40
+expt11_150824,46,3B,Coronavirus HKU,0,40
+expt11_150824,46,3B,Coronavirus NL63,0,40
+expt11_150824,46,3B,Coronavirus OC43,0,40
+expt11_150824,46,3B,Rhinovirus/enterovirus,1,40
+expt11_150824,46,3B,Influenza A,0,40
+expt11_150824,46,3B,Influenza A/H1,0,40
+expt11_150824,46,3B,Influenza A/H1-2009,0,40
+expt11_150824,46,3B,Influenza A/H3,0,40
+expt11_150824,46,3B,Influenza B,0,40
+expt11_150824,46,3B,MERS,0,40
+expt11_150824,46,3B,Metapneumovirus,0,40
+expt11_150824,46,3B,Mycoplasma_pneumoniae,0,40
+expt11_150824,46,3B,Parainfluenza 1,0,40
+expt11_150824,46,3B,Parainfluenza 2,0,40
+expt11_150824,46,3B,Parainfluenza 3,0,40
+expt11_150824,46,3B,Parainfluenza 4,0,40
+expt11_150824,46,3B,RSV,0,40
+expt11_150824,46,3B,SARS-CoV-2,0,40
+expt11_150824,46,3B,unmapped,0,40
+expt11_150824,47,4B,Adenovirus,0,40
+expt11_150824,47,4B,Bordetella_parapertussis,0,40
+expt11_150824,47,4B,Bordetella_pertussis,0,40
+expt11_150824,47,4B,Chlamydia_pneumoniae,0,40
+expt11_150824,47,4B,Coronavirus 229E,0,40
+expt11_150824,47,4B,Coronavirus HKU,0,40
+expt11_150824,47,4B,Coronavirus NL63,1,40
+expt11_150824,47,4B,Coronavirus OC43,0,40
+expt11_150824,47,4B,Influenza A,0,40
+expt11_150824,47,4B,Influenza A/H1,0,40
+expt11_150824,47,4B,Influenza A/H1-2009,0,40
+expt11_150824,47,4B,Influenza A/H3,0,40
+expt11_150824,47,4B,Influenza B,0,40
+expt11_150824,47,4B,MERS,0,40
+expt11_150824,47,4B,Metapneumovirus,0,40
+expt11_150824,47,4B,Mycoplasma_pneumoniae,0,40
+expt11_150824,47,4B,Parainfluenza 1,0,40
+expt11_150824,47,4B,Parainfluenza 2,0,40
+expt11_150824,47,4B,Parainfluenza 3,0,40
+expt11_150824,47,4B,Parainfluenza 4,0,40
+expt11_150824,47,4B,RSV,0,40
+expt11_150824,47,4B,Rhinovirus/enterovirus,0,40
+expt11_150824,47,4B,SARS-CoV-2,0,40
+expt11_150824,47,4B,unmapped,0,40
+expt11_150824,48,5B,Adenovirus,0,40
+expt11_150824,48,5B,Bordetella_parapertussis,0,40
+expt11_150824,48,5B,Bordetella_pertussis,0,40
+expt11_150824,48,5B,Chlamydia_pneumoniae,0,40
+expt11_150824,48,5B,Coronavirus 229E,0,40
+expt11_150824,48,5B,Coronavirus HKU,0,40
+expt11_150824,48,5B,Coronavirus NL63,0,40
+expt11_150824,48,5B,Coronavirus OC43,0,40
+expt11_150824,48,5B,Influenza A,0,40
+expt11_150824,48,5B,Influenza A/H1,0,40
+expt11_150824,48,5B,Influenza A/H1-2009,0,40
+expt11_150824,48,5B,Influenza A/H3,0,40
+expt11_150824,48,5B,Influenza B,0,40
+expt11_150824,48,5B,MERS,0,40
+expt11_150824,48,5B,Metapneumovirus,0,40
+expt11_150824,48,5B,Mycoplasma_pneumoniae,0,40
+expt11_150824,48,5B,Parainfluenza 1,0,40
+expt11_150824,48,5B,Parainfluenza 2,0,40
+expt11_150824,48,5B,Parainfluenza 3,0,40
+expt11_150824,48,5B,Parainfluenza 4,0,40
+expt11_150824,48,5B,RSV,0,40
+expt11_150824,48,5B,Rhinovirus/enterovirus,0,40
+expt11_150824,48,5B,SARS-CoV-2,1,40
+expt11_150824,48,5B,unmapped,0,40
+expt11_150824,49,6B,Adenovirus,0,40
+expt11_150824,49,6B,Bordetella_parapertussis,0,40
+expt11_150824,49,6B,Bordetella_pertussis,0,40
+expt11_150824,49,6B,Chlamydia_pneumoniae,0,40
+expt11_150824,49,6B,Coronavirus 229E,0,40
+expt11_150824,49,6B,Coronavirus HKU,0,40
+expt11_150824,49,6B,Coronavirus NL63,0,40
+expt11_150824,49,6B,Coronavirus OC43,0,40
+expt11_150824,49,6B,Influenza A,0,40
+expt11_150824,49,6B,Influenza A/H1,0,40
+expt11_150824,49,6B,Influenza A/H1-2009,0,40
+expt11_150824,49,6B,Influenza A/H3,0,40
+expt11_150824,49,6B,Influenza B,0,40
+expt11_150824,49,6B,MERS,0,40
+expt11_150824,49,6B,Metapneumovirus,0,40
+expt11_150824,49,6B,Mycoplasma_pneumoniae,0,40
+expt11_150824,49,6B,Parainfluenza 1,0,40
+expt11_150824,49,6B,Parainfluenza 2,0,40
+expt11_150824,49,6B,Parainfluenza 3,0,40
+expt11_150824,49,6B,Parainfluenza 4,0,40
+expt11_150824,49,6B,RSV,0,40
+expt11_150824,49,6B,Rhinovirus/enterovirus,0,40
+expt11_150824,49,6B,SARS-CoV-2,1,40
+expt11_150824,49,6B,unmapped,0,40
+expt11_150824,50,8B,Adenovirus,0,40
+expt11_150824,50,8B,Bordetella_parapertussis,0,40
+expt11_150824,50,8B,Bordetella_pertussis,0,40
+expt11_150824,50,8B,Chlamydia_pneumoniae,0,40
+expt11_150824,50,8B,Coronavirus 229E,0,40
+expt11_150824,50,8B,Coronavirus HKU,0,40
+expt11_150824,50,8B,Coronavirus NL63,0,40
+expt11_150824,50,8B,Coronavirus OC43,0,40
+expt11_150824,50,8B,Influenza A,0,40
+expt11_150824,50,8B,Influenza A/H1,0,40
+expt11_150824,50,8B,Influenza A/H1-2009,0,40
+expt11_150824,50,8B,Influenza A/H3,0,40
+expt11_150824,50,8B,Influenza B,0,40
+expt11_150824,50,8B,MERS,0,40
+expt11_150824,50,8B,Metapneumovirus,0,40
+expt11_150824,50,8B,Mycoplasma_pneumoniae,0,40
+expt11_150824,50,8B,Parainfluenza 3,1,40
+expt11_150824,50,8B,Parainfluenza 1,0,40
+expt11_150824,50,8B,Parainfluenza 2,0,40
+expt11_150824,50,8B,Parainfluenza 4,0,40
+expt11_150824,50,8B,RSV,0,40
+expt11_150824,50,8B,Rhinovirus/enterovirus,0,40
+expt11_150824,50,8B,SARS-CoV-2,0,40
+expt11_150824,50,8B,unmapped,0,40
+expt11_150824,51,9B,Adenovirus,0,40
+expt11_150824,51,9B,Bordetella_parapertussis,0,40
+expt11_150824,51,9B,Bordetella_pertussis,0,40
+expt11_150824,51,9B,Chlamydia_pneumoniae,0,40
+expt11_150824,51,9B,Coronavirus 229E,0,40
+expt11_150824,51,9B,Coronavirus HKU,0,40
+expt11_150824,51,9B,Coronavirus NL63,0,40
+expt11_150824,51,9B,Coronavirus OC43,0,40
+expt11_150824,51,9B,Rhinovirus/enterovirus,1,40
+expt11_150824,51,9B,Influenza A,0,40
+expt11_150824,51,9B,Influenza A/H1,0,40
+expt11_150824,51,9B,Influenza A/H1-2009,0,40
+expt11_150824,51,9B,Influenza A/H3,0,40
+expt11_150824,51,9B,Influenza B,0,40
+expt11_150824,51,9B,MERS,0,40
+expt11_150824,51,9B,Metapneumovirus,0,40
+expt11_150824,51,9B,Mycoplasma_pneumoniae,0,40
+expt11_150824,51,9B,Parainfluenza 1,0,40
+expt11_150824,51,9B,Parainfluenza 2,0,40
+expt11_150824,51,9B,Parainfluenza 3,0,40
+expt11_150824,51,9B,Parainfluenza 4,0,40
+expt11_150824,51,9B,RSV,0,40
+expt11_150824,51,9B,SARS-CoV-2,0,40
+expt11_150824,51,9B,unmapped,0,40
+expt11_150824,52,10B,Adenovirus,0,40
+expt11_150824,52,10B,Bordetella_parapertussis,0,40
+expt11_150824,52,10B,Bordetella_pertussis,0,40
+expt11_150824,52,10B,Chlamydia_pneumoniae,0,40
+expt11_150824,52,10B,Coronavirus 229E,0,40
+expt11_150824,52,10B,Coronavirus HKU,0,40
+expt11_150824,52,10B,Coronavirus NL63,0,40
+expt11_150824,52,10B,Coronavirus OC43,0,40
+expt11_150824,52,10B,Influenza A,0,40
+expt11_150824,52,10B,Influenza A/H1,0,40
+expt11_150824,52,10B,Influenza A/H1-2009,0,40
+expt11_150824,52,10B,Influenza A/H3,0,40
+expt11_150824,52,10B,Influenza B,0,40
+expt11_150824,52,10B,MERS,0,40
+expt11_150824,52,10B,Metapneumovirus,1,40
+expt11_150824,52,10B,Mycoplasma_pneumoniae,0,40
+expt11_150824,52,10B,Parainfluenza 1,0,40
+expt11_150824,52,10B,Parainfluenza 2,0,40
+expt11_150824,52,10B,Parainfluenza 3,0,40
+expt11_150824,52,10B,Parainfluenza 4,0,40
+expt11_150824,52,10B,RSV,0,40
+expt11_150824,52,10B,Rhinovirus/enterovirus,0,40
+expt11_150824,52,10B,SARS-CoV-2,0,40
+expt11_150824,52,10B,unmapped,0,40
+expt11_150824,53,11B,Adenovirus,0,40
+expt11_150824,53,11B,Bordetella_parapertussis,0,40
+expt11_150824,53,11B,Bordetella_pertussis,0,40
+expt11_150824,53,11B,Chlamydia_pneumoniae,0,40
+expt11_150824,53,11B,Coronavirus 229E,0,40
+expt11_150824,53,11B,Coronavirus HKU,0,40
+expt11_150824,53,11B,Coronavirus NL63,0,40
+expt11_150824,53,11B,Coronavirus OC43,0,40
+expt11_150824,53,11B,Influenza A,0,40
+expt11_150824,53,11B,Influenza A/H1,0,40
+expt11_150824,53,11B,Influenza A/H1-2009,0,40
+expt11_150824,53,11B,Influenza A/H3,0,40
+expt11_150824,53,11B,Influenza B,0,40
+expt11_150824,53,11B,MERS,0,40
+expt11_150824,53,11B,Metapneumovirus,0,40
+expt11_150824,53,11B,Mycoplasma_pneumoniae,0,40
+expt11_150824,53,11B,Parainfluenza 1,0,40
+expt11_150824,53,11B,Parainfluenza 2,0,40
+expt11_150824,53,11B,Parainfluenza 3,0,40
+expt11_150824,53,11B,Parainfluenza 4,0,40
+expt11_150824,53,11B,RSV,0,40
+expt11_150824,53,11B,Rhinovirus/enterovirus,0,40
+expt11_150824,53,11B,SARS-CoV-2,1,40
+expt11_150824,53,11B,unmapped,0,40
+expt11_150824,54,NC2,Adenovirus,0,40
+expt11_150824,54,NC2,Bordetella_parapertussis,0,40
+expt11_150824,54,NC2,Bordetella_pertussis,0,40
+expt11_150824,54,NC2,Chlamydia_pneumoniae,0,40
+expt11_150824,54,NC2,Coronavirus 229E,0,40
+expt11_150824,54,NC2,Coronavirus HKU,0,40
+expt11_150824,54,NC2,Coronavirus NL63,0,40
+expt11_150824,54,NC2,Coronavirus OC43,0,40
+expt11_150824,54,NC2,Influenza A,0,40
+expt11_150824,54,NC2,Influenza A/H1,0,40
+expt11_150824,54,NC2,Influenza A/H1-2009,0,40
+expt11_150824,54,NC2,Influenza A/H3,0,40
+expt11_150824,54,NC2,Influenza B,0,40
+expt11_150824,54,NC2,MERS,0,40
+expt11_150824,54,NC2,Metapneumovirus,0,40
+expt11_150824,54,NC2,Mycoplasma_pneumoniae,0,40
+expt11_150824,54,NC2,Parainfluenza 1,0,40
+expt11_150824,54,NC2,Parainfluenza 2,0,40
+expt11_150824,54,NC2,Parainfluenza 3,0,40
+expt11_150824,54,NC2,Parainfluenza 4,0,40
+expt11_150824,54,NC2,RSV,0,40
+expt11_150824,54,NC2,Rhinovirus/enterovirus,0,40
+expt11_150824,54,NC2,SARS-CoV-2,0,40
+expt11_150824,54,NC2,unmapped,0,40

@@ -1,0 +1,228 @@
+library(ggplot2)
+library(RColorBrewer)
+library(plyr)
+library(grid)
+library(gtable)
+
+dat2 <- read.csv("logit_predictions_no_zero.csv", header = TRUE, sep = ",")  # Load data
+# select metrics of interest
+cols=c('AuG_trunc10', 'sample.num.reads', 'Cov1_perc',
+       'Sample_reads_percent_of_run', 'Sample_reads_percent_of_refs', 
+       'Sample_reads_percent_of_type_run', 'Sample_reads_percent_of_type_sample',
+       'mean_read_length','mean_aligned_length')
+#cols=c('Cov1_perc','sample.num.reads', 'mean_aligned_length')
+dat <- dat2[,cols]
+
+
+# Number of items, generate labels, and set size of text for correlations and item labels
+n <- dim(dat)[2]
+sizeItem = 5
+sizeCor = 4
+labels <- colnames(dat)  # Ensure labels vector corresponds to actual column names
+scatter <- list()
+k <- 1 
+
+## Step 1: Compute all correlations and store them in a data frame
+cor_data <- data.frame()
+for (i in 1:(n-1)) {
+  for (j in (i+1):n) {
+    # Extract x and y
+    x <- dat[, j]
+    y <- dat[, i]
+    
+    # replace 0 with NA
+    x[x == 0] <- NA
+    y[y == 0] <- NA
+    
+    # Perform correlation test
+    correlation <- cor.test(x, y, method="spearman", exact=FALSE, continuity = TRUE)
+    print(paste(colnames(dat)[j], colnames(dat)[i], correlation$estimate, sep = '|'))
+    
+    # Store the results
+    cor_data <- rbind(cor_data, data.frame(
+      x_var = colnames(dat)[j],
+      y_var = colnames(dat)[i],
+      estimate = correlation$estimate,
+      p_value = correlation$p.value
+    ))
+  }
+}
+
+# Categorize correlations into groups
+cor_data$corr_group <- cut(cor_data$estimate,
+                           breaks = c(-Inf,0, Inf),
+                           labels = c("negative", "positive"))
+
+
+# Categorize the p-values into groups
+cor_data$p_value_group <- cut(cor_data$p_value,
+                              breaks = c(-Inf,0.001, 0.01, 0.05, 0.1, Inf),
+                              labels = c("***" ,"**", "*", ".", ""))
+
+RdBu_palette <- rev(colorRampPalette(brewer.pal(11, "RdBu"))(100))
+
+# Global range for sizes based on correlation estimates
+min_cor <- min(abs(cor_data$estimate))
+max_cor <- max(abs(cor_data$estimate))
+
+## List of scatterplots
+scatter <- list()
+for (i in 1:(n-1)) {
+  for (j in (i+1):n) {
+    # Data frame for the i-th and j-th columns, removing rows with NA values
+    x=dat[[i]]
+    y=dat[[j]]
+    x=ifelse(x==0,NA,x)
+    y=ifelse(y==0,NA,y)
+    df.point <- na.omit(data.frame(x = x, y = y))
+    
+    # Plot
+    p <- ggplot(df.point, aes(x, y)) +
+      geom_point(size=0.3) +
+      stat_smooth(method="loess", colour="black") +
+      theme_bw() + theme(panel.grid = element_blank()) +
+      labs(x = colnames(dat)[i], y = colnames(dat)[j]) +  # Dynamically set x and y labels
+      theme(legend.position = "none", axis.text = element_blank(), axis.title = element_text(size = 3))
+    
+    name <- paste0("Item", j, i)
+    scatter[[name]] <- p
+  } }
+
+## List of bar plots
+bar <- list()
+for(i in 1:n) {
+  bar[[i]] <- ggplot(df.point , aes(x=1, y=1)) + 
+    geom_tile(fill = "darkgrey") +
+    theme_void()# No axes or labels
+}
+
+
+## List of tiles (correlation circles)
+tile <- list()
+
+for (i in 1:(n-1)) {
+  for (j in (i+1):n) {
+    # Get the correlation for this pair from cor_data
+    cor_row <- cor_data[cor_data$x_var == colnames(dat)[j] & cor_data$y_var == colnames(dat)[i], ]
+    
+    # Create correlation label
+    cor_row$cor <- paste0("r: ", sprintf("%.2f", cor_row$estimate))
+    cor_row$cor <- paste0(cor_row$cor, cor_row$p_value_group)
+    
+    # Create plot with circles (size based on absolute correlation, fill based on correlation values)
+    p <- ggplot(cor_row, aes(x = 1, y = 1)) +
+      geom_point(aes(size = abs(estimate), fill = estimate), shape = 21, color = "white") + 
+      geom_text(aes(x = 1, y = -7, label = cor), colour = "black", size = 2.5) +
+      scale_size(range = c(1, 14.5), limits = c(min_cor, max_cor), guide = FALSE) +  # Scale size
+      scale_fill_gradientn(colors = RdBu_palette, limits = c(-1, 1), guide = FALSE) + # Continuous color scale
+      ylim(c(-7.5, 7.5)) +
+      theme_void() +
+      theme(panel.grid = element_blank()) +
+      labs(x = colnames(dat)[i], y = colnames(dat)[j]) +
+      theme(legend.position = "none", axis.text = element_blank(), axis.title = element_text(size = 3))
+    
+    # Store the plot in the tile list
+    name <- paste0("Item", j, i)
+    tile[[name]] <- p
+  }
+}
+
+
+# Convert the ggplots to grobs, 
+# and select only the plot panels
+
+barGrob <- llply(bar, ggplotGrob)
+barGrob <- llply(barGrob, gtable_filter, "panel")
+
+scatterGrob <- llply(scatter, ggplotGrob)
+scatterGrob <- llply(scatterGrob, gtable_filter, "panel")
+
+tileGrob <- llply(tile, ggplotGrob)
+tileGrob <- llply(tileGrob, gtable_filter, "panel")
+
+## Set up the gtable layout
+gt <- gtable(unit(rep(1, n), "null"), unit(rep(1, n), "null"))
+
+## Add the plots to the layout
+# Bar plots along the diagonal
+for(i in 1:n) {
+  gt <- gtable_add_grob(gt, barGrob[[i]], t=i, l=i)
+}
+
+
+# Create a vector to keep track of positions
+k <- 1  # Initialize plot index for scatter plots
+m <- 1  # Initialize plot index for correlation tiles
+
+for (i in 1:(n-1)) {
+  for (j in (i+1):n) {
+    # Get the x and y axis labels for this plot
+    x_label <- colnames(dat)[i]
+    y_label <- colnames(dat)[j]
+    
+    # Debugging checks
+    if (!(x_label %in% labels)) {
+      stop(paste("Error: x_label", x_label, "not found in labels"))
+    }
+    if (!(y_label %in% labels)) {
+      stop(paste("Error: y_label", y_label, "not found in labels"))
+    }
+    
+    # Position the scatter plot in the lower-left triangle
+    row_pos_scatter <- j        # Row determined by the y-axis variable for scatter
+    col_pos_scatter <- i        # Column determined by the x-axis variable for scatter
+    
+    # Position the correlation tile in the upper-right triangle (mirroring the scatter plot)
+    row_pos_tile <- i           # Row determined by x-axis variable for tile
+    col_pos_tile <- j           # Column determined by y-axis variable for tile
+    
+    # Check that the positions are valid
+    if (length(row_pos_scatter) == 0 || length(col_pos_scatter) == 0) stop("Scatter plot position out of bounds")
+    if (length(row_pos_tile) == 0 || length(col_pos_tile) == 0) stop("Tile position out of bounds")
+    
+    # Place the scatter plot in the lower-left triangle
+    gt <- gtable_add_grob(gt, scatterGrob[[k]], t=row_pos_scatter, l=col_pos_scatter)
+    
+    # Place the correlation tile in the upper-right triangle
+    gt <- gtable_add_grob(gt, tileGrob[[m]], t=row_pos_tile, l=col_pos_tile)
+    
+    # Increment the plot indices
+    k <- k + 1  # Increment scatter plot index
+    m <- m + 1  # Increment tile index
+  }
+}
+
+
+# Add item labels
+gt <- gtable_add_cols(gt, unit(1.5, "lines"), 0)
+gt <- gtable_add_rows(gt, unit(1.5, "lines"), 2*n)
+
+for(i in 1:n) {
+  textGrob <- textGrob(labels[i], gp = gpar(fontsize = sizeItem)) 
+  gt <- gtable_add_grob(gt, textGrob, t=n+1, l=i+1)
+}
+
+for(i in 1:n) {
+  textGrob <- textGrob(labels[i], rot = 90, gp = gpar(fontsize = sizeItem)) 
+  gt <- gtable_add_grob(gt, textGrob, t=i, l=1)
+}
+
+
+# Add small gap between the panels
+for(i in n:1) gt <- gtable_add_cols(gt, unit(0.2, "lines"), i)
+for(i in (n-1):1) gt <- gtable_add_rows(gt, unit(0.2, "lines"), i)
+
+# Add chart title
+gt <- gtable_add_rows(gt, unit(1.5, "lines"), 0)
+textGrob <- textGrob("Outcomes per metric - Spearman correlation", gp = gpar(fontface = "bold", fontsize = 16)) 
+gt <- gtable_add_grob(gt, textGrob, t=1, l=3, r=2*n+1)
+
+# Add margins to the whole plot
+for(i in c(2*n+1, 0)) {
+  gt <- gtable_add_cols(gt, unit(.75, "lines"), i)
+  gt <- gtable_add_rows(gt, unit(.75, "lines"), i)
+}
+
+# Draw the final plot
+grid.newpage()
+grid.draw(gt)

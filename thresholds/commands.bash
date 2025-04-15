@@ -1,22 +1,16 @@
 
-python3 ~/soft/AD_analysis/thresholds/analysis.py -i \
-    /mnt/data/analysis/nick/agnostic_diagnostic/Expt6_081223_SISPA1 \
-    /mnt/data/analysis/nick/agnostic_diagnostic/Expt6_081223_SISPA2 \
-    /mnt/data/analysis/nick/agnostic_diagnostic/Expt7_SISPA_240124 \
-    /mnt/data/analysis/nick/agnostic_diagnostic/Expt9A_SISPA_Katie \
-    /mnt/data/analysis/nick/agnostic_diagnostic/SISPA_Expt8_batch1 \
-    /mnt/data/analysis/nick/agnostic_diagnostic/expt10A_17072024_sup \
-    /mnt/data/analysis/nick/agnostic_diagnostic/expt10_03072024_sup \
-    /mnt/data/analysis/nick/agnostic_diagnostic/expt11_150824_sup \
-    /mnt/data/analysis/nick/agnostic_diagnostic/expt8_SISPA_batch2 \
-    /mnt/data/analysis/nick/agnostic_diagnostic/fractionated_SISPA_run1 \
-    /mnt/data/analysis/nick/agnostic_diagnostic/fractionated_SISPA_run2 \
-    -m meta.csv \
-    -p pathogens.csv \
-    -pr pathogen_reduced.csv \
-    -o results.csv
+data='/mnt/data/analysis/nick/agnostic_diagnostic/'
 
+python3  ~/soft/AD_analysis/thresholds/analysis.py -i \
+    ${data}expt10A_17072024 \
+    ${data}expt10_03072024 \
+    ${data}expt11_150824 \
+    ${data}Expt9A_SISPA_Katie \
+    ${data}010524_Expt9_SISPA_Daisy \
+    ${data}010524_Expt9_SISPA_Kate \
+    -m ~/soft/AD_analysis/thresholds/meta.csv \
+    -p ~/soft/AD_analysis/thresholds/pathogens.csv \
+    -pr ~/soft/AD_analysis/thresholds/pathogen_reduced.csv \
+    -bf ~/soft/AD_analysis/thresholds/biofire_pathogens.csv \
+    -o results
 
-
-
-cp roc_curve.png /mnt/data/analysis/nick/agnostic_diagnostic/thresholds/

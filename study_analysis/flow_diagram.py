@@ -314,4 +314,5 @@ df11.to_csv('xf.csv', index=False)
 # count number of additional yield
 df_ay=df_full[((df_full['pathogen'].isin(biofire_additional)) & (df_full['test'].isin(['ALINITY', 'CEPHEID']))) ]
 df_ay=df_ay[(df_ay['pass']=="True") & (df_ay['PCs_passed']==1)]
+df_ay.to_csv('additional_yield_pass.csv', index=False)
 print(f'Number of additional yield samples xN/XP:{df_ay.shape[0]}/{X_not_tested_for} ({df_ay.shape[0]/X_not_tested_for*100:.2f}%)')
