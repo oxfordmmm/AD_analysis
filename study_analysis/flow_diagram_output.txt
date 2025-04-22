@@ -1,0 +1,39 @@
+Total number of samples X: 155
+Number of Biofire samples Yb: 49
+Number of Alinity Cepheid samples Yc: 106
+Total number of runs R: 5
+Total number of batches B: 10
+Number of runs with total run bases lower than 400 MB xR: 0
+Number of runs with total run bases higher than 400 MB: 5
+Number of samples with total sample reads lower than 25,000 xS: 0
+Number of samples with total sample reads higher than 25,000 X2: 155
+Percentage of samples with total sample reads higher than 25,000: 100.00%
+Batches that failed negative controls but passed run/sample controls:xB 0
+Samples that failed negative controls but passed run/sample controls:Z 0
+Total number of samples passing batch negative controls: X3 155 (100%)
+Percentage of samples passing batch negative controls: 100.00%
+Total number of samples passing batch negative controls: X4 155 (100%)
+Number of samples failing positive controls xF: 30 (19%)
+Number of samples failing MS2: 30(100%)
+Number of samples failing 1 IC virus: 3(10%)
+Number of samples failing 2 IC viruses: 5(17%)
+Number of samples failing 3 IC viruses: 13(43%)
+Number of samples failing positive controls with pathogens identified by cMG ix:0/iZ:30 (0%)
+Total number of cMG tests for failed positive control samples px:386/ pW:386 (100%)
+Number of samples passing positive controls X5: 125(81% total, 81% of samples passing negative controls)
+Number of Biofire samples passing controls: 		35
+Number of Alinity Cepheid samples passsing controls: 	90
+x pathogens identified by cMG: 97
+Percentage of samples with pathogens identified by cMG: 81.5126050420168%
+Number of samples with no pathogens identified by cMG: 1013
+Percentage of samples with no pathogens identified by cMG: 86.5072587532024%
+Number of samples with 1 pathogen detected in gold_standard nX: 109
+Number of samples with > pathogen detected in gold_standard nY: 4.0 (8 pathogens)
+Number of samples with >1 Influenza detected in gold_standard nW: 1
+Total Z pathogens identified from routine laboratory testing: 119
+Samples negative on all targets assayed nZ: 11
+Total W pathogens not identified from routine laboratory testing: 1046
+Total XP pathogens not tested with routine laboratory testing XP: 1710
+Total xS samples passing gold standard: 78 (66%)
+Total x samples not identified by cMG xf: 1042 (99.61759082217974%)
+Number of additional yield samples xN/XP:9/1710 (0.53%)

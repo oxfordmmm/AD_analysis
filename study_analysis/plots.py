@@ -32,3 +32,17 @@ g1.invert_xaxis()
 plt.yscale('log')
 plt.savefig('reads_vs_CT_pathogen.pdf')
 plt.clf()
+
+# plot meanDepth_trunc5 over bins of CT values with pathogen as hue
+g1=sns.swarmplot(x='CT bins', y='meanDepth_trunc5', data=df2, hue='pathogen')
+g1.invert_xaxis()
+#plt.yscale('log')
+plt.savefig('meanDepth_trunc5_vs_CT_pathogen.pdf')
+plt.clf()
+
+# plot meanDepth_trunc5 over bins of CT values with pathogen as hue
+g1=sns.swarmplot(x='CT bins', y='Cov1_perc', data=df2, hue='pathogen')
+g1.invert_xaxis()
+#plt.yscale('log')
+plt.savefig('Cov1_perc_vs_CT_pathogen.pdf')
+plt.clf()

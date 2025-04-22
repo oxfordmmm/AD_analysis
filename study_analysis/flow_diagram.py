@@ -211,11 +211,13 @@ df3=df2[(df2['PCs_passed']==0) & (df2['test'].isin(['BIOFIRE', 'ALINITY', 'CEPHE
 df3=df3.copy()
 df3g=df3[df3['gold_standard']>=1]
 num_pathogens=df3g.shape[0]
-df3fp=df3g[df3g['pass']==1]
+df3fp=df3g[df3g['pass']=='True']
 num_p_pass=df3fp.shape[0]
 print(f'Number of samples failing positive controls with pathogens identified by cMG ix:{num_p_pass}/iZ:{num_pathogens} ({num_p_pass/num_pathogens*100:.0f}%)')
-df3fp2=df3g[df3g['pass']==0].shape[0]
-negs_not_identified=cMG_tests-df3fp2
+df3n=df3[df3['gold_standard']==0]
+df3fp2=df3n[df3n['pass']!='True']
+#print(df3fp2['pass'].unique())
+negs_not_identified=df3fp2.shape[0]
 print(f'Total number of cMG tests for failed positive control samples px:{negs_not_identified}/ pW:{cMG_tests} ({negs_not_identified/cMG_tests*100:.0f}%)') 
 
 #print(f'Total number of samples failing batch negative controls: {total_samples_failing_BNC}')
