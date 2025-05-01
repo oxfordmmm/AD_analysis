@@ -3,6 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import sys
+sns.set_theme(style="darkgrid")
+
 
 df=pd.read_csv(sys.argv[1])
 
@@ -28,14 +30,19 @@ df_melted.to_csv('metrics_melted.csv', index=False)
 #plt.show()
 
 g2=sns.scatterplot(x='AuG_trunc10', y='Sample_reads_percent_of_refs', data=df_melted, hue='Test result')
-plt.yscale('symlog')
+g2.set_title('Derivation set, test_result does not incldue AND ratio')
+
 # set axis limits
-g2.set(ylim=(0, 0.5))
-g2.set(xlim=(0, 1))
+#g2.set(ylim=(0, 0.5))
+#g2.set(xlim=(0, 1))
 # draw a slope line with intercept 0 and slope 0.5
-x = np.linspace(0,1,100)
+x = np.linspace(0,10,100)
 y = 0.1*x
 plt.plot(x, y, color='red')
+plt.axhline(y=0.007, color='grey', linestyle='--')
+plt.axvline(x=0.003, color='grey', linestyle='--')
+plt.yscale('log')
+plt.xscale('log')
 
 plt.tight_layout()
 plt.savefig('AuG_trunc10_vs_Sample_reads_percent_of_refs.pdf')

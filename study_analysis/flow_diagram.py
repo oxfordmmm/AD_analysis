@@ -150,22 +150,69 @@ print(f'Total number of samples passing batch negative controls: X3 {total_sampl
 print(f'Percentage of samples passing batch negative controls: {total_samples_passing_BNC/total_samples*100:.2f}%')
 
 # count number of samples that failed batch ampification negative controls
-df_amp_control=df[(df['MS2_spike']==0) & (df['IC_virus_spike']==1) ]#& (df['test']==0)]
+df_RC_control=df[(df['reverse_transcription_control']==1) & (df['IC_virus_spike']==1)]
 # orthoreovirus passed	zika passed	MS2 passed	murine_respirovirus passed
-df_amp_control_PCFAIL=df_amp_control[(df_amp_control['orthoreovirus passed']==0) & (df_amp_control['zika passed']==0) & (df_amp_control['murine_respirovirus passed']==0)]
-#if len(df_amp_control_PCFAIL)>0:
+df_RC_control_PCFAIL=df_RC_control[(df_RC_control['orthoreovirus passed']==0) & (df_RC_control['zika passed']==0) & (df_RC_control['murine_respirovirus passed']==0) \
+                                   | (df_RC_control['MS2 passed']==1) \
+                                   | (df_RC_control['pass']=='True') ]
+if len(df_RC_control_PCFAIL)>0:
 #    # get Run and Batch tuples
-#    failed_batches=list(df_amp_control_PCFAIL.drop_duplicates(['Run','Batch'])[['Run','Batch']].itertuples(index=False, name=None))
-#    print(failed_batches)
-#    unique_batches=len(df_amp_control_PCFAIL.drop_duplicates(['Run','Batch']).index)
-#    print(f'Batches that failed amplification controls but passed run/sample controls:xB {unique_batches}')
+    failed_batches=list(df_RC_control_PCFAIL.drop_duplicates(['Run','Batch'])[['Run','Batch']].itertuples(index=False, name=None))
+    print(failed_batches)
+    failed_unique_batches=len(df_RC_control_PCFAIL.drop_duplicates(['Run','Batch']).index)
+    print(f'Batches that failed amplification controls but passed run/sample controls:xR/B {failed_unique_batches}/{unique_batches}')
 #    # filter df by failed_batches 
-#    df_ACF_samples=df_amp_control_PCFAIL[df_amp_control_PCFAIL[['Run','Batch']].apply(tuple, axis=1).isin(failed_batches)]
+    df_ACF_samples=df2[df2[['Run','Batch']].apply(tuple, axis=1).isin(failed_batches)]
+    df_ACF_samples=df_ACF_samples.copy()
+    df_ACF_samples=df_ACF_samples[df_ACF_samples['test_type'].isin(['BIOFIRE', 'ALINITY', 'CEPHEID'])]
+    df3r=df_ACF_samples.copy()
+    df_ACF_samples.drop_duplicates(subset=['Run', 'barcode'], inplace=True)
+    print(f'Samples in failed batch amplification controls:rZ {df_ACF_samples.shape[0]}')
 
-    #print('Samples that failed amplification controls but passed run/sample controls:Z {df_amp_control_PCFAIL.shape[0]}')
-#else:
-#    print('Batches that failed amplification controls but passed run/sample controls:xB 0')
-#    print('Samples that failed amplification controls but passed run/sample controls:Z 0')
+    # count any samples that passed with a target pathogen
+    df_pathogen_pass=df_RC_control_PCFAIL[(df_RC_control_PCFAIL['chrom']!='unmapped') & (df_RC_control_PCFAIL['pass']=='True')]
+    if len(df_pathogen_pass)>0:
+        print(f'Number of samples in batch amplification controls that passed with a target pathogen: {df_pathogen_pass.shape[0]} ({df_pathogen_pass.shape[0]/df_RC_control_PCFAIL.shape[0]*100:.0f}%)')
+    else:
+        print(f'Number of samples in batch amplification controls that passed with a target pathogen: 0')
+
+    df_RC_control_PCFAIL=df_RC_control_PCFAIL.drop_duplicates(subset=['Run', 'barcode'], keep='first')
+    ms2_passed=df_RC_control_PCFAIL[df_RC_control_PCFAIL['MS2 passed']==1]
+    print(f'Number of samples in failed batch amplification controls that passed MS2: {ms2_passed.shape[0]} ({ms2_passed.shape[0]/df_ACF_samples.shape[0]*100:.0f}%)')
+
+    ICfail_1=df_RC_control_PCFAIL[df_RC_control_PCFAIL['PC_PASSES']==2]
+    ICfail_2=df_RC_control_PCFAIL[df_RC_control_PCFAIL['PC_PASSES']==1]
+    ICfail_3=df_RC_control_PCFAIL[df_RC_control_PCFAIL['PC_PASSES']==0]
+    print(f'Number of samples in failed batch amplification controls that failed 1 IC virus: {ICfail_1.shape[0]} ({ICfail_1.shape[0]/df_RC_control_PCFAIL.shape[0]*100:.0f}%)')   
+    print(f'Number of samples in failed batch amplification controls that failed 2 IC viruses: {ICfail_2.shape[0]} ({ICfail_2.shape[0]/df_RC_control_PCFAIL.shape[0]*100:.0f}%)')
+    print(f'Number of samples in failed batch amplification controls that failed 3 IC viruses: {ICfail_3.shape[0]} ({ICfail_3.shape[0]/df_RC_control_PCFAIL.shape[0]*100:.0f}%)')
+
+    # count pathogen tests that would have passed
+    bf=df3r[df3r['test_type']=='BIOFIRE']
+    bf=bf.drop_duplicates(subset=['Run', 'barcode'])
+    ac=df3r[df3r['test_type'].isin( ['ALINITY', 'CEPHEID'])]
+    ac=ac.drop_duplicates(subset=['Run', 'barcode'])
+    total_samples_failing_BNC=bf.shape[0]+ac.shape[0]
+
+    cMG_tests=(bf.shape[0]*len(biorifre_organisms))+(ac.shape[0]*len(alinity_cephid_organisms))
+    df3=df2[(df2['PCs_passed']==0) & (df2['test'].isin(['BIOFIRE', 'ALINITY', 'CEPHEID']))]
+    df3r=df3r.copy()
+    df3g=df3r[df3r['gold_standard']>=1]
+    num_pathogens=df3g.shape[0]
+    df3fp=df3g[df3g['pass']=='True']
+    num_p_pass=df3fp.shape[0]
+    print(f'Number of samples failing positive batch with pathogens identified by cMG rx:{num_p_pass}/rZ:{num_pathogens} ({num_p_pass/num_pathogens*100:.0f}%)')
+    df3n=df3r[df3r['gold_standard']==0]
+    df3fp2=df3n[df3n['pass']!='True']
+    #print(df3fp2['pass'].unique())
+    negs_not_identified=df3fp2.shape[0]
+    print(f'Total number of cMG tests for failed positive control samples rpx:{negs_not_identified}/ rW:{cMG_tests} ({negs_not_identified/cMG_tests*100:.0f}%)')
+
+    # remove failed batches from the rest of the analysis
+    df2=df2[~df2[['Run','Batch']].apply(tuple, axis=1).isin(failed_batches)]
+else:
+    print('Batches that failed amplification controls but passed run/sample controls:xR 0')
+    print('Samples that failed amplification controls but passed run/sample controls:Z 0')
 
 
 # samples that passed batch amplification controls
@@ -307,11 +354,18 @@ df10=df4[(df4['pass']=='True') & (df4['gold_standard']>=1)]
 print(f'Total xS samples passing gold standard: {df10.shape[0]} ({df10.shape[0]/df8.shape[0]*100:.0f}%)')
 #print(f'Percentage of samples passing gold standard: {df10.shape[0]/df8.shape[0]*100:.2f}%')
 
+# count the number of samples where pass is 1 not including the AND fails
+df10a=df4[(df4['OR pass']==True) & (df4['2 reads pass']==True) & (df4['gold_standard']>=1)]
+print(f'Total grey-xS samples passing gold standard: {df10a.shape[0]} ({df10a.shape[0]/df8.shape[0]*100:.0f}%)')
+
 # Count the number of samples where pass is 0 and gold_standard is 0
 df11=df4[(df4['pass']!='True') & (df4['gold_standard']==0) & (df4['pathogen']!='unmapped')]
 print(f'Total x samples not identified by cMG xf: {df11.shape[0]} ({df11.shape[0]/df9.shape[0]*100}%)')
 df11.to_csv('xf.csv', index=False)
-#print(f'Percentage of samples not passing gold standard: {df11.shape[0]/df9.shape[0]*100}%')
+
+# Count the number of samples where pass is 0 and gold_standard is 1 not including the AND fails
+df11a=df4[(df4['OR pass']!=True) & (df4['2 reads pass']!=True) & (df4['gold_standard']==0) & (df4['pathogen']!='unmapped')]
+print(f'Total grey-x samples not identified by cMG xf: {df11a.shape[0]} ({df11a.shape[0]/df9.shape[0]*100}%)')
 
 # count number of additional yield
 df_ay=df_full[((df_full['pathogen'].isin(biofire_additional)) & (df_full['test'].isin(['ALINITY', 'CEPHEID']))) ]

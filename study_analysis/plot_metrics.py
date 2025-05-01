@@ -3,6 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 import sys
+sns.set_theme(style="darkgrid")
+
 
 df=pd.read_csv(sys.argv[1])
 
@@ -19,6 +21,9 @@ df['TP'] = np.where( (df['gold_standard'] == True)  & (df['full pass'] == True),
 df['FP'] = np.where( (df['gold_standard'] == False) & (df['full pass'] == True), 1, 0)
 df['TN'] = np.where( (df['gold_standard'] == False) & (df['full pass'] == False), 1, 0)
 df['FN'] = np.where( (df['gold_standard'] == True)  & (df['full pass'] == False), 1, 0)
+
+# remove rows that failed positive controls
+df=df[df['PCs_passed'] == True]
 
 cols=['Run',	'barcode',	'seq_name',	'pathogen',	'TP',	'FP',	'TN',	'FN',
        'Sample_reads_percent_of_run', 'Sample_reads_percent_of_refs',	'Sample_reads_percent_of_type_run', 'AuG_trunc10']
@@ -42,17 +47,27 @@ print(df_melted['AuG_trunc10/Sample_reads_percent_of_refs'].describe())
 #plt.show()
 
 g2=sns.scatterplot(x='AuG_trunc10', y='Sample_reads_percent_of_refs', data=df_melted, hue='Test result')
-plt.yscale('symlog')
 # set axis limits
-g2.set(ylim=(0, 0.5))
-g2.set(xlim=(0, 1))
+#g2.set(ylim=(0, 0.4))
+#g2.set(xlim=(0, 10))
 g2.set_title('Validation set, test_result includes AND ratio')
 # draw a slope line with intercept 0 and slope 0.5
-x = np.linspace(0,1,100)
+x = np.linspace(0,10,100)
 y = 0.1*x
 plt.plot(x, y, color='red')
 
+# add sample_reads_percent_of_refs = 0.007 as a dotted grey line
+plt.axhline(y=0.007, color='grey', linestyle='--')
+plt.axvline(x=0.003, color='grey', linestyle='--')
+plt.yscale('log')
+plt.xscale('log')
+
 plt.tight_layout()
+# limit axis to 0.1
+#plt.xlim(0, 0.1)
+#plt.ylim(0, 0.05)
+#plt.savefig('AuG_trunc10_vs_Sample_reads_percent_of_refs_limit_axis.pdf')
+
 plt.savefig('AuG_trunc10_vs_Sample_reads_percent_of_refs.pdf')
 #plt.xscale('symlog')
 plt.show()
