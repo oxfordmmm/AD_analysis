@@ -15,6 +15,7 @@ Flu A/H1-2009,Influenza_A_virus_A_California_07_2009H1N1_segment_5_nucleocapsid_
 Flu A/H1-2009,Influenza_A_virus_A_California_07_2009H1N1_segment_6_neuraminidase_NA_gene
 Flu A/H1-2009,Influenza_A_virus_A_California_07_2009H1N1_segment_7_matrix_protein_2_M2_and_matrix_protein_1_M1_genes
 Flu A/H1-2009,Influenza_A_virus_A_California_07_2009H1N1_segment_8_nuclear_export_protein_NEP_and_nonstructural_protein_1_NS1_genes
+INFLUENZA A H1-2009,INFLUENZA A H1-2009
 Flu A/H3,Influenza_A_virus_A_New_York_392_2004H3N2_segment_1
 Flu A/H3,Influenza_A_virus_A_New_York_392_2004H3N2_segment_2
 Flu A/H3,Influenza_A_virus_A_New_York_392_2004H3N2_segment_3
@@ -102,4 +103,5 @@ Bordetella_parapertussis,CP085971.1
 Bordetella_pertussis,NZ_CP025371.1
 Chlamydia_pneumoniae,NC_005043.1
 Mycoplasmoides_pneumoniae,NZ_LR214945.1
+MYCOPLASMA PNEUMONIAE,NZ_LR214945.1
 unmapped,unmapped

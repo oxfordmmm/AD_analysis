@@ -23,9 +23,9 @@ df['TN'] = np.where( (df['gold_standard'] == False) & (df['full pass'] == False)
 df['FN'] = np.where( (df['gold_standard'] == True)  & (df['full pass'] == False), 1, 0)
 
 # remove rows that failed positive controls
-df=df[df['PCs_passed'] == True]
+#df=df[df['PCs_passed'] == True]
 
-cols=['Run',	'barcode',	'seq_name',	'pathogen',	'TP',	'FP',	'TN',	'FN',
+cols=['Run',	'barcode',	'seq_name','reverse_transcription_control','2 reads pass',	'pathogen',	'TP',	'FP',	'TN',	'FN',
        'Sample_reads_percent_of_run', 'Sample_reads_percent_of_refs',	'Sample_reads_percent_of_type_run', 'AuG_trunc10']
 df=df[cols]
 
@@ -33,7 +33,7 @@ df=df[cols]
 #df_melted = pd.melt(df, id_vars=['Run', 'barcode', 'seq_name', 'pathogen', 'TP', 'FP', 'TN', 'FN'], value_vars=['Sample_reads_percent_of_run', 'Sample_reads_percent_of_refs', 'Sample_reads_percent_of_type_run'], var_name='Metric', value_name='Metric Value')
 
 # melt dataframe by 'TP', 'FP', 'TN', 'FN'
-df_melted = pd.melt(df, id_vars=['Run', 'barcode', 'seq_name', 'pathogen','Sample_reads_percent_of_run', 'Sample_reads_percent_of_refs', 'Sample_reads_percent_of_type_run', 'AuG_trunc10'], value_vars=['TP', 'FP', 'TN', 'FN'], var_name='Test result', value_name='Test result Value')
+df_melted = pd.melt(df, id_vars=['Run', 'barcode', 'seq_name','reverse_transcription_control','2 reads pass', 'pathogen','Sample_reads_percent_of_run', 'Sample_reads_percent_of_refs', 'Sample_reads_percent_of_type_run', 'AuG_trunc10'], value_vars=['TP', 'FP', 'TN', 'FN'], var_name='Test result', value_name='Test result Value')
 df_melted=df_melted[df_melted['Test result Value']==1]
 
 df_melted['AuG_trunc10/Sample_reads_percent_of_refs']=df_melted['Sample_reads_percent_of_refs']/df_melted['AuG_trunc10']
@@ -45,8 +45,10 @@ print(df_melted['AuG_trunc10/Sample_reads_percent_of_refs'].describe())
 #g=sns.stripplot(x='Test result', y='Sample_reads_percent_of_refs', data=df_melted, hue='pathogen')
 #plt.yscale('symlog')
 #plt.show()
-
-g2=sns.scatterplot(x='AuG_trunc10', y='Sample_reads_percent_of_refs', data=df_melted, hue='Test result')
+markers={0:'o', 1:'s'}
+fillStyle={0:False, 1:True}
+g2=sns.scatterplot(x='AuG_trunc10', y='Sample_reads_percent_of_refs', data=df_melted, hue='Test result',
+                   style='reverse_transcription_control', markers=markers) #, palette='Set1', hue_order=['TP', 'FP', 'TN', 'FN'])
 # set axis limits
 #g2.set(ylim=(0, 0.4))
 #g2.set(xlim=(0, 10))

@@ -5,6 +5,7 @@ Corona 229E,Coronavirus 229E
 Corona OC43,Coronavirus OC43
 Coronavirus 229E,Coronavirus 229E
 Coronavirus HKU,Coronavirus HKU
+CORONAVIRUS HKU,Coronavirus HKU
 Coronavirus NL63,Coronavirus NL63
 CORONAVIRUS NL63,Coronavirus NL63
 Coronavirus OC43,Coronavirus OC43
@@ -13,8 +14,11 @@ Flu A,Influenza A
 INFLUENZA A,Influenza A
 INFLUENZA A SUBTYPE H1,Influenza A/H1
 Flu A/H1-2009,Influenza A/H1-2009
+INFLUENZA A SUBTYPE H1 2009,Influenza A/H1-2009
+INFLUENZA A H1-2009,Influenza A/H1-2009
 Flu A/H1,Influenza A/H1
 Flu A/H3,Influenza A/H3
+INFLUENZA A H3,Influenza A/H3
 Flu A/H5,Influenza A/H5
 FluB,Influenza B
 HRE,Rhinovirus/enterovirus
@@ -62,4 +66,5 @@ Bordetella_pertussis,Bordetella_pertussis
 BORDETELLA PERTUSSIS,Bordetella_pertussis
 Chlamydia_pneumoniae,Chlamydia_pneumoniae
 Mycoplasmoides_pneumoniae,Mycoplasma_pneumoniae
+MYCOPLASMA PNEUMONIAE,Mycoplasma_pneumoniae
 unmapped,unmapped
