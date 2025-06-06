@@ -45,9 +45,11 @@ def readjust_pass(df, AND_ratio):
     df : dataframe
         DataFrame with the updated 'pass' column.
     """
-
-    df['pass']=np.where((df['sample num reads']>=2) & (df['AuG_trunc10']>AND_ratio), 'True', 'False')
-    #df['pass']=df['pass'].astype('bool')
+    df['AND ratio pass']=np.where(df['Sample_reads_percent_of_refs_AuG_truc10']>AND_ratio, True, False)
+    
+    df['pass']=np.where((df['AuG_trunc10']>0.003) | (df['Cov1_perc']>0.25) | (df['Sample_reads_percent_of_refs']>0.007),'True','False')    
+    df['pass']=np.where(df['AND ratio pass']==True, df['pass'],'False')
+    df['pass']=np.where(df['sample num reads']>=2, df['pass'],'False')
     return df
 
 
@@ -84,6 +86,7 @@ def remove_biofire_additional(df):
     # remove biofire tests from alinity cephid
     df_full=df.copy()
     df=df[ ~((df['pathogen'].isin(biofire_additional)) & (df['test'].isin(['ALINITY', 'CEPHEID']))) ]
+    df=df.copy()
 
     df['pathogen_tests']=df.groupby(['Run', 'barcode'])[['pathogen']].transform('count')
 
@@ -150,7 +153,9 @@ def count_failed_runs_samples(df, metrics):
 def count_failed_negative_controls(df, metrics):
     # count number of samples that failed negative controls
     # spike negs
-    df_negs=df[(df['MS2_spike']==0) & (df['IC_virus_spike']==0)]
+    #df_negs=df[(df['MS2_spike']==0) & (df['IC_virus_spike']==0)]
+    # This is also called the batch negatice control in the flow diagram
+    df_negs=df[df['amplification_control']==1]
     df_negs_pass=df_negs[(df_negs['pass']=='True') | (df_negs['PCs_passed']==1)]
     # clinical negs
     df_negs_clinical=df[(df['Negative control']==1) & (df['pass']=='True')]
@@ -213,7 +218,7 @@ def count_samples_failing_batch_controls(df, df2, metrics):
         failed_unique_batches=len(df_RC_control_PCFAIL.drop_duplicates(['Run','Batch']).index)
         unique_batches=metrics['Total number of batches B']
         print(f'Batches that failed amplification controls but passed run/sample controls:xR/B {failed_unique_batches}/{unique_batches}')
-        metrics['Batches that failed amplification controls but passed run/sample controls:xR/B'] = f'{failed_unique_batches}/{unique_batches}'
+        metrics['Batches that failed amplification controls but passed run/sample controls:xR/B'] = f'{failed_unique_batches} {failed_unique_batches}/{unique_batches}'
     #    # filter df by failed_batches 
         df_ACF_samples=df2[df2[['Run','Batch']].apply(tuple, axis=1).isin(failed_batches)]
         df_ACF_samples=df_ACF_samples.copy()
@@ -503,6 +508,8 @@ def run_analysis(AND_ratio=0.1):
     df, metrics=count_failed_runs_samples(df, metrics)
 
     df,df2, metrics=count_failed_negative_controls(df, metrics)
+
+    df.to_csv(f'AND_ratios/biofire_results_merged_adjusted_{AND_ratio}.csv', index=False)
     
     metrics=count_passing_samples(df2, metrics)
     
@@ -524,7 +531,11 @@ def run_analysis(AND_ratio=0.1):
 
 if __name__ == '__main__':
     metrics=[]
-    ratios=[0.0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1]
+    ratios=[0.0, 0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 
+            0.07, 0.071, 0.072, 0.073, 0.074, 0.075,
+            0.076, 0.077, 0.078, 0.079,
+            0.08, 0.081, 0.082, 0.083, 0.084, 0.085, 0.086, 0.087, 0.088, 0.089,
+            0.09, 0.091, 0.092, 0.093, 0.094, 0.095, 0.096, 0.097, 0.098, 0.099,  0.1]
     for ratio in ratios:
         print(f'Running analysis with AND_ratio={ratio}')
         metrics.append(run_analysis(AND_ratio=ratio))

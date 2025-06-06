@@ -161,7 +161,7 @@ def getMeta(meta, pathogens, pathogens_reduced,biofire,keep_runs):
     metaDF=df.copy()
     # add Negavtive control where pathogen 1 is empty
     metaDF['pathogen_1']=np.where(metaDF['pathogen_1'].isnull(),'Negative control',metaDF['pathogen_1'])
-    metaDF=metaDF.melt(id_vars=['Run','barcode','sample_name','seq_name','Batch','Negative control','test','spiked', 'MS2_spike', 'IC_virus_spike', 'ct_1', 'ct_2','reverse_transcription_control' ],
+    metaDF=metaDF.melt(id_vars=['Run','barcode','sample_name','seq_name','Batch','Negative control','test','spiked', 'MS2_spike', 'IC_virus_spike', 'ct_1', 'ct_2','amplification_control','reverse_transcription_control' ],
                        value_vars=['pathogen_1','pathogen_2','pathogen_3'],
                        var_name='pathogen number',value_name='pathogen')
     metaDF['pathogen reduced']=metaDF['pathogen'].map(path_dict_reduced)
@@ -213,7 +213,7 @@ def getMeta(meta, pathogens, pathogens_reduced,biofire,keep_runs):
     #keep_runs=['expt10_03072024', 'expt11_150824','expt10A_17072024']
     metaDF=metaDF[metaDF['Run'].isin(keep_runs)]
     
-    cols=['Run','barcode','Batch','seq_name','pathogen reduced','Biofire positive', 'mapQ', 'Negative control','test', 'spiked', 'MS2_spike', 'IC_virus_spike', 'ct_1', 'ct_2', 'reverse_transcription_control']
+    cols=['Run','barcode','Batch','seq_name','pathogen reduced','Biofire positive', 'mapQ', 'Negative control','test', 'spiked', 'MS2_spike', 'IC_virus_spike', 'ct_1', 'ct_2','amplification_control', 'reverse_transcription_control']
     metaDF=metaDF[cols]
     metaDF.rename(columns={'pathogen reduced':'pathogen'},inplace=True)
 
