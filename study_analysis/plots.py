@@ -40,6 +40,16 @@ plt.yscale('log')
 plt.savefig('reads_vs_CT_pathogen_scatter.pdf')
 plt.clf()
 
+# plot reads over scatter of CT values with run name as hue
+g1=sns.scatterplot(x='CT value', y='sample num reads', data=df2, hue='Run')
+g1.invert_xaxis()
+plt.yscale('log')
+# move legend outside of plot
+plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
+plt.tight_layout()
+plt.savefig('reads_vs_CT_run_scatter.pdf')
+plt.clf()
+
 # plot meanDepth_trunc5 over bins of CT values with pathogen as hue
 g1=sns.swarmplot(x='CT bins', y='meanDepth_trunc5', data=df2, hue='pathogen')
 g1.invert_xaxis()
@@ -53,3 +63,151 @@ g1.invert_xaxis()
 #plt.yscale('log')
 plt.savefig('Cov1_perc_vs_CT_pathogen.pdf')
 plt.clf()
+
+## Bar plots for each run/batch for sensitivity
+# g1=df.groupby(['Run','Batch'])[['gold_standard']].sum().reset_index()
+# df['pass'] = np.where(df['pass']=='0', 0, df['pass'])  # Convert 'pass' to numeric
+# df['pass'] = np.where(df['pass']=='False', 0, df['pass'])
+# df['pass'] = np.where(df['pass']=='True', 1, df['pass'])
+# df['pass'] = df['pass'].astype(int)  # Ensure 'pass' is integer
+# df['TP']= np.where((df['pass']==1) & (df['gold_standard']==1), 1, 0)  # Create a new column 'TP' for true positives
+# g2=df.groupby(['Run','Batch'])[['TP']].sum().reset_index()
+# # Merge the two dataframes on 'Run' and 'batch'
+# g1 = g1.rename(columns={'gold_standard': 'gold_standard_count'})
+# g2 = g2.rename(columns={'TP': 'pass_count'})
+# g1 = g1.merge(g2, on=['Run', 'Batch'])
+# g1['Total'] = g1['gold_standard_count'] - g1['pass_count']
+# g1.drop(columns=['gold_standard_count'], inplace=True)
+# print(g1)
+# # plot stack bar plot of gold_standard and pass
+# g1 = g1.set_index(['Run', 'Batch'])
+# g1.plot(kind='bar', stacked=True, figsize=(10, 6))
+# plt.title('Gold Standard vs Pass Counts by Run and Batch')
+# plt.xlabel('Run and Batch')
+# plt.ylabel('Count')
+# plt.xticks(rotation=90)
+# plt.tight_layout()
+# plt.savefig('gold_standard_vs_pass_counts_by_run_and_batch.pdf')
+# plt.clf()
+
+## Bar plots for each run/batch for sensitivity, but only PCs_passed == 1
+g0=df.groupby(['Run','Batch'])[['gold_standard']].sum().reset_index()
+df_original = df.copy()  # Keep a copy of the original DataFrame
+df = df[df['PCs_passed'] == 1]  # Filter for PCs_passed == 1
+g1=df.groupby(['Run','Batch'])[['gold_standard']].sum().reset_index()
+df['pass'] = np.where(df['pass']=='0', 0, df['pass'])  # Convert 'pass' to numeric
+df['pass'] = np.where(df['pass']=='False', 0, df['pass'])
+df['pass'] = np.where(df['pass']=='True', 1, df['pass'])
+df['pass'] = df['pass'].astype(int)  # Ensure 'pass' is integer
+df['TP']= np.where((df['pass']==1) & (df['gold_standard']==1), 1, 0)  # Create a new column 'TP' for true positives
+g2=df.groupby(['Run','Batch'])[['TP']].sum().reset_index()
+# Merge the two dataframes on 'Run' and 'batch'
+g1 = g1.rename(columns={'gold_standard': 'gold_standard_count'})
+g2 = g2.rename(columns={'TP': 'passed'})
+g0 = g0.rename(columns={'gold_standard': 'all_gold_standard_count'})
+g1 = g1.merge(g2, on=['Run', 'Batch'])
+g1 = g1.merge(g0, on=['Run', 'Batch'])
+g1['Failed criteria'] = g1['gold_standard_count'] - g1['passed']
+g1['Failed PCs'] = g1['all_gold_standard_count'] - (g1['passed'] + g1['Failed criteria'])
+
+print(g1)
+g1.drop(columns=['gold_standard_count','all_gold_standard_count'], inplace=True)
+print(g1)
+
+# Sort the DataFrame by list of run names
+run_order = {'AD_winter_study_201224':1,
+             'AD_winter_study_220125':2,
+             'AD_winter_study_070325':3,
+             'AD_winter_study_170325':4,
+             'AD_winter_study_100425':5,
+             'AD_winter_study_160725':6,
+             'AD_winter_study_220725':7,
+             'AD_winter_study_240725':8,
+             'AD_winter_study_300725':9
+  }  # Define the order of runs
+
+g1['Run_order'] = g1['Run'].map(run_order)  # Map the run names to their order
+g1 = g1.sort_values(by=['Run_order', 'Batch'])  # Sort by Run order and Batch
+g1 = g1.drop(columns=['Run_order'])  # Drop the temporary Run_order column
+
+# plot stack bar plot of gold_standard and pass
+g1 = g1.set_index(['Run', 'Batch'])
+g1.plot(kind='bar', stacked=True, 
+        figsize=(10, 6))
+# make y scale full integers
+#plt.ylim(0, g1['passed'].max())  # Adjust the y-axis limit for better visibility
+plt.title('Gold Standard vs Pass Counts by Run and Batch')
+plt.xlabel('Run and Batch')
+plt.ylabel('Pathogen Count')
+plt.xticks(rotation=90)
+plt.tight_layout()
+plt.savefig('gold_standard_vs_pass_counts_by_run_and_batch_PCs_passed.pdf')
+plt.clf()
+
+print(g1['passed'].sum())
+print(g1['Failed criteria'].sum())
+print(g1['Failed PCs'].sum())
+
+g1['sensitivity'] = g1['passed'] / (g1['passed'] + g1['Failed criteria'])
+print(g1)
+
+## Bar plots for each run/batch/pathogen for sensitivity, but only PCs_passed == 1
+groups=['pathogen']
+df = df_original.copy()  # Use the original DataFrame for grouping
+g0=df.groupby(groups)[['gold_standard']].sum().reset_index()
+df = df[df['PCs_passed'] == 1]  # Filter for PCs_passed == 1
+g1=df.groupby(groups)[['gold_standard']].sum().reset_index()
+df['pass'] = np.where(df['pass']=='0', 0, df['pass'])  # Convert 'pass' to numeric
+df['pass'] = np.where(df['pass']=='False', 0, df['pass'])
+df['pass'] = np.where(df['pass']=='True', 1, df['pass'])
+df['pass'] = df['pass'].astype(int)  # Ensure 'pass' is integer
+df['TP']= np.where((df['pass']==1) & (df['gold_standard']==1), 1, 0)  # Create a new column 'TP' for true positives
+g2=df.groupby(groups)[['TP']].sum().reset_index()
+# Merge the two dataframes on 'Run' and 'batch'
+g1 = g1.rename(columns={'gold_standard': 'gold_standard_count'})
+g2 = g2.rename(columns={'TP': 'passed'})
+g0 = g0.rename(columns={'gold_standard': 'all_gold_standard_count'})
+g1 = g1.merge(g2, on=groups)
+g1 = g1.merge(g0, on=groups)
+g1['Failed criteria'] = g1['gold_standard_count'] - g1['passed']
+g1['Failed PCs'] = g1['all_gold_standard_count'] - (g1['passed'] + g1['Failed criteria'])
+
+print(g1)
+g1.drop(columns=['gold_standard_count','all_gold_standard_count'], inplace=True)
+print(g1)
+
+# Sort the DataFrame by list of run names
+run_order = {'AD_winter_study_201224':1,
+             'AD_winter_study_220125':2,
+             'AD_winter_study_070325':3,
+             'AD_winter_study_170325':4,
+             'AD_winter_study_100425':5,
+             'AD_winter_study_160725':6,
+             'AD_winter_study_220725':7,
+             'AD_winter_study_240725':8
+  }  # Define the order of runs
+
+#g1['Run_order'] = g1['Run'].map(run_order)  # Map the run names to their order
+#g1 = g1.sort_values(by=['Run_order', 'Batch'])  # Sort by Run order and Batch
+#g1 = g1.drop(columns=['Run_order'])  # Drop the temporary Run_order column
+
+# plot stack bar plot of gold_standard and pass
+g1 = g1.set_index(groups)
+g1.plot(kind='bar', stacked=True, 
+        figsize=(10, 6))
+# make y scale full integers
+#plt.ylim(0, g1['passed'].max())  # Adjust the y-axis limit for better visibility
+plt.title('Gold Standard vs Pass Counts by Run, Batch and pathogen')
+plt.xlabel('pathogen')
+plt.ylabel('Pathogen Count')
+plt.xticks(rotation=90)
+plt.tight_layout()
+plt.savefig('gold_standard_vs_pass_counts_by_run_and_batch_and_pathogen_PCs_passed.pdf')
+plt.clf()
+
+print(g1['passed'].sum())
+print(g1['Failed criteria'].sum())
+print(g1['Failed PCs'].sum())
+
+g1['sensitivity'] = g1['passed'] / (g1['passed'] + g1['Failed criteria'])
+print(g1)

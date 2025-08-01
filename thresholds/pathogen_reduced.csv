@@ -9,6 +9,7 @@ CORONAVIRUS HKU,Coronavirus HKU
 Coronavirus NL63,Coronavirus NL63
 CORONAVIRUS NL63,Coronavirus NL63
 Coronavirus OC43,Coronavirus OC43
+CORONAVIRUS OC43,Coronavirus OC43
 Enterovirus,Rhinovirus/enterovirus
 Flu A,Influenza A
 INFLUENZA A,Influenza A
@@ -19,8 +20,10 @@ INFLUENZA A H1-2009,Influenza A/H1-2009
 Flu A/H1,Influenza A/H1
 Flu A/H3,Influenza A/H3
 INFLUENZA A H3,Influenza A/H3
+INFLUUENZA A H3,Influenza A/H3
 Flu A/H5,Influenza A/H5
 FluB,Influenza B
+INFLUENZA B,Influenza B
 HRE,Rhinovirus/enterovirus
 Human Rhinovirus,Rhinovirus/enterovirus
 Influenza A,Influenza A
@@ -31,10 +34,13 @@ METAPNEUMOVIRUS,Metapneumovirus
 MERS,MERS
 Paraflu 1,Parainfluenza 1
 PARAINFLUENZA TYPE 1,Parainfluenza 1
+PARAINFLUENZA 1,Parainfluenza 1
+PARAINFLUENZA VIRUS 1,Parainfluenza 1
 Paraflu 2,Parainfluenza 2
 PARAINFLUENZA TYPE 2,Parainfluenza 2
 Paraflu 3,Parainfluenza 3
 PARAINFLUENZA TYPE 3,Parainfluenza 3
+PARAINFLUENZA 3,Parainfluenza 3
 Paraflu 4,Parainfluenza 4
 Paraflu 4 ,Parainfluenza 4
 PARAINFLUENZA TYPE 4,Parainfluenza 4
@@ -65,6 +71,7 @@ Bordetella_parapertussis,Bordetella_parapertussis
 Bordetella_pertussis,Bordetella_pertussis
 BORDETELLA PERTUSSIS,Bordetella_pertussis
 Chlamydia_pneumoniae,Chlamydia_pneumoniae
+CHLAMYDIA PNEUMONIAE,Chlamydia_pneumoniae
 Mycoplasmoides_pneumoniae,Mycoplasma_pneumoniae
 MYCOPLASMA PNEUMONIAE,Mycoplasma_pneumoniae
 unmapped,unmapped
