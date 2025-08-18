@@ -56,10 +56,12 @@ def readjust_pass(df, AND_ratio):
 def repopulate_columns(df):
     # repopulate df PC_passes with results from the same Run and barcode if PC_passes is 1
     df['PCs_passed']=df.groupby(['Run', 'barcode'])['PCs_passed'].transform('max')
-
+    df['extraction_date']=pd.to_datetime(df['extraction_date'], format='%d.%m.%Y',errors='coerce')
+    df['collection_date']=pd.to_datetime(df['collection_date'], format='%d.%m.%Y', errors='coerce') 
     for col in ['orthoreovirus', 'zika',	'MS2',	'murine_respirovirus',	
                 'orthoreovirus passed',	'zika passed',	'MS2 passed',	'murine_respirovirus passed',
-                'total sample bases', 'total sample reads', 'PCs_passed', 'PC_PASSES']:
+                'total sample bases', 'total sample reads', 'PCs_passed', 'PC_PASSES', 'FLU_A_POS', 'TOP_FLU_A',
+                'extraction_date','collection_date' ]:
         df[col]=df.groupby(['Run', 'barcode'])[[col]].transform('max')
 
     for col in ['total run bases',	'total run reads']:

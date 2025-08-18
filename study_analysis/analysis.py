@@ -161,7 +161,8 @@ def getMeta(meta, pathogens, pathogens_reduced,biofire,keep_runs):
     metaDF=df.copy()
     # add Negavtive control where pathogen 1 is empty
     metaDF['pathogen_1']=np.where(metaDF['pathogen_1'].isnull(),'Negative control',metaDF['pathogen_1'])
-    metaDF=metaDF.melt(id_vars=['Run','barcode','sample_name','seq_name','Batch','Negative control','test','spiked', 'MS2_spike', 'IC_virus_spike', 'ct_1', 'ct_2','amplification_control','reverse_transcription_control' ],
+    metaDF=metaDF.melt(id_vars=['Run','barcode','sample_name','seq_name','Batch','Negative control','test','spiked', 'MS2_spike', 'IC_virus_spike', 'ct_1', 'ct_2','amplification_control','reverse_transcription_control',
+                                'extraction_date','collection_date' ],
                        value_vars=['pathogen_1','pathogen_2','pathogen_3'],
                        var_name='pathogen number',value_name='pathogen')
     metaDF['pathogen reduced']=metaDF['pathogen'].map(path_dict_reduced)
@@ -213,7 +214,9 @@ def getMeta(meta, pathogens, pathogens_reduced,biofire,keep_runs):
     #keep_runs=['expt10_03072024', 'expt11_150824','expt10A_17072024']
     metaDF=metaDF[metaDF['Run'].isin(keep_runs)]
     
-    cols=['Run','barcode','Batch','seq_name','pathogen reduced','Biofire positive', 'mapQ', 'Negative control','test', 'spiked', 'MS2_spike', 'IC_virus_spike', 'ct_1', 'ct_2','amplification_control', 'reverse_transcription_control']
+    cols=['Run','barcode','Batch','seq_name','pathogen reduced','Biofire positive', 'mapQ',
+           'Negative control','test', 'spiked', 'MS2_spike', 'IC_virus_spike', 'ct_1', 'ct_2','amplification_control', 'reverse_transcription_control',
+           'extraction_date','collection_date' ]
     metaDF=metaDF[cols]
     metaDF.rename(columns={'pathogen reduced':'pathogen'},inplace=True)
 
@@ -601,12 +604,16 @@ def adjust_gold_standard(df):
     '''Create a new column with the gold standard
     change the Influnza subtypes gold standard to 1 if Influnza A positive and sequencing maps to Influenza A'''
     df['gold_standard']=df['Biofire positive']
+
+    flu_A_options=['Influnza A', 'Influenza A','Influenza A','Influenza A/H1-2009','Influenza A/H3','Influenza A/H1']
     
     # FLU_A_POS is 1 if biofire positive for Influenza A for the run and barcode
-    df['condition'] = (df['Biofire positive'] == 1) & (df['pathogen'] == 'Influenza A')
+    df['condition'] = np.where((df['Biofire positive'] == 1) & (df['pathogen_reduced'].isin(flu_A_options)), 1, 0 )
     df['FLU_A_POS'] = df.groupby(['Run', 'barcode'])['condition'].transform('any')
 
-    flu_A_options=['Influnza A','Influenza A/H1-2009','Influenza A/H3','Influenza A/H1']
+
+    # make 'Influenza A' positive if FLU_A_POS is 1
+    df['gold_standard'] = np.where((df['pathogen_reduced'].isin(flu_A_options)) & (df['FLU_A_POS']==1), 1, df['gold_standard'])
 
     filtered_df = df[df['pathogen'].isin(flu_A_options)]
 

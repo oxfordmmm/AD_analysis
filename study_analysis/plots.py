@@ -123,7 +123,8 @@ run_order = {'AD_winter_study_201224':1,
              'AD_winter_study_160725':6,
              'AD_winter_study_220725':7,
              'AD_winter_study_240725':8,
-             'AD_winter_study_300725':9
+             'AD_winter_study_300725':9,
+             'AD_winter_study_010825':10,
   }  # Define the order of runs
 
 g1['Run_order'] = g1['Run'].map(run_order)  # Map the run names to their order
@@ -175,34 +176,24 @@ g1['Failed PCs'] = g1['all_gold_standard_count'] - (g1['passed'] + g1['Failed cr
 print(g1)
 g1.drop(columns=['gold_standard_count','all_gold_standard_count'], inplace=True)
 print(g1)
+print(g1.index)
 
-# Sort the DataFrame by list of run names
-run_order = {'AD_winter_study_201224':1,
-             'AD_winter_study_220125':2,
-             'AD_winter_study_070325':3,
-             'AD_winter_study_170325':4,
-             'AD_winter_study_100425':5,
-             'AD_winter_study_160725':6,
-             'AD_winter_study_220725':7,
-             'AD_winter_study_240725':8
-  }  # Define the order of runs
+# remove 'unmapped' row if it exists
+g1= g1[g1['pathogen'] != 'unmapped']
 
-#g1['Run_order'] = g1['Run'].map(run_order)  # Map the run names to their order
-#g1 = g1.sort_values(by=['Run_order', 'Batch'])  # Sort by Run order and Batch
-#g1 = g1.drop(columns=['Run_order'])  # Drop the temporary Run_order column
+g1 = g1.set_index(groups)
 
 # plot stack bar plot of gold_standard and pass
-g1 = g1.set_index(groups)
 g1.plot(kind='bar', stacked=True, 
         figsize=(10, 6))
 # make y scale full integers
 #plt.ylim(0, g1['passed'].max())  # Adjust the y-axis limit for better visibility
-plt.title('Gold Standard vs Pass Counts by Run, Batch and pathogen')
+plt.title('Gold Standard vs Pass Counts by pathogen')
 plt.xlabel('pathogen')
 plt.ylabel('Pathogen Count')
 plt.xticks(rotation=90)
 plt.tight_layout()
-plt.savefig('gold_standard_vs_pass_counts_by_run_and_batch_and_pathogen_PCs_passed.pdf')
+plt.savefig('pathogoen_pass_fails.pdf')
 plt.clf()
 
 print(g1['passed'].sum())
@@ -211,3 +202,37 @@ print(g1['Failed PCs'].sum())
 
 g1['sensitivity'] = g1['passed'] / (g1['passed'] + g1['Failed criteria'])
 print(g1)
+
+
+# plot gold_standard pathogen counts by run and batch
+g1 = df.groupby(['Run', 'Batch', 'pathogen'])[['gold_standard']].sum().reset_index()
+g1 = g1.set_index(['Run', 'Batch', 'pathogen'])
+
+g1 = g1.unstack(level='pathogen')
+
+g1.columns = g1.columns.droplevel(0)  # Drop the top level of the MultiIndex
+g1 = g1.fillna(0)  # Fill NaN values with 0
+#g1.reset_index(inplace=True)  # Reset index to make it easier to plot
+# sort dataframe by first index in MultiIndex by run_order
+g1['Run_order'] = g1.index.get_level_values('Run').map(run_order)  # Map the run names to their order
+g1 = g1.sort_values(by='Run_order')  # Sort by Run order
+g1 = g1.drop(columns=['Run_order'])  # Drop the temporary Run_order column      
+# drop 'unmapped' column if it exists
+if 'unmapped' in g1.columns:
+    g1 = g1.drop(columns=['unmapped'])
+# drop empty columns
+g1 = g1.loc[:, (g1 != 0).any(axis=0)]
+
+print(g1)
+g1.plot(kind='bar', stacked=True, 
+        colormap='tab20',  # Use a colormap for better color differentiation
+        figsize=(10, 6))
+plt.title('Gold Standard Pathogen Counts by Run and Batch')
+plt.xlabel('Run and Batch')
+plt.ylabel('Pathogen Count')
+plt.xticks(rotation=90)
+# move legend outside of plot
+plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
+plt.tight_layout()
+plt.savefig('gold_standard_pathogen_counts_by_run_and_batch.pdf')
+plt.clf()
