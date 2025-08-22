@@ -125,6 +125,7 @@ run_order = {'AD_winter_study_201224':1,
              'AD_winter_study_240725':8,
              'AD_winter_study_300725':9,
              'AD_winter_study_010825':10,
+             'AD_winter_study_130825_rpt050825':11
   }  # Define the order of runs
 
 g1['Run_order'] = g1['Run'].map(run_order)  # Map the run names to their order
