@@ -27,4 +27,5 @@ g=g.set_index(pathogens)['count']
 up.plot(g, show_counts=True)
 #plt.show()
 plt.savefig('spikes_upset_plot.pdf')
+plt.savefig('spikes_upset_plot.svg')
 

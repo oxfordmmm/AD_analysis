@@ -29,4 +29,5 @@ g=g.set_index(pass_types)['count']
 up.plot(g, show_counts=True)
 #plt.show()
 plt.savefig('pass_upset_plot.pdf')
+plt.savefig('pass_upset_plot.svg')
 

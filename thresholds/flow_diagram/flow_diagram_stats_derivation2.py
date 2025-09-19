@@ -107,10 +107,18 @@ bf=df[df['test_type']=='BIOFIRE']
 bf=bf.drop_duplicates(subset=['Run', 'barcode'])
 ac=df[df['test_type'].isin(['ALINITY', 'CEPHEID'])]
 ac=ac.drop_duplicates(subset=['Run', 'barcode'])
+cf=df[df['test_type'].isin(['CEPHEID'])]
+cf=cf.drop_duplicates(subset=['Run', 'barcode'])
+al=df[df['test_type'].isin(['ALINITY'])]
+al=al.drop_duplicates(subset=['Run', 'barcode'])
 total_samples=bf.shape[0]+ac.shape[0]
 print(f'Total number of samples X: {total_samples}')
 print('Number of Biofire samples Yb:', bf.shape[0])
 print('Number of Alinity Cepheid samples Yc:', ac.shape[0])
+print('Number of Cepheid samples:', cf.shape[0])
+print('Number of Alinity samples:', al.shape[0])
+
+
 unique_runs=df['Run'].nunique()
 print('Total number of runs R:', unique_runs )
 unique_batches=len(df.drop_duplicates(['Run','Batch']).index)
@@ -143,6 +151,7 @@ if len(df_negs_pass)>0:
     unique_batches=len(df_negs_pass.drop_duplicates(['Run','Batch'], keep='first').index)
     print(f'Batches that failed negative controls but passed run/sample controls:xB {unique_batches}')
     failedruns=list(df_negs_pass['Run'].unique())
+    print('Run names failed negative controls but passed run/sample controls:', failedruns)
     df_failed_negs=df[df['Run'].isin(failedruns)]
     df_failed_negs=df_failed_negs.copy()
     df_failed_negs.drop_duplicates(subset=['Run', 'barcode'], keep='first', inplace=True)
@@ -329,6 +338,8 @@ print(f'Total xS samples passing gold standard: {df10.shape[0]} ({df10.shape[0]/
 
 # Count the number of samples where pass is 0 and gold_standard is 0
 df11=df4[(df4['pass']!='True') & (df4['gold_standard']==0) & (df4['pathogen']!='unmapped')]
+fp=df4[(df4['pass']=='True') & (df4['gold_standard']==0) & (df4['pathogen']!='unmapped')]
+fp.to_csv('false_positives.csv', index=False)
 print(f'Total x samples not identified by cMG xf: {df11.shape[0]} ({df11.shape[0]/df9.shape[0]*100}%)')
 #print(f'Percentage of samples not passing gold standard: {df11.shape[0]/df9.shape[0]*100}%')
 

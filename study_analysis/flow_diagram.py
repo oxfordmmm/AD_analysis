@@ -27,6 +27,14 @@ biorifre_organisms=['Adenovirus',
 'Chlamydia_pneumoniae',
 'Mycoplasma_pneumoniae']
 
+DNA_orgs=['Adenovirus',
+'Bordetella_parapertussis',
+'Bordetella_pertussis',
+'Chlamydia_pneumoniae',
+'Mycoplasma_pneumoniae']
+
+HRE_orgs=['Rhinovirus/enterovirus']
+          
 alinity_cephid_organisms=['Influenza A', 'Influenza B', 'RSV', 'SARS-CoV-2']
 
 biofire_additional=[org for org in biorifre_organisms if org not in alinity_cephid_organisms]
@@ -88,7 +96,7 @@ def get_additional_yield(df):
 def remove_biofire_additional(df):
     # remove biofire tests from alinity cephid
     df_full=df.copy()
-    df=df[ ~((df['pathogen'].isin(biofire_additional)) & (df['test'].isin(['ALINITY','ALINTY', 'CEPHEID']))) ]
+    df=df[ ~((df['pathogen'].isin(biofire_additional)) & (df['test'].isin(['ALINITY','ALINTY', 'CEPHEID']))) ]   
     df=df.copy()
 
     df['pathogen_tests']=df.groupby(['Run', 'barcode'])[['pathogen']].transform('count')
@@ -108,10 +116,16 @@ def count_samples(df, metrics):
     bf=bf.drop_duplicates(subset=['Run', 'barcode'])
     ac=df[df['test_type'].isin(['ALINITY','ALINTY', 'CEPHEID'])]
     ac=ac.drop_duplicates(subset=['Run', 'barcode'])
+    cf=df[df['test_type'].isin(['CEPHEID'])]
+    cf=cf.drop_duplicates(subset=['Run', 'barcode'])
+    al=df[df['test_type'].isin(['ALINITY','ALINTY'])]
+    al=al.drop_duplicates(subset=['Run', 'barcode'])
     total_samples=bf.shape[0]+ac.shape[0]
     print(f'Total number of samples X: {total_samples}')
     print('Number of Biofire samples Yb:', bf.shape[0])
     print('Number of Alinity Cepheid samples Yc:', ac.shape[0])
+    print('Number of Cepheid samples Ycc:', cf.shape[0])
+    print('Number of Alinity samples Yca:', al.shape[0])
     unique_runs=df['Run'].nunique()
     print('Total number of runs R:', unique_runs )
     unique_batches=len(df.drop_duplicates(['Run','Batch']).index)
@@ -525,6 +539,12 @@ def count_full_passing_samples(df4,df_full, metrics, AND_ratio):
 
 def run_analysis(AND_ratio=0.1, AND_ratio_metric='Sample_reads_percent_of_refs_AuG_truc10'):
     df=pd.read_csv('biofire_results_merged.csv')
+
+    # remove DNA pathogens 
+    #df=df[df['pathogen'].isin(DNA_orgs)==False]
+    # remove HRE pathogens
+    #df=df[df['pathogen'].isin(HRE_orgs)==False]
+
     metrics={'AND_ratio': AND_ratio}
 
     df=readjust_pass(df, AND_ratio, AND_ratio_metric=AND_ratio_metric)
