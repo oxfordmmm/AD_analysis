@@ -1,0 +1,5 @@
+fpr,tpr,thresholds,sensitivity,specificity,1-specificity,Youden J statistic,metric
+0.0,0.0,2.0,0.0,1.0,0.0,0.0,Sample_reads_percent_of_type_sample
+0.0,0.07017543859649122,1.0,0.07017543859649122,1.0,0.0,0.07017543859649122,Sample_reads_percent_of_type_sample
+0.0,0.25146198830409355,0.4043940397036267,0.25146198830409355,1.0,0.0,0.2514619883040936,Sample_reads_percent_of_type_sample
+1.0,1.0,0.28368865055948117,1.0,0.0,1.0,0.0,Sample_reads_percent_of_type_sample

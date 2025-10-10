@@ -166,26 +166,33 @@ workflow {
             }
             .groupTuple(by: [0,1])
 
+    fqs=Channel.fromPath("$params.fastqs/**/*.fastq.gz")
+            .map {it ->
+                tuple(it.getParent().getName(),it.baseName, it)
+            }
+            .groupTuple(by: [0,1])
+            .view()
+
     illumina_fastqs=Channel.fromFilePairs("$params.illuminafastqs/*{1,2}.fq.gz")
         .map{it -> tuple(it[0], it[1][0], it[1][1])}
         .view()
 
 
-    //meta_pathogens = Channel.fromPath(params.meta_pathogens)
+    meta_pathogens = Channel.fromPath(params.meta_pathogens)
  
     //fqs=JOIN_FQS(illumina_fastqs)
 
-    fqs=CAT_FASTQS(fastqs)
+    //fqs=CAT_FASTQS(fastqs)
 
-    //KRAKEN2SERVER(fqs)
+    KRAKEN2SERVER(fqs)
 
-    KRAKEN2(fqs)
+    //KRAKEN2(fqs)
 
-    //EXTRACT_RESULTS(KRAKEN2SERVER.out.reports)
+    EXTRACT_RESULTS(KRAKEN2SERVER.out.reports)
 
-    //results=EXTRACT_RESULTS.out.tsv
-    //    .collect()
+    results=EXTRACT_RESULTS.out.tsv
+        .collect()
 
-    //COMPILE_RESULTS(results, meta_pathogens)
+    COMPILE_RESULTS(results, meta_pathogens)
 
 }

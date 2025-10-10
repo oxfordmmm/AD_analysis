@@ -31,6 +31,8 @@ def clean_df(df):
     df.reset_index(inplace=True)
     df['run']=df['run'].str.replace('.sup_barcodes_sup_fastq','')
     df['barcode']=df['barcode'].str.replace('SQK-RBK114-96_barcode','')
+    df['barcode']=df['barcode'].str.replace('barcode','')
+    df['barcode']=df['barcode'].str.replace('.fastq','')
     df['barcode']=df['barcode'].str.replace('unclassified','0')
     df=df[df['run']!='basecalled_fastq']
     df['barcode']=df['barcode'].astype(int)
@@ -52,8 +54,12 @@ def run(args):
     if args.meta:
         meta=pd.read_csv(args.meta)
         meta['barcode']=meta['barcode'].astype(int)
-        df2=df2.merge(meta, left_on=['run','barcode'], right_on=['Run','barcode'])
-        df2=df2[index_cols+meta_cols+pathogens]
+        df2=df2.merge(meta, on=['run','barcode'])
+        #df2=df2[index_cols+meta_cols+pathogens]
+        df2['barcode used'] = np.where(df2['barcode used'].isna(), False, df2['barcode used'])
+        #df2=df2[index_cols+pathogens]
+        
+
     df2.to_csv(args.output)
 
 if __name__ == '__main__':

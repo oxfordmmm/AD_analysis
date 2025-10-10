@@ -55,6 +55,7 @@ def getDataFrame(input):
     df=pd.concat(dfs)
     # remove SQK-RBK114-96_barcode from Sample name
     df['Sample name']=df['Sample name'].str.replace('SQK-RBK114-96_barcode','')
+    df['Sample name']=df['Sample name'].str.replace('barcode','')
     # remove unclassified samples and nan
     df=df[df['Sample name']!='unclassified']
     df=df[~df['Sample name'].isnull()]

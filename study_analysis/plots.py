@@ -249,7 +249,23 @@ def plot_sensitivity_by_pathogen(df_original):
     print(g1)
 
 
-def get_pathogen_sensistivity_data(df_original):
+def get_CI(df, set=None):
+    # calculate 95% confidence intervals for sensitivity
+    from statsmodels.stats.proportion import proportion_confint
+    df = df.copy()
+    df['sensitivity'] = (df['passed'] / (df['passed'] + df['Failed criteria']))*100
+    # using normal approximation method
+    ci_lower, ci_upper = proportion_confint(df['passed'], df['passed'] + df['Failed criteria'], alpha=0.05, method='normal')
+    df['CI lower'] = ci_lower
+    df['CI upper'] = ci_upper
+    print(df)
+    if set:
+        df.to_csv(f'pathogen_sensitivity_CI_{set}.csv')
+    else:
+        df.to_csv('pathogen_sensitivity_CI.csv')
+    #return df
+
+def get_pathogen_sensistivity_data(df_original, set=None):
     groups=['pathogen']
     df = df_original.copy()  # Use the original DataFrame for grouping
     g0=df.groupby(groups)[['gold_standard']].sum().reset_index()
@@ -281,6 +297,9 @@ def get_pathogen_sensistivity_data(df_original):
     g1 = g1.set_index(groups)
     print(g1)
 
+    # save to csv
+    get_CI(g1, set=set)
+
     # convert to long format for plotnine
     g1 = g1.reset_index().melt(id_vars=['pathogen'], var_name='Result', value_name='count')
     return g1
@@ -288,12 +307,12 @@ def get_pathogen_sensistivity_data(df_original):
 def plot_sensitivity_by_pathogen_plotnine(df_original, dfd):
     df_original = df_original.copy()  # Use the original DataFrame for grouping
     df_original= df_original[~((df_original['Run']=='AD_winter_study_220125') & (df_original['Batch']==2))]
-    g1=get_pathogen_sensistivity_data(df_original)
+    g1=get_pathogen_sensistivity_data(df_original, set='Validation')
     g1['Set']='Validation'
     print(g1)
 
     # repeat with derivation set
-    g2=get_pathogen_sensistivity_data(dfd)
+    g2=get_pathogen_sensistivity_data(dfd, set='Derivation')
     g2['Set']='Derivation'
     g1=pd.concat([g1, g2])
 
