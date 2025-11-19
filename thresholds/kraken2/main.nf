@@ -2,6 +2,82 @@
 
 params.fastqs = ''
 params.meta_pathogens="$projectDir/../meta.csv"
+params.method = 'sispa'
+
+process FASTQ_TO_FASTA {
+    //conda "$params.envs/biopython"
+    tag {run + ' ' + barcode}
+
+    input:
+    tuple val(run), val(barcode), path(fastq), val(method)
+
+    output:
+    tuple val(run), val(barcode), path("${barcode}.fasta")
+
+    script:
+    """
+    seqtk seq -a $fastq > ${barcode}.fasta
+    """
+}
+
+/*
+Uses blast to find all locations of the 22bp primer within the reads.
+Returns a tsv where each row is a primer hit
+*/
+process BLASTN {
+    tag {run + ' ' + barcode}
+    //cpus 4
+
+    //conda "$params.envs/blast"
+    //publishDir "$params.output/primer_blast", mode: 'copy', saveAs: { filename -> "${barcode}_${split}_primer_blast.tsv" }
+
+    input:
+    tuple val(run), val(barcode), path(reads)
+    path(query) // This is the sequence you want to search for
+
+    output:
+    tuple val(run), val(barcode), path("${barcode}_blast.tsv") 
+
+    script:
+    """
+    makeblastdb -in ${reads} -title "read db" -dbtype nucl -out read_db -max_file_sz '3.5GB'
+    blastn -task blastn-short -query $query -db read_db -word_size 7 -gapopen 2 -out _blastn.tsv -max_target_seqs 10000000 -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore slen"
+    echo -e "qseqid\tsseqid\tpident\tlength\tmismatch\tgapopen\tqstart\tqend\tsstart\tsend\tevalue\tbitscore\tslen" > ${barcode}_blast.tsv && cat _blastn.tsv >> ${barcode}_blast.tsv
+    """
+}
+
+/*
+Process takes reads and splits into "pseudoreads" based on primer locations.
+
+The script split_by_primer.py, will produce several outputs:
+    - non_primer_reads.fastq: all reads with no primer
+    - primer_reads.fastq: all reads with primer found in them
+    - pseudoreads.fastq: the pseudoreads made from splitting the reads with primer
+    - read_stats.csv: a table with info about every read
+    - report.txt: a short summary of the splitting
+*/
+process PHI_SPLIT_READS_BY_PRIMER {
+    tag {run + ' ' + barcode}
+
+//    conda "$params.envs/biopython"
+    cpus = 1
+
+    input:
+    tuple val(run), val(barcode), path(reads), path(primer_blast)
+
+    output:
+    tuple val(run), val(barcode), path("split_split_reads.fastq"), emit: 'fastq' // This is non-primer reads and pseudoreads together
+    tuple val(run), val(barcode), path("split_read_stats.csv"), emit: 'read_stats'
+
+    script:
+    """
+    #gzip -dc $reads > reads.fastq
+    split_by_primer.py -r $reads -b $primer_blast -o split -m 30
+    
+    #cat ${barcode}_non_primer_reads.fastq ${barcode}_pseudoreads.fastq > ${barcode}_split_reads.fastq
+    cat split_non_primer_reads.fastq split_pseudoreads.fastq > split_split_reads.fastq
+    """
+}
 
 process CAT_FASTQS {
     tag {run + ' ' + barcode}
@@ -115,7 +191,7 @@ process EXTRACT_RESULTS {
     label 'python'
 
     input:
-    tuple val(run), val(barcode), path("${run}_${barcode}_report.txt")
+    tuple val(run), val(barcode), path("${run}_${barcode}_report.txt"), path("seqkit_stats.tsv")
 
     output:
     path("${run}_${barcode}_report.tsv"), emit: tsv
@@ -124,13 +200,32 @@ process EXTRACT_RESULTS {
     """
     extract_results.py -i ${run}_${barcode}_report.txt \
         -o ${run}_${barcode}_report.tsv \
-        -t 463676 147711 44130 518987 641809 211044 335341 47681 2760809 138948 42789 138949 \
-            138951 138950 33757 11224 12730 11216 2560525 162145 11137 277944 186938 2697049 12814 31631 \
-            290028 11520 \
-            11320 12059 11118 10509 \
-            519 520 83558 2104 \
-            351073 64320 3052731 12022\
-        -r $run -b $barcode
+        -t 10508 10509 \
+            11118 11137 290028 277944 31631 2697049 \
+            11308 11320 641809 211044 335341 11520 518987 \
+            12058 12059 147711 147712 463676 138948 138949 138950 138951\
+            11158 12730 2560525 11216 11224 162145 \
+            2842319 12022 2946187 10886 11158 3052731 11050 64320 \
+            351073 3049954 11250 \
+            687329 \
+            519 520 83558 2104 0\
+        -r $run -b $barcode -s seqkit_stats.tsv
+    """
+}
+
+process SEQKIT_STATS {
+    tag {run + ' ' + barcode}
+    publishDir "stats/${run}/", mode: 'copy'
+
+    input:
+    tuple val(run), val(barcode), path("${run}_${barcode}.gz")
+
+    output:
+    tuple val(run), val(barcode), path("${barcode}_seqkit_stats.txt")
+
+    script:
+    """
+    seqkit stats -a -b -T ${run}_${barcode}.gz > ${barcode}_seqkit_stats.txt
     """
 }
 
@@ -171,7 +266,6 @@ workflow {
                 tuple(it.getParent().getName(),it.baseName, it)
             }
             .groupTuple(by: [0,1])
-            .view()
 
     illumina_fastqs=Channel.fromFilePairs("$params.illuminafastqs/*{1,2}.fq.gz")
         .map{it -> tuple(it[0], it[1][0], it[1][1])}
@@ -179,20 +273,52 @@ workflow {
 
 
     meta_pathogens = Channel.fromPath(params.meta_pathogens)
- 
+
+    // split csv file in tuple of just run,method columns. Remove duplicates
+    run_method = meta_pathogens
+        .splitCsv(header:true)
+        .map{ tuple(it['run'], it['method']) }
+        .distinct()
+        .view()
     //fqs=JOIN_FQS(illumina_fastqs)
 
     //fqs=CAT_FASTQS(fastqs)
 
+    fqs.combine(run_method, by:0)
+        .branch{ it -> 
+                sispa_fqs: it[3] == 'sispa'
+                phi_fqs:   it[3] == 'phi' 
+                }.set{fq_by_method}
+
+    
+    read_fastas = FASTQ_TO_FASTA(fq_by_method.phi_fqs)
+    BLASTN(read_fastas, "$params.primer")
+    phi_fqs = fq_by_method
+                .phi_fqs.map{ tuple(it[0], it[1], it[2]) }
+                .combine(BLASTN.out, by:[0,1])
+                //.view()
+
+    PHI_SPLIT_READS_BY_PRIMER(phi_fqs)
+
+    // remove method from sispa fqs
+    sispa_fqs = fq_by_method.sispa_fqs.map{ tuple(it[0], it[1], it[2]) }
+
+    // combine sispa and SPLIT_READS outputs
+    fqs=sispa_fqs.concat(PHI_SPLIT_READS_BY_PRIMER.out.fastq)
+    
     KRAKEN2SERVER(fqs)
 
     //KRAKEN2(fqs)
+    SEQKIT_STATS(fqs)
 
-    EXTRACT_RESULTS(KRAKEN2SERVER.out.reports)
+    EXTRACT_RESULTS(KRAKEN2SERVER.out.reports.combine(SEQKIT_STATS.out, by:[0,1]))
 
-    results=EXTRACT_RESULTS.out.tsv
+    results=EXTRACT_RESULTS.out.tsv // filter our duplicates if any
+        .unique()
         .collect()
 
     COMPILE_RESULTS(results, meta_pathogens)
+
+    // collectS
 
 }

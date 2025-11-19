@@ -4,20 +4,23 @@ import numpy as np
 import sys
 from argparse import ArgumentParser
 
-pathogens=['Mastadenovirus', 
-    'Coronaviridae', 'Human coronavirus 229E', 'Human coronavirus HKU1', 'Human coronavirus NL63', 'Human coronavirus OC43',
-    'Influenza A virus', 'Influenza A virus (A/California/07/2009(H1N1))', 'Influenza A virus (A/Puerto Rico/8/1934(H1N1))', 'Influenza A virus (A/New York/392/2004(H3N2))',
+pathogens=['Adenoviridae','Mastadenovirus', 
+    'Coronaviridae', 'Human coronavirus 229E', 'Human coronavirus HKU1', 'Human coronavirus NL63', 'Human coronavirus OC43','Severe acute respiratory syndrome coronavirus 2',
+    'Orthomyxoviridae', 'Influenza A virus', 'Influenza A virus (A/California/07/2009(H1N1))', 
+    'Influenza A virus (A/Puerto Rico/8/1934(H1N1))', 'Influenza A virus (A/New York/392/2004(H3N2))',
     'Influenza B virus', 'Influenza B virus (B/Lee/1940)',
-    'Enterovirus', 
+    'Picornaviridae','Enterovirus', 'Rhinovirus A', 'Rhinovirus B', 'Rhinovirus C', 'Enterovirus A', 'Enterovirus B', 'Enterovirus C', 'Enterovirus D',
+    'Paramyxoviridae', 'Human respirovirus 1','Human orthorubulavirus 2','Human respirovirus 3','Human parainfluenza virus 4a',
+    'Orthopneumovirus hominis', 'human respiratory syncytial virus',
     'Human metapneumovirus',
-    'Human respirovirus 1','Human orthorubulavirus 2','Human respirovirus 3','Human parainfluenza virus 4a',
-    'Respiratory syncytial virus',
-    'Severe acute respiratory syndrome coronavirus 2',
-    'Bordetella parapertussis', 'Bordetella pertussis', 'Chlamydia pneumoniae', 'Mycoplasmoides pneumoniae',
-    'Escherichia phage MS2', 'Mammalian orthoreovirus','Respirovirus muris', 'Zika virus' ]
+    'Fiersviridae','Escherichia phage MS2', 
+    'Spinareoviridae', 'Mammalian orthoreovirus', 
+    'Paramyxoviridae', 'Respirovirus muris', 'Flaviviridae', 'Zika virus',
+    'Anelloviridae',
+    'Bordetella parapertussis', 'Bordetella pertussis', 'Chlamydia pneumoniae', 'Mycoplasmoides pneumoniae', 'unclassified']
 
-index_cols=['run','barcode']
-meta_cols=['sample_name', 'seq_name', 'pathogen 1', 'pathogen 2', 'pathogen 3']
+index_cols=['run','barcode', 'num_seqs', 'sum_len', 'avg_len', 'Q1', 'Q2', 'Q3']
+meta_cols=['sample_name', 'seq_name', 'pathogen 1', 'pathogen 2', 'pathogen 3', 'num_seqs', 'sum_len', 'avg_len']
 
 def read_reports(l):
     dfs=[]
@@ -46,9 +49,9 @@ def clean_df(df):
 
 def run(args):
     df=read_reports(args.input)
-    cols=['run','barcode','Scientific Name','Clades']
+    cols=['run','barcode','Scientific Name','Clades','num_seqs', 'sum_len', 'avg_len','Q1', 'Q2', 'Q3']
     df2=df[cols]
-    df2=df2.pivot(index=['run','barcode'],columns='Scientific Name',values='Clades')
+    df2=df2.pivot(index=['run','barcode','num_seqs', 'sum_len', 'avg_len','Q1', 'Q2', 'Q3'],columns='Scientific Name',values='Clades')
     df2=clean_df(df2)
 
     if args.meta:

@@ -108,4 +108,11 @@ print(f'Number of unique samples with more than one pathogen: {len(df2[df2["num_
 # caluclate number of tests per sample
 df['num tests'] = df[['Alinity', 'Ceipheid', 'BioFire']].sum(axis=1)
 
+# Add test_type column
+df['test_type'] = np.where(df['Alinity'] == 1, 'ALINITY',None)
+df['test_type'] = np.where(df['Ceipheid'] == 1, 'CEPHEID', df['test_type'])
+df['test_type'] = np.where(df['BioFire'] == 1, 'BIOFIRE', df['test_type'])
+
+# export to csv
 df.to_csv('count_samples_expanded.csv', index=False)
+df[['Run', 'barcode', 'test_type']].to_csv('derivation_test_types.csv', index=False)

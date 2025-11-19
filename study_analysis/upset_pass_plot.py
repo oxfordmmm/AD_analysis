@@ -5,7 +5,8 @@ import matplotlib.pyplot as plt
 import sys
 
 df=df=pd.read_csv(sys.argv[1])
-df=df[df['test_type'].isin(['BIOFIRE','ALINITY', 'CEPHEID'])]
+#df=df[df['test_type'].isin(['BIOFIRE','ALINITY','ALINTY' 'CEPHEID'])]
+#df=df[df['test_type'].isin(['BIOFIRE','ALINITY','ALINTY' 'CEPHEID'])]
 df=df[(df['MS2_spike'] != 0) & (df['IC_virus_spike']!=0)]
 df=df[df['PCs_passed']==1]
 df=df[df['gold_standard']==1]

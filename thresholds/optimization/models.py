@@ -44,7 +44,7 @@ range_values={'AuG_trunc10': 0.001,
              'Sample_reads_percent_of_run': 0.00001, 
              'Sample_reads_percent_of_refs': 0.001, 
              'Sample_reads_percent_of_type_run': 0.001, 
-             'Sample_reads_percent_of_type_sample': 0.1, 
+             'Sample_reads_percent_of_type_sample': 0.01, 
              'mean_read_length': 1, 
              'mean_aligned_length': 1,
              'AuG_trunc10_Sample_reads_percent_of_refs': 0.01,
@@ -78,7 +78,7 @@ round_values={'AuG_trunc10': 0.001,
              'Sample_reads_percent_of_run': 0.00001, 
              'Sample_reads_percent_of_refs': 0.001, 
              'Sample_reads_percent_of_type_run': 0.001, 
-             'Sample_reads_percent_of_type_sample': 0.1, 
+             'Sample_reads_percent_of_type_sample': 0.01, 
              'mean_read_length': 5, 
              'mean_aligned_length': 5,
              'AuG_trunc10_Sample_reads_percent_of_refs': 0.01,
@@ -239,6 +239,9 @@ def run_logit(df, metric):
     df2['logit ROC AUC']=logit_roc_auc
     df2.to_csv(f'roc_data/roc_data_{metric}.csv', index=False)
 
+    # remove rows where tpr and fpr are both 0
+    df2=df2[~((df2['tpr']==0) & (df2['fpr']==0))]
+
     # calculate threshold for max Youden J statistic
     max_J = df2[df2['Youden J statistic']==df2['Youden J statistic'].max()]
     threshold=max_J['thresholds'].values[0]
@@ -354,7 +357,7 @@ def makeFolders():
         else:
             print(f'Folder {folder} already exists')
 
-def run(input_file, set_type, remove_no_reads, use_metrics=False):
+def run(input_file, set_type, remove_no_reads, use_metrics=False, negatives_meta_file=None):
     # make some folders
     makeFolders()
     # Step 1: Load data
@@ -371,6 +374,21 @@ def run(input_file, set_type, remove_no_reads, use_metrics=False):
         # Step 1.1: Remove Flu A with no biofire from gold standard
         flu_A_types=['Influenza A/H1', 'Influenza A/H1-2009', 'Influenza A/H3']
         df=df[~((df['pathogen'].isin(flu_A_types)) & (df['Biofire positive']==0))]
+
+        # add in negative meta
+        negative_meta=pd.read_csv(negatives_meta_file)
+        df=df.merge(negative_meta, on=['Run', 'barcode'], how='left')
+        print('Merged negative meta data')
+        print(df[['Run', 'barcode', 'spiked']])
+        df_negs=df[df['spiked']==0]
+        df_negs=df_negs[df_negs['pathogen']!='unmapped']
+        print(df_negs[['Run', 'barcode', 'spiked']])
+        df_negs_pass=df_negs[df_negs['sample num reads']>1]
+        if len(df_negs_pass)>0:
+            failedruns=list(df_negs_pass['Run'].unique())
+            print(f'Runs that failed negative controls: {failedruns}')
+            # remove rows where negative controls failed
+            df=df[~df['Run'].isin(failedruns)]
         
         # Step 1.2: remove rows where biofire wasn't run.    
         df_PCR=pd.read_csv('pcr_organisms.csv')
@@ -456,20 +474,23 @@ def run(input_file, set_type, remove_no_reads, use_metrics=False):
     nsamples=df.groupby(['Run', 'barcode'])[['pathogen']].nunique()
     print(f'Number of unique samples not inc negs: {len(nsamples)}')
 
-    # remove 010524_Expt9_SISPA_Daisy that failed negative controls but passed run/sample controls
-    df=df[~(df['Run']=='010524_Expt9_SISPA_Daisy')]
+    # remove 010524_Expt9_SISPA_Daisy and 010524_Expt9_SISPA_Kate that failed negative controls but passed run/sample controls
+    #df=df[~(df['Run'].isin(['010524_Expt9_SISPA_Daisy','010524_Expt9_SISPA_Kate']))]
+    
     # count number of samples that failed PCs
     n_failed_PCs=df[df['PCs_passed']==0][['Run', 'barcode']].drop_duplicates()
     print(f'Number of samples that failed PCs: {len(n_failed_PCs)}')
     #print(n_failed_PCs)
     # remove rows where PCs failed
     df=df[df['PCs_passed']>0]
-    df.to_csv('train_data_PCs_passed.csv', index=False)
 
     # if remove_no_reads is True then remove rows where sample num reads = 0
     if remove_no_reads:
         df=df[df['sample num reads']>0]
         print(f'Removed samples with no reads, new number of samples: {len(df.groupby(["Run", "barcode"])["pathogen"].nunique())}')
+
+    df.to_csv('train_data_PCs_passed.csv', index=False)
+
 
     # print number of unique samples
     nsamples=df.groupby(['Run', 'barcode'])[['pathogen']].nunique()
@@ -533,7 +554,8 @@ if __name__ == "__main__":
     parser.add_argument("--set", type=str, default="derivation", help="derivation or validation set")
     parser.add_argument("--remove_no_reads", type=bool, default=False, help="Remove samples with no reads")
     parser.add_argument("--use_metrics", type=bool, default=False, help="Use specific metrics")
+    parser.add_argument("--negatives_meta_file", type=str, default=None, help="Path to negatives meta CSV file")
 
     args = parser.parse_args()
 
-    run(args.input_file, args.set, args.remove_no_reads, use_metrics=args.use_metrics)
+    run(args.input_file, args.set, args.remove_no_reads, use_metrics=args.use_metrics, negatives_meta_file=args.negatives_meta_file)

@@ -564,14 +564,16 @@ def count_full_passing_samples(df4,df_full, metrics, AND_ratio):
 
     return metrics
 
-def run_analysis(AND_ratio=0.1, AND_ratio_metric='Sample_reads_percent_of_refs_AuG_truc10'):
+def run_analysis(AND_ratio=0.1, AND_ratio_metric='Sample_reads_percent_of_refs_AuG_truc10', organisms='biofire_set'):
     df=pd.read_csv('biofire_results_merged.csv')
 
     # remove DNA pathogens 
-    #df=df[df['pathogen'].isin(DNA_orgs)==False]
+    if 'no_DNA' in organisms:
+        df=df[df['pathogen'].isin(DNA_orgs)==False]
     # remove HRE pathogens
-    #df=df[df['pathogen'].isin(HRE_orgs)==False]
-
+    if 'no_HRE' in organisms:
+        df=df[df['pathogen'].isin(HRE_orgs)==False]
+    
     metrics={'AND_ratio': AND_ratio}
 
     df=readjust_pass(df, AND_ratio, AND_ratio_metric=AND_ratio_metric)
@@ -618,7 +620,8 @@ if __name__ == '__main__':
     argparse=argparse.ArgumentParser(description='Run Biofire analysis with different AND ratios')
     argparse.add_argument('--AND_ratio_metric', type=str, default='Sample_reads_percent_of_refs_AuG_truc10',
                           help='metric used for calculating AND ratio')
-
+    argparse.add_argument('--organisms', type=str, nargs='+', default='biofire_set',
+                          help='set of organisms to include in the analysis: biofire_set, no_DNA, no_HRE')
     args=argparse.parse_args()
 
     metrics=[]
@@ -630,7 +633,7 @@ if __name__ == '__main__':
     ratios=[0.1, 0.03]
     for ratio in ratios:
         print(f'Running analysis with AND_ratio={ratio}')
-        metrics.append(run_analysis(AND_ratio=ratio, AND_ratio_metric=args.AND_ratio_metric))
+        metrics.append(run_analysis(AND_ratio=ratio, AND_ratio_metric=args.AND_ratio_metric, organisms=args.organisms))
     #metrics.append(run_analysis(AND_ratio=0.1))
     #metrics.append(run_analysis(AND_ratio=0.0))
 

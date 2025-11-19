@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import sys
 
 df=df=pd.read_csv(sys.argv[1])
-df=df[df['test_type'].isin(['BIOFIRE','ALINITY', 'CEPHEID'])]
+df=df[df['test_type'].isin(['BIOFIRE','ALINITY','ALINTY', 'CEPHEID'])]
 cols=['Run', 'barcode','MS2_spike',	'IC_virus_spike', 'orthoreovirus passed',	'zika passed',	'MS2 passed',	'murine_respirovirus passed']
 df=df[cols]
 df.drop_duplicates(inplace=True, keep='first')
