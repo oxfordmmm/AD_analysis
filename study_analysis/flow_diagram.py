@@ -81,7 +81,7 @@ def repopulate_columns(df):
     for col in ['orthoreovirus', 'zika',	'MS2',	'murine_respirovirus',	
                 'orthoreovirus passed',	'zika passed',	'MS2 passed',	'murine_respirovirus passed',
                 'total sample bases', 'total sample reads', 'PCs_passed', 'PC_PASSES', 'FLU_A_POS', 
-                'extraction_date','collection_date' ]:
+                'extraction_date','collection_date', 'amplification_control' ]:
         df[col]=df.groupby(['Run', 'barcode'])[[col]].transform('max')
 
     for col in ['total run bases',	'total run reads']:
@@ -172,8 +172,8 @@ def count_failed_runs_samples(df, metrics):
     dfSunique=dfSF.drop_duplicates(subset=['Run', 'barcode'])
     dfSunique=dfSunique[dfSunique['test_type'].isin(['BIOFIRE','BIOFIRE ', 'ALINITY','ALINTY', 'CEPHEID'])]
     print(f'Number of samples with total sample reads lower than {min_reads:,} xS: {dfSunique.shape[0]}')
-    df=df[df['total sample reads']>=min_reads]
-    dfSunique=df.drop_duplicates(subset=['Run', 'barcode'])
+    df2=df[(df['total sample reads']>=min_reads) | (df['amplification_control']==1) | (df['reverse_transcription_control']==1)] # to keep batch controls
+    dfSunique=df2.drop_duplicates(subset=['Run', 'barcode'])
     dfSunique=dfSunique[dfSunique['test_type'].isin(['BIOFIRE','BIOFIRE ', 'ALINITY','ALINTY', 'CEPHEID'])]
 
     print(f'Number of samples with total sample reads higher than {min_reads:,} X2: {dfSunique.shape[0]}')

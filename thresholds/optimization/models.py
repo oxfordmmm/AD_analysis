@@ -241,6 +241,8 @@ def run_logit(df, metric):
 
     # remove rows where tpr and fpr are both 0
     df2=df2[~((df2['tpr']==0) & (df2['fpr']==0))]
+    # remove rows where tpr and fpr are both 1
+    #df2=df2[~((df2['tpr']==1) & (df2['fpr']==1))]
 
     # calculate threshold for max Youden J statistic
     max_J = df2[df2['Youden J statistic']==df2['Youden J statistic'].max()]
@@ -476,6 +478,7 @@ def run(input_file, set_type, remove_no_reads, use_metrics=False, negatives_meta
 
     # remove 010524_Expt9_SISPA_Daisy and 010524_Expt9_SISPA_Kate that failed negative controls but passed run/sample controls
     #df=df[~(df['Run'].isin(['010524_Expt9_SISPA_Daisy','010524_Expt9_SISPA_Kate']))]
+    #df=df[~(df['Run'].isin(['010524_Expt9_SISPA_Kate']))]
     
     # count number of samples that failed PCs
     n_failed_PCs=df[df['PCs_passed']==0][['Run', 'barcode']].drop_duplicates()
@@ -489,6 +492,9 @@ def run(input_file, set_type, remove_no_reads, use_metrics=False, negatives_meta
         df=df[df['sample num reads']>0]
         print(f'Removed samples with no reads, new number of samples: {len(df.groupby(["Run", "barcode"])["pathogen"].nunique())}')
 
+    # remore unmapped rows
+    df=df[df['pathogen']!='unmapped']
+    # save data
     df.to_csv('train_data_PCs_passed.csv', index=False)
 
 

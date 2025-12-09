@@ -21,13 +21,23 @@ df=df[cols]
 
 # group to generate counts
 pass_types=[ 'OR pass',	'AND ratio pass',	'2 reads pass']
+# rename pass types for plotting
+pt_rename={'OR pass':'Main criteria (Table 2)', 
+           'AND ratio pass':'Ratio criteria (Table 2)', 
+           '2 reads pass':'>=2 reads'}
+df.rename(columns=pt_rename, inplace=True)
+pass_types=[pt_rename[pt] for pt in pass_types]
+
 g=df.groupby(pass_types).size().reset_index().rename(columns={0:'count'})
+
+
+
 
 # convert g to series
 g=g.set_index(pass_types)['count']
 
 # plot
-up.plot(g, show_counts=True)
+up.plot(g,sort_categories_by='input', show_counts=True)
 #plt.show()
 plt.savefig('pass_upset_plot.pdf')
 

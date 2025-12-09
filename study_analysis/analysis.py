@@ -194,13 +194,16 @@ def getMeta(meta, pathogens, pathogens_reduced,biofire,keep_runs):
             MS2_spike=metaDF[(metaDF['Run']==run) & (metaDF['barcode']==barcode)]['MS2_spike'].unique()[0]
             IC_virus_spike=metaDF[(metaDF['Run']==run) & (metaDF['barcode']==barcode)]['IC_virus_spike'].unique()[0]
             reverse_transcription_control=metaDF[(metaDF['Run']==run) & (metaDF['barcode']==barcode)]['reverse_transcription_control'].unique()[0]
+            amplification_control=metaDF[(metaDF['Run']==run) & (metaDF['barcode']==barcode)]['amplification_control'].unique()[0]
+            collection_date=metaDF[(metaDF['Run']==run) & (metaDF['barcode']==barcode)]['collection_date'].unique()[0]
+            extraction_date=metaDF[(metaDF['Run']==run) & (metaDF['barcode']==barcode)]['extraction_date'].unique()[0]
             missed_pathogens=list(set(biofire_pathogens) - set(pathogens))
             for p in missed_pathogens:
                 for mapQ in mapQs:
                     d={'Run':run,'barcode':barcode,'seq_name':seq_name, 'Batch':Batch, 'Negative control': NC, 'test':test,'spiked':spiked,
                        'MS2_spike': MS2_spike, 'IC_virus_spike': IC_virus_spike,
                        'pathogen number':None,'pathogen':p,'pathogen reduced':p,'Biofire positive':0,'reverse_transcription_control':reverse_transcription_control,
-                       'mapQ':mapQ}
+                       'amplification_control':amplification_control, 'mapQ':mapQ, 'collection_date': collection_date, 'extraction_date': extraction_date}
                     additonal_rows.append(d)
     if len(additonal_rows)>0:
         ar_df=pd.DataFrame(additonal_rows)
