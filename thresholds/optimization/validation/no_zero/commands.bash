@@ -3,4 +3,4 @@ python3 ../../models.py \
 	--set validation \
 	--remove_no_reads True
 
-mv roc_data_all.csv validation_roc_data_all_no_zero.csv
+mv roc_data_all.csv validation_non_zero_roc_data_all.csv

@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
 import matplotlib.patches as mpatches
 from matplotlib.colors import LinearSegmentedColormap
+import upsetplot as up
 import sys
 import argparse
 from mizani.formatters import label_number, label_comma
@@ -57,6 +58,54 @@ from plotnine import (
     geom_abline,
     annotate,
     element_blank)
+
+ward_generalisation={'C-DC Renal':	'Other_inpatient_adult',
+'C-WD CICU':	'Critical_care',
+'C-WD EPCTU':	'Haematology_oncology',
+'C-WD Haem':	'Haematology_oncology',
+'C-WD OncHaemAmb':	'Haematology_oncology',
+'C-WD OncHTriage':	'Haematology_oncology',
+'C-WD Oncology':	'Haematology_oncology',
+'C-WD Renal':	'Other_inpatient_adult',
+'C-WD Transplant':	'Other_inpatient_adult',
+'C-WD Urology':	'Other_inpatient_adult',
+'H-WD Childrens':	'Other_inpatient_paeds',
+'H-WD EAU':	'Other_inpatient_adult',
+'H-WD Juniper':	'Other_inpatient_adult',
+'H-WD Laburnum':	'Other_inpatient_adult',
+'H-WD Oak HCU':	'Other_inpatient_adult',
+'H-WD Rowan AU':	'Ambulatory_and_ED',
+'H-WD Trauma F':	'Other_inpatient_adult',
+'J-WD 5A':	'Other_inpatient_adult',
+'J-WD 5C-5D':	'Other_inpatient_adult',
+'J-WD Bell-Dray':	'Other_inpatient_paeds',
+'J-WD Child CDU':	'Ambulatory_and_ED',
+'J-WD CMU-A':	'Other_inpatient_adult',
+'J-WD CMU-B':	'Other_inpatient_adult',
+'J-WD CMU-C':	'Other_inpatient_adult',
+'J-WD CritCareL2':	'Critical_care',
+'J-WD EAU':	'Other_inpatient_adult',
+'J-WD ED ORU':	'Ambulatory_and_ED',
+'J-WD KamDaycare':	'Haematology_oncology',
+'J-WD Kamrans':	'Haematology_oncology',
+'J-WD L4 AAU':	'Ambulatory_and_ED',
+'J-WD Maty AU':	'Other_inpatient_adult',
+'J-WD Maty L6':	'Other_inpatient_adult',
+'J-WD Melanies':	'Other_inpatient_paeds',
+'J-WD Neuro Red':	'Other_inpatient_adult',
+'J-WD NeuroPurpl':	'Other_inpatient_adult',
+'J-WD Newborn IC':	'Critical_care',
+'J-WD PCC':	'Critical_care',
+'J-WD Robins':	'Other_inpatient_paeds',
+'J-WD SEU E':	'Other_inpatient_adult',
+'J-WD Toms':	'Other_inpatient_paeds',
+'J-WD Trauma 2A':	'Other_inpatient_adult',
+'J-WD Trauma 3A':	'Other_inpatient_adult',
+'J-WD Ward 5E-5F':	'Other_inpatient_adult',
+'O-WD AHatHome':	'Ambulatory_and_ED',
+'O-WD CHIM':	'Ambulatory_and_ED',
+'V-WD HAHCentral':	'Ambulatory_and_ED',
+'V-WD HAHNorth':	'Ambulatory_and_ED'}
 
 run_order = {'AD_winter_study_201224':1,
                 'AD_winter_study_220125':2,
@@ -167,7 +216,7 @@ def plot_cts_vs_reads():
 def readjust_pass(df):
     df=df.copy()
     # adjust pass column to be 'True' if sample num reads > 50 else 'False'
-    df['pass'] = np.where(df['Sample_reads_percent_of_type_run']>0.03, True, False)
+    df['pass'] = np.where(df['Sample_reads_percent_of_type_run']>=0.037, True, False)
     df['pass'] = np.where(df['sample num reads']<2, False, df['pass'])
     df['pass'] = np.where(df['pathogen']=='unmapped', False, df['pass'])
 
@@ -180,7 +229,8 @@ def remove_failed_runs(df):
     # count number of samples that failed negative controls
     # spike negs
     # This is also called the batch negatice control in the flow diagram
-    df_negs=df[df['amplification_control']==1]
+    df['pass'] = np.where(df['pathogen']=='unmapped', False, df['pass'])
+    df_negs=df[(df['amplification_control']==1) & (df['pathogen']!='unmapped')]
     df_negs_pass=df_negs[(df_negs['pass']==True) | (df_negs['PCs_passed']==1)]
     if len(df_negs_pass)>0:
         unique_batches=len(df_negs_pass.drop_duplicates(['Run','Batch'], keep='first').index)
@@ -654,6 +704,8 @@ def table_3_sensitivity_specificity(df):
     """Calculte sensitivity and specificity for each data validation set with different criteria"""
     # only use clinical samples
     df_original = df.copy()  # Use the original DataFrame for grouping
+    df_original['pass'] = np.where((df_original['pathogen']!='unmapped') & (df_original['2 reads pass']==True) & (df_original['OR pass']==True) & (df_original['AND ratio pass']==True), 1, 0)
+    df_original['pass'] = np.where((df_original['pathogen'].isin(flu_A_pathogens)) & (df_original['TOP_FLU_A']==False), 0, df_original['pass'])
     df_original = remove_failed_runs(df_original)
     df_original['set'] = 'Validation - main criteria'
     
@@ -662,8 +714,12 @@ def table_3_sensitivity_specificity(df):
     df_positive_reads['set'] = 'Validation - main criteria > 0 reads'
 
     # repeat with non null CT values
-    df_original_ct = df_original[df_original['qpcr_ct'].notnull()]
+    df_original_ct = df_original[df_original['qpcr_ct_value'].notnull()]
     df_original_ct['set'] = 'Validation - main criteria non null CT'
+
+    # repeat with Ct < 35
+    df_original_ct35 = df_original[df_original['qpcr_ct_value'] < 35]
+    df_original_ct35['set'] = 'Validation - main criteria CT < 35'
     
     # repeat with readjusted pass
     df_adjusted = readjust_pass(df)
@@ -671,8 +727,12 @@ def table_3_sensitivity_specificity(df):
     df_adjusted['set'] = 'Validation - alternative criteria'
 
     # repeat with non null CT values
-    df_adjusted_ct = df_adjusted[df_adjusted['qpcr_ct'].notnull()]
+    df_adjusted_ct = df_adjusted[df_adjusted['qpcr_ct_value'].notnull()]
     df_adjusted_ct['set'] = 'Validation - alternative criteria non null CT'
+
+    # repeat with Ct < 35
+    df_adjusted_ct35 = df_adjusted[df_adjusted['qpcr_ct_value'] < 35]
+    df_adjusted_ct35['set'] = 'Validation - alternative criteria CT < 35'
     
     # repeat with > 0 sample_num_reads
     df_adjusted_positive_reads = df_adjusted[df_adjusted['sample num reads'] > 0]
@@ -682,9 +742,13 @@ def table_3_sensitivity_specificity(df):
     df_adjusted_rna = df_adjusted[~df_adjusted['pathogen'].isin(dna_pathogens)]
     df_adjusted_rna['set'] = 'Validation - alternative criteria RNA only'
 
-    # repeat with non null CT valies
-    df_adjusted_rna_ct = df_adjusted_rna[df_adjusted_rna['qpcr_ct'].notnull()]
+    # repeat with non null CT values
+    df_adjusted_rna_ct = df_adjusted_rna[df_adjusted_rna['qpcr_ct_value'].notnull()]
     df_adjusted_rna_ct['set'] = 'Validation - alternative criteria RNA only non null CT'
+
+    # repeat with Ct < 35
+    df_adjusted_rna_ct35 = df_adjusted_rna[df_adjusted_rna['qpcr_ct_value'] < 35]
+    df_adjusted_rna_ct35['set'] = 'Validation - alternative criteria RNA only CT < 35'
 
     # repeat with only RNA pathogens > 0 reads
     df_adjusted_rna_positive_reads = df_adjusted_rna[df_adjusted_rna['sample num reads'] > 0]
@@ -695,15 +759,24 @@ def table_3_sensitivity_specificity(df):
     df_adjusted_rna_no_hre['set'] = 'Validation - alternative criteria RNA only without HRE'
 
     # repeat with non null CT values
-    df_adjusted_rna_no_hre_ct = df_adjusted_rna_no_hre[df_adjusted_rna_no_hre['qpcr_ct'].notnull()]
+    df_adjusted_rna_no_hre_ct = df_adjusted_rna_no_hre[df_adjusted_rna_no_hre['qpcr_ct_value'].notnull()]
     df_adjusted_rna_no_hre_ct['set'] = 'Validation - alternative criteria RNA only without HRE non null CT'
+
+    # repeat with Ct < 35
+    df_adjusted_rna_no_hre_ct35 = df_adjusted_rna_no_hre[df_adjusted_rna_no_hre['qpcr_ct_value'] < 35]
+    df_adjusted_rna_no_hre_ct35['set'] = 'Validation - alternative criteria RNA only without HRE CT < 35'
 
     # repeat with only RNA pathogenes without HRE > 0 reads
     df_adjusted_rna_no_hre_positive_reads = df_adjusted_rna_no_hre[df_adjusted_rna_no_hre['sample num reads'] > 0]
     df_adjusted_rna_no_hre_positive_reads['set'] = 'Validation - alternative criteria RNA only without HRE > 0 reads'
 
     # combine datasets
-    df2=pd.concat([df_original, df_positive_reads, df_original_ct, df_adjusted, df_adjusted_ct, df_adjusted_positive_reads, df_adjusted_rna, df_adjusted_rna_ct, df_adjusted_rna_positive_reads, df_adjusted_rna_no_hre, df_adjusted_rna_no_hre_ct, df_adjusted_rna_no_hre_positive_reads])
+    df2=pd.concat([df_original, df_positive_reads, df_original_ct, df_original_ct35, 
+                   df_adjusted, df_adjusted_ct, df_adjusted_positive_reads, df_adjusted_ct35,
+                   df_adjusted_rna, df_adjusted_rna_ct, df_adjusted_rna_positive_reads, 
+                   df_adjusted_rna_no_hre, df_adjusted_rna_no_hre_ct, df_adjusted_rna_no_hre_positive_reads,
+                   df_adjusted_rna_ct35, df_adjusted_rna_no_hre_ct35])
+    
     g1=get_set_sensistivity_data(df2)
     g1.sort_values(by=['sensitivity'], ascending=True, inplace=True)
 
@@ -745,7 +818,19 @@ def table_3_sensitivity_specificity(df):
     df3=df3.merge(df3_ct, on='set')
     df3['Pathogen targets not detected on qPCR*'] = df3['gold_standard_count'] - df3['gold_standard_count_non_null_CT']
 
-    cols=['set', 'Sensitivity (per target)','Pathogen targets not detected on qPCR*','Sensitivity in true-positive targets with non null CT', 'Pathogen targets with 0 mapped reads', 'Sensitivity in true-positive targets with >0 reads', 
+    # get selection of columns for CT < 35 values
+    ct35_sets=['Validation - main criteria CT < 35', 'Validation - alternative criteria CT < 35', 'Validation - alternative criteria RNA only CT < 35', 'Validation - alternative criteria RNA only without HRE CT < 35']
+    df3_ct35=g1[g1['set'].isin(ct35_sets)]
+    df3_ct35=df3_ct35[['set', 'Sensitivity (per target)']]
+    df3_ct35.rename(columns={'Sensitivity (per target)': 'Sensitivity in true-positive targets with CT < 35'}, inplace=True)
+    set_mapper={'Validation - main criteria CT < 35': 'Validation - main criteria',
+                'Validation - alternative criteria CT < 35': 'Validation - alternative criteria',
+                'Validation - alternative criteria RNA only CT < 35': 'Validation - alternative criteria RNA only',
+                'Validation - alternative criteria RNA only without HRE CT < 35': 'Validation - alternative criteria RNA only without HRE'}
+    df3_ct35['set'] = df3_ct35['set'].map(set_mapper)
+    df3=df3.merge(df3_ct35, on='set')
+
+    cols=['set', 'Sensitivity (per target)','Pathogen targets not detected on qPCR*','Sensitivity in true-positive targets with non null CT','Sensitivity in true-positive targets with CT < 35', 'Pathogen targets with 0 mapped reads', 'Sensitivity in true-positive targets with >0 reads', 
     'Sensitivity (per sample)', 'Specificity (per target)',  'False-positive detections', 'Specificity (per sample)']
     df3=df3[cols]
     df3.to_csv('table_3.csv')
@@ -1191,8 +1276,8 @@ def plot_figure_S1(df_original, dfd):
         #+ geom_hline(yintercept=0.4, linetype='dashed', color='blue')
         # + scale_y_discrete(name='Total run reads inc unmapped')
         )
-    p3.save('Figure_S1.pdf', width=10, height=6)
-    p3.save('Figure_S1.svg', width=10, height=6)
+    p3.save('supplemental/Figure_S1.pdf', width=10, height=6)
+    p3.save('supplemental/Figure_S1.svg', width=10, height=6)
 
 def plot_ratios(df, dfd):
     # plot AuG_trunc10 on x axis and Sample_reads_percent_of_refs on y axis with 
@@ -1255,7 +1340,7 @@ def plot_ratios(df, dfd):
     df.to_csv('figure_03_input_data.csv', index=False)
     
     # add sample QC pass/fail based on PCs_passed, and 2 reads pass
-    df['Sample_QC_pass'] = np.where((df['PCs_passed'] == True) & (df['sample num reads'] >= 2), 'Sample QC Pass', 'Sample QC Fail')
+    df['Sample_QC_pass'] = np.where((df['PCs_passed'] == True) & (df['sample num reads'] >= 2) & (df['run_pass']==1), 'Sample QC Pass', 'Sample QC Fail')
 
     # order Sample_QC_pass so that 'Sample QC Fail' comes after 'Sample QC Pass'
     df['Sample_QC_pass'] = pd.Categorical(df['Sample_QC_pass'], categories=['Sample QC Pass', 'Sample QC Fail'], ordered=True)
@@ -1327,7 +1412,7 @@ def plot_alt_ratios(df, dfd):
     #df['pass'] = np.where((df['Sample_reads_percent_of_type_run'] > 0.03) 
     #                      & (df['OR pass']==True) & (df['2 reads pass']==True),
     #                       True, False)
-    df['pass'] = np.where(df['Sample_reads_percent_of_type_run'] > 0.03, True, False)
+    df['pass'] = np.where(df['Sample_reads_percent_of_type_run'] > 0.037, True, False)
     # refilter the Flu that aren't the top flu found
     df=df[~(df['FLU_A_POS']==True)&(df['TOP_FLU_A']==False)]
     #df['pass'] = np.where((df['FLU_A_POS']==True)&(df['TOP_FLU_A']==False), False, df['pass'])
@@ -1345,7 +1430,7 @@ def plot_alt_ratios(df, dfd):
     df=df[~df['pathogen'].isin(['unmapped','unmapped_2'])]
 
     # add sample QC pass/fail based on PCs_passed, and 2 reads pass
-    df['Sample_QC_pass'] = np.where((df['PCs_passed'] == True) & (df['sample num reads'] >= 2), 'Sample QC Pass', 'Sample QC Fail')
+    df['Sample_QC_pass'] = np.where((df['PCs_passed'] == True) & (df['sample num reads'] >= 2) & (df['run_pass']==1), 'Sample QC Pass', 'Sample QC Fail')
 
     # order Sample_QC_pass so that 'Sample QC Fail' comes after 'Sample QC Pass'
     df['Sample_QC_pass'] = pd.Categorical(df['Sample_QC_pass'], categories=['Sample QC Pass', 'Sample QC Fail'], ordered=True)
@@ -1405,8 +1490,8 @@ def plot_alt_ratios(df, dfd):
                        name='Fill color (only if 2 reads pass)') +
      #geom_hline(yintercept=0.007, linetype='dashed', color='grey') +
      geom_vline(xintercept=0.003, linetype='dashed', color='grey') +
-     geom_hline(yintercept=0.03,  color='red') +
-     geom_hline(yintercept=0.003,  color='pink') +
+     geom_hline(yintercept=0.037,  color='red') +
+     #geom_hline(yintercept=0.003,  color='pink') +
      scale_x_log10(limits=(0.001, 10)) +
      scale_y_log10(limits=(0.0001, 100)) +
      facet_grid('Sample_QC_pass ~ Set') +
@@ -1451,8 +1536,8 @@ def plot_alt_ratios(df, dfd):
                         name='Outline color') +
      scale_fill_manual(values=fill_colors,
                        name='Fill color (only if 2 reads pass)') +
-     geom_hline(yintercept=0.03,  color='red') +
-     geom_hline(yintercept=0.003,  color='pink') +
+     geom_hline(yintercept=0.037,  color='red') +
+     #geom_hline(yintercept=0.003,  color='pink') +
      scale_y_log10(limits=(0.0001, 100)) +
      facet_grid('. ~ Set') +
      labs(x='Sample QC pass/fail',
@@ -1460,7 +1545,114 @@ def plot_alt_ratios(df, dfd):
     
     p2.save('supplemental/Figure_S5_swarm.pdf', width=8, height=6)
 
+def upset_pass_plot(df, set='Validation'):
+    df=df[(df['MS2_spike'] != 0) & (df['IC_virus_spike']!=0)]
+    df=df[df['PCs_passed']==1]
+    #if set=='Validation':
+    df=df[df['run_pass']==1]
+    df=df[df['gold_standard']==1]
 
+    #df['QC_pass']=np.where((df['PCs_passed']==1) & (df['run_pass']==1), 1, 0)
+    #cols=['Run', 'barcode', 'OR pass',	'AND ratio pass',	'2 reads pass', 'QC_pass' ]
+    cols=['Run', 'barcode', 'OR pass',	'AND ratio pass',	'2 reads pass' ]
+    df=df[cols]
+
+    # group to generate counts
+    pass_types=[ 'OR pass',	'AND ratio pass',	'2 reads pass' ]
+    # rename pass types for plotting
+    pt_rename={'OR pass':'Main criteria (Table 2)', 
+            'AND ratio pass':'Ratio criteria (Table 2)', 
+            '2 reads pass':'>=2 reads',
+            'PCs_passed':'Passed internal positive controls',
+            'QC_pass':'QC pass'}    
+    df.rename(columns=pt_rename, inplace=True)
+    pass_types=[pt_rename[pt] for pt in pass_types]
+
+    g=df.groupby(pass_types).size().reset_index().rename(columns={0:'count'})
+
+    # convert g to series
+    g=g.set_index(pass_types)['count']
+
+    # plot
+    up.plot(g, sort_categories_by='input', show_counts=True)
+    if set=='Validation':
+        subplot='d'
+    if set=='Derivation':
+        subplot='c'
+    plt.savefig(f'supplemental/Figure_S3{subplot}_pass_upset_plot.pdf')
+    plt.savefig(f'supplemental/Figure_S3{subplot}_pass_upset_plot.svg')
+
+def upset_spiked_plot(df, set='Validation'):
+    df=df[df['test_type'].isin(test_type_normalisation.keys())]
+    # remove run failures
+    df=df[df['run_pass']==1]
+    df=df[(df['run_bases_pass']==True) & (df['sample_reads_pass']==True)]
+
+    cols=['Run', 'barcode','MS2_spike',	'IC_virus_spike', 'orthoreovirus passed',	'zika passed',	'MS2 passed',	'murine_respirovirus passed']
+    df=df[cols]
+    df.drop_duplicates(inplace=True, keep='first')
+
+    # remove spiked == 0
+    df=df[(df['MS2_spike'] != 0) & (df['IC_virus_spike']!=0)]
+
+    # group to generate counts
+    pathogens=[ 'orthoreovirus passed',	'zika passed',	'MS2 passed',	'murine_respirovirus passed']
+    # rename pathogens for plotting
+    pt_rename={'orthoreovirus passed':'Orthoreovirus',
+            'zika passed':'Zika virus',
+            'MS2 passed':'MS2',
+            'murine_respirovirus passed':'Murine respirovirus'}
+    df.rename(columns=pt_rename, inplace=True)
+    pathogens=[pt_rename[pt] for pt in pathogens]
+    g=df.groupby(pathogens).size().reset_index().rename(columns={0:'count'})
+
+    # convert g to series
+    g=g.set_index(pathogens)['count']
+
+    # plot
+    up.plot(g, sort_categories_by='input', show_counts=True)
+    if set=='Validation':
+        subplot='b'
+    if set=='Derivation':
+        subplot='a'
+    plt.savefig(f'supplemental/Figure_S3{subplot}_spikes_upset_plot.pdf')
+    plt.savefig(f'supplemental/Figure_S3{subplot}_spikes_upset_plot.svg')
+
+
+def upset_spiked_stacked_plot(df, set='Validation'):
+    df=df[df['test_type'].isin(test_type_normalisation.keys())]
+
+    df['run_pass']=df['run_pass'].map({True:'QC run pass', False:'QC run fail'})
+
+    cols=['Run', 'barcode','MS2_spike',	'IC_virus_spike', 'orthoreovirus passed',	'zika passed',	'MS2 passed',	'murine_respirovirus passed', 'run_pass']
+    df=df[cols]
+    df.drop_duplicates(inplace=True, keep='first')
+
+    # remove spiked == 0
+    df=df[(df['MS2_spike'] != 0) & (df['IC_virus_spike']!=0)]
+
+    # group to generate counts
+    pathogens=[ 'orthoreovirus passed',	'zika passed',	'MS2 passed',	'murine_respirovirus passed']
+    # rename pathogens for plotting
+    pt_rename={'orthoreovirus passed':'Orthoreovirus',
+            'zika passed':'Zika virus',
+            'MS2 passed':'MS2',
+            'murine_respirovirus passed':'Murine respirovirus'}
+    df.rename(columns=pt_rename, inplace=True)
+    pathogens=[pt_rename[pt] for pt in pathogens]
+    
+    df=df.set_index(df['MS2']==1).set_index(df['Orthoreovirus']==1, append=True).set_index(df['Zika virus']==1, append=True).set_index(df['Murine respirovirus']==1, append=True)
+    
+    # plot
+    upset=up.UpSet(df, sort_categories_by='input', intersection_plot_elements=0, show_counts=True, )
+    upset.add_stacked_bars('run_pass', colors=['black', 'lightgray'], title='Intersection size')
+    upset.plot()
+    if set=='Validation':
+        subplot='b'
+    if set=='Derivation':
+        subplot='a'
+    plt.savefig(f'supplemental/Figure_S3{subplot}_spikes_upset_stacked_plot.pdf')
+    plt.savefig(f'supplemental/Figure_S3{subplot}_spikes_upset_stacked_plot.svg')
 
 def lowess_with_confidence_bounds(
     x, y, eval_x, N=200, conf_interval=0.95, lowess_kw=None
@@ -1685,8 +1877,14 @@ def plot_qPCR(df, qPCR):
                           'CORONAVIRUS NL63': 'Coronavirus NL63',
                           'METAPNEUMOVIRUS': 'Metapneumovirus',
                           'INFLUENZA A': 'Influenza A',
+                          'INFLUENZA B': 'Influenza B',
                           'RHINOVIRUS': 'Rhinovirus/enterovirus',
-                          'ENTEROVIRUS': 'Rhinovirus/enterovirus'}
+                          'ENTEROVIRUS': 'Rhinovirus/enterovirus',
+                          'PARAINFLUENZA VIRUS 1': 'Parainfluenza 1',
+                          'PARAINFLUENZA VIRUS 2': 'Parainfluenza 2',
+                          'SARSCOV2': 'SARS-CoV-2',
+                          'RSVA': 'RSV',
+                          'RSVB': 'RSV'}
     qPCR['pathogen'] = qPCR['target'].map(qPCR_name_mapping)
     qPCR=qPCR[qPCR['qpcr_ct'].notna()]
     flu_qPCR=qPCR[qPCR['pathogen']=='Influenza A']
@@ -1697,31 +1895,42 @@ def plot_qPCR(df, qPCR):
     fluA12009=flu_qPCR.copy()
     fluA12009['pathogen'] = 'Influenza A/H1-2009'
     qPCR=pd.concat([qPCR, fluAH1, fluAH3, fluA12009])
+    qPCR['gold_standard']=1
     # replace _ from pathogen names in df
     df['pathogen'] = df['pathogen'].str.replace('_', ' ')
     print('Unique pathogens in qPCR data:', qPCR['target'].unique())
     # merge qPCR data with df on Run and barcode
-    df_merged = df.merge(qPCR, on=['Run', 'barcode', 'pathogen'], how='left')
+    df_merged = df.merge(qPCR, on=['Run', 'barcode', 'pathogen', 'gold_standard'], how='left')
+    df_merged['pQCR_status'] = np.where(df_merged['qpcr_ct'].notna(), 'qPCR performed', 'qPCR not performed')
+    df_merged['qpcr undetermined'] = np.where(df_merged['qpcr_ct']=='UNDETERMINED', 1, 0)
+    df_merged['qpcr_ct_value'] = np.where((df_merged['qpcr_ct']!='UNDETERMINED')&(df_merged['pQCR_status']=='qPCR performed'), df_merged['qpcr_ct'], np.nan)
+    df_merged['qpcr_ct_value']=df_merged['qpcr_ct_value'].astype(float)
     df_merged.drop_duplicates(subset=['Run', 'barcode', 'pathogen'], keep='first', inplace=True)
+
+    df_merged['ct_1']=df_merged['ct_1'].replace(0, np.nan)
+    df_merged['ct_2']=df_merged['ct_2'].replace(0, np.nan)
+    # create routine_CT_value column that uses ct_1 if present, else ct_2
+    df_merged['routine_CT_value'] = df_merged['ct_1']
+    df_merged['routine_CT_value'] = np.where(df_merged['ct_1'].isna(), df_merged['ct_2'], df_merged['routine_CT_value'])
     
     df_merged_orginal=df_merged.copy()
     print(f'Merged dataframe shape: {df_merged.shape}')
-    #df_merged=df_merged[df_merged['qpcr_ct'].notna()]
-    # removing samples that were not detected by clinical PCR
-    # this is so I don't have to merge by pathogen and marry up target and pathogen names again, 
-    # might have to revit later
+
     df_merged=df_merged[df_merged['gold_standard']==1]
     df_merged['Test platform']=df_merged['test'].map(test_type_mapping)
     df_merged['chrom']=np.where(df_merged['sample num reads']>0, df_merged['chrom'], 'No reads detected')
 
-    df2=df_merged[(df_merged['ct_1'].notna()) & (df_merged['ct_1']>0) & (df_merged['chrom']!='0')]
+    
+
+    df2=df_merged[(df_merged['routine_CT_value'].notna()) & (df_merged['routine_CT_value']>0) & (df_merged['chrom']!='0') & (df_merged['qpcr_ct'].notna()) & (df_merged['qpcr_ct']!='UNDETERMINED')]
     df2.to_csv('FigureS8_input.csv')
 
     # plot Ct value vs Sample_reads_percent_of_refs
     df2['Flu genotype']=df2['chrom']
     df2['Reads']=df2['sample num reads']
+    df2['qpcr_ct'] = df2['qpcr_ct'].astype(float)
     
-    p = (ggplot(df2, aes(y='qpcr_ct', x='ct_1')) +
+    p = (ggplot(df2, aes(y='qpcr_ct', x='routine_CT_value')) +
          geom_point(aes(color='pathogen', shape='Test platform'),  alpha=0.7) +
          # add straight line y=x
         geom_abline(slope=1, intercept=0, linetype='dashed', color='red') +
@@ -1730,19 +1939,20 @@ def plot_qPCR(df, qPCR):
         scale_x_continuous(limits=(15, 40)) +
         scale_y_continuous(limits=(15, 40)) +
         theme(legend_position='right',
-              legend_text=element_text(size=5),
+              legend_text=element_text(size=10),
               legend_title=element_blank())
         # add facet by pathogen
         #+ facet_wrap('~pathogen')
     )
 
-    #p.save('supplemental/Figure_S7a.pdf', width=8, height=6)
+    p.save('supplemental/Figure_S7a.pdf', width=8, height=6)
 
     # box plot of Ct values by method
     # melt cts to long format
     df_long = pd.melt(df_merged, id_vars=['Run', 'barcode', 'pathogen','chrom','sample num reads'], 
-                      value_vars=['qpcr_ct', 'ct_1'], var_name='Method', value_name='Ct Value')
-    df_long['Method'] = df_long['Method'].map({'qpcr_ct': 'Assay qPCR', 'ct_1': 'Clinical qPCR'}) 
+                      value_vars=['qpcr_ct', 'routine_CT_value'], var_name='Method', value_name='Ct Value')
+
+    df_long['Method'] = df_long['Method'].map({'qpcr_ct': 'Assay qPCR', 'routine_CT_value': 'Clinical qPCR'}) 
     # order pathogens by list
     pathogen_order = ['Influenza A', 'Influenza B','RSV','SARS-CoV-2',
         'Adenovirus', 
@@ -1752,7 +1962,11 @@ def plot_qPCR(df, qPCR):
         'Rhinovirus/enterovirus']
     df_long['pathogen'] = pd.Categorical(df_long['pathogen'], categories=pathogen_order, ordered=True)
     df_long=df_long[df_long['Ct Value'].notna()]
+    df_long=df_long[df_long['Ct Value']!= 'UNDETERMINED']
+    #df_long['Ct Value'] = df_long['Ct Value'].astype(float)
+    df_long['Ct Value'] = df_long['Ct Value'].astype(float)
     df_long=df_long[df_long['Ct Value']>0]
+    df_long.to_csv('FigureS7b_input.csv')
      # boxplot of Ct values by pathogen and method
      # save as FigureS8b.pdf
     p2 = (ggplot(df_long, aes(x='pathogen', y='Ct Value', fill='Method')) +
@@ -1760,10 +1974,10 @@ def plot_qPCR(df, qPCR):
          #geom_jitter(width=0.2, alpha=0.5) +
          labs(x='Pathogen target', y='Ct Value', tag='B') +
          theme(axis_text_x=element_text(rotation=90, hjust=1),
-               legend_text=element_text(size=5),
+               legend_text=element_text(size=10),
                legend_title=element_blank())
     )
-    #p2.save('supplemental/Figure_S7b.pdf', width=8, height=6)
+    p2.save('supplemental/Figure_S7b.pdf', width=8, height=6)
 
     px=p/p2
     px.save('supplemental/Figure_S7_combined.pdf', width=10, height=15)
@@ -1772,6 +1986,8 @@ def plot_qPCR(df, qPCR):
     # Ct vs reads plot
     df3=df_merged[df_merged['sample num reads']>0]
     df3=df3[df3['qpcr_ct'].notna()]
+    df3=df3[df3['qpcr_ct']!='UNDETERMINED']
+    df3['qpcr_ct'] = df3['qpcr_ct'].astype(float)
     df3=df3[df3['qpcr_ct']>0]
     p=(ggplot(df3, aes(x='qpcr_ct', y='sample num reads')) +
        geom_point() +
@@ -1781,23 +1997,41 @@ def plot_qPCR(df, qPCR):
        scale_x_reverse() + # reverse x axis
        labs(x='Ct Value', y='Reads') +
        facet_wrap('~pathogen') +
-       theme(legend_title=element_blank())
+       theme(legend_title=element_blank(), panel_spacing = 0.025)
     )
-    p.save('figures/Figure05_assayCt.pdf', width=6, height=4)
+    p.save('figures/Figure05_assayCt.pdf', width=8, height=4)
 
-    # Quant vs reads plot
-    p=(ggplot(df3, aes(x='qpcr_quantity', y='sample num reads')) +
+    # clinical Ct vs reads plot
+    df4=df_merged[df_merged['sample num reads']>0]
+    df4=df4[df4['routine_CT_value'].notna()]
+    #df4=df4[df4['ct_1']!='UNDETERMINED']
+    df4['routine_CT_value'] = df4['routine_CT_value'].astype(float)
+    df4=df4[df4['routine_CT_value']>0]
+    p=(ggplot(df4, aes(x='routine_CT_value', y='sample num reads')) +
        geom_point() +
        #geom_smooth(method='lm', se=True) + 
        #geom_smooth(se=True) + 
        scale_y_log10(labels=label_comma()) +  # <- plain numbers
-       scale_x_log10(labels=label_comma()) +
-       #scale_x_reverse() + # reverse x axis
-       labs(x='Assay Quantity', y='Reads') +
+       scale_x_reverse() + # reverse x axis
+       labs(x='Ct Value', y='Reads') +
        facet_wrap('~pathogen') +
-       theme(legend_title=element_blank())
+       theme(legend_title=element_blank(), panel_spacing = 0.025)
     )
-    p.save('figures/Figure05_assayQuantity.pdf', width=6, height=4)
+    p.save('figures/Figure05_clinicalCt.pdf', width=8, height=4)
+
+    # Quant vs reads plot
+    #p=(ggplot(df3, aes(x='qpcr_quantity', y='sample num reads')) +
+    #   geom_point() +
+    #   #geom_smooth(method='lm', se=True) + 
+    #   #geom_smooth(se=True) + 
+    #   scale_y_log10(labels=label_comma()) +  # <- plain numbers
+    #   scale_x_log10(labels=label_comma()) +
+    #   #scale_x_reverse() + # reverse x axis
+    #   labs(x='Assay Quantity', y='Reads') +
+    #   facet_wrap('~pathogen') +
+    #   theme(legend_title=element_blank())
+    #)
+    #p.save('figures/Figure05_assayQuantity.pdf', width=6, height=4)
 
     # plot both types of Cts
 
@@ -1829,7 +2063,8 @@ def plot_qPCR(df, qPCR):
         color='black',
         fontweight='bold'
     )
-    p4.save('figures/Figure05_assayCt_combined.pdf', width=10, height=4)
+    
+    p4.save('figures/Figure05_assayCt_combined.pdf', width=12, height=4)
     return df_merged_orginal
 
 
@@ -1895,7 +2130,7 @@ def plot_ages(df):
     )
     p.save('figures/age_distribution.pdf', width=6, height=4)
 
-def derivation_set_characteristics(pcr_types, metaDF, derivation_set):
+def derivation_set_characteristics(pcr_types, metaDF, dfd):
     df=pd.read_csv(pcr_types)
         # Replace NULL with np.nan
     df.replace('NULL', np.nan, inplace=True)
@@ -1963,12 +2198,13 @@ def derivation_set_characteristics(pcr_types, metaDF, derivation_set):
     num_had_tests = df[['Alinity', 'Ceipheid', 'BioFire']].any(axis=1).sum()
     print(f'Number of samples with at least one test in dataset: {num_had_tests}')
     # calculate bases and reads median and IQR
-    dfd=pd.read_csv(derivation_set)
-    dfd=dfd[['Run', 'barcode','total run bases','total run reads']]
+    #dfd=pd.read_csv(derivation_set)
+    #dfd['pathogen'] = dfd['pathogen_reduced']
+    #dfd=dfd[['Run', 'barcode','total run bases','total run reads','run_pass','PCs_passed', 'pathogen','sample num reads']]
     dfd['total run bases']=dfd.groupby(['Run', 'barcode'])['total run bases'].transform('max')
     dfd['total run reads']=dfd.groupby(['Run', 'barcode'])['total run reads'].transform('max')
-    dfd=dfd.drop_duplicates(subset=['Run', 'barcode'])
-    df=df.merge(dfd, on=['Run', 'barcode'], how='left')
+    dfdd=dfd.drop_duplicates(subset=['Run', 'barcode'])
+    df=df.merge(dfdd, on=['Run', 'barcode'], how='left')
     bases=df.drop_duplicates(subset=['Run', 'barcode'])['total run bases'].median()
     gb=bases/1_000_000_000
     q75, q25 = np.percentile(df.drop_duplicates(subset=['Run', 'barcode'])['total run bases'],  [75 ,25])
@@ -1976,6 +2212,66 @@ def derivation_set_characteristics(pcr_types, metaDF, derivation_set):
     reads=df.drop_duplicates(subset=['Run', 'barcode'])['total run reads'].median()
     q75, q25 = np.percentile(df.drop_duplicates(subset=['Run', 'barcode'])['total run reads'],  [75 ,25])
     reads_IQR = f'{q25/1_000_000:.3f} - {q75/1_000_000:.3f}'
+
+    # Any target pathogen reads identified = sum of all the samples with any reads for target pathogens (median IQR)
+    dfd['test normalized'] = dfd['test'].map(test_type_normalisation)
+    print(dfd['test normalized'].unique())
+    dfd['reads_to_any_reference']=dfd[dfd['pathogen']!='unmapped'].groupby(['Run', 'barcode'])['sample num reads'].transform('sum')
+    median_atpri = dfd[(dfd['test normalized'].isin(test_type_normalisation.values())) ].drop_duplicates(subset=['Run', 'barcode'])['reads_to_any_reference'].median()
+    q75, q25 = np.percentile(dfd[(dfd['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode'])['reads_to_any_reference'],  [75 ,25])
+    atpri_N = dfd[(dfd['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    atpri_IQR = f'{q25} - {q75}'
+    Any_target_pathogen_reads_identified = f'{median_atpri:.0f} (IQR: {q25:.0f} - {q75:.0f}) n={atpri_N:.0f}'
+
+    # same again but only for samples with reads_to_any_reference > 0
+    median_atpri_gs = dfd[(dfd['test normalized'].isin(test_type_normalisation.values())) & (dfd['reads_to_any_reference']>0)]['reads_to_any_reference'].median()
+    q75_gs, q25_gs = np.percentile(dfd[(dfd['test normalized'].isin(test_type_normalisation.values())) & (dfd['reads_to_any_reference']>0)]['reads_to_any_reference'],  [75 ,25])
+    atpri_N_gs = dfd[(dfd['test normalized'].isin(test_type_normalisation.values())) & (dfd['reads_to_any_reference']>0)].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    atpri_IQR_gs = f'{q25_gs} - {q75_gs}'
+    Any_target_pathogen_reads_identified_gs = f'{median_atpri_gs:.0f} (IQR: {q25_gs:.0f} - {q75_gs:.0f}) n={atpri_N_gs:.0f}'
+
+    # Gold standard pathogen reads identified 
+    median_gspri =  dfd[(dfd['test normalized'].isin(test_type_normalisation.values())) & (dfd['gold_standard']==1) ]['sample num reads'].median()
+    q75, q25 = np.percentile(dfd[(dfd['test normalized'].isin(test_type_normalisation.values())) & (dfd['gold_standard']==1) ]['sample num reads'],  [75 ,25])
+    gspri_N = dfd[(dfd['test normalized'].isin(test_type_normalisation.values())) & (dfd['gold_standard']==1)].shape[0]
+    gspri_IQR = f'{q25} - {q75}'
+    Gold_standard_pathogen_reads_identified = f'{median_gspri:.0f} (IQR: {q25:.0f} - {q75:.0f}) n={gspri_N:.0f}'
+
+    # Gold standard pathogen reads identified where reads > 0
+    median_gspri_gs = dfd[(dfd['test normalized'].isin(test_type_normalisation.values())) & (dfd['gold_standard']==1) & (dfd['sample num reads']>0) ]['sample num reads'].median()
+    q75_gs, q25_gs = np.percentile(dfd[(dfd['test normalized'].isin(test_type_normalisation.values())) & (dfd['gold_standard']==1) & (dfd['sample num reads']>0) ]['sample num reads'],  [75 ,25])
+    gspri_N_gs = dfd[(dfd['test normalized'].isin(test_type_normalisation.values())) & (dfd['gold_standard']==1) & (dfd['sample num reads']>0)].shape[0]
+    gspri_IQR_gs = f'{q25_gs} - {q75_gs}'
+    Gold_standard_pathogen_reads_identified_gs = f'{median_gspri_gs:.0f} (IQR: {q25_gs:.0f} - {q75_gs:.0f}) n={gspri_N_gs:.0f}'
+
+    # Count number of FPs with single read
+    dfd['PT_single_read_FP'] = np.where((dfd['test normalized'].isin(test_type_normalisation.values())) & (dfd['pathogen']!='unmapped') & (dfd['gold_standard']==0) & (dfd['sample num reads']==1), 1, 0)
+    dfd['PS_single_read_FPs'] = dfd.groupby(['Run', 'barcode'])['PT_single_read_FP'].transform('sum')
+    dfd['PS_single_read_FP'] = np.where(dfd['PS_single_read_FPs']>0, 1, 0)
+    # Count number of FPs with two or more reads
+    dfd['PT_twoMore_reads_FP'] = np.where((dfd['test normalized'].isin(test_type_normalisation.values())) & (dfd['pathogen']!='unmapped') & (dfd['gold_standard']==0) & (dfd['sample num reads']>1), 1, 0)
+    dfd['PS_twoMore_reads_FPs'] = dfd.groupby(['Run', 'barcode'])['PT_twoMore_reads_FP'].transform('sum')
+    dfd['PS_twoMore_reads_FP'] = np.where(dfd['PS_twoMore_reads_FPs']>0, 1, 0)
+    # calculate per sample FP rates
+    num_fps_single_read = dfd[dfd['PS_single_read_FP']>0].drop_duplicates(subset=['Run', 'barcode'])['PS_single_read_FPs'].shape[0]
+    num_fps_twoMore_reads = dfd[dfd['PS_twoMore_reads_FP']>0].drop_duplicates(subset=['Run', 'barcode'])['PS_twoMore_reads_FPs'].shape[0]
+    n_denominator = dfd[(dfd['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    fp_reads=f'1={num_fps_single_read}, 2+={num_fps_twoMore_reads}, n={n_denominator}'
+
+    # Count number of TPs with single read
+    dfd['PT_single_read_TP'] = np.where((dfd['test normalized'].isin(test_type_normalisation.values())) & (dfd['pathogen']!='unmapped') & (dfd['gold_standard']==1) & (dfd['sample num reads']==1), 1, 0)
+    dfd['PS_single_read_TPs'] = dfd.groupby(['Run', 'barcode'])['PT_single_read_TP'].transform('sum')
+    dfd['PS_single_read_TP'] = np.where(dfd['PS_single_read_TPs']>0, 1, 0)
+    # Count number of TPs with two or more reads
+    dfd['PT_twoMore_reads_TP'] = np.where((dfd['test normalized'].isin(test_type_normalisation.values())) & (dfd['pathogen']!='unmapped') & (dfd['gold_standard']==1) & (dfd['sample num reads']>1), 1, 0)
+    dfd['PS_twoMore_reads_TPs'] = dfd.groupby(['Run', 'barcode'])['PT_twoMore_reads_TP'].transform('sum')
+    dfd['PS_twoMore_reads_TP'] = np.where(dfd['PS_twoMore_reads_TPs']>0, 1, 0)
+    # calculate per sample TP rates
+    num_tps_single_read = dfd[dfd['PS_single_read_TP']>0].drop_duplicates(subset=['Run', 'barcode'])['PS_single_read_TPs'].shape[0]
+    num_tps_twoMore_reads = dfd[dfd['PS_twoMore_reads_TP']>0].drop_duplicates(subset=['Run', 'barcode'])['PS_twoMore_reads_TPs'].shape[0]
+    n_denominator = dfd[(dfd['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    tp_reads=f'1={num_tps_single_read}, 2+={num_tps_twoMore_reads}, n={n_denominator}'
+
     d1={
         'Set': 'derivation set sequences',
         'Total sequences': len(df),
@@ -1989,8 +2285,15 @@ def derivation_set_characteristics(pcr_types, metaDF, derivation_set):
         '1 pathogens': len(df[df['num_pathogens'] == 1]),
         '2 pathogens': len(df[df['num_pathogens'] == 2]),
         '3 pathogens': len(df[df['num_pathogens'] == 3]),
+        'Total pathogens detected': df['num_pathogens'].sum(),
+        'Any target pathogen reads identified': Any_target_pathogen_reads_identified,
+        'Any target pathogen reads identified (if reads>0)': Any_target_pathogen_reads_identified_gs,
+        '(target) Gold standard pathogen reads identified': Gold_standard_pathogen_reads_identified,
+        '(target) Gold standard pathogen reads identified (if reads>0)': Gold_standard_pathogen_reads_identified_gs,
         'Gigabases': f'{gb:.2f} (IQR: {bases_IQR})',
         'Million Reads': f'{reads/1_000_000:.3f} (IQR: {reads_IQR})',
+        '(Per sample) False positives by reads': fp_reads,
+        '(Per sample) True positives by reads': tp_reads,
     }
 
     # remove duplicate accessions
@@ -2031,13 +2334,130 @@ def derivation_set_characteristics(pcr_types, metaDF, derivation_set):
         '1 pathogens': len(df2[df2['num_pathogens'] == 1]),
         '2 pathogens': len(df2[df2['num_pathogens'] == 2]),
         '3 pathogens': len(df2[df2['num_pathogens'] == 3]),
+        'Total pathogens detected': df2['num_pathogens'].sum(),
+        'Any target pathogen reads identified': None,
+        'Any target pathogen reads identified (if reads>0)': None,
+        '(target) Gold standard pathogen reads identified': None,
+        '(target) Gold standard pathogen reads identified (if reads>0)': None,
         'Gigabases': f'{gb:.2f} (IQR: {bases_IQR})',
         'Million Reads': f'{reads/1_000_000:.3f} (IQR: {reads_IQR})',
+        '(Per sample) False positives by reads': None,
     }
+
+    # Remove samples that failed QC
+    df3=df[(df['run_pass']==True) & (df['PCs_passed']==True)]
+    df3=df3.copy()
+    unique_samples_qc = df3[['accession_1', 'accession_2']].drop_duplicates()
+    print(f'Number of unique samples in dataset after QC: {len(unique_samples_qc)}')
+     # count number of Alinity, Cepheid, BioFire tests
+    df3 = df3[df3[['Alinity', 'Ceipheid', 'BioFire']].any(axis=1)]
+    num_unique_had_tests = len(df3)
+    print(f'Number of unique samples with at least one test in dataset: {num_unique_had_tests}')
+    num_Alinity_tests = df3['Alinity'].sum()
+    num_Cepheid_tests = df3['Ceipheid'].sum()
+    num_BioFire_tests = df3['BioFire'].sum()
+    print(f'Number of unique Alinity tests in dataset: {num_Alinity_tests}')
+    print(f'Number of unique Cepheid tests in dataset: {num_Cepheid_tests}')
+    print(f'Number of unique BioFire tests in dataset: {num_BioFire_tests}')
+
+    # print number of pathogens per sample
+    print(f'Number of unique samples with no pathogens: {len(df3[df3["num_pathogens"] == 0])}')
+    print(f'Number of unique samples with one pathogen: {len(df3[df3["num_pathogens"] == 1])}')
+    print(f'Number of unique samples with more than one pathogen: {len(df3[df3["num_pathogens"] > 1])}')
+
+    # caluclate number of tests per sample
+    df3['num tests'] = df3[['Alinity', 'Ceipheid', 'BioFire']].sum(axis=1)
+
+    # Add test_type column
+    df3['test_type'] = np.where(df3['Alinity'] == 1, 'ALINITY',None)
+    df3['test_type'] = np.where(df3['Ceipheid'] == 1, 'CEPHEID', df3['test_type'])
+    df3['test_type'] = np.where(df3['BioFire'] == 1, 'BIOFIRE', df3['test_type'])
+
+    # Any target pathogen reads identified = sum of all the samples with any reads for target pathogens (median IQR)
+    df2=dfd[(dfd['run_pass']==True) & (dfd['PCs_passed']==True)]
+    df2['reads_to_any_reference']=df2[df2['pathogen']!='unmapped'].groupby(['Run', 'barcode'])['sample num reads'].transform('sum')
+    median_atpri = df2[(df2['test normalized'].isin(test_type_normalisation.values())) ].drop_duplicates(subset=['Run', 'barcode'])['reads_to_any_reference'].median()
+    q75, q25 = np.percentile(df2[(df2['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode'])['reads_to_any_reference'],  [75 ,25])
+    atpri_N = df2[(df2['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    atpri_IQR = f'{q25} - {q75}'
+    Any_target_pathogen_reads_identified = f'{median_atpri:.0f} (IQR: {q25:.0f} - {q75:.0f}) n={atpri_N:.0f}'
+
+    # same again but only for samples with reads_to_any_reference > 0
+    median_atpri_gs = df2[(df2['test normalized'].isin(test_type_normalisation.values())) & (df2['reads_to_any_reference']>0)]['reads_to_any_reference'].median()
+    q75_gs, q25_gs = np.percentile(df2[(df2['test normalized'].isin(test_type_normalisation.values())) & (df2['reads_to_any_reference']>0)]['reads_to_any_reference'],  [75 ,25])
+    atpri_N_gs = df2[(df2['test normalized'].isin(test_type_normalisation.values())) & (df2['reads_to_any_reference']>0)].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    atpri_IQR_gs = f'{q25_gs} - {q75_gs}'
+    Any_target_pathogen_reads_identified_gs = f'{median_atpri_gs:.0f} (IQR: {q25_gs:.0f} - {q75_gs:.0f}) n={atpri_N_gs:.0f}'
+
+    # Gold standard pathogen reads identified 
+    median_gspri = df2[(df2['test normalized'].isin(test_type_normalisation.values())) & (df2['gold_standard']==1) ]['sample num reads'].median()
+    q75, q25 = np.percentile(df2[(df2['test normalized'].isin(test_type_normalisation.values())) & (df2['gold_standard']==1) ]['sample num reads'],  [75 ,25])
+    gspri_N = df2[(df2['test normalized'].isin(test_type_normalisation.values())) & (df2['gold_standard']==1)].shape[0]
+    gspri_IQR = f'{q25} - {q75}'
+    Gold_standard_pathogen_reads_identified = f'{median_gspri:.0f} (IQR: {q25:.0f} - {q75:.0f}) n={gspri_N:.0f}'
+
+    # Gold standard pathogen reads identified where reads > 0
+    median_gspri_gs = df2[(df2['test normalized'].isin(test_type_normalisation.values())) & (df2['gold_standard']==1) & (df2['sample num reads']>0) ]['sample num reads'].median()
+    q75_gs, q25_gs = np.percentile(df2[(df2['test normalized'].isin(test_type_normalisation.values())) & (df2['gold_standard']==1) & (df2['sample num reads']>0) ]['sample num reads'],  [75 ,25])
+    gspri_N_gs = df2[(df2['test normalized'].isin(test_type_normalisation.values())) & (df2['gold_standard']==1) & (df2['sample num reads']>0)].shape[0]
+    gspri_IQR_gs = f'{q25_gs} - {q75_gs}'
+    Gold_standard_pathogen_reads_identified_gs = f'{median_gspri_gs:.0f} (IQR: {q25_gs:.0f} - {q75_gs:.0f}) n={gspri_N_gs:.0f}'
+
+    # Count number of FPs with single read
+    df2['PT_single_read_FP'] = np.where((df2['test normalized'].isin(test_type_normalisation.values())) & (df2['pathogen']!='unmapped') & (df2['gold_standard']==0) & (df2['sample num reads']==1), 1, 0)
+    df2['PS_single_read_FPs'] = df2.groupby(['Run', 'barcode'])['PT_single_read_FP'].transform('sum')
+    df2['PS_single_read_FP'] = np.where(df2['PS_single_read_FPs']>0, 1, 0)
+    # Count number of FPs with two or more reads
+    df2['PT_twoMore_reads_FP'] = np.where((df2['test normalized'].isin(test_type_normalisation.values())) & (df2['pathogen']!='unmapped') & (df2['gold_standard']==0) & (df2['sample num reads']>1), 1, 0)
+    df2['PS_twoMore_reads_FPs'] = df2.groupby(['Run', 'barcode'])['PT_twoMore_reads_FP'].transform('sum')
+    df2['PS_twoMore_reads_FP'] = np.where(df2['PS_twoMore_reads_FPs']>0, 1, 0)
+    # calculate per sample FP rates
+    num_fps_single_read = df2[df2['PS_single_read_FP']>0].drop_duplicates(subset=['Run', 'barcode'])['PS_single_read_FPs'].shape[0]
+    num_fps_twoMore_reads = df2[df2['PS_twoMore_reads_FP']>0].drop_duplicates(subset=['Run', 'barcode'])['PS_twoMore_reads_FPs'].shape[0]
+    n_denominator = df2[(df2['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    fp_reads=f'1={num_fps_single_read}, 2+={num_fps_twoMore_reads}, n={n_denominator}'
+
+    # Count number of TPs with single read
+    df2['PT_single_read_TP'] = np.where((df2['test normalized'].isin(test_type_normalisation.values())) & (df2['pathogen']!='unmapped') & (df2['gold_standard']==1) & (df2['sample num reads']==1), 1, 0)
+    df2['PS_single_read_TPs'] = df2.groupby(['Run', 'barcode'])['PT_single_read_TP'].transform('sum')
+    df2['PS_single_read_TP'] = np.where(df2['PS_single_read_TPs']>0, 1, 0)
+    # Count number of TPs with two or more reads
+    df2['PT_twoMore_reads_TP'] = np.where((df2['test normalized'].isin(test_type_normalisation.values())) & (df2['pathogen']!='unmapped') & (df2['gold_standard']==1) & (df2['sample num reads']>1), 1, 0)
+    df2['PS_twoMore_reads_TPs'] = df2.groupby(['Run', 'barcode'])['PT_twoMore_reads_TP'].transform('sum')
+    df2['PS_twoMore_reads_TP'] = np.where(df2['PS_twoMore_reads_TPs']>0, 1, 0)
+    # calculate per sample TP rates
+    num_tps_single_read = df2[df2['PS_single_read_TP']>0].drop_duplicates(subset=['Run', 'barcode'])['PS_single_read_TPs'].shape[0]
+    num_tps_twoMore_reads = df2[df2['PS_twoMore_reads_TP']>0].drop_duplicates(subset=['Run', 'barcode'])['PS_twoMore_reads_TPs'].shape[0]
+    n_denominator = df2[(df2['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    tp_reads=f'1={num_tps_single_read}, 2+={num_tps_twoMore_reads}, n={n_denominator}'
+
+    df3={
+        'Set': 'Derivation set sequences (QC passed)',
+        'Total sequences': len(df3),
+        'total samples': len(unique_samples_qc),
+        'samples with at least one test': num_unique_had_tests,
+        'Alinity m Respiratory Panel samples': num_Alinity_tests,
+        'BioFire Respiratory Panel 2.1 samples': num_BioFire_tests,
+        'Cepheid Xpert Xpress SARS-CoV-2/Flu/RSV samples': num_Cepheid_tests,
+        '0 pathogens': len(df3[df3['num_pathogens'] == 0]),
+        '1 pathogens': len(df3[df3['num_pathogens'] == 1]),
+        '2 pathogens': len(df3[df3['num_pathogens'] == 2]),
+        '3 pathogens': len(df3[df3['num_pathogens'] == 3]),
+        'Total pathogens detected': df3['num_pathogens'].sum(),
+        'Any target pathogen reads identified': Any_target_pathogen_reads_identified,
+        'Any target pathogen reads identified (if reads>0)': Any_target_pathogen_reads_identified_gs,
+        '(target) Gold standard pathogen reads identified': Gold_standard_pathogen_reads_identified,
+        '(target) Gold standard pathogen reads identified (if reads>0)': Gold_standard_pathogen_reads_identified_gs,
+        'Gigabases': f'{gb:.2f} (IQR: {bases_IQR})',
+        'Million Reads': f'{reads/1_000_000:.3f} (IQR: {reads_IQR})',
+        '(Per sample) False positives by reads': fp_reads,
+        '(Per sample) True positives by reads': tp_reads,
+    }
+
     df[df["num_pathogens"] == 0].to_csv('derivation_set_zero_pathogen_samples.csv', index=False)
-    df_table = pd.DataFrame([d2, d1])
+    df_table = pd.DataFrame([d2, d1, df3])
     df_table=df_table.transpose().reset_index()
-    df_table.columns=['Characteristic', 'derivation set samples (unique accessions)', 'Derivation set sequences']
+    df_table.columns=['Characteristic', 'derivation set samples (unique accessions)', 'Derivation set sequences', 'Derivation set sequences (QC passed)']
 
     return df_table, df[['Run', 'barcode', 'test_type']]
 
@@ -2079,49 +2499,88 @@ def table_1_characteristics(df, IORD, dfd_table):
     atpri_IQR_gs = f'{q25_gs} - {q75_gs}'
     Any_target_pathogen_reads_identified_gs = f'{median_atpri_gs:.0f} (IQR: {q25_gs:.0f} - {q75_gs:.0f}) n={atpri_N_gs:.0f}'
 
+    # Gold standard pathogen reads identified 
+    median_gspri = df[(df['test normalized'].isin(test_type_normalisation.values())) & (df['gold_standard']==1) ]['sample num reads'].median()
+    q75, q25 = np.percentile(df[(df['test normalized'].isin(test_type_normalisation.values())) & (df['gold_standard']==1) ]['sample num reads'],  [75 ,25])
+    gspri_N = df[(df['test normalized'].isin(test_type_normalisation.values())) & (df['gold_standard']==1)].shape[0]
+    gspri_IQR = f'{q25} - {q75}'
+    Gold_standard_pathogen_reads_identified = f'{median_gspri:.0f} (IQR: {q25:.0f} - {q75:.0f}) n={gspri_N:.0f}'
+
+    # Gold standard pathogen reads identified where reads > 0
+    median_gspri_gs = df[(df['test normalized'].isin(test_type_normalisation.values())) & (df['gold_standard']==1) & (df['sample num reads']>0) ]['sample num reads'].median()
+    q75_gs, q25_gs = np.percentile(df[(df['test normalized'].isin(test_type_normalisation.values())) & (df['gold_standard']==1) & (df['sample num reads']>0) ]['sample num reads'],  [75 ,25])
+    gspri_N_gs = df[(df['test normalized'].isin(test_type_normalisation.values())) & (df['gold_standard']==1) & (df['sample num reads']>0)].shape[0]
+    gspri_IQR_gs = f'{q25_gs} - {q75_gs}'
+    Gold_standard_pathogen_reads_identified_gs = f'{median_gspri_gs:.0f} (IQR: {q25_gs:.0f} - {q75_gs:.0f}) n={gspri_N_gs:.0f}'
+
     # CT values available from clinical PCR
-    clinical_CT_values_N = df[(df['ct_1'].notna()) & (df['ct_1']!=0)].drop_duplicates(subset=['Run', 'barcode']).shape[0]
-    clinical_CT_values_median = df[(df['ct_1'].notna()) & (df['ct_1']!=0)].drop_duplicates(subset=['Run', 'barcode'])['ct_1'].median()
-    q75, q25 = np.percentile(df[(df['ct_1'].notna()) & (df['ct_1']!=0)].drop_duplicates(subset=['Run', 'barcode'])['ct_1'],  [75 ,25])
+    clinical_CT_values_N = df[(df['routine_CT_value'].notna()) & (df['routine_CT_value']!=0) & (df['test normalized']=='ALINITY')].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    clinical_CT_values_median = df[(df['routine_CT_value'].notna()) & (df['routine_CT_value']!=0) & (df['test normalized']=='ALINITY')].drop_duplicates(subset=['Run', 'barcode'])['routine_CT_value'].median()
+    q75, q25 = np.percentile(df[(df['routine_CT_value'].notna()) & (df['routine_CT_value']!=0) & (df['test normalized']=='ALINITY')].drop_duplicates(subset=['Run', 'barcode'])['routine_CT_value'],  [75 ,25])
     clinical_CT_values_IQR = f'{q25:.2f} - {q75:.2f}'
     clinical_CT_values = f'{clinical_CT_values_median:.2f} (IQR: {clinical_CT_values_IQR}) n={clinical_CT_values_N}'
 
+    clinical_CT_values_N_cepheid = df[(df['routine_CT_value'].notna()) & (df['routine_CT_value']!=0) & (df['test normalized']=='CEPHEID')].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    clinical_CT_values_median_cepheid = df[(df['routine_CT_value'].notna()) & (df['routine_CT_value']!=0) & (df['test normalized']=='CEPHEID')].drop_duplicates(subset=['Run', 'barcode'])['routine_CT_value'].median()
+    q75_c, q25_c = np.percentile(df[(df['routine_CT_value'].notna()) & (df['routine_CT_value']!=0) & (df['test normalized']=='CEPHEID')].drop_duplicates(subset=['Run', 'barcode'])['routine_CT_value'],  [75 ,25])
+    clinical_CT_values_IQR_cepheid = f'{q25_c:.2f} - {q75_c:.2f}'
+    clinical_CT_values_cepheid = f'{clinical_CT_values_median_cepheid:.2f} (IQR: {clinical_CT_values_IQR_cepheid}) n={clinical_CT_values_N_cepheid}'
+
     # CT values available from study qPCR
     study_CT_values_N = df[(df['qpcr_ct'].notna()) & (df['qpcr_ct']!=0)].drop_duplicates(subset=['Run', 'barcode']).shape[0]
-    study_CT_values_median = df[(df['qpcr_ct'].notna()) & (df['qpcr_ct']!=0)].drop_duplicates(subset=['Run', 'barcode'])['qpcr_ct'].median()
-    q75, q25 = np.percentile(df[(df['qpcr_ct'].notna()) & (df['qpcr_ct']!=0)].drop_duplicates(subset=['Run', 'barcode'])['qpcr_ct'],  [75 ,25])
+    undetermined_count = df[(df['qpcr_ct']=='UNDETERMINED')].shape[0]
+    df['qpcr_ct2'] = df['qpcr_ct'].replace('UNDETERMINED', np.nan)
+    df['qpcr_ct2'] = df['qpcr_ct2'].astype(float)
+    study_CT_values_median = df[(df['qpcr_ct2'].notna()) & (df['qpcr_ct2']!=0)].drop_duplicates(subset=['Run', 'barcode'])['qpcr_ct2'].median()
+    q75, q25 = np.percentile(df[(df['qpcr_ct2'].notna()) & (df['qpcr_ct2']!=0)].drop_duplicates(subset=['Run', 'barcode'])['qpcr_ct2'],  [75 ,25])
     study_CT_values_IQR = f'{q25:.2f} - {q75:.2f}'
-    study_CT_values = f'{study_CT_values_median:.2f} (IQR: {study_CT_values_IQR}) n={study_CT_values_N}'
+    study_CT_values = f'{study_CT_values_median:.2f} (IQR: {study_CT_values_IQR}) n={study_CT_values_N} U={undetermined_count}'
+
+    # Ct values available from study qPCR per target pathogen
+    study_CT_values_N = df[(df['qpcr_ct'].notna()) & (df['qpcr_ct']!=0)].shape[0]
+    missing_CT= df[(df['qpcr_ct'].isna()) & (df['gold_standard']==1)].shape[0]
+    undetermined_count = df[(df['qpcr_ct']=='UNDETERMINED')].shape[0]
+    study_CT_values_median = df[(df['qpcr_ct2'].notna()) & (df['qpcr_ct2']!=0)]['qpcr_ct2'].median()
+    q75, q25 = np.percentile(df[(df['qpcr_ct2'].notna()) & (df['qpcr_ct2']!=0)]['qpcr_ct2'],  [75 ,25])
+    study_CT_values_IQR = f'{q25:.2f} - {q75:.2f}'
+    study_CT_values_per_pathogen = f'{study_CT_values_median:.2f} (IQR: {study_CT_values_IQR}) n={study_CT_values_N} U={undetermined_count} M={missing_CT}'
 
     # Age median and IQR
-    age_median = df[df['AgeInYearsAtCollection'].notna()].drop_duplicates(subset=['Run', 'barcode'])['AgeInYearsAtCollection'].median()
-    q75, q25 = np.percentile(df[df['AgeInYearsAtCollection'].notna()].drop_duplicates(subset=['Run', 'barcode'])['AgeInYearsAtCollection'],  [75 , 25])
+    df['AgeInYearsAtCollection']=df['AgeInYearsAtCollection'].replace('NULL',np.nan)
+    age_median = df[(df['AgeInYearsAtCollection'].notna()) & df['test normalized'].isin(test_type_normalisation.values())].drop_duplicates(subset=['Run', 'barcode'])['AgeInYearsAtCollection'].median()
+    q75, q25 = np.percentile(df[(df['AgeInYearsAtCollection'].notna()) & df['test normalized'].isin(test_type_normalisation.values())].drop_duplicates(subset=['Run', 'barcode'])['AgeInYearsAtCollection'],  [75 ,25])
     age_IQR = f'{q25:.1f} - {q75:.1f}'
-    age_N = df[df['AgeInYearsAtCollection'].notna()].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    age_N = df[(df['AgeInYearsAtCollection'].notna()) & df['test normalized'].isin(test_type_normalisation.values())].drop_duplicates(subset=['Run', 'barcode']).shape[0]
     age_summary = f'{age_median:.1f} (IQR: {age_IQR}) n={age_N}'
 
     # Patient sex split
     F=df[(df['LinkedSex']=='F') & (df['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode']).shape[0]
     M=df[(df['LinkedSex']=='M') & (df['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode']).shape[0]
-    U=df[(df['LinkedSex'].isna()) & (df['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode']).shape[0]
-    patient_sex = f'F: {F}, M: {M}, U: {U}, total n={F+M+U}'
+    U=df[(df['LinkedSex']=='U') & (df['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    patient_sex = f'F: {F}, M: {M}, U: {U}, n={F+M+U}'
 
     # location tablulation
-    location_counts = df[df['test normalized'].isin(test_type_normalisation.values())].drop_duplicates(subset=['Run', 'barcode'])['LastKnownLocation_micro'].value_counts()
+    location_counts = df[df['test normalized'].isin(test_type_normalisation.values())].drop_duplicates(subset=['Run', 'barcode'])['LastKnownLocation_micro'].shape[0]
     locationDesc = df[df['test normalized'].isin(test_type_normalisation.values())].drop_duplicates(subset=['Run', 'barcode']).groupby(['LastKnownLocation_micro'])['LastKnownLocation_micro'].count()
     locationDesc = pd.DataFrame({'LastKnownLocation_micro':locationDesc.index, 'Count':locationDesc.values})
     locationDesc.sort_values(by='Count',ascending=False, inplace=True)
     #locationDesc.to_csv('table_1_tabs/location_description.csv')
 
     # ward tabulation
-    ward_counts = df[df['test normalized'].isin(test_type_normalisation.values())].drop_duplicates(subset=['Run', 'barcode'])['WardName_linked_inpat'].value_counts()
+    df['WardName_linked_inpat']=df['WardName_linked_inpat'].replace('NULL',np.nan)
+    ward_counts = df[df['test normalized'].isin(test_type_normalisation.values()) & (df['WardName_linked_inpat'].notna())].drop_duplicates(subset=['Run', 'barcode'])['WardName_linked_inpat'].shape[0]
     wardDesc = df[df['test normalized'].isin(test_type_normalisation.values())].drop_duplicates(subset=['Run', 'barcode']).groupby(['WardName_linked_inpat'])['WardName_linked_inpat'].count()
     wardDesc = pd.DataFrame({'WardName_linked_inpat':wardDesc.index, 'Count':wardDesc.values})
     wardDesc.sort_values(by='Count',ascending=False, inplace=True)
-    #wardDesc.to_csv('table_1_tabs/ward_description.csv')
+    wardDesc['Ward_generalized']=wardDesc['WardName_linked_inpat'].map(ward_generalisation)
+    wardDesc.to_csv('table_1_tabs/ward_description.csv')
+
+    # Ward generalized
+    df['Ward']=df['WardName_linked_inpat'].map(ward_generalisation)
+
 
     # facility tabulation
-    facility_counts = df[df['test normalized'].isin(test_type_normalisation.values())].drop_duplicates(subset=['Run', 'barcode'])['Facility_linked_inpat'].value_counts()
+    facility_counts = df[df['test normalized'].isin(test_type_normalisation.values())].drop_duplicates(subset=['Run', 'barcode'])['Facility_linked_inpat'].shape[0]
     facilityDesc = df[df['test normalized'].isin(test_type_normalisation.values())].drop_duplicates(subset=['Run', 'barcode']).groupby(['Facility_linked_inpat'])['Facility_linked_inpat'].count()
     facilityDesc = pd.DataFrame({'Facility_linked_inpat':facilityDesc.index, 'Count':facilityDesc.values})
     facilityDesc.sort_values(by='Count',ascending=False, inplace=True)
@@ -2137,35 +2596,107 @@ def table_1_characteristics(df, IORD, dfd_table):
     q75, q25 = np.percentile(df.drop_duplicates(subset=['Run', 'barcode'])['total run reads'],  [75 ,25])
     reads_IQR = f'{q25/1_000_000:.3f} - {q75/1_000_000:.3f}'
 
+    # Count number of FPs with single read
+    df['PT_single_read_FP'] = np.where((df['test normalized'].isin(test_type_normalisation.values())) & (df['pathogen']!='unmapped') & (df['gold_standard']==0) & (df['sample num reads']==1), 1, 0)
+    df['PS_single_read_FPs'] = df.groupby(['Run', 'barcode'])['PT_single_read_FP'].transform('sum')
+    df['PS_single_read_FP'] = np.where(df['PS_single_read_FPs']>0, 1, 0)
+    # Count number of FPs with two or more reads
+    df['PT_twoMore_reads_FP'] = np.where((df['test normalized'].isin(test_type_normalisation.values())) & (df['pathogen']!='unmapped') & (df['gold_standard']==0) & (df['sample num reads']>1), 1, 0)
+    df['PS_twoMore_reads_FPs'] = df.groupby(['Run', 'barcode'])['PT_twoMore_reads_FP'].transform('sum')
+    df['PS_twoMore_reads_FP'] = np.where(df['PS_twoMore_reads_FPs']>0, 1, 0)
+    # calculate per sample FP rates
+    num_fps_single_read = df[df['PS_single_read_FP']>0].drop_duplicates(subset=['Run', 'barcode'])['PS_single_read_FPs'].shape[0]
+    num_fps_twoMore_reads = df[df['PS_twoMore_reads_FP']>0].drop_duplicates(subset=['Run', 'barcode'])['PS_twoMore_reads_FPs'].shape[0]
+    n_denominator = df[(df['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    fp_reads=f'1={num_fps_single_read}, 2+={num_fps_twoMore_reads}, n={n_denominator}'
+
+    # Count number of TPs with single read
+    df['PT_single_read_TP'] = np.where((df['test normalized'].isin(test_type_normalisation.values())) & (df['pathogen']!='unmapped') & (df['gold_standard']==1) & (df['sample num reads']==1), 1, 0)
+    df['PS_single_read_TPs'] = df.groupby(['Run', 'barcode'])['PT_single_read_TP'].transform('sum')
+    df['PS_single_read_TP'] = np.where(df['PS_single_read_TPs']>0, 1, 0)
+    # Count number of TPs with two or more reads
+    df['PT_twoMore_reads_TP'] = np.where((df['test normalized'].isin(test_type_normalisation.values())) & (df['pathogen']!='unmapped') & (df['gold_standard']==1) & (df['sample num reads']>1), 1, 0)
+    df['PS_twoMore_reads_TPs'] = df.groupby(['Run', 'barcode'])['PT_twoMore_reads_TP'].transform('sum')
+    df['PS_twoMore_reads_TP'] = np.where(df['PS_twoMore_reads_TPs']>0, 1, 0)
+    # calculate per sample TP rates
+    num_tps_single_read = df[df['PS_single_read_TP']>0].drop_duplicates(subset=['Run', 'barcode'])['PS_single_read_TPs'].shape[0]
+    num_tps_twoMore_reads = df[df['PS_twoMore_reads_TP']>0].drop_duplicates(subset=['Run', 'barcode'])['PS_twoMore_reads_TPs'].shape[0]
+    n_denominator = df[(df['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    tp_reads=f'1={num_tps_single_read}, 2+={num_tps_twoMore_reads}, n={n_denominator}'
+
+    # alinity samples
+    n=df[df['test normalized']=='ALINITY'].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    tp_alinity=df[(df['test normalized']=='ALINITY') & (df['gold_standard']==1)].shape[0]
+    neg_alinity=df[(df['test normalized']=='ALINITY') & (df['sample_positive']==0)].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    alinity_summary=f'n={n}, negs={neg_alinity}, p={tp_alinity}'
+
+    # biofire samples
+    n=df[df['test normalized']=='BIOFIRE'].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    tp_biofire=df[(df['test normalized']=='BIOFIRE') & (df['gold_standard']==1)].shape[0]
+    neg_biofire=df[(df['test normalized']=='BIOFIRE') & (df['sample_positive']==0)].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    biofire_summary=f'n={n}, negs={neg_biofire}, p={tp_biofire}'
+
+    # cepheid samples
+    n=df[df['test normalized']=='CEPHEID'].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    tp_cepheid=df[(df['test normalized']=='CEPHEID') & (df['gold_standard']==1)].shape[0]
+    neg_cepheid=df[(df['test normalized']=='CEPHEID') & (df['sample_positive']==0)].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    cepheid_summary=f'n={n}, negs={neg_cepheid}, p={tp_cepheid}'
+
+    # samples with no reads or Ct == UNDETERMINED but gold standard positive
+    no_reads=df[(df['gold_standard']==1) & (df['sample num reads']==0) & (df['test normalized'].isin(test_type_normalisation.values()))].shape[0]
+    no_ct=df[(df['qpcr_ct'].isin(['UNDETERMINED', np.nan])) & (df['gold_standard']==1) & (df['test normalized'].isin(test_type_normalisation.values()))].shape[0]
+    no_reads_or_undetermined_Ct_positive = df[(df['qpcr_ct'].isin(['UNDETERMINED', np.nan])) & (df['gold_standard']==1) & (df['sample num reads']==0) & (df['test normalized'].isin(test_type_normalisation.values()))].shape[0]
+    total_pathogens_detected = df[(df['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode'])['num_pathogens_detected'].sum()
+    no_reads_or_undetermined_Ct_positive_summary = f'no reads={no_reads}, no Ct={no_ct}, n={no_reads_or_undetermined_Ct_positive}({no_reads_or_undetermined_Ct_positive / total_pathogens_detected * 100}%)'
+
     d1={
         'Set': 'validation set samples',
         'Total sequences': df.drop_duplicates(subset=['Run', 'barcode']).shape[0],
         'total samples': df[df['test normalized'].isin(test_type_normalisation.values())].drop_duplicates(subset=['Run', 'barcode']).shape[0],
-        'Alinity m Respiratory Panel samples': df[df['test normalized']=='ALINITY'].drop_duplicates(subset=['Run', 'barcode']).shape[0],
-        'BioFire Respiratory Panel 2.1 samples': df[df['test normalized']=='BIOFIRE'].drop_duplicates(subset=['Run', 'barcode']).shape[0],
-        'Cepheid Xpert Xpress SARS-CoV-2/Flu/RSV samples': df[df['test normalized']=='CEPHEID'].drop_duplicates(subset=['Run', 'barcode']).shape[0],
+        'Alinity m Respiratory Panel samples': alinity_summary,
+        'BioFire Respiratory Panel 2.1 samples': biofire_summary,
+        'Cepheid Xpert Xpress SARS-CoV-2/Flu/RSV samples': cepheid_summary,
         '0 pathogens': df[(df['num_pathogens_detected']==0) & (df['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode']).shape[0],
         '1 pathogens': df[(df['num_pathogens_detected']==1) & (df['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode']).shape[0],
         '2 pathogens': df[(df['num_pathogens_detected']==2) & (df['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode']).shape[0],
         '3 pathogens': df[(df['num_pathogens_detected']==3) & (df['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode']).shape[0],
+        'Total pathogens detected': df[(df['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode'])['num_pathogens_detected'].sum(),
         'Samples with collection date': collection_date_count,
         'Samples with extraction date': extraction_date_count,
         'Samples with days between collection and extraction date': days_between_median_IQR_N,
-        'Ct (Xpert or Alinity) available': clinical_CT_values,
+        'Ct (Alinity) available': clinical_CT_values,
+        'Ct (Xpert) available': clinical_CT_values_cepheid,
         'Ct (study qPCR) available': study_CT_values,
+        'Ct (study qPCR) available per target pathogen': study_CT_values_per_pathogen,
         #'Any target pathogen reads identified': df[(df['gold_standard']==1) & (df['sample num reads']>0)].drop_duplicates(subset=['Run', 'barcode']).shape[0],
         'Any target pathogen reads identified': Any_target_pathogen_reads_identified,
         #'Number of reads (if>0)': df[(df['sample num reads']>0) & (df['test normalized'].isin(test_type_normalisation.values())) & (df['pathogen']!='unmapped')].shape[0],
-        'Number of reads (if>0)': Any_target_pathogen_reads_identified_gs,
+        'Any target pathogen reads identified (if reads>0)': Any_target_pathogen_reads_identified_gs,
+        '(target) Gold standard pathogen reads identified': Gold_standard_pathogen_reads_identified,
+        '(target) Gold standard pathogen reads identified (if reads>0)': Gold_standard_pathogen_reads_identified_gs,
         'Samples with patient age': age_summary,
+        'Age range <1': len(df[(df['AgeInYearsAtCollection']<1) & (df['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode'])),
+        'Age range 1-12': len(df[(df['AgeInYearsAtCollection']>=1) & (df['AgeInYearsAtCollection']<=12) & (df['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode'])),
+        'Age range 13-49': len(df[(df['AgeInYearsAtCollection']>=13) & (df['AgeInYearsAtCollection']<=49) & (df['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode'])), 
+        'Age range 50-70': len(df[(df['AgeInYearsAtCollection']>=50) & (df['AgeInYearsAtCollection']<=70) & (df['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode'])),
+        'Age range 71-84': len(df[(df['AgeInYearsAtCollection']>=71) & (df['AgeInYearsAtCollection']<=84) & (df['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode'])),
+        'Age range 85+': len(df[(df['AgeInYearsAtCollection']>=85) & (df['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode'])),
         'Samples with patient sex': patient_sex,
         'Samples with patient location': location_counts,
         'Samples with patient ward': ward_counts,
+        'Haematology_oncology': df[df['Ward']=='Haematology_oncology'].drop_duplicates(subset=['Run', 'barcode']).shape[0],
+        'Other_inpatient_adult': df[df['Ward']=='Other_inpatient_adult'].drop_duplicates(subset=['Run', 'barcode']).shape[0],
+        'Other_inpatient_paeds': df[df['Ward']=='Other_inpatient_paeds'].drop_duplicates(subset=['Run', 'barcode']).shape[0],
+        'Ambulatory_and_ED': df[df['Ward']=='Ambulatory_and_ED'].drop_duplicates(subset=['Run', 'barcode']).shape[0],
+        'Critical_care': df[df['Ward']=='Critical_care'].drop_duplicates(subset=['Run', 'barcode']).shape[0],        
         'Samples with patient facility': facility_counts,
         'Samples with sample type NTS': df[df['sample_type']=='NTS'].drop_duplicates(subset=['Run', 'barcode']).shape[0],
         'Samples with sample type NS': df[df['sample_type']=='NS'].drop_duplicates(subset=['Run', 'barcode']).shape[0],
         'Gigabases': f'{gb:.2f} (IQR: {bases_IQR})',
-        'Million Reads': f'{reads/1_000_000:.3f} (IQR: {reads_IQR})'
+        'Million Reads': f'{reads/1_000_000:.3f} (IQR: {reads_IQR})',
+        '(Per sample) False positives by reads': fp_reads,
+        '(Per sample) True positives by reads': tp_reads,
+        '(per target pathogen) Samples with no reads or Ct UNDETERMINED but gold standard positive': no_reads_or_undetermined_Ct_positive_summary
     }
 
     # remove QC failed samples and repeat
@@ -2191,32 +2722,62 @@ def table_1_characteristics(df, IORD, dfd_table):
     atpri_IQR_gs = f'{q25_gs:.0f} - {q75_gs:.0f}'
     Any_target_pathogen_reads_identified_gs = f'{median_atpri_gs:.0f} (IQR: {atpri_IQR_gs}) n={atpri_N_gs:.0f}'
 
+    # Gold standard pathogen reads identified 
+    median_gspri = df2[(df2['test normalized'].isin(test_type_normalisation.values())) & (df2['gold_standard']==1) ]['sample num reads'].median()
+    q75, q25 = np.percentile(df2[(df2['test normalized'].isin(test_type_normalisation.values())) & (df2['gold_standard']==1) ]['sample num reads'],  [75 ,25])
+    gspri_N = df2[(df2['test normalized'].isin(test_type_normalisation.values())) & (df2['gold_standard']==1)].shape[0]
+    gspri_IQR = f'{q25} - {q75}'
+    Gold_standard_pathogen_reads_identified = f'{median_gspri:.0f} (IQR: {q25:.0f} - {q75:.0f}) n={gspri_N:.0f}'
+
+    # Gold standard pathogen reads identified where reads > 0
+    median_gspri_gs = df2[(df2['test normalized'].isin(test_type_normalisation.values())) & (df2['gold_standard']==1) & (df2['sample num reads']>0) ]['sample num reads'].median()
+    q75_gs, q25_gs = np.percentile(df2[(df2['test normalized'].isin(test_type_normalisation.values())) & (df2['gold_standard']==1) & (df2['sample num reads']>0) ]['sample num reads'],  [75 ,25])
+    gspri_N_gs = df2[(df2['test normalized'].isin(test_type_normalisation.values())) & (df2['gold_standard']==1) & (df2['sample num reads']>0)].shape[0]
+    gspri_IQR_gs = f'{q25_gs} - {q75_gs}'
+    Gold_standard_pathogen_reads_identified_gs = f'{median_gspri_gs:.0f} (IQR: {q25_gs:.0f} - {q75_gs:.0f}) n={gspri_N_gs:.0f}'
+
     # Ct values available from clinical PCR
-    clinical_CT_values_N = df2[(df2['ct_1'].notna()) & (df2['ct_1']!=0)].drop_duplicates(subset=['Run', 'barcode']).shape[0]
-    clinical_CT_values_median = df2[(df2['ct_1'].notna()) & (df2['ct_1']!=0)].drop_duplicates(subset=['Run', 'barcode'])['ct_1'].median()
-    q75, q25 = np.percentile(df2[(df2['ct_1'].notna()) & (df2['ct_1']!=0)].drop_duplicates(subset=['Run', 'barcode'])['ct_1'],  [75 ,25])
+    clinical_CT_values_N = df2[(df2['routine_CT_value'].notna()) & (df2['routine_CT_value']!=0) & (df2['test normalized']=='ALINITY')].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    clinical_CT_values_median = df2[(df2['routine_CT_value'].notna()) & (df2['routine_CT_value']!=0) & (df2['test normalized']=='ALINITY')].drop_duplicates(subset=['Run', 'barcode'])['routine_CT_value'].median()
+    q75, q25 = np.percentile(df2[(df2['routine_CT_value'].notna()) & (df2['routine_CT_value']!=0) & (df2['test normalized']=='ALINITY')].drop_duplicates(subset=['Run', 'barcode'])['routine_CT_value'],  [75 ,25])
     clinical_CT_values_IQR = f'{q25:.2f} - {q75:.2f}'
     clinical_CT_values = f'{clinical_CT_values_median:.2f} (IQR: {clinical_CT_values_IQR}) n={clinical_CT_values_N}'
 
+    clinical_CT_values_N_cepheid = df2[(df2['routine_CT_value'].notna()) & (df2['routine_CT_value']!=0) & (df2['test normalized']=='CEPHEID')].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    clinical_CT_values_median_cepheid = df2[(df2['routine_CT_value'].notna()) & (df2['routine_CT_value']!=0) & (df2['test normalized']=='CEPHEID')].drop_duplicates(subset=['Run', 'barcode'])['routine_CT_value'].median()
+    q75_c, q25_c = np.percentile(df2[(df2['routine_CT_value'].notna()) & (df2['routine_CT_value']!=0) & (df2['test normalized']=='CEPHEID')].drop_duplicates(subset=['Run', 'barcode'])['routine_CT_value'],  [75 ,25])
+    clinical_CT_values_IQR_cepheid = f'{q25_c:.2f} - {q75_c:.2f}'
+    clinical_CT_values_cepheid = f'{clinical_CT_values_median_cepheid:.2f} (IQR: {clinical_CT_values_IQR_cepheid}) n={clinical_CT_values_N_cepheid}'
+
     # Ct values available from study qPCR
     study_CT_values_N = df2[(df2['qpcr_ct'].notna()) & (df2['qpcr_ct']!=0)].drop_duplicates(subset=['Run', 'barcode']).shape[0]
-    study_CT_values_median = df2[(df2['qpcr_ct'].notna()) & (df2['qpcr_ct']!=0)].drop_duplicates(subset=['Run', 'barcode'])['qpcr_ct'].median()
-    q75, q25 = np.percentile(df2[(df2['qpcr_ct'].notna()) & (df2['qpcr_ct']!=0)].drop_duplicates(subset=['Run', 'barcode'])['qpcr_ct'],  [75 ,25])
+    undetermined_count = df2[(df2['qpcr_ct']=='UNDETERMINED')].shape[0]
+    study_CT_values_median = df2[(df2['qpcr_ct2'].notna()) & (df2['qpcr_ct2']!=0)].drop_duplicates(subset=['Run', 'barcode'])['qpcr_ct2'].median()
+    q75, q25 = np.percentile(df2[(df2['qpcr_ct2'].notna()) & (df2['qpcr_ct2']!=0)].drop_duplicates(subset=['Run', 'barcode'])['qpcr_ct2'],  [75 ,25])
     study_CT_values_IQR = f'{q25:.2f} - {q75:.2f}'
-    study_CT_values = f'{study_CT_values_median:.2f} (IQR: {study_CT_values_IQR}) n={study_CT_values_N}'
+    study_CT_values = f'{study_CT_values_median:.2f} (IQR: {study_CT_values_IQR}) n={study_CT_values_N} U={undetermined_count}'
+
+    # Ct values available from study qPCR per target pathogen
+    study_CT_values_N = df2[(df2['qpcr_ct'].notna()) & (df2['qpcr_ct']!=0)].shape[0]
+    missing_CT= df2[(df2['qpcr_ct'].isna()) & (df2['gold_standard']==1)].shape[0]
+    undetermined_count = df2[(df2['qpcr_ct']=='UNDETERMINED')].shape[0]
+    study_CT_values_median = df2[(df2['qpcr_ct2'].notna()) & (df2['qpcr_ct2']!=0)]['qpcr_ct2'].median()
+    q75, q25 = np.percentile(df2[(df2['qpcr_ct2'].notna()) & (df2['qpcr_ct2']!=0)]['qpcr_ct2'],  [75 ,25])
+    study_CT_values_IQR = f'{q25:.2f} - {q75:.2f}'
+    study_CT_values_per_pathogen = f'{study_CT_values_median:.2f} (IQR: {study_CT_values_IQR}) n={study_CT_values_N} U={undetermined_count} M={missing_CT}'
 
     # Age median and IQR
-    age_median = df2[df2['AgeInYearsAtCollection'].notna()].drop_duplicates(subset=['Run', 'barcode'])['AgeInYearsAtCollection'].median()
-    q75, q25 = np.percentile(df2[df2['AgeInYearsAtCollection'].notna()].drop_duplicates(subset=['Run', 'barcode'])['AgeInYearsAtCollection'],  [75 , 25])
+    age_median = df2[(df2['AgeInYearsAtCollection'].notna()) & (df2['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode'])['AgeInYearsAtCollection'].median()
+    q75, q25 = np.percentile(df2[(df2['AgeInYearsAtCollection'].notna()) & (df2['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode'])['AgeInYearsAtCollection'],  [75 , 25])
     age_IQR = f'{q25:.1f} - {q75:.1f}'
-    age_N = df2[df2['AgeInYearsAtCollection'].notna()].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    age_N = df2[(df2['AgeInYearsAtCollection'].notna()) & (df2['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode']).shape[0]
     age_summary = f'{age_median:.1f} (IQR: {age_IQR}) n={age_N}'
 
     # Patient sex split
     F=df2[(df2['LinkedSex']=='F') & (df2['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode']).shape[0]
     M=df2[(df2['LinkedSex']=='M') & (df2['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode']).shape[0]
-    U=df2[(df2['LinkedSex'].isna()) & (df2['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode']).shape[0]
-    patient_sex = f'F: {F}, M: {M}, U: {U}, total n={F+M+U}'
+    U=df2[(df2['LinkedSex']=='U') & (df2['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    patient_sex = f'F: {F}, M: {M}, U: {U}, n={F+M+U}'
 
     # location tablulation
     location_counts2 = df2[df2['test normalized'].isin(test_type_normalisation.values())].drop_duplicates(subset=['Run', 'barcode'])['LastKnownLocation_micro'].value_counts()
@@ -2252,44 +2813,116 @@ def table_1_characteristics(df, IORD, dfd_table):
     q75, q25 = np.percentile(df2.drop_duplicates(subset=['Run', 'barcode'])['total run reads'],  [75 ,25])
     reads_IQR = f'{q25/1_000_000:.3f} - {q75/1_000_000:.3f}'
 
+    # Count number of FPs with single read
+    df2['PT_single_read_FP'] = np.where((df2['test normalized'].isin(test_type_normalisation.values())) & (df2['pathogen']!='unmapped') & (df2['gold_standard']==0) & (df2['sample num reads']==1), 1, 0)
+    df2['PS_single_read_FPs'] = df2.groupby(['Run', 'barcode'])['PT_single_read_FP'].transform('sum')
+    df2['PS_single_read_FP'] = np.where(df2['PS_single_read_FPs']>0, 1, 0)
+    # Count number of FPs with two or more reads
+    df2['PT_twoMore_reads_FP'] = np.where((df2['test normalized'].isin(test_type_normalisation.values())) & (df2['pathogen']!='unmapped') & (df2['gold_standard']==0) & (df2['sample num reads']>1), 1, 0)
+    df2['PS_twoMore_reads_FPs'] = df2.groupby(['Run', 'barcode'])['PT_twoMore_reads_FP'].transform('sum')
+    df2['PS_twoMore_reads_FP'] = np.where(df2['PS_twoMore_reads_FPs']>0, 1, 0)
+    # calculate per sample FP rates
+    num_fps_single_read = df2[df2['PS_single_read_FP']>0].drop_duplicates(subset=['Run', 'barcode'])['PS_single_read_FPs'].shape[0]
+    num_fps_twoMore_reads = df2[df2['PS_twoMore_reads_FP']>0].drop_duplicates(subset=['Run', 'barcode'])['PS_twoMore_reads_FPs'].shape[0]
+    n_denominator = df2[(df2['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    fp_reads=f'1={num_fps_single_read}, 2+={num_fps_twoMore_reads}, n={n_denominator}'
+
+    # Count number of TPs with single read
+    df2['PT_single_read_TP'] = np.where((df2['test normalized'].isin(test_type_normalisation.values())) & (df2['pathogen']!='unmapped') & (df2['gold_standard']==1) & (df2['sample num reads']==1), 1, 0)
+    df2['PS_single_read_TPs'] = df2.groupby(['Run', 'barcode'])['PT_single_read_TP'].transform('sum')
+    df2['PS_single_read_TP'] = np.where(df2['PS_single_read_TPs']>0, 1, 0)
+    # Count number of TPs with two or more reads
+    df2['PT_twoMore_reads_TP'] = np.where((df2['test normalized'].isin(test_type_normalisation.values())) & (df2['pathogen']!='unmapped') & (df2['gold_standard']==1) & (df2['sample num reads']>1), 1, 0)
+    df2['PS_twoMore_reads_TPs'] = df2.groupby(['Run', 'barcode'])['PT_twoMore_reads_TP'].transform('sum')
+    df2['PS_twoMore_reads_TP'] = np.where(df2['PS_twoMore_reads_TPs']>0, 1, 0)
+    # calculate per sample TP rates
+    num_tps_single_read = df2[df2['PS_single_read_TP']>0].drop_duplicates(subset=['Run', 'barcode'])['PS_single_read_TPs'].shape[0]
+    num_tps_twoMore_reads = df2[df2['PS_twoMore_reads_TP']>0].drop_duplicates(subset=['Run', 'barcode'])['PS_twoMore_reads_TPs'].shape[0]
+    n_denominator = df2[(df2['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    tp_reads=f'1={num_tps_single_read}, 2+={num_tps_twoMore_reads}, n={n_denominator}'
+    
+    # alinity samples
+    n=df2[df2['test normalized']=='ALINITY'].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    tp_alinity=df2[(df2['test normalized']=='ALINITY') & (df2['gold_standard']==1)].shape[0]
+    neg_alinity=df2[(df2['test normalized']=='ALINITY') & (df2['sample_positive']==0)].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    alinity_summary=f'n={n}, negs={neg_alinity}, p={tp_alinity}'
+
+    # biofire samples
+    n=df2[df2['test normalized']=='BIOFIRE'].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    tp_biofire=df2[(df2['test normalized']=='BIOFIRE') & (df2['gold_standard']==1)].shape[0]
+    neg_biofire=df2[(df2['test normalized']=='BIOFIRE') & (df2['sample_positive']==0)].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    biofire_summary=f'n={n}, negs={neg_biofire}, p={tp_biofire}'
+
+    # cepheid samples
+    n=df2[df2['test normalized']=='CEPHEID'].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    tp_cepheid=df2[(df2['test normalized']=='CEPHEID') & (df2['gold_standard']==1)].shape[0]
+    neg_cepheid=df2[(df2['test normalized']=='CEPHEID') & (df2['sample_positive']==0)].drop_duplicates(subset=['Run', 'barcode']).shape[0]
+    cepheid_summary=f'n={n}, negs={neg_cepheid}, p={tp_cepheid}' 
+
+    # samples with no reads or Ct == UNDETERMINED but gold standard positive
+    no_reads=df2[(df2['gold_standard']==1) & (df2['sample num reads']==0) & (df2['test normalized'].isin(test_type_normalisation.values()))].shape[0]
+    no_ct=df2[(df2['qpcr_ct'].isin(['UNDETERMINED', np.nan])) & (df2['gold_standard']==1) & (df2['test normalized'].isin(test_type_normalisation.values()))].shape[0]
+    no_reads_or_undetermined_Ct_positive = df2[(df2['qpcr_ct'].isin(['UNDETERMINED', np.nan])) & (df2['gold_standard']==1) & (df2['sample num reads']==0) & (df2['test normalized'].isin(test_type_normalisation.values()))].shape[0]
+    total_pathogens_detected = df2[(df2['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode'])['num_pathogens_detected'].sum()
+    no_reads_or_undetermined_Ct_positive_summary = f'no reads={no_reads}, no Ct={no_ct}, n={no_reads_or_undetermined_Ct_positive}({no_reads_or_undetermined_Ct_positive / total_pathogens_detected * 100}%)'
     
 
     d2={
         'Set': 'validation set samples after QC',
         'Total sequences': df2.drop_duplicates(subset=['Run', 'barcode']).shape[0],
         'total samples': df2[df2['test normalized'].isin(test_type_normalisation.values())].drop_duplicates(subset=['Run', 'barcode']).shape[0],
-        'Alinity m Respiratory Panel samples': df2[df2['test normalized']=='ALINITY'].drop_duplicates(subset=['Run', 'barcode']).shape[0],
-        'BioFire Respiratory Panel 2.1 samples': df2[df2['test normalized']=='BIOFIRE'].drop_duplicates(subset=['Run', 'barcode']).shape[0],
-        'Cepheid Xpert Xpress SARS-CoV-2/Flu/RSV samples': df2[df2['test normalized']=='CEPHEID'].drop_duplicates(subset=['Run', 'barcode']).shape[0],
+        'Alinity m Respiratory Panel samples': alinity_summary,
+        'BioFire Respiratory Panel 2.1 samples': biofire_summary,
+        'Cepheid Xpert Xpress SARS-CoV-2/Flu/RSV samples': cepheid_summary,
         '0 pathogens': df2[(df2['num_pathogens_detected']==0) & (df2['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode']).shape[0],
         '1 pathogens': df2[(df2['num_pathogens_detected']==1) & (df2['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode']).shape[0],
         '2 pathogens': df2[(df2['num_pathogens_detected']==2) & (df2['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode']).shape[0],
         '3 pathogens': df2[(df2['num_pathogens_detected']==3) & (df2['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode']).shape[0],
+        'Total pathogens detected': df2[(df2['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode'])['num_pathogens_detected'].sum(),
         'Samples with collection date': collection_date_count,
         'Samples with extraction date': extraction_date_count,
         'Samples with days between collection and extraction date': days_between_median_IQR_N,
-        'Ct (Xpert or Alinity) available': clinical_CT_values,
+        'Ct (Alinity) available': clinical_CT_values,
+        'Ct (Xpert) available': clinical_CT_values_cepheid,
         'Ct (study qPCR) available': study_CT_values,
+        'Ct (study qPCR) available per target pathogen': study_CT_values_per_pathogen,
         #'Any target pathogen reads identified': df2[(df2['gold_standard']==1) & (df2['sample num reads']>0)].drop_duplicates(subset=['Run', 'barcode']).shape[0],
         'Any target pathogen reads identified': Any_target_pathogen_reads_identified,
         #'Number of reads (if>0)': df2[(df2['sample num reads']>0) & (df2['test normalized'].isin(test_type_normalisation.values()))& (df2['pathogen']!='unmapped')].shape[0],
-        'Number of reads (if>0)': Any_target_pathogen_reads_identified_gs,
+        'Any target pathogen reads identified (if reads>0)': Any_target_pathogen_reads_identified_gs,
+        '(target) Gold standard pathogen reads identified': Gold_standard_pathogen_reads_identified,
+        '(target) Gold standard pathogen reads identified (if reads>0)': Gold_standard_pathogen_reads_identified_gs,
         'Samples with patient age': age_summary,
+        'Age range <1': len(df2[(df2['AgeInYearsAtCollection']<1) & (df2['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode'])),
+        'Age range 1-12': len(df2[(df2['AgeInYearsAtCollection']>=1) & (df2['AgeInYearsAtCollection']<=12) & (df2['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode'])),
+        'Age range 13-49': len(df2[(df2['AgeInYearsAtCollection']>=13) & (df2['AgeInYearsAtCollection']<=49) & (df2['test normalized'].isin(test_type_normalisation.values  ()))].drop_duplicates(subset=['Run', 'barcode'])), 
+        'Age range 50-70': len(df2[(df2['AgeInYearsAtCollection']>=50) & (df2['AgeInYearsAtCollection']<=70) & (df2['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode'])),
+        'Age range 71-84': len(df2[(df2['AgeInYearsAtCollection']>=71) & (df2['AgeInYearsAtCollection']<=84) & (df2['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode'])),
+        'Age range 85+': len(df2[(df2['AgeInYearsAtCollection']>=85) & (df2['test normalized'].isin(test_type_normalisation.values()))].drop_duplicates(subset=['Run', 'barcode'])),
         'Samples with patient sex': patient_sex,
         'Samples with patient location': df2[df2['LastKnownLocation_micro'].notna()].drop_duplicates(subset=['Run', 'barcode']).shape[0],
         'Samples with patient ward': df2[df2['WardName_linked_inpat'].notna()].drop_duplicates(subset=['Run', 'barcode']).shape[0],
+        'Haematology_oncology': df2[df2['Ward']=='Haematology_oncology'].drop_duplicates(subset=['Run', 'barcode']).shape[0],
+        'Other_inpatient_adult': df2[df2['Ward']=='Other_inpatient_adult'].drop_duplicates(subset=['Run', 'barcode']).shape[0],
+        'Other_inpatient_paeds': df2[df2['Ward']=='Other_inpatient_paeds'].drop_duplicates(subset=['Run', 'barcode']).shape[0],
+        'Ambulatory_and_ED': df2[df2['Ward']=='Ambulatory_and_ED'].drop_duplicates(subset=['Run', 'barcode']).shape[0],
+        'Critical_care': df2[df2['Ward']=='Critical_care'].drop_duplicates(subset=['Run', 'barcode']).shape[0],
         'Samples with patient facility': df2[df2['Facility_linked_inpat'].notna()].drop_duplicates(subset=['Run', 'barcode']).shape[0],
         'Samples with sample type NTS': df2[df2['sample_type']=='NTS'].drop_duplicates(subset=['Run', 'barcode']).shape[0],
         'Samples with sample type NS': df2[df2['sample_type']=='NS'].drop_duplicates(subset=['Run', 'barcode']).shape[0],
         'Gigabases': f'{gb:.2f} (IQR: {bases_IQR})',
         'Million Reads': f'{reads/1_000_000:.3f} (IQR: {reads_IQR})',
+        '(Per sample) False positives by reads': fp_reads,
+        '(Per sample) True positives by reads': tp_reads,
+        '(per target pathogen) Samples with no reads or Ct UNDETERMINED but gold standard positive': no_reads_or_undetermined_Ct_positive_summary
     }
     df_table=pd.DataFrame([d1, d2])
     # pivot table so that 'Set' is the index and all the other columns are columns
     df_table=df_table.transpose().reset_index()
     df_table.columns=['Characteristic', 'All validation set samples', 'Validation set samples after QC']
     df_table=df_table.merge(dfd_table, on='Characteristic', how='left')
-    cols=['Characteristic', 'derivation set samples (unique accessions)', 'Derivation set sequences', 'All validation set samples', 'Validation set samples after QC']
+    cols=['Characteristic', 'derivation set samples (unique accessions)', 'Derivation set sequences','Derivation set sequences (QC passed)', 
+          'All validation set samples', 'Validation set samples after QC']
     df_table[cols].to_csv('table_1_sample_characteristics.csv', index=False)
     df.to_csv('table_1_input_data.csv', index=False)
     plot_ages(df)
@@ -2326,6 +2959,79 @@ def run_pass(df):
     print(failed_runs_batches)
     return df
 
+def run_pass_derivation(df):
+    # add column if run passes QC
+    # spike negs
+    # Add column if Total run bases < 0.4 million bases
+    df['run_bases_pass']=np.where(df['total run bases']<400_000, False, True)
+    # Add column if Total sample reads < 25,000 reads
+    df['sample_reads_pass']=np.where(df['total sample reads']<25_000, False, True)
+    # This is also called the batch negatice control in the flow diagram
+    # count number of samples that failed batch ampification negative controls
+    df_negs=df[df['spiked']==0]
+    df_negs=df_negs[df_negs['pathogen']!='unmapped']
+    df_negs_pass=df_negs[df_negs['sample num reads']>1]
+    if len(df_negs_pass)>0:
+        failedruns=list(df_negs_pass['Run'].unique())
+        print(f'Runs that failed negative controls: {failedruns}')
+        # remove rows where negative controls failed
+        df['batch_RT_control_fail']=df['Run'].isin(failedruns)
+        #df=df[~df['Run'].isin(failedruns)]
+
+    # add run_pass column
+    df['run_pass']=np.where((df['batch_RT_control_fail']==False) & (df['run_bases_pass']==True) & (df['sample_reads_pass']==True), True, False)
+    # print runs and batches that failed
+    failed_runs_batches=df[df['run_pass']==False][['Run','Batch', 'barcode', 'seq_name']].drop_duplicates()
+    print('Runs and Batches that failed QC:')
+    print(failed_runs_batches)
+    return df
+
+def table_S2_roc_all_data(roc_all_data_files):
+    # read in all roc all data files, match to expected prefix and concatenate
+    prefixes={'derivation_roc_data_all': {'set': 'Derivation', 'zero_reads': True},
+              'validation_roc_data_all': {'set': 'Validation', 'zero_reads': True},
+              'derivation_non_zero_roc_data_all': {'set': 'Derivation', 'zero_reads': False},
+              'validation_non_zero_roc_data_all': {'set': 'Validation', 'zero_reads': False}}
+
+
+    df_list=[]
+    for file in roc_all_data_files:
+        dft=pd.read_csv(file)
+        p=prefixes[file.split('/')[-1].split('.')[0]]
+        dft['set']=p['set']
+        dft['zero_reads']=p['zero_reads']
+        if p['zero_reads']:
+            suf=''
+        else:
+            suf=' excluding true-positives with 0 reads'
+        dft.rename(columns={'sensitivity': f'{p["set"]} Sensitivity{suf}', 
+                            'specificity': f'{p["set"]} Specificity{suf}',
+                            'ROC AUC': f'{p["set"]} AUROC{suf}',
+                            'minVal threshold': f'{p["set"]} Youdens optimal threshold{suf}'}, inplace=True)
+        df_list.append(dft)
+    # merge all dataframes on metric
+    df_roc_all=df_list[0]
+    for dft in df_list[1:]:
+        df_roc_all=df_roc_all.merge(dft, on='metric', how='left', suffixes=('', '_drop'))
+
+    cols=['metric', 'Derivation Sensitivity', 'Derivation Sensitivity excluding true-positives with 0 reads',
+          'Derivation Specificity', 'Derivation AUROC', 'Derivation Youdens optimal threshold',
+          'Validation Sensitivity', 'Validation Sensitivity excluding true-positives with 0 reads',
+          'Validation Specificity', 'Validation AUROC', 'Validation Youdens optimal threshold']
+    df=df_roc_all[cols].copy()
+    # round to 3 decimal places
+    df['Derivation Sensitivity']=df['Derivation Sensitivity'].round(3)
+    df['Derivation Sensitivity excluding true-positives with 0 reads']=df['Derivation Sensitivity excluding true-positives with 0 reads'].round(3)
+    df['Derivation Specificity']=df['Derivation Specificity'].round(3)
+    df['Derivation AUROC']=df['Derivation AUROC'].round(3)
+    df['Validation Sensitivity']=df['Validation Sensitivity'].round(3)
+    df['Validation Sensitivity excluding true-positives with 0 reads']=df['Validation Sensitivity excluding true-positives with 0 reads'].round(3)
+    df['Validation Specificity']=df['Validation Specificity'].round(3)
+    df['Validation AUROC']=df['Validation AUROC'].round(3)
+    
+    #df_roc_all=pd.concat(df_list.values(), ignore_index=True)
+    # save to csv
+    df.to_csv('table_S2_roc_all_data.csv', index=False)
 
 def get_files():
     args=argparse.ArgumentParser(description='Plotting script for mNGS respiratory validation data')
@@ -2337,12 +3043,21 @@ def get_files():
     args.add_argument('-I', '--IORD_meta', help='IORD meta data for patient level information CSV file', required=True)
     args.add_argument('-s', '--sample_derivation_meta', help='Sample derivation meta data CSV file', required=False)
     args.add_argument('-o', '--output_prefix', help='Output prefix for plots', required=False)
+    args.add_argument('-r', '--roc_all_data', help='ROC all data CSV files', nargs='+', required=False)
     return args.parse_args()
 
 if __name__ == "__main__":
     args=get_files()
     df=pd.read_csv(args.validation_csv)
     df=run_pass(df)
+    upset_spiked_plot(df, set='Validation')
+    upset_spiked_stacked_plot(df, set='Validation')
+    upset_pass_plot(df, set='Validation')
+
+
+    # generate table S2 roc all data if provided
+    #if args.roc_all_data:
+    #    table_S2_roc_all_data(args.roc_all_data)
     #total_samples=df.shape[0]
     #print(f'Total number of samples: {total_samples}')
 
@@ -2360,9 +3075,9 @@ if __name__ == "__main__":
     # read in derivation set
     if args.derivation_set_csv: # derivation set csv
         dfd=pd.read_csv(args.derivation_set_csv)
+        dfd=run_pass_derivation(dfd)
         if args.pcr_types: # add in test type info
-            dfd_table, dfd_tt=derivation_set_characteristics(args.pcr_types, args.sample_derivation_meta, args.derivation_set_csv)
-            #dfd_tt=pd.read_csv(sys.argv[3])
+            dfd_table, dfd_tt=derivation_set_characteristics(args.pcr_types, args.sample_derivation_meta, dfd)
             dfd=dfd.merge(dfd_tt, on=['Run', 'barcode'], how='left')
             dfd['test_type']=dfd['test_type_y']
 
@@ -2376,9 +3091,14 @@ if __name__ == "__main__":
         dfd['Run_order'] = dfd['Run'].map(run_order)  # Map the run names to their order
         dfd.sort_values(by=['Run_order'], inplace=True)  # Sort by Run order and Batch
         dfd['Run']= 'Run ' + dfd['Run_order'].astype(str).str.zfill(2)
+        #dfd=run_pass_derivation(dfd)
         dfd.to_csv('derivation_set_with_run_names_test_types.csv', index=False)
     else:
         sys.exit('Please provide derivation set csv as second argument to continue plotting')
+
+    #upset_spiked_plot(dfd, set='Derivation')
+    #upset_spiked_stacked_plot(dfd, set='Derivation')
+    #upset_pass_plot(dfd, set='Derivation')
 
     #plot_reads_bases(df, dfd)
 
@@ -2394,7 +3114,7 @@ if __name__ == "__main__":
 
     #plot_ratios(df, dfd)
 
-    #plot_alt_ratios(df, dfd)
+    plot_alt_ratios(df, dfd)
 
     #correlation_plot(dfd)
 
@@ -2406,7 +3126,6 @@ if __name__ == "__main__":
         # IORD meta data
         dfI=pd.read_csv(args.IORD_meta)
         table_1_characteristics(df_merged, dfI, dfd_table)
-
         table_3_sensitivity_specificity(df_merged)
 
     #if sys.argv[5]: # mapQ data

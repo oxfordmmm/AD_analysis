@@ -136,7 +136,7 @@ dfSF=df[df['total sample reads']<min_reads]
 dfSunique=dfSF.drop_duplicates(subset=['Run', 'barcode'])
 dfSunique=dfSunique[dfSunique['test_type'].isin(['BIOFIRE', 'ALINITY', 'CEPHEID'])]
 print(f'Number of samples with total sample reads lower than {min_reads:,} xS: {dfSunique.shape[0]}')
-df=df[df['total sample reads']>=min_reads]
+#df=df[df['total sample reads']>=min_reads]
 dfSunique=df.drop_duplicates(subset=['Run', 'barcode'])
 dfSunique=dfSunique[dfSunique['test_type'].isin(['BIOFIRE', 'ALINITY', 'CEPHEID'])]
 
@@ -144,8 +144,16 @@ print(f'Number of samples with total sample reads higher than {min_reads:,} X2: 
 print(f'Percentage of samples with total sample reads higher than {min_reads:,}: {dfSunique.shape[0]/total_samples*100:.2f}%')
 
 # count number of samples that failed negative controls
-df_negs=df[(df['MS2_spike']==0) & (df['IC_virus_spike']==0)]
-df_negs_pass=df_negs[df_negs['pass']=='True']
+print(df['IC_virus_spike'].unique())
+df_negs=df[df['IC_virus_spike']==0]
+df_negs2=df_negs.copy()
+df_negs2=df_negs2[df_negs2['seq_name'].isin(['Negative control'])]
+print(df_negs2[['Run','barcode']].drop_duplicates())
+df_negs=df_negs.copy()
+df_negs['neg_pass']=np.where((df_negs['pathogen']!='unmapped')&(df_negs['sample num reads']>=2), True, False)
+df_negs_pass=df_negs[(df_negs['neg_pass']==True)|(df_negs['MS2 passed']==1)|(df_negs['zika passed']==1)|(df_negs['orthoreovirus passed']==1)|(df_negs['murine_respirovirus passed']==1)]
+pd.options.display.max_columns = None
+print(df_negs_pass[['Run','Batch','barcode','pathogen','neg_pass','sample num reads']])
 #df_negs_pass=df_negs[(df_negs['pass']==True) | (df_negs['PCs_passed']==1)]
 if len(df_negs_pass)>0:
     unique_batches=len(df_negs_pass.drop_duplicates(['Run','Batch'], keep='first').index)

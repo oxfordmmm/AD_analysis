@@ -287,7 +287,8 @@ def test_combination(combination, df, thresholds, combination_ID):
     df['prediction']=0
     for metric in combination:
         # predict based on threshold, if value is greater than threshold, predict 1 OR keep previous prediction
-        df['prediction']=np.where((df[metric]>=thresholds[metric]) & (df['sample num reads']>=2), 1, df['prediction'])
+        #df['prediction']=np.where((df[metric]>=thresholds[metric]) & (df['sample num reads']>=2), 1, df['prediction'])
+        df['prediction']=np.where(df[metric]>=thresholds[metric], 1, df['prediction'])
 
     df['TP']=np.where((df['gold_standard']==1) & (df['prediction']==1), 1, 0)
     df['FP']=np.where((df['gold_standard']==0) & (df['prediction']==1), 1, 0)
@@ -305,6 +306,7 @@ def test_combination(combination, df, thresholds, combination_ID):
     NPV=TN/(TN+FN)
 
     youden=sensitivity+specificity-1
+    AUROC=roc_auc_score(df['gold_standard'], df['prediction'])
 
     cols=['Run', 'barcode',	'seq_name',	'pathogen',	
         'Biofire positive', 'gold_standard', 'PCs_passed',
@@ -324,7 +326,8 @@ def test_combination(combination, df, thresholds, combination_ID):
     d={'num_metrics': num_metrics,
         'combination':combination, 
         'sensitivity':sensitivity, 
-        'specificity':specificity, 'PPV':PPV, 'NPV':NPV, 'Youden':youden}
+        'specificity':specificity, 'PPV':PPV, 'NPV':NPV, 'Youden':youden,
+        'AUROC':AUROC}
     return d
         
 def plot_combaintion_results(df):
@@ -504,6 +507,19 @@ def run(input_file, set_type, remove_no_reads, use_metrics=False, negatives_meta
     # print number of unique samples with gold standard = 1
     nsamples_gs=len(df[df['gold_standard']==1])
     print(f'Number of unique samples with gold standard = 1: {nsamples_gs}')
+    # print number of samples with >0 sample num reads
+    nsamples_reads=len(df[(df['sample num reads']>0)&(df['gold_standard']==1)])
+    print(f'Number of unique samples with >0 sample num reads: {nsamples_reads}')
+    # printer number of expected negatives
+    nsamples_neg=len(df[df['gold_standard']==0])
+    print(f'Number of unique samples with gold standard = 0: {nsamples_neg}')
+
+    with open(f'{set_type}_summary_no_zero_{remove_no_reads}.csv', 'w') as f:
+        f.write(f'Number of unique samples,{len(nsamples)}\n')
+        f.write(f'Number of unique samples with gold standard = 1,{nsamples_gs}\n')
+        f.write(f'Number of unique samples with >0 sample num reads,{nsamples_reads}\n')
+        f.write(f'Number of samples that failed PCs,{len(n_failed_PCs)}\n')
+        f.write(f'Number of unique samples with gold standard = 0,{nsamples_neg}\n')
 
     # Step 2: Run logistic regression for each metric and get thresholds for max Youden J statistic
     dfs=[]
