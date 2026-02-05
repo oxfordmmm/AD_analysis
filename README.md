@@ -4,12 +4,14 @@ This is a pipeline for taking metagenomic reads amplified with Phi or Sispa. Cur
 
 The process is based around detecting the primer (N9-GATGATAGTAGGGCTTCGTCAC) which is used in the reverse transcription step and by SISPA.
 
+To replicate our study using validating this workflow, please see the [Study replication folder](study_replication/README.md).
+
 ## SISPA
 With SISPA pieces of DNA with primer bound to either end get amplified. So the expectation for these reads is that primer should be found at the ends of the ONT reads. These may not be found if the read was fragmented before going through the pore, or if the start/end aren't read so well.
 
-### Process
+### SISPA Process
 1. Blastn: A tool called blastn is used to find all the places in the reads where the primer sequence appears.
-2. Trimming: A script goes through every single read. If there is any primer near the start or end then it gets cutoff. But if there is any primer in the middle than the read is excluded from further processing. If the read had no primer then it is left as it is.
+2. Trimming: A script goes through every single read. If there is any primer near the start or end then it gets cutoff. If the read had no primer then it is left as it is.
 3. mapping: A tool called minimap2 is used to align the reads to the references. For each read we only keep the best/primary alignment.
 4. consensus: Now we have all the reads mapped we can form the consensus. Basically for each position in the reference you consider all the reads which map to that place and decide what base to call (potentially a SNP if enough evidence for being different to the reference). If the coverage at a position is too low (currently less than 5 reads), than we report it as ambiguous using the letter N.
 5. Error counts: We can then look at the resulting consensus and count the number of N's (positions with not enough coverage) as well as the number of differences to the reference.
@@ -18,7 +20,7 @@ With SISPA pieces of DNA with primer bound to either end get amplified. So the e
 ## PHI
 In PHI we form circles of DNA which should be up to 1kb long and contain the primer somewhere in the circle. PHI then loops round the circle amplifying it. This should generate long reads which should have the primer evenly spaced. However, these don't always go so cleanly and PHI may could and replicate one of the repeating reads already created and generally produce reads which are a bit messy.
 
-### Process
+### PHI Process
 The process is similar to SISPA so only differences are described here.
 1. Blastn: same as SISPA
 2. Splitting: We go through every read. If it has no primer than leave it as is. Otherwise we split the read at every place where the primer is found to form several segments. Sometimes you find primer very close together (even back to back!), in these cases the resulting segments are very short so we just remove them (There is a min_contig_length parameter for the script). **Each of these segments will now be treated as a seperate read**. However their read id will have the added ending 'splitX' so we can keep track of what happens to all the different segments of a read.  
@@ -72,10 +74,3 @@ Useful info about these alignments is put into the folder **alignment_info**. al
    - bases 120-210 of the read map to 100-190 of zika. This is also supplementary.
 2. Consensus and Clair3. Because ONT has a weird error profile we use a tool called clair3 in the consensus step. It's got some machine learning magic or something. It produces a vcf file which is just a list of the differences from the reference. These could be SNPs of INDELS.
 3. Primer removal: The primer also has the random 9 bases. So whenever we split/trim based on a primer we actually also remove the 9 bases before/after it based on the direction of the primer. 
-
-
-
-## Classification
-
-I've got a separate classification workflow using kraken2 and kaiju.
-It will also produce a merge report taking the most precise classification for each read.
