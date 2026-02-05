@@ -77,7 +77,7 @@ def trim(reads, blast_df, margin_pc, min_read_length):
                     'read_length' : seq_length,
                     'has_primer' : True,
                     'primer_count' : hits.shape[0],
-                    'failed_trimming' : True,
+                    'failed_trimming' : False,
                     'fail_reason' : 'primer_in_middle',
                 }
                 read_stats.append(stats)

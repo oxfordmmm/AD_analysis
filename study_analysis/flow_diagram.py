@@ -2,6 +2,8 @@
 import pandas as pd
 import numpy as np
 import argparse
+import sys
+import os
 
 biorifre_organisms=['Adenovirus',
 'Coronavirus 229E',
@@ -162,8 +164,8 @@ def count_failed_runs_samples(df, metrics):
     # count number of samples that failed run/sample controls, higher than 426.6 MB for total run bases and 30,000 for total sample reads
     total_samples=metrics['Total number of samples X']
     dfF=df[df['total run bases']<400000000]
-    df=df[df['total run bases']>=400000000]
-    unique_runs=df['Run'].nunique()
+    dfH=df[df['total run bases']>=400000000]
+    unique_runs=dfH['Run'].nunique()
     failed_runs=dfF['Run'].nunique()
     print(f'Number of runs with total run bases lower than 400 MB xR: {failed_runs}')
     print(f'Number of runs with total run bases higher than 400 MB: {unique_runs}')
@@ -185,6 +187,8 @@ def count_failed_runs_samples(df, metrics):
     metrics['Number of samples with total sample reads higher than 25,000 X2'] = dfSunique.shape[0]
     metrics['Percentage of samples with total sample reads higher than 25,000'] = dfSunique.shape[0]/total_samples*100
 
+    df['run_pass']=np.where((df['test_type'].isin(['BIOFIRE','BIOFIRE ', 'ALINITY','ALINTY', 'CEPHEID'])) & (df['total run bases']>=400000000), 'True', 'False')
+    df['barcode_pass']=np.where((df['test_type'].isin(['BIOFIRE','BIOFIRE ', 'ALINITY','ALINTY', 'CEPHEID'])) & (df['total sample reads']>=min_reads), 'True', 'False')
     return df, metrics
 
 def count_failed_negative_controls(df, metrics):
@@ -205,7 +209,7 @@ def count_failed_negative_controls(df, metrics):
         df_failed_negs=df[df['Run'].isin(failedruns)]
         df_failed_negs=df_failed_negs.copy()
         df_failed_negs.drop_duplicates(subset=['Run', 'barcode'], keep='first', inplace=True)
-        df_failed_negs=df_failed_negs[df_failed_negs['test_type'].isin(['BIOFIRE', 'BIOFIRE ', 'ALINITY','ALINTY', 'CEPHEID'])] 
+        df_failed_negs=df_failed_negs[df_failed_negs['test_type'].isin(['BIOFIRE', 'BIOFIRE ', 'ALINITY','ALINTY', 'CEPHEID']) & ((df_failed_negs['run_pass']=='True') | (df_failed_negs['barcode_pass']=='True'))] 
         print(f'Samples that failed negative controls but passed run/sample controls:Z {df_failed_negs.shape[0]}')
         metrics['Samples that failed negative controls but passed run/sample controls:Z'] = df_failed_negs.shape[0]
         
@@ -226,9 +230,9 @@ def count_failed_negative_controls(df, metrics):
     return df, df2, metrics
 
 def count_passing_samples(df2, metrics):
-    bf=df2[df2['test_type'].isin(['BIOFIRE','BIOFIRE '])]
+    bf=df2[(df2['run_pass']=='True') & (df2['barcode_pass']=='True') & (df2['test_type'].isin(['BIOFIRE','BIOFIRE ']))]
     bf=bf.drop_duplicates(subset=['Run', 'barcode'])
-    ac=df2[df2['test_type'].isin(['ALINITY','ALINTY', 'CEPHEID'])]
+    ac=df2[(df2['run_pass']=='True') & (df2['barcode_pass']=='True') & (df2['test_type'].isin(['ALINITY','ALINTY', 'CEPHEID']))]
     ac=ac.drop_duplicates(subset=['Run', 'barcode'])
 
     total_samples_passing_BNC=bf.shape[0]+ac.shape[0]
@@ -261,7 +265,7 @@ def count_samples_failing_batch_controls(df, df2, metrics):
     #    # filter df by failed_batches 
         df_ACF_samples=df2[df2[['Run','Batch']].apply(tuple, axis=1).isin(failed_batches)]
         df_ACF_samples=df_ACF_samples.copy()
-        df_ACF_samples=df_ACF_samples[df_ACF_samples['test_type'].isin(['BIOFIRE', 'ALINITY','ALINTY', 'CEPHEID'])]
+        df_ACF_samples=df_ACF_samples[(df_ACF_samples['test_type'].isin(['BIOFIRE', 'BIOFIRE ', 'ALINITY','ALINTY', 'CEPHEID'])) & ((df_ACF_samples['run_pass']=='True') & (df_ACF_samples['barcode_pass']=='True'))]
         df3r=df_ACF_samples.copy()
         df_ACF_samples.drop_duplicates(subset=['Run', 'barcode'], inplace=True)
         print(f'Samples in failed batch amplification controls:rZ {df_ACF_samples.shape[0]}')
@@ -337,9 +341,9 @@ def count_samples_failing_batch_controls(df, df2, metrics):
 
 def count_samples_passing_batch_controls(df2, metrics):
     # samples that passed batch amplification controls
-    bf=df2[df2['test_type']=='BIOFIRE']
+    bf=df2[(df2['test_type'].isin(['BIOFIRE', 'BIOFIRE '])) & ( (df2['run_pass']=='True') & (df2['barcode_pass']=='True') )]
     bf=bf.drop_duplicates(subset=['Run', 'barcode'])
-    ac=df2[df2['test_type'].isin(['ALINITY','ALINTY', 'CEPHEID'])]
+    ac=df2[(df2['test_type'].isin(['ALINITY','ALINTY', 'CEPHEID'])) & ( (df2['run_pass']=='True') & (df2['barcode_pass']=='True') )]
     ac=ac.drop_duplicates(subset=['Run', 'barcode'])
 
     total_samples_passing_BNC=bf.shape[0]+ac.shape[0]
@@ -351,7 +355,7 @@ def count_samples_passing_batch_controls(df2, metrics):
 
 def count_samples_failing_positive_controls(df2, metrics):
     # count number of samples that failed positive controls
-    df3=df2[(df2['PCs_passed']==0) & (df2['test'].isin(['BIOFIRE', 'ALINITY','ALINTY', 'CEPHEID']))]
+    df3=df2[(df2['PCs_passed']==0) & (df2['test'].isin(['BIOFIRE', 'BIOFIRE ', 'ALINITY','ALINTY', 'CEPHEID']))]
     df3=df3.copy()
     df3=df3[df3['pathogen']!='unmapped']
     #df3.to_csv('failed_positive_controls.csv', index=False)
@@ -385,7 +389,7 @@ def count_samples_failing_positive_controls(df2, metrics):
     #total_samples_failing_BNC=bf.shape[0]+ac.shape[0]
     #cMG_tests=(bf.shape[0]*len(biorifre_organisms))+(ac.shape[0]*len(alinity_cephid_organisms))
     
-    df3=df2[(df2['PCs_passed']==0) & (df2['test'].isin(['BIOFIRE', 'ALINITY','ALINTY', 'CEPHEID']))]
+    df3=df2[(df2['PCs_passed']==0) & (df2['test'].isin(['BIOFIRE', 'BIOFIRE ', 'ALINITY','ALINTY', 'CEPHEID']))]
     df3=df3.copy()
     df3g=df3[df3['gold_standard']>=1]
     num_pathogens=df3g.shape[0]
@@ -420,7 +424,7 @@ def count_samples_failing_positive_controls(df2, metrics):
 
 def count_samples_passing_positive_controls(df2, metrics):
     # count number of samples that passed positive controls
-    df4=df2[(df2['PCs_passed']==1) & (df2['test'].isin(['BIOFIRE','BIOFIRE ', 'ALINITY','ALINTY', 'CEPHEID']))]
+    df4=df2[(df2['PCs_passed']==1) & (df2['test'].isin(['BIOFIRE','BIOFIRE ', 'ALINITY','ALINTY', 'CEPHEID'])) & (df2['run_pass']=='True') & (df2['barcode_pass']=='True')]
     df4=df4.copy()
     df5=df4.drop_duplicates(subset=['Run', 'barcode'])
     total_samples_passing_BNC= metrics['Total number of samples passing batch negative controls: X4']
@@ -517,7 +521,7 @@ def count_full_passing_samples(df4,df_full, metrics, AND_ratio):
     metrics['Samples negative on all targets assayed nZ'] = df8n.shape[0]
 
     # count the number of samples where gold_standard is 0
-    df9=df4[(df4['gold_standard']==0) & (df4['pathogen']!='unmapped')]
+    df9=df4[(df4['gold_standard']==0) & (df4['pathogen']!='unmapped') & (df4['test_type'].isin(['BIOFIRE','BIOFIRE ', 'ALINITY','ALINTY', 'CEPHEID'])) & ((df4['run_pass']=='True') & (df4['barcode_pass']=='True'))]
     print(f'Total W pathogens not identified from routine laboratory testing: {df9.shape[0]}')
     metrics['Total W pathogens not identified from routine laboratory testing'] = df9.shape[0]
 
@@ -544,10 +548,10 @@ def count_full_passing_samples(df4,df_full, metrics, AND_ratio):
     #print(f'Total grey-xS samples passing gold standard: {df10a.shape[0]} ({df10a.shape[0]/df8.shape[0]*100:.0f}%)')
 
     # Count the number of samples where pass is 0 and gold_standard is 0
-    df11=df4[(df4['pass']!='True') & (df4['gold_standard']==0) & (df4['pathogen']!='unmapped')]
+    df11=df4[(df4['pass']!='True') & (df4['gold_standard']==0) & (df4['pathogen']!='unmapped') & (df4['test_type'].isin(['BIOFIRE','BIOFIRE ', 'ALINITY','ALINTY', 'CEPHEID'])) & ((df4['run_pass']=='True') & (df4['barcode_pass']=='True'))]
     print(f'Total x samples not identified by cMG xf: {df11.shape[0]} ({df11.shape[0]/df9.shape[0]*100}%)')
     metrics['Total x samples not identified by cMG xf'] = f'{df11.shape[0]} ({df11.shape[0]/df9.shape[0]*100:.0f}%)'
-    #df11.to_csv('xf.csv', index=False)
+    df11.to_csv('xf.csv', index=False)
 
     # Count the number of samples where pass is 0 and gold_standard is 1 not including the AND fails
     df11a=df4[(df4['OR pass']!=True) & (df4['2 reads pass']!=True) & (df4['gold_standard']==0) & (df4['pathogen']!='unmapped')]
@@ -556,16 +560,87 @@ def count_full_passing_samples(df4,df_full, metrics, AND_ratio):
 
     # count number of additional yield
     df_ay=df_full[((df_full['pathogen'].isin(biofire_additional)) & (df_full['test'].isin(['ALINITY','ALINTY', 'CEPHEID']))) ]
-    df_ay=df_ay[(df_ay['pass']=="True") & (df_ay['PCs_passed']==1)]
+    df_ay=readjust_pass(df_ay, AND_ratio=AND_ratio, AND_ratio_metric='Sample_reads_percent_of_refs_AuG_truc10')
+    
+    # readjust TOP_FLU_A for additional yield
+    flu_A_options=['Influenza A/H1-2009','Influenza A/H3','Influenza A/H1']
+    
+    # FLU_A_POS is 1 if biofire positive for Influenza A for the run and barcode
+    df_ay['condition'] = np.where(df_ay['pathogen'].isin(flu_A_options), 1, 0)
+    df_ay['FLU_A_POS'] = df_ay.groupby(['Run', 'barcode'])['condition'].transform('any')
+    filtered_df = df_ay[df_ay['pathogen'].isin(flu_A_options)]
+
+    # Step 2: Group by 'Run' and 'barcode' and find the index of the row with the highest 'num_reads'
+    filtered_df['TOP_FLU_A'] = filtered_df.groupby(['Run', 'barcode'])['sample num reads'].transform('idxmax')
+
+    # Step 3: Set the 'top_flu' column to 1 for the row with the highest 'num_reads', and 0 for others
+    df_ay['TOP_FLU_A'] = df_ay.index.isin(filtered_df['TOP_FLU_A'])
+
+
+
+    # readjust pass criteria for additional yield
+    df_ay['pass']=np.where((df_ay['pathogen'].isin(['Influenza A/H1-2009','Influenza A/H1','Influenza A/H3']) & (df_ay['TOP_FLU_A']==False)), 'False', df_ay['pass'])
+    # remove runs and batches in list of tuple [('AD_winter_study_130825_rpt050825', 1.0), ('AD_winter_study_220125', 2.0)]
+    df_ay=df_ay[~df_ay[['Run','Batch']].apply(tuple, axis=1).isin([('AD_winter_study_130825_rpt050825', 1.0), ('AD_winter_study_220125', 2.0)])]
+
+    df_ay=df_ay[(df_ay['pass']=="True") & (df_ay['PCs_passed']==1) ]
+
+    df_ay.to_csv('tmp/df_ay_pre_filter.csv', index=False)
+    
     df_ay.to_csv(f'additional_yield/additional_yield_pass_{AND_ratio}.csv', index=False)
+    
     X_not_tested_for=metrics['Total XP pathogens not tested with routine laboratory testing XP']
     print(f'Number of additional yield samples xN/XP:{df_ay.shape[0]}/{X_not_tested_for} ({df_ay.shape[0]/X_not_tested_for*100:.2f}%)')
     metrics['Number of additional yield samples xN/XP'] = f'{df_ay.shape[0]}/{X_not_tested_for} ({df_ay.shape[0]/X_not_tested_for*100:.2f}%)'
 
     return metrics
 
+def appy_test_types(df, test_type_meta_file):
+    """Read in test type meta data and apply to main dataframe
+    Check test_to_use column only contains BIOFIRE, ALINITY, CEPHEID
+    After merging, check column test_to_use that has missing values are negative controls, with amplification_control or reverse_transcription_control columns == 1
+    Except for 'Negative Sequencing control 1' which is also a negative control but wasn't spiked correctly.
+    """
+    test_type_meta=pd.read_csv(test_type_meta_file)
+    test_type_meta.dropna(subset=['sample_name'], inplace=True)
+    test_type_meta=test_type_meta[['sample_name', 'test_to_use']]
+    test_type_meta['test_to_use']=test_type_meta['test_to_use'].str.strip()
+    df=df.merge(test_type_meta, left_on=['seq_name'], right_on=['sample_name'], how='left')
+    
+    # check test_to_use column only contains BIOFIRE, ALINITY, CEPHEID or is NaN
+    valid_test_types=['BIOFIRE', 'ALINITY', 'CEPHEID']
+    invalid_test_types=df[~df['test_to_use'].isin(valid_test_types) & (df['test_to_use'].notna())]
+    if len(invalid_test_types)>0:
+        print('Invalid test types found in test_type_meta_file:')
+        print(invalid_test_types[['seq_name', 'test_to_use']].drop_duplicates())
+        sys.exit('Please correct test_type_meta_file to only contain valid test types: BIOFIRE, ALINITY, CEPHEID')
+
+    # check that rows with missing test_to_use are negative controls
+    missing_test_types=df[df['test_to_use'].isna()]
+    non_negative_controls=missing_test_types[(missing_test_types['amplification_control']!=1) & (missing_test_types['reverse_transcription_control']!=1) & (missing_test_types['seq_name']!='Negative Sequencing control 1')]
+    if len(non_negative_controls)>0:
+        print('Rows with missing test types that are not negative controls found:')
+        print(non_negative_controls[['seq_name', 'amplification_control', 'reverse_transcription_control']].drop_duplicates())
+        sys.exit('Please correct test_type_meta_file to include test types for all non-negative control samples')
+
+    # replace missing test_to_use with 'Negative Control'
+    df['test_to_use']=df['test_to_use'].fillna('Negative Control')
+
+    # save the test type information for scrutiny
+    df[['seq_name','Run','barcode','test', 'test_to_use', 'amplification_control', 'reverse_transcription_control']].drop_duplicates().to_csv('test_type_assignment.csv', index=False)
+
+    # replace test with test_to_use
+    df['test_type']=df['test_to_use']
+    df['test']=df['test_to_use']
+
+    df.drop(columns=['sample_name', 'test_to_use'], inplace=True)
+    return df
+
 def run_analysis(AND_ratio=0.1, AND_ratio_metric='Sample_reads_percent_of_refs_AuG_truc10', organisms='biofire_set'):
     df=pd.read_csv('biofire_results_merged.csv')
+
+    test_meta_file='extracted_samples_storage_and_processing_info_pcr_organisms_test_code_check.csv'
+    df=appy_test_types(df, test_meta_file)
 
     # remove DNA pathogens 
     if 'no_DNA' in organisms:
