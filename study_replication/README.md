@@ -17,7 +17,8 @@ python3 download_data.py
 The nextflow workflow must be run for each sequencing flow cell run. This will take a long time and has some steps that could be optimised. 
 
 ```bash
-bash run_all.bash
+repo_location='~/soft/'
+bash run_all.bash ${repo_location}
 ```
 
 ## Run the analysis
@@ -49,6 +50,7 @@ python3  ${repo_location}AD_analysis/study_analysis/analysis.py -i \
 This scripts generates the reuslts for flow diagram and an input file for the plots.
 
 ```bash
+mkdir -p AND_ratios additional_yield figures passing_samples supplemental table_1_tabs 
 repo_location='~/soft/'
 python3 ${repo_location}AD_analysis/study_analysis/flow_diagram.py | tee flow_diagram_results.txt
 ```
@@ -60,12 +62,12 @@ repo_location='~/soft/'
 python3 ${repo_location}AD_analysis/study_analysis/plots.py \
         -v AND_ratios/biofire_results_merged_adjusted_0.1.csv \
         -d ${repo_location}AD_analysis/thresholds/flow_diagram/biofire_results_merged_adjusted.csv \
-        -p meta_data/expt_9to11_Nick_pcr_organisms_plus_machine_extra_daisy.csv \
+        -p meta_data/derivation_PCR_results_anonymised.csv \
         -q ${repo_location}AD_analysis/study_analysis/qpcr_info.csv \
         -m meta_data/mapQ.csv \
         -I meta_data/IORD2.csv \
-        -t meta_data/extracted_samples_storage_and_processing_info_pcr_organisms_test_code_check.csv \
-        -s meta_data/metaDF.csv \
+        -t meta_data/validation_PCR_results_anonymised.csv \
+        -s meta_data/derivation_sample_meta.csv \
         -r model_data/derivation_roc_data_all.csv \
     model_data/derivation_non_zero_roc_data_all.csv \
     ${repo_location}/AD_analysis/thresholds/optimization/validation/validation_roc_data_all.csv \

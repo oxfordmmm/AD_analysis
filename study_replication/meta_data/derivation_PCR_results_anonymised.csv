@@ -1,0 +1,134 @@
+run_name,accession_1,accession_2,pooled_with_accession_1,pooled_with_accession_2,barcode,iord_pcr_organisms
+010524_Expt9_SISPA_Kate,ACC_1,ACC_43,,,66,RPCR:CULT::Parainfluenzavirus type 3;CV2P:CV2R:Biofire:Negative;RPCR:CULT::Respiratory Syncytial Virus
+010524_Expt9_SISPA_Kate,ACC_2,ACC_44,,,67,RPCR:CULT::Coronavirus HKU;CV2P:CV2R:Biofire:Negative
+010524_Expt9_SISPA_Kate,ACC_3,ACC_45,,,68,RPCR:CULT:Biofire:Parainfluenzavirus type 3;CV2P:CV2R:Biofire:Negative
+010524_Expt9_SISPA_Kate,ACC_4,ACC_46,,,69,RPCR:CULT:Biofire:Coronavirus OC43;CV2P:CV2R:Biofire:Negative
+010524_Expt9_SISPA_Kate,ACC_1,ACC_43,,,70,RPCR:CULT::Parainfluenzavirus type 3;RPCR:CULT::Respiratory Syncytial Virus;CV2P:CV2R:Biofire:Negative
+010524_Expt9_SISPA_Kate,ACC_2,ACC_44,,,71,RPCR:CULT::Coronavirus HKU;CV2P:CV2R:Biofire:Negative
+010524_Expt9_SISPA_Kate,ACC_3,ACC_45,,,72,RPCR:CULT:Biofire:Parainfluenzavirus type 3;CV2P:CV2R:Biofire:Negative
+010524_Expt9_SISPA_Kate,ACC_4,ACC_46,,,73,RPCR:CULT:Biofire:Coronavirus OC43;CV2P:CV2R:Biofire:Negative
+010524_Expt9_SISPA_Kate,ACC_1,ACC_43,,,74,RPCR:CULT::Parainfluenzavirus type 3;RPCR:CULT::Respiratory Syncytial Virus;CV2P:CV2R:Biofire:Negative
+010524_Expt9_SISPA_Kate,ACC_2,ACC_44,,,75,RPCR:CULT::Coronavirus HKU;CV2P:CV2R:Biofire:Negative
+010524_Expt9_SISPA_Kate,ACC_3,ACC_45,,,76,RPCR:CULT:Biofire:Parainfluenzavirus type 3;CV2P:CV2R:Biofire:Negative
+010524_Expt9_SISPA_Kate,ACC_4,ACC_46,,,77,RPCR:CULT:Biofire:Coronavirus OC43;CV2P:CV2R:Biofire:Negative
+010524_Expt9_SISPA_Kate,ACC_1,ACC_43,,,78,RPCR:CULT::Parainfluenzavirus type 3;RPCR:CULT::Respiratory Syncytial Virus;CV2P:CV2R:Biofire:Negative
+010524_Expt9_SISPA_Kate,ACC_2,ACC_44,,,79,RPCR:CULT::Coronavirus HKU;CV2P:CV2R:Biofire:Negative
+010524_Expt9_SISPA_Kate,ACC_3,ACC_45,,,80,RPCR:CULT:Biofire:Parainfluenzavirus type 3;CV2P:CV2R:Biofire:Negative
+010524_Expt9_SISPA_Kate,ACC_4,ACC_46,,,81,RPCR:CULT:Biofire:Coronavirus OC43;CV2P:CV2R:Biofire:Negative
+010524_Expt9_SISPA_Kate,,,,,82,
+expt9_katie,ACC_5,ACC_47,,,49,CV2P:CV2R:Biofire:Negative;RPCR:CULT:Biofire:MYCOPLASMA PNEUMONIAE;RPCR:CULT:Biofire:RHINOVIRUS/ENTEROVIRUS
+expt9_katie,ACC_5,ACC_47,,,50,RPCR:CULT:Biofire:RHINOVIRUS/ENTEROVIRUS;RPCR:CULT:Biofire:MYCOPLASMA PNEUMONIAE;CV2P:CV2R:Biofire:Negative
+expt9_katie,ACC_5,ACC_47,,,51,RPCR:CULT:Biofire:RHINOVIRUS/ENTEROVIRUS;CV2P:CV2R:Biofire:Negative;RPCR:CULT:Biofire:MYCOPLASMA PNEUMONIAE
+expt9_katie,ACC_5,ACC_47,,,52,CV2P:CV2R:Biofire:Negative;RPCR:CULT:Biofire:RHINOVIRUS/ENTEROVIRUS;RPCR:CULT:Biofire:MYCOPLASMA PNEUMONIAE
+expt9_katie,ACC_6,,,,53,
+expt9_katie,ACC_6,,,,54,
+expt9_katie,ACC_6,,,,55,
+expt9_katie,ACC_6,,,,56,
+expt9_katie,ACC_7,,,,57,RPCR:CULT:Biofire:Coronavirus 229E
+expt9_katie,ACC_7,,,,58,RPCR:CULT:Biofire:Coronavirus 229E
+expt9_katie,ACC_7,,,,59,RPCR:CULT:Biofire:Coronavirus 229E
+expt9_katie,ACC_7,,,,60,RPCR:CULT:Biofire:Coronavirus 229E
+expt9_katie,ACC_8,ACC_48,,,61,CV2P:CV2R:Biofire:Negative;RPCR:CULT:Biofire:HUMAN RHINOVIRUS/ENTEROVIRUS
+expt9_katie,ACC_8,ACC_48,,,62,RPCR:CULT:Biofire:HUMAN RHINOVIRUS/ENTEROVIRUS;CV2P:CV2R:Biofire:Negative
+expt9_katie,ACC_8,ACC_48,,,63,RPCR:CULT:Biofire:HUMAN RHINOVIRUS/ENTEROVIRUS;CV2P:CV2R:Biofire:Negative
+expt9_katie,ACC_8,ACC_48,,,64,RPCR:CULT:Biofire:HUMAN RHINOVIRUS/ENTEROVIRUS;CV2P:CV2R:Biofire:Negative
+expt9_katie,,,,,65,
+Expt9A_SISPA_Katie,ACC_9,ACC_49,,,1,CV2P:CV2R:Biofire:Negative;RPCR:CULT:Biofire:Metapneumovirus
+Expt9A_SISPA_Katie,ACC_9,ACC_49,,,2,RPCR:CULT:Biofire:Metapneumovirus;CV2P:CV2R:Biofire:Negative
+Expt9A_SISPA_Katie,ACC_9,ACC_49,,,3,CV2P:CV2R:Biofire:Negative;RPCR:CULT:Biofire:Metapneumovirus
+Expt9A_SISPA_Katie,ACC_9,ACC_49,,,4,RPCR:CULT:Biofire:Metapneumovirus;CV2P:CV2R:Biofire:Negative
+Expt9A_SISPA_Katie,ACC_10,,,,5,RPCR:CULT:Biofire:HUMAN RHINOVIRUS/ENTEROVIRUS
+Expt9A_SISPA_Katie,ACC_10,,,,6,RPCR:CULT:Biofire:HUMAN RHINOVIRUS/ENTEROVIRUS
+Expt9A_SISPA_Katie,ACC_10,,,,7,RPCR:CULT:Biofire:HUMAN RHINOVIRUS/ENTEROVIRUS
+Expt9A_SISPA_Katie,ACC_10,,,,8,RPCR:CULT:Biofire:HUMAN RHINOVIRUS/ENTEROVIRUS
+Expt9A_SISPA_Katie,ACC_11,,,,9,RPCR:CULT:Biofire:HUMAN RHINOVIRUS/ENTEROVIRUS
+Expt9A_SISPA_Katie,ACC_11,,,,10,RPCR:CULT:Biofire:HUMAN RHINOVIRUS/ENTEROVIRUS
+Expt9A_SISPA_Katie,ACC_11,,,,11,RPCR:CULT:Biofire:HUMAN RHINOVIRUS/ENTEROVIRUS
+Expt9A_SISPA_Katie,ACC_11,,,,12,RPCR:CULT:Biofire:HUMAN RHINOVIRUS/ENTEROVIRUS
+Expt9A_SISPA_Katie,ACC_12,,,,13,RPCR:CULT:Biofire:Respiratory Syncytial Virus
+Expt9A_SISPA_Katie,ACC_12,,,,14,RPCR:CULT:Biofire:Respiratory Syncytial Virus
+Expt9A_SISPA_Katie,ACC_12,,,,15,RPCR:CULT:Biofire:Respiratory Syncytial Virus
+Expt9A_SISPA_Katie,ACC_12,,,,16,RPCR:CULT:Biofire:Respiratory Syncytial Virus
+Expt9A_SISPA_Katie,,,,,17,
+expt10_03072024,ACC_13,,ACC_71,,57,CV2P:CV2R:Alinity:Negative;FLRA:FLBP:Alinity:Negative;FLRA:FLAP:Alinity:FLU A;FLRA:FLBP:Alinity:Negative;FLRA:RSVP:Alinity:Negative;FLRA:RSVP:Alinity:Negative;CV2P:CV2R:Alinity:Negative;FLRA:FLAP:Alinity:FLU A
+expt10_03072024,ACC_13,,ACC_71,,58,CV2P:CV2R:Alinity:Negative;FLRA:FLAP:Alinity:FLU A;FLRA:FLBP:Alinity:Negative;FLRA:RSVP:Alinity:Negative;CV2P:CV2R:Alinity:Negative;FLRA:FLBP:Alinity:Negative;FLRA:RSVP:Alinity:Negative;FLRA:FLAP:Alinity:FLU A
+expt10_03072024,ACC_13,,ACC_71,,59,CV2P:CV2R:Alinity:Negative;FLRA:RSVP:Alinity:Negative;FLRA:FLAP:Alinity:FLU A;FLRA:FLBP:Alinity:Negative;FLRA:FLBP:Alinity:Negative;CV2P:CV2R:Alinity:Negative;FLRA:RSVP:Alinity:Negative;FLRA:FLAP:Alinity:FLU A
+expt10_03072024,ACC_14,ACC_50,ACC_72,ACC_79,60,RPCR:CULT:Biofire:Parainfluenzavirus type 3;RPCR:CULT:Biofire:Parainfluenza 3 RNA;CV2P:CV2R:Biofire:Negative;CV2P:CV2R:Biofire:Negative
+expt10_03072024,ACC_14,ACC_50,ACC_72,ACC_79,61,RPCR:CULT:Biofire:Parainfluenzavirus type 3;CV2P:CV2R:Biofire:Negative;RPCR:CULT:Biofire:Parainfluenza 3 RNA;CV2P:CV2R:Biofire:Negative
+expt10_03072024,ACC_14,ACC_50,ACC_72,ACC_79,62,RPCR:CULT:Biofire:Parainfluenza 3 RNA;CV2P:CV2R:Biofire:Negative;RPCR:CULT:Biofire:Parainfluenzavirus type 3;CV2P:CV2R:Biofire:Negative
+expt10_03072024,ACC_15,ACC_51,ACC_73,ACC_80,63,CV2P:CV2R:Biofire:SARS-CoV-2;RPCR:CULT:Biofire:Negative;RPCR:CULT:Biofire:Negative;CV2P:CV2R:Cepheid:SARS-CoV-2
+expt10_03072024,ACC_15,ACC_51,ACC_73,ACC_80,64,CV2P:CV2R:Biofire:SARS-CoV-2;RPCR:CULT:Biofire:Negative;RPCR:CULT:Biofire:Negative;CV2P:CV2R:Cepheid:SARS-CoV-2
+expt10_03072024,ACC_15,ACC_51,ACC_73,ACC_80,65,CV2P:CV2R:Cepheid:SARS-CoV-2;RPCR:CULT:Biofire:Negative;CV2P:CV2R:Biofire:SARS-CoV-2;RPCR:CULT:Biofire:Negative
+expt10_03072024,ACC_16,ACC_52,ACC_74,,66,RPCR:CULT:Biofire:HUMAN RHINOVIRUS/ENTEROVIRUS;RPCR:CULT:Biofire:Metapneumovirus;RPCR:CULT:Biofire:Metapneumovirus;CV2P:CV2R:Biofire:Negative
+expt10_03072024,ACC_16,ACC_52,ACC_74,,67,RPCR:CULT:Biofire:Metapneumovirus;RPCR:CULT:Biofire:Metapneumovirus;RPCR:CULT:Biofire:HUMAN RHINOVIRUS/ENTEROVIRUS;CV2P:CV2R:Biofire:Negative
+expt10_03072024,ACC_16,ACC_52,ACC_74,,68,RPCR:CULT:Biofire:Metapneumovirus;RPCR:CULT:Biofire:HUMAN RHINOVIRUS/ENTEROVIRUS;RPCR:CULT:Biofire:Metapneumovirus;CV2P:CV2R:Biofire:Negative
+expt10_03072024,,,,,69,
+expt10_03072024,ACC_17,ACC_53,ACC_75,ACC_81,70,CV2P:CV2R:Biofire:Negative;CV2P:CV2R:Alinity:Negative;FLRA:FLAP:Alinity:Negative;RPCR:CULT:Biofire:Coronavirus NL63;FLRA:RSVP:Alinity:Negative;RPCR:CULT:Biofire:Coronavirus NL63;FLRA:FLBP:Alinity:Negative
+expt10_03072024,ACC_17,ACC_53,ACC_75,ACC_81,71,FLRA:FLAP:Alinity:Negative;RPCR:CULT:Biofire:Coronavirus NL63;FLRA:FLBP:Alinity:Negative;CV2P:CV2R:Biofire:Negative;RPCR:CULT:Biofire:Coronavirus NL63;CV2P:CV2R:Alinity:Negative;FLRA:RSVP:Alinity:Negative
+expt10_03072024,ACC_17,ACC_53,ACC_75,ACC_81,72,CV2P:CV2R:Biofire:Negative;FLRA:FLAP:Alinity:Negative;RPCR:CULT:Biofire:Coronavirus NL63;CV2P:CV2R:Alinity:Negative;FLRA:FLBP:Alinity:Negative;RPCR:CULT:Biofire:Coronavirus NL63;FLRA:RSVP:Alinity:Negative
+expt10_03072024,ACC_18,,ACC_76,,73,RPCR:CULT:Biofire:Parainfluenzavirus type 3;RPCR:CULT:Biofire:Parainfluenzavirus type 3
+expt10_03072024,ACC_18,,ACC_76,,74,RPCR:CULT:Biofire:Parainfluenzavirus type 3;RPCR:CULT:Biofire:Parainfluenzavirus type 3
+expt10_03072024,ACC_18,,ACC_76,,75,RPCR:CULT:Biofire:Parainfluenzavirus type 3;RPCR:CULT:Biofire:Parainfluenzavirus type 3
+expt10_03072024,ACC_19,ACC_54,ACC_77,ACC_82,76,CV2P:CV2R:Biofire:Negative;RPCR:CULT:Biofire:PARAINFLUENZA VIRUS type 1;CV2P:CV2R:Biofire:Negative;RPCR:CULT:Biofire:Parainfluenzavirus type 1
+expt10_03072024,ACC_19,ACC_54,ACC_77,ACC_82,77,RPCR:CULT:Biofire:PARAINFLUENZA VIRUS type 1;CV2P:CV2R:Biofire:Negative;RPCR:CULT:Biofire:Parainfluenzavirus type 1;CV2P:CV2R:Biofire:Negative
+expt10_03072024,ACC_19,ACC_54,ACC_77,ACC_82,78,RPCR:CULT:Biofire:PARAINFLUENZA VIRUS type 1;CV2P:CV2R:Biofire:Negative;CV2P:CV2R:Biofire:Negative;RPCR:CULT:Biofire:Parainfluenzavirus type 1
+expt10_03072024,ACC_20,ACC_55,ACC_78,ACC_83,79,CV2P:CV2R:Biofire:Negative;RPCR:CULT:Biofire:HUMAN RHINOVIRUS/ENTEROVIRUS;RPCR:CULT:Biofire:HUMAN RHINOVIRUS/ENTEROVIRUS;CV2P:CV2R:Biofire:Negative
+expt10_03072024,ACC_20,ACC_55,ACC_78,ACC_83,80,RPCR:CULT:Biofire:HUMAN RHINOVIRUS/ENTEROVIRUS;CV2P:CV2R:Biofire:Negative;CV2P:CV2R:Biofire:Negative;RPCR:CULT:Biofire:HUMAN RHINOVIRUS/ENTEROVIRUS
+expt10_03072024,ACC_20,ACC_55,ACC_78,ACC_83,81,RPCR:CULT:Biofire:HUMAN RHINOVIRUS/ENTEROVIRUS;CV2P:CV2R:Biofire:Negative;CV2P:CV2R:Biofire:Negative;RPCR:CULT:Biofire:HUMAN RHINOVIRUS/ENTEROVIRUS
+expt10_03072024,,,,,82,
+expt10A_17072024,ACC_21,ACC_56,,,1,RPCR:CULT:Biofire:Respiratory Syncytial Virus;CV2P:CV2R:Biofire:Negative
+expt10A_17072024,ACC_21,ACC_56,,,2,RPCR:CULT:Biofire:Respiratory Syncytial Virus;CV2P:CV2R:Biofire:Negative
+expt10A_17072024,ACC_22,ACC_57,,,3,RPCR:CULT:Biofire:Negative;CV2P:CV2R:Cepheid:SARS-CoV-2
+expt10A_17072024,ACC_22,ACC_57,,,4,RPCR:CULT:Biofire:Negative;CV2P:CV2R:Cepheid:SARS-CoV-2
+expt10A_17072024,ACC_23,ACC_58,,,5,RPCR:CULT:Biofire:Parainfluenza 2 RNA;CV2P:CV2R:Biofire:Negative
+expt10A_17072024,ACC_23,ACC_58,,,6,RPCR:CULT:Biofire:Parainfluenza 2 RNA;CV2P:CV2R:Biofire:Negative
+expt10A_17072024,ACC_24,ACC_59,,,7,CV2P:CV2R:Biofire:Negative;RPCR:CULT:Biofire:Parainfluenzavirus type 3
+expt10A_17072024,ACC_24,ACC_59,,,8,CV2P:CV2R:Biofire:Negative;RPCR:CULT:Biofire:Parainfluenzavirus type 3
+expt10A_17072024,ACC_25,,,,9,FLRA:FLAP:Alinity:Negative;CV2P:CV2R:Alinity:Negative;FLRA:FLBP:Alinity:Negative;FLRA:RSVP:Alinity:RSV
+expt10A_17072024,ACC_25,,,,10,CV2P:CV2R:Alinity:Negative;FLRA:FLAP:Alinity:Negative;FLRA:FLBP:Alinity:Negative;FLRA:RSVP:Alinity:RSV
+expt10A_17072024,ACC_26,,,,11,CV2P:CV2R:Alinity:Negative;FLRA:FLAP:Alinity:Negative;FLRA:FLBP:Alinity:Negative;FLRA:RSVP:Alinity:RSV
+expt10A_17072024,ACC_26,,,,12,CV2P:CV2R:Alinity:Negative;FLRA:FLBP:Alinity:Negative;FLRA:FLAP:Alinity:Negative;FLRA:RSVP:Alinity:RSV
+expt10A_17072024,ACC_27,ACC_60,,,13,RPCR:CULT::INFLUENZA A VIRUS;CV2P:CV2R:Biofire:Negative
+expt10A_17072024,ACC_27,ACC_60,,,14,RPCR:CULT::INFLUENZA A VIRUS;CV2P:CV2R:Biofire:Negative
+expt10A_17072024,ACC_28,ACC_61,,,15,RPCR:CULT:Biofire:Influenza A virus;CV2P:CV2R:Biofire:Negative
+expt10A_17072024,ACC_28,ACC_61,,,16,CV2P:CV2R:Biofire:Negative;RPCR:CULT:Biofire:Influenza A virus
+expt10A_17072024,ACC_29,ACC_62,,,17,RPCR:CULT:Biofire:Parainfluenzavirus type 3;CV2P:CV2R:Biofire:Negative
+expt10A_17072024,ACC_29,ACC_62,,,18,RPCR:CULT:Biofire:Parainfluenzavirus type 3;CV2P:CV2R:Biofire:Negative
+expt10A_17072024,ACC_30,ACC_63,,,19,RPCR:CULT:Biofire:HUMAN RHINOVIRUS/ENTEROVIRUS;CV2P:CV2R:Biofire:Negative;RPCR:CULT:Biofire:Parainfluenzavirus type 3
+expt10A_17072024,ACC_30,ACC_63,,,20,RPCR:CULT:Biofire:HUMAN RHINOVIRUS/ENTEROVIRUS;RPCR:CULT:Biofire:Parainfluenzavirus type 3;CV2P:CV2R:Biofire:Negative
+expt10A_17072024,,,,,21,
+expt10A_17072024,,,,,22,
+expt10A_17072024,,,,,23,
+expt10A_17072024,,,,,24,
+expt10A_17072024,,,,,25,
+expt11_150824,ACC_31,ACC_64,,,33,RPCR:CULT:Biofire:Negative;CV2P:CV2R:Cepheid:SARS-CoV-2
+expt11_150824,ACC_32,ACC_65,,,34,RPCR:CULT:Biofire:Coronavirus OC43;CV2P:CV2R:Biofire:Negative
+expt11_150824,ACC_33,,,,35,RPCR:CULT:Biofire:HUMAN RHINOVIRUS/ENTEROVIRUS
+expt11_150824,ACC_34,ACC_66,,,36,RPCR:CULT:Biofire:Coronavirus NL63;CV2P:CV2R:Biofire:Negative
+expt11_150824,ACC_35,,,,37,FLRP:RFLA:Cepheid:Negative;CV2P:CV2R:Cepheid:SARS-CoV-2;FLRP:RFLB:Cepheid:Negative;FLRP:RRSR:Cepheid:Negative
+expt11_150824,ACC_36,,,,38,CV2P:CV2R:Cepheid:SARS-CoV-2;FLRP:RFLB:Cepheid:Negative;FLRP:RRSR:Cepheid:Negative;FLRP:RFLA:Cepheid:Negative
+expt11_150824,ACC_37,,,,39,RPCR:CULT:Biofire:Parainfluenzavirus type 3
+expt11_150824,ACC_38,ACC_67,,,40,CV2P:CV2R:Biofire:Negative;RPCR:CULT:Biofire:HUMAN RHINOVIRUS/ENTEROVIRUS
+expt11_150824,ACC_39,,,,41,RPCR:CULT:Biofire:Metapneumovirus
+expt11_150824,ACC_40,ACC_68,,,42,CV2P:CV2R:Cepheid:SARS-CoV-2;RPCR:CULT:Biofire:Negative
+expt11_150824,,,,,43,
+expt11_150824,ACC_31,ACC_64,,,44,CV2P:CV2R:Cepheid:SARS-CoV-2;RPCR:CULT:Biofire:Negative
+expt11_150824,ACC_32,ACC_65,,,45,RPCR:CULT:Biofire:Coronavirus OC43;CV2P:CV2R:Biofire:Negative
+expt11_150824,ACC_33,,,,46,RPCR:CULT:Biofire:HUMAN RHINOVIRUS/ENTEROVIRUS
+expt11_150824,ACC_34,ACC_66,,,47,RPCR:CULT:Biofire:Coronavirus NL63;CV2P:CV2R:Biofire:Negative
+expt11_150824,ACC_35,,,,48,CV2P:CV2R:Cepheid:SARS-CoV-2;FLRP:RFLA:Cepheid:Negative;FLRP:RFLB:Cepheid:Negative;FLRP:RRSR:Cepheid:Negative
+expt11_150824,ACC_36,,,,49,FLRP:RFLB:Cepheid:Negative;FLRP:RRSR:Cepheid:Negative;CV2P:CV2R:Cepheid:SARS-CoV-2;FLRP:RFLA:Cepheid:Negative
+expt11_150824,ACC_37,,,,50,RPCR:CULT:Biofire:Parainfluenzavirus type 3
+expt11_150824,ACC_38,ACC_67,,,51,RPCR:CULT:Biofire:HUMAN RHINOVIRUS/ENTEROVIRUS;CV2P:CV2R:Biofire:Negative
+expt11_150824,ACC_39,,,,52,RPCR:CULT:Biofire:Metapneumovirus
+expt11_150824,ACC_40,ACC_68,,,53,RPCR:CULT:Biofire:Negative;CV2P:CV2R:Cepheid:SARS-CoV-2
+expt11_150824,,,,,54,
+010524_Expt9_SISPA_Daisy,ACC_41,ACC_69,,,66,CV2P:CV2R:Alinity:Negative;FLRA:FLAP:Alinity:Negative;FLRA:FLBP:Alinity:Negative;FLRA:RSVP:Alinity:RSV
+010524_Expt9_SISPA_Daisy,ACC_42,ACC_70,,,67,CV2P:CV2R:Alinity:Negative;FLRA:FLAP:Alinity:FLU A;FLRA:FLBP:Alinity:Negative;FLRA:RSVP:Alinity:Negative
+010524_Expt9_SISPA_Daisy,ACC_41,ACC_69,,,68,CV2P:CV2R:Alinity:Negative;FLRA:FLAP:Alinity:Negative;FLRA:FLBP:Alinity:Negative;FLRA:RSVP:Alinity:RSV
+010524_Expt9_SISPA_Daisy,ACC_42,ACC_70,,,69,CV2P:CV2R:Alinity:Negative;FLRA:FLAP:Alinity:FLU A;FLRA:FLBP:Alinity:Negative;FLRA:RSVP:Alinity:Negative
+010524_Expt9_SISPA_Daisy,ACC_41,ACC_69,,,70,CV2P:CV2R:Alinity:Negative;FLRA:FLAP:Alinity:Negative;FLRA:FLBP:Alinity:Negative;FLRA:RSVP:Alinity:RSV
+010524_Expt9_SISPA_Daisy,ACC_42,ACC_70,,,71,CV2P:CV2R:Alinity:Negative;FLRA:FLAP:Alinity:FLU A;FLRA:FLBP:Alinity:Negative;FLRA:RSVP:Alinity:Negative
+010524_Expt9_SISPA_Daisy,ACC_41,ACC_69,,,72,CV2P:CV2R:Alinity:Negative;FLRA:FLAP:Alinity:Negative;FLRA:FLBP:Alinity:Negative;FLRA:RSVP:Alinity:RSV
+010524_Expt9_SISPA_Daisy,ACC_42,ACC_70,,,73,CV2P:CV2R:Alinity:Negative;FLRA:FLAP:Alinity:FLU A;FLRA:FLBP:Alinity:Negative;FLRA:RSVP:Alinity:Negative
+010524_Expt9_SISPA_Daisy,,,,,74,

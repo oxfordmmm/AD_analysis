@@ -4,7 +4,7 @@ This is a pipeline for taking metagenomic reads amplified with Phi or Sispa. Cur
 
 The process is based around detecting the primer (N9-GATGATAGTAGGGCTTCGTCAC) which is used in the reverse transcription step and by SISPA.
 
-To replicate our study using validating this workflow, please see the [Study replication folder](study_replication/README.md).
+To replicate our validation study using this workflow, please see the [study replication folder](study_replication/README.md).
 
 ## SISPA
 With SISPA pieces of DNA with primer bound to either end get amplified. So the expectation for these reads is that primer should be found at the ends of the ONT reads. These may not be found if the read was fragmented before going through the pore, or if the start/end aren't read so well.
