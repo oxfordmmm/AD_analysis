@@ -14,7 +14,7 @@ python3 download_data.py
 
 ## Run the workflow for each run
 
-The nextflow workflow must be run for each sequencing flow cell run. This will take a long time and has some steps that could be optimised. 
+The nextflow workflow must be run for each sequencing flow cell run. This will take a long time and has some steps that could be optimised. The workflow was originally written to deal with Phi generated cicular reads, that are cut into sub-reads. The process of finding the SISPA primer and trimming it was mainted for this workflow, but it is expensive. Work could be done to test whether it is needed, with reads directly mapped without any pre trimming or filtering. However, the derivation thresholds were set using this workflow, so the study validation needs to use the same method. This script (`run_all.bash`) runs the `workflow_commands.bash` script for each sequencing run. It uses the `standard` profile in the nextflow.config files. You might need to edit this profile (or create your own) to something that suits your computing environment. 
 
 ```bash
 repo_location='~/soft/'

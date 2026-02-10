@@ -15,9 +15,9 @@ soft=$1
 
 for run in ${runs}
 do
-        mkdir -p ${run}
-        cp workflow_commands.bash ${run}/
-        cd ${run}
+        #mkdir -p ${run}
+        cp workflow_commands.bash workflow_runs/${run}/
+        cd workflow_runs/${run}
         bash workflow_commands.bash ${soft}
-        cd ..
+        cd ../..
 done
