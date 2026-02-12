@@ -26,6 +26,13 @@ def download_data(ena_data):
         # construct the URL for the FASTQ file
         url = f"ftp://ftp.sra.ebi.ac.uk/vol1/run/{accession[:6]}/{accession}/reads.fastq.gz"
         output_file = os.path.join('workflow_runs', run, 'data', f"barcode{barcode:02d}.fastq.gz")
+        # if output_file already exists but is empty, remove it and download again
+        if os.path.exists(output_file) and os.path.getsize(output_file) == 0:
+            os.remove(output_file)
+        # if output_file already exists and is not empty, skip downloading
+        if os.path.exists(output_file) and os.path.getsize(output_file) > 0:
+            print(f"File {output_file} already exists and is not empty. Skipping download.")
+            continue
         os.makedirs(os.path.dirname(output_file), exist_ok=True)
         # download the file using wget
         os.system(f"wget -O {output_file} {url}")
