@@ -639,7 +639,8 @@ def appy_test_types(df, test_type_meta_file):
 def run_analysis(AND_ratio=0.1, AND_ratio_metric='Sample_reads_percent_of_refs_AuG_truc10', organisms='biofire_set'):
     df=pd.read_csv('biofire_results_merged.csv')
 
-    test_meta_file='extracted_samples_storage_and_processing_info_pcr_organisms_test_code_check.csv'
+    #test_meta_file='extracted_samples_storage_and_processing_info_pcr_organisms_test_code_check.csv'
+    test_meta_file='meta_data/validation_PCR_results_anonymised.csv'
     df=appy_test_types(df, test_meta_file)
 
     # remove DNA pathogens 
